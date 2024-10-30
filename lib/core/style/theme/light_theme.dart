@@ -3,7 +3,7 @@ import 'package:blood_donation/core/locale/cubit/localizations_cubit.dart';
 import 'package:flutter/material.dart';
 
 ThemeData lighTheme = ThemeData.light().copyWith(
-  textTheme: Typography().white.apply(
+  textTheme: Typography().black.apply(
       fontFamily: getIt<LocalizationsCubit>().state.languageCode == "ar"
           ? "ibm"
           : "inter"),
