@@ -1,0 +1,43 @@
+name: blood_donation
+description: "A new Flutter project."
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  flutter_native_splash: ^2.4.2
+  flutter_onboarding_slider: ^1.0.11
+  flutter_bloc: ^8.1.6
+  bloc: ^8.1.4 
+  get_it: ^8.0.1
+  shared_preferences: ^2.3.2
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^4.0.0
+
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/onboarding/
+    - assets/images/choose/
+    - assets/lang/
+  fonts:
+    - family: inter
+      fonts:
+        - asset: assets/fonts/inter/Inter_18pt-Regular.ttf
+    - family: "ibm"
+      fonts:
+        - asset: assets/fonts/ibm/IBMPlexSansArabic-Regular.ttf
