@@ -22,64 +22,68 @@ class ChooseScreen extends StatelessWidget {
           final cubit = BlocProvider.of<ChooseCubit>(context);
           return Scaffold(
             body: SafeArea(
-                child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  GlobalTitleTextWidget(
-                    title: "Choose Account Type".tr(context),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  GlobalSubTitleTextWidget(
-                      subTitle:
-                          "Please select your account type to proceed, whether you want to donate or represent a hospital in need of support. Choose the option that best suits your role to help contribute to healthcare services."
-                              .tr(context)),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  ListView.separated(
-                      separatorBuilder: (context, index) => const SizedBox(
-                            height: 15,
-                          ),
-                      itemCount: cubit.chooseAccoutTypeModel.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return BuildChooseOptionCard(
-                          title: cubit.chooseAccoutTypeModel[index].title
-                              .tr(context),
-                          image: cubit.chooseAccoutTypeModel[index].imagePath,
-                          isSelected:
-                              cubit.chooseAccoutTypeModel[index].index ==
-                                      state.selectedIndex
-                                  ? true
-                                  : false,
-                          onTap: () {
-                            cubit.toggleChooseAccountType(
-                                cubit.chooseAccoutTypeModel[index].index);
-                          },
-                        );
-                      }),
-                  const Spacer(),
-                  if (state.selectedIndex > 0)
-                    GlobalButton(
-                        text: "Continue".tr(context),
-                        onTap: () {
-                          if (state.selectedIndex == 1) {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return const UserLoginScreen();
-                            }));
-                          } else if (state.selectedIndex == 2) {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return const HospitalLoginScreen();
-                            }));
-                          }
+                child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GlobalTitleTextWidget(
+                      title: "Choose Account Type".tr(context),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    GlobalSubTitleTextWidget(
+                        subTitle:
+                            "Please select your account type to proceed, whether you want to donate or represent a hospital in need of support. Choose the option that best suits your role to help contribute to healthcare services."
+                                .tr(context)),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    ListView.separated(
+                        separatorBuilder: (context, index) => const SizedBox(
+                              height: 15,
+                            ),
+                        itemCount: cubit.chooseAccoutTypeModel.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return BuildChooseOptionCard(
+                            title: cubit.chooseAccoutTypeModel[index].title
+                                .tr(context),
+                            image: cubit.chooseAccoutTypeModel[index].imagePath,
+                            isSelected:
+                                cubit.chooseAccoutTypeModel[index].index ==
+                                        state.selectedIndex
+                                    ? true
+                                    : false,
+                            onTap: () {
+                              cubit.toggleChooseAccountType(
+                                  cubit.chooseAccoutTypeModel[index].index);
+                            },
+                          );
                         }),
-                ],
+                    SizedBox(
+                      height: 10,
+                    ),
+                    if (state.selectedIndex > 0)
+                      GlobalButton(
+                          text: "Continue".tr(context),
+                          onTap: () {
+                            if (state.selectedIndex == 1) {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return const UserLoginScreen();
+                              }));
+                            } else if (state.selectedIndex == 2) {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return const HospitalLoginScreen();
+                              }));
+                            }
+                          }),
+                  ],
+                ),
               ),
             )),
           );

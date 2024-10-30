@@ -19,7 +19,7 @@ class OnboardingScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
       floatingActionButton: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(5.0),
         child: Row(
           children: [
             FloatingActionButton(
@@ -41,6 +41,7 @@ class OnboardingScreen extends StatelessWidget {
                         ? Icons.light_mode
                         : Icons.auto_awesome,
                 color: Theme.of(context).colorScheme.onSurface,
+                size: 25,
               ),
             ),
             const SizedBox(
@@ -91,134 +92,128 @@ class OnboardingScreen extends StatelessWidget {
         totalPage: 3,
         headerBackgroundColor: Theme.of(context).colorScheme.surface,
         pageBackgroundColor: Theme.of(context).colorScheme.surface,
-        background: [
-          Image.asset(
-            'assets/images/onboarding/onboarding_one.png',
-            height: 400,
-          ),
-          Image.asset(
-            'assets/images/onboarding/onboarding_two.png',
-            height: 400,
-          ),
-          Image.asset(
-            'assets/images/onboarding/onboarding_three.png',
-            height: 400,
-          ),
-        ],
+        background: [Container(), Container(), Container()],
         speed: 1.8,
         pageBodies: [
-          Container(
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width,
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                const SizedBox(
-                  height: 480,
-                ),
-                Text(
-                  'onboarding_title1'.tr(context),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: kDarkBlueColor,
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.w600,
+          SingleChildScrollView(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Center(
+                    child: Image.asset(
+                      'assets/images/onboarding/onboarding_one.png',
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'onboarding_subtitle1'.tr(context),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withOpacity(0.2),
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w600,
+                  Text(
+                    'onboarding_title1'.tr(context),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: kDarkBlueColor,
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'onboarding_subtitle1'.tr(context),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.2),
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          Container(
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width,
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                const SizedBox(
-                  height: 480,
-                ),
-                Text(
-                  'onboarding_title2'.tr(context),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: kDarkBlueColor,
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.w600,
+          SingleChildScrollView(
+            child: Container(
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Image.asset(
+                    'assets/images/onboarding/onboarding_two.png',
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'onboarding_subtitle2'.tr(context),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withOpacity(0.2),
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w600,
+                  Text(
+                    'onboarding_title2'.tr(context),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: kDarkBlueColor,
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'onboarding_subtitle2'.tr(context),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.2),
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          Container(
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width,
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                const SizedBox(
-                  height: 480,
-                ),
-                Text(
-                  "onboarding_title3".tr(context),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: kDarkBlueColor,
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.w600,
+          SingleChildScrollView(
+            child: Container(
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Image.asset(
+                    'assets/images/onboarding/onboarding_three.png',
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'onboarding_subtitle3'.tr(context),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withOpacity(0.2),
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w600,
+                  Text(
+                    "onboarding_title3".tr(context),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: kDarkBlueColor,
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'onboarding_subtitle3'.tr(context),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.2),
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

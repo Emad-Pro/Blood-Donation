@@ -7,7 +7,7 @@ ThemeData lighTheme = ThemeData.light().copyWith(
       fontFamily: getIt<LocalizationsCubit>().state.languageCode == "ar"
           ? "ibm"
           : "inter"),
-  //scaffoldBackgroundColor: Colors.white,
+  scaffoldBackgroundColor: Colors.white,
   colorScheme: ColorScheme(
     primary: const Color(0xffA80000),
     primaryContainer: Colors.red.shade100,
