@@ -30,7 +30,7 @@ class UserSignupSelectBloodWidget extends StatelessWidget {
             iconDisabledColor: Theme.of(context).colorScheme.surface,
             isExpanded: true,
             hint: Text('Select Blood Type'.tr(context)),
-            value: state.selectedBloodType ?? userSignUpCubit.bloodTypes[0],
+            value: state.selectedBloodType,
             items: userSignUpCubit.bloodTypes.map((String bloodType) {
               return DropdownMenuItem<String>(
                 value: bloodType,

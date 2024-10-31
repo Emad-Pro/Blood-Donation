@@ -35,10 +35,8 @@ class LocationService {
       position.latitude,
       position.longitude,
     );
-    placemarks.forEach((action) {
-      print(action);
-    });
 
+    print(placemarks[0]);
     Placemark place = placemarks[0];
     return '${place.street}, ${place.locality}, ${place.administrativeArea}, ${place.country}';
   }

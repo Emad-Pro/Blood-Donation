@@ -24,7 +24,6 @@ class UserSignupNameEmailPhoneWidgets extends StatelessWidget {
             if (value!.isEmpty) {
               return 'please enter your full name'.tr(context);
             }
-
             return null;
           },
         ),
@@ -46,16 +45,39 @@ class UserSignupNameEmailPhoneWidgets extends StatelessWidget {
         SizedBox(
           height: 8,
         ),
-        GlobalTextFormFiled(
-          lableText: "Phone Number".tr(context),
-          keyboardType: TextInputType.phone,
-          textEditingController: userSignUpCubit.phoneController,
-          validator: (value) {
-            if (value!.isEmpty) {
-              return 'please enter your phone number'.tr(context);
-            }
-            return null;
-          },
+        Row(
+          children: [
+            SizedBox(
+              width: 50,
+              child: GlobalTextFormFiled(
+                lableText: "Phone Number".tr(context),
+                keyboardType: TextInputType.phone,
+                textEditingController: userSignUpCubit.phoneController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'please enter your phone number'.tr(context);
+                  }
+                  return null;
+                },
+              ),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            Expanded(
+              child: GlobalTextFormFiled(
+                lableText: "Phone Number".tr(context),
+                keyboardType: TextInputType.phone,
+                textEditingController: userSignUpCubit.phoneCodeController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'please enter your phone number'.tr(context);
+                  }
+                  return null;
+                },
+              ),
+            ),
+          ],
         ),
       ],
     );

@@ -2,9 +2,13 @@ part of 'user_signup_cubit.dart';
 
 class UserSignupState {
   final String? selectedBloodType;
+
   final String? selectedGender;
+
   final String permissionMessage;
+
   final RequestState permissionRequestState;
+
   final Map<String, bool> diseases;
   final bool isDisease;
 
@@ -44,5 +48,3 @@ class UserSignupState {
     );
   }
 }
-
-class UserSignupChangeValues extends UserSignupState {}
