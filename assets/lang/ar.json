@@ -68,5 +68,13 @@
     "Cancer": "السرطان",
     "Uncontrolled Diabetes": "السكري غير المتحكم به",
     "Chronic Kidney Disease": "مرض الكلى المزمن",
-    "Hereditary Blood Diseases": "أمراض الدم الوراثية"
+    "Hereditary Blood Diseases": "أمراض الدم الوراثية",
+    "Age": "العمر",
+    "please enter your age": "يرجي إدخال عمرك",
+    "I don't know": "لا أعرف",
+    "password not match": "كلمة المرور غير متطابقة",
+    "please enter your weight": " يرجي ادخال الوزن",
+    "weight": "الوزن",
+    "please enter your height": "يرجي ادخال الطول",
+    "Height": "الطول"
 }

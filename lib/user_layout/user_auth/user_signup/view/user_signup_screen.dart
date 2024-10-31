@@ -2,7 +2,6 @@ import 'package:blood_donation/core/enum/request_state.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:blood_donation/core/location_service/widget/location_dailog.dart';
 import 'package:blood_donation/core/widget/global_button.dart';
-
 import 'package:blood_donation/user_layout/user_auth/user_signup/view_model/cubit/user_signup_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,7 +52,7 @@ class UserSignupScreen extends StatelessWidget {
                         userSignUpCubit: userSignUpCubit),
                     UserSignupPasswordLocationWidgets(
                         userSignUpCubit: userSignUpCubit),
-                    UserSignupSelectGenderWidget(
+                    UserSignupWeightHeightAgeAndSelectGenderWidget(
                         userSignUpCubit: userSignUpCubit, state: state),
                     UserSignupSelectBloodWidget(
                         userSignUpCubit: userSignUpCubit, state: state),

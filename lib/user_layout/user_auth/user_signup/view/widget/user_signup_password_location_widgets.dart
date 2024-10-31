@@ -24,6 +24,9 @@ class UserSignupPasswordLocationWidgets extends StatelessWidget {
           validator: (value) {
             if (value!.isEmpty) {
               return 'please enter your password'.tr(context);
+            } else if (userSignUpCubit.confirmPasswordController.text !=
+                value) {
+              return 'password not match'.tr(context);
             }
             return null;
           },
@@ -38,6 +41,8 @@ class UserSignupPasswordLocationWidgets extends StatelessWidget {
           validator: (value) {
             if (value!.isEmpty) {
               return 'please enter your confirm password'.tr(context);
+            } else if (userSignUpCubit.passwordController.text != value) {
+              return 'password not match'.tr(context);
             }
             return null;
           },
