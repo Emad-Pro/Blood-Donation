@@ -1,12 +1,24 @@
+import 'package:blood_donation/core/enum/request_state.dart';
+import 'package:blood_donation/core/locale/app_localiztions.dart';
+import 'package:blood_donation/core/location_service/widget/location_dailog.dart';
 import 'package:blood_donation/core/widget/global_button.dart';
-import 'package:blood_donation/core/widget/global_sub_title_text_widget.dart';
-import 'package:blood_donation/core/widget/global_title_text_widget.dart';
-import 'package:blood_donation/core/widget/globla_textformfiled.dart';
+
+import 'package:blood_donation/user_layout/user_auth/user_signup/view_model/cubit/user_signup_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/di/service_lacator.dart';
+import '../../../../core/location_service/location_service.dart';
+import 'widget/user_signup_name_email_phone_widgets.dart';
+import 'widget/user_signup_title_subtile_widgets.dart';
+import 'widget/user_signup_confirm_has_problem_widget.dart';
+import 'widget/user_signup_last_date_blood_donation_widget.dart';
+import 'widget/user_signup_password_location_widgets.dart';
+import 'widget/user_signup_select_blood_widget.dart';
+import 'widget/user_signup_select_gender_widget.dart';
 
 class UserSignupScreen extends StatelessWidget {
   const UserSignupScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,113 +27,51 @@ class UserSignupScreen extends StatelessWidget {
           'User Signup',
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GlobalTitleTextWidget(title: "Create Account"),
-              SizedBox(
-                height: 8,
+      body: BlocProvider(
+        create: (context) => UserSignupCubit(getIt<LocationService>()),
+        child: BlocConsumer<UserSignupCubit, UserSignupState>(
+          listener: (context, state) {
+            if (state.permissionRequestState == RequestState.error) {
+              showPermissionDialog(
+                  context: context,
+                  onPressed: () {
+                    getIt<LocationService>().openAppSettings();
+                    Navigator.of(context).pop();
+                  });
+            }
+          },
+          builder: (context, state) {
+            final userSignUpCubit = context.read<UserSignupCubit>();
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    UserSignupTitleSubtitleWidgets(),
+                    UserSignupNameEmailPhoneWidgets(
+                        userSignUpCubit: userSignUpCubit),
+                    UserSignupPasswordLocationWidgets(
+                        userSignUpCubit: userSignUpCubit),
+                    UserSignupSelectGenderWidget(
+                        userSignUpCubit: userSignUpCubit, state: state),
+                    UserSignupSelectBloodWidget(
+                        userSignUpCubit: userSignUpCubit, state: state),
+                    UserSignupLastDateBloodDonationWidget(
+                        userSignUpCubit: userSignUpCubit),
+                    UserSignupConfirmhasProblemWidget(
+                      userSignupCubit: userSignUpCubit,
+                    ),
+                  ],
+                ),
               ),
-              GlobalSubTitleTextWidget(
-                  subTitle:
-                      "Sign up now and start exploring all that our app has to offer. We're excited to welcome you to our community!"),
-              SizedBox(
-                height: 8,
-              ),
-              GlobalTextFormFiled(
-                lableText: "Full Name",
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              GlobalTextFormFiled(
-                lableText: "Email",
-                keyboardType: TextInputType.emailAddress,
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              GlobalTextFormFiled(
-                lableText: "Phone Number",
-                keyboardType: TextInputType.phone,
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              GlobalTextFormFiled(
-                keyboardType: TextInputType.visiblePassword,
-                lableText: "Password",
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              GlobalTextFormFiled(
-                keyboardType: TextInputType.visiblePassword,
-                lableText: "Confirm Password",
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              GlobalTextFormFiled(
-                keyboardType: TextInputType.text,
-                lableText: "Current Location",
-                readOnly: true,
-                iconButton:
-                    IconButton(onPressed: () {}, icon: Icon(Icons.location_on)),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              GlobalTextFormFiled(
-                keyboardType: TextInputType.text,
-                lableText: "Gender",
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              GlobalTextFormFiled(
-                keyboardType: TextInputType.text,
-                lableText: "Date of last blood donation",
-                readOnly: true,
-                onTap: () {
-                  DateTime currentDate = DateTime.now();
-                  DateTime threeMonthsAgo = DateTime(
-                      currentDate.year, currentDate.month - 3, currentDate.day);
-
-                  showDatePicker(
-                      context: context,
-                      firstDate: DateTime(1970),
-                      initialDate: threeMonthsAgo,
-                      lastDate: DateTime.now());
-                },
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Checkbox(
-                    value: false,
-                    onChanged: (value) {},
-                  ),
-                  Expanded(
-                    child: Text(
-                        "Are there any chronic diseases or contraindications to donation (prohibited diseases can be clarified, such as infectious or chronic diseases that prevent donation)"),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              GlobalButton(text: "Sign Up", onTap: () {})
-            ],
-          ),
+            );
+          },
         ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GlobalButton(text: "Sign Up".tr(context), onTap: () {}),
       ),
     );
   }

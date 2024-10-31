@@ -7,6 +7,7 @@ import 'package:blood_donation/core/style/theme/light_theme.dart';
 import 'package:blood_donation/hospital_layout/hospital_auth/hospital_forgot_password/view_model/hospital_forgot_password_screen.dart';
 import 'package:blood_donation/hospital_layout/hospital_auth/hospital_signup/view/hospital_signup_screen.dart';
 import 'package:blood_donation/user_layout/user_auth/user_forogt_password/user_forgot_password_screen.dart';
+
 import 'package:blood_donation/user_layout/user_auth/user_signup/view/user_signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +36,7 @@ class Main extends StatelessWidget {
             bloc: getIt<ThemeCubit>(),
             builder: (context, themeMode) {
               return MaterialApp(
-                locale: locale,
+                locale: Locale("ar"),
                 supportedLocales: const [Locale('en'), Locale('ar')],
                 localizationsDelegates: const [
                   AppLocaliztions.delegate,
@@ -48,6 +49,8 @@ class Main extends StatelessWidget {
                 darkTheme: darkTheme,
                 themeMode: themeMode,
                 home: HospitalSignupScreen(),
+
+
               );
             },
           );
