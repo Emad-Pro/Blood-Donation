@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -10,6 +9,7 @@ part 'user_signup_state.dart';
 
 class UserSignupCubit extends Cubit<UserSignupState> {
   UserSignupCubit(this._locationService) : super(UserSignupState()) {}
+  final LocationService _locationService;
   final List<String> bloodTypes = [
     'A+',
     'A-',
@@ -18,7 +18,8 @@ class UserSignupCubit extends Cubit<UserSignupState> {
     'AB+',
     'AB-',
     'O+',
-    'O-'
+    'O-',
+    "I don't know"
   ];
   final List<String> genderTypes = ['Male', 'Female', 'Other'];
 
@@ -30,9 +31,12 @@ class UserSignupCubit extends Cubit<UserSignupState> {
       TextEditingController();
   TextEditingController currentLocationController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  TextEditingController phoneCodeController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
+  TextEditingController heightController = TextEditingController();
+  TextEditingController weightController = TextEditingController();
   TextEditingController latitudeController = TextEditingController();
   TextEditingController longitudeController = TextEditingController();
-  final LocationService _locationService;
 
   toggleSelectedBloodType(String bloodType) {
     emit(state.copyWith(selectedBloodType: bloodType));
@@ -77,6 +81,7 @@ class UserSignupCubit extends Cubit<UserSignupState> {
           await _locationService.getAddressFromCoordinates(position);
 
       currentLocationController.text = locationAddress;
+      emit(state.copyWith(permissionRequestState: RequestState.success));
     } catch (e) {
       emit(state.copyWith(
           permissionRequestState: RequestState.error,
