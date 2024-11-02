@@ -25,6 +25,9 @@ dependencies:
   geocoding: ^2.0.5
   equatable: ^2.0.5
 
+  image_picker: ^1.1.2
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -38,6 +41,9 @@ flutter:
     - assets/images/onboarding/
     - assets/images/choose/
     - assets/lang/
+    - assets/splash/
+    - assets/fonts/
+    - assets/logo/
   fonts:
     - family: inter
       fonts:

@@ -9,15 +9,20 @@ class UserSignupState {
 
   final RequestState permissionRequestState;
 
+  final String? selectedPhoneService;
+  final bool isSecure;
   final Map<String, bool> diseases;
   final bool isDisease;
-
+  final File? slectedProfileImage;
   UserSignupState(
       {this.selectedBloodType,
       this.selectedGender,
       this.permissionMessage = '',
+      this.selectedPhoneService,
       this.permissionRequestState = RequestState.init,
+      this.slectedProfileImage,
       this.isDisease = false,
+      this.isSecure = false,
       this.diseases = const {
         "HIV/AIDS": false,
         "Viral Hepatitis": false,
@@ -36,7 +41,10 @@ class UserSignupState {
       String? permissionMessage,
       RequestState? permissionRequestState,
       Map<String, bool>? diseases,
-      bool? isDisease}) {
+      bool? isDisease,
+      File? slectedProfileImage,
+      String? selectedPhoneService,
+      bool? isSecure}) {
     return UserSignupState(
       selectedBloodType: selectedBloodType ?? this.selectedBloodType,
       selectedGender: selectedGender ?? this.selectedGender,
@@ -45,6 +53,9 @@ class UserSignupState {
           permissionRequestState ?? this.permissionRequestState,
       diseases: diseases ?? this.diseases,
       isDisease: isDisease ?? this.isDisease,
+      slectedProfileImage: slectedProfileImage ?? this.slectedProfileImage,
+      selectedPhoneService: selectedPhoneService ?? this.selectedPhoneService,
+      isSecure: isSecure ?? this.isSecure,
     );
   }
 }

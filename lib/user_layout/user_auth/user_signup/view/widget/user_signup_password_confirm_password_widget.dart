@@ -4,23 +4,30 @@ import 'package:flutter/material.dart';
 import '../../../../../core/widget/globla_textformfiled.dart';
 import '../../view_model/cubit/user_signup_cubit.dart';
 
-class UserSignupPasswordLocationWidgets extends StatelessWidget {
-  const UserSignupPasswordLocationWidgets({
+class UserSignupPasswordConfirmPasswordWidgets extends StatelessWidget {
+  const UserSignupPasswordConfirmPasswordWidgets({
     super.key,
     required this.userSignUpCubit,
   });
+
   final UserSignupCubit userSignUpCubit;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: 8,
-        ),
         GlobalTextFormFiled(
           keyboardType: TextInputType.visiblePassword,
           lableText: "Password".tr(context),
+          isSecure: userSignUpCubit.state.isSecure,
           textEditingController: userSignUpCubit.passwordController,
+          iconButton: IconButton(
+              onPressed: () {
+                userSignUpCubit.togglePasswordSecure();
+              },
+              icon: Icon(userSignUpCubit.state.isSecure
+                  ? Icons.visibility
+                  : Icons.visibility_off)),
           validator: (value) {
             if (value!.isEmpty) {
               return 'please enter your password'.tr(context);
@@ -36,6 +43,14 @@ class UserSignupPasswordLocationWidgets extends StatelessWidget {
         ),
         GlobalTextFormFiled(
           keyboardType: TextInputType.visiblePassword,
+          isSecure: userSignUpCubit.state.isSecure,
+          iconButton: IconButton(
+              onPressed: () {
+                userSignUpCubit.togglePasswordSecure();
+              },
+              icon: Icon(userSignUpCubit.state.isSecure
+                  ? Icons.visibility
+                  : Icons.visibility_off)),
           textEditingController: userSignUpCubit.confirmPasswordController,
           lableText: "Confirm Password".tr(context),
           validator: (value) {
