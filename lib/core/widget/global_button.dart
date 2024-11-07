@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 
 class GlobalButton extends StatelessWidget {
-  const GlobalButton({
-    super.key,
-    required this.text,
-    required this.onTap,
-  });
+  const GlobalButton(
+      {super.key, required this.text, required this.onTap, this.fontSize});
   final String text;
   final VoidCallback onTap;
-
+  final double? fontSize;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -25,7 +22,7 @@ class GlobalButton extends StatelessWidget {
             text,
             style: TextStyle(
                 color: Theme.of(context).colorScheme.surface,
-                fontSize: 18,
+                fontSize: fontSize ?? 18,
                 fontWeight: FontWeight.bold),
           ))),
     );
