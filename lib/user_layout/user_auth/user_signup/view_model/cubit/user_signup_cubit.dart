@@ -51,23 +51,28 @@ class UserSignupCubit extends Cubit<UserSignupState> {
 
   // SignUp Auth
   Future<void> signupUserWithEmailAndPassword() async {
-    emit(state.copyWith(loginState: RequestState.loading));
+    emit(state.copyWith(signUpState: RequestState.loading));
     try {
       final userAuth = await _signUpUser();
+
       await _addUserToDatabase(userAuth);
-      emit(state.copyWith(loginState: RequestState.success));
+
+      emit(state.copyWith(signUpState: RequestState.success));
     } on AuthException catch (e) {
+      print("object111".toString());
       emit(state.copyWith(
-          loginState: RequestState.error, errorMessage: e.message));
+          signUpState: RequestState.error, errorMessage: e.message));
     } on StorageException catch (e) {
+      print("object222".toString());
       emit(state.copyWith(
-          loginState: RequestState.error, errorMessage: e.message));
+          signUpState: RequestState.error, errorMessage: e.message));
     } on PostgrestException catch (e) {
-      emit(
-          state.copyWith(loginState: RequestState.error, errorMessage: e.code));
+      print(e.details);
+      emit(state.copyWith(
+          signUpState: RequestState.error, errorMessage: e.message));
     } catch (e) {
       emit(state.copyWith(
-          loginState: RequestState.error,
+          signUpState: RequestState.error,
           errorMessage: "An unexpected error occurred"));
     }
   }
@@ -96,7 +101,6 @@ class UserSignupCubit extends Cubit<UserSignupState> {
   }
 
   Future<String?> _uploadProfileImage() async {
-    if (state.selectedProfileImage == null) return null;
     try {
       final uniqueFileName =
           "${DateTime.now().microsecondsSinceEpoch}_${state.selectedProfileImage!.path.split("/").last}";

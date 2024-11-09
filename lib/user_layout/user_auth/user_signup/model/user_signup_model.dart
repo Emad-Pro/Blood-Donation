@@ -52,9 +52,8 @@ class UserSignupModel {
       'user_blood_type': selectedBloodType,
       'user_gender': selectedGender,
       'user_diseases': diseases,
-      //  'isDisease': false,
+      'is_disease': isDisease,
       'profile_image': profileImage,
-
       'uId': uId
     };
   }

@@ -11,17 +11,25 @@ part 'hospital_signup_state.dart';
 
 class HospitalSignupCubit extends Cubit<HospitalSignupState> {
   HospitalSignupCubit(this._locationService) : super(HospitalSignupState());
-
+  final List<String> nameServicePhone = ["Orange", "Zain", "Umniah"];
   final LocationService _locationService;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  TextEditingController phoneCodeController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController currentLocationController = TextEditingController();
   TextEditingController longitudeController = TextEditingController();
   TextEditingController latitudeController = TextEditingController();
   TextEditingController namePersonController = TextEditingController();
+
+  //SignUp data
+
+  //SignUp data
+  toggleServicePhone(String phoneService) {
+    emit(state.copyWith(selectedPhoneService: phoneService));
+  }
 
   selectOpeningTime(BuildContext context) async {
     final TimeOfDay? picked = await showTimePicker(

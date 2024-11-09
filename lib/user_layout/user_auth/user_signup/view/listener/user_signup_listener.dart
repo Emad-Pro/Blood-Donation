@@ -1,11 +1,12 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
+import 'package:blood_donation/user_layout/user_auth/user_signup/view_model/cubit/user_signup_cubit.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/enum/request_state.dart';
 import '../../../../../core/widget/global_snackbar.dart';
 
-userSignupListener(context, state) {
-  if (state.loginState == RequestState.loading) {
+userSignupListener(context, UserSignupState state) {
+  if (state.signUpState == RequestState.loading) {
     showDialog(
         context: context,
         builder: (context) => Scaffold(
@@ -36,12 +37,12 @@ userSignupListener(context, state) {
                 ),
               ),
             ));
-  } else if (state.loginState == RequestState.success) {
+  } else if (state.signUpState == RequestState.success) {
     Navigator.pop(context);
     globalSnackbar(context, "User Created Successfully".tr(context),
         backgroundColor: Colors.green);
     Navigator.pop(context);
-  } else if (state.loginState == RequestState.error) {
+  } else if (state.signUpState == RequestState.error) {
     Navigator.pop(context);
     globalSnackbar(context, state.errorMessage.toString().tr(context),
         backgroundColor: Colors.red);

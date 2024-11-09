@@ -15,7 +15,7 @@ class UserSignupState {
   final bool isDisease;
   final File? selectedProfileImage;
 
-  final RequestState loginState;
+  final RequestState signUpState;
   final String errorMessage;
   UserSignupState(
       {this.selectedBloodType,
@@ -26,7 +26,7 @@ class UserSignupState {
       this.selectedProfileImage,
       this.isDisease = false,
       this.isSecure = false,
-      this.loginState = RequestState.init,
+      this.signUpState = RequestState.init,
       this.errorMessage = '',
       this.diseases = const {
         "HIV/AIDS": false,
@@ -49,7 +49,7 @@ class UserSignupState {
       bool? isDisease,
       File? selectedProfileImage,
       String? selectedPhoneService,
-      RequestState? loginState,
+      RequestState? signUpState,
       String? errorMessage,
       bool? isSecure}) {
     return UserSignupState(
@@ -63,7 +63,7 @@ class UserSignupState {
         selectedProfileImage: selectedProfileImage ?? this.selectedProfileImage,
         selectedPhoneService: selectedPhoneService ?? this.selectedPhoneService,
         isSecure: isSecure ?? this.isSecure,
-        loginState: loginState ?? RequestState.init,
+        signUpState: signUpState ?? RequestState.init,
         errorMessage: errorMessage ?? this.errorMessage);
   }
 }
