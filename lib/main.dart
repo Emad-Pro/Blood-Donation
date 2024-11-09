@@ -47,7 +47,7 @@ class Main extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 theme: lighTheme,
                 darkTheme: darkTheme,
-                themeMode: ThemeMode.light,
+                themeMode: themeMode,
                 home: OnboardingScreen(),
               );
             },
