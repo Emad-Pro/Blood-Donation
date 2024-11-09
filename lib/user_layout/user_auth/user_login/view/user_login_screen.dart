@@ -1,13 +1,19 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
-import 'package:blood_donation/core/widget/global_button.dart';
-import 'package:blood_donation/core/widget/global_sub_title_text_widget.dart';
-import 'package:blood_donation/core/widget/global_title_text_widget.dart';
+
 import 'package:blood_donation/user_layout/user_auth/user_login/view_model/cubit/user_cubit.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/widget/globla_textformfiled.dart';
-import '../../user_signup/view/user_signup_screen.dart';
+import '../../../../core/enum/request_state.dart';
+import '../../../../core/widget/global_snackbar.dart';
+import 'listner/user_login_listener.dart';
+import 'widgets/user_login_button_signin_widget.dart';
+import 'widgets/user_login_dont_hove_account_widgets.dart';
+import 'widgets/user_login_email_password_formfiled_widgets.dart';
+import 'widgets/user_login_forgot_password_remember_widgets.dart';
+import 'widgets/user_login_privacy_policy_text_button_widgets.dart';
+import 'widgets/user_login_title_subtitle_widgets.dart';
 
 class UserLoginScreen extends StatelessWidget {
   const UserLoginScreen({super.key});
@@ -15,155 +21,27 @@ class UserLoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Login".tr(context)),
-      ),
+      appBar: AppBar(title: Text("Login".tr(context))),
       body: BlocProvider(
         create: (context) => UserLoginCubit(),
         child: SingleChildScrollView(
-          child: BlocBuilder<UserLoginCubit, UserLoginState>(
+          child: BlocConsumer<UserLoginCubit, UserLoginState>(
+            listener: userLoginListener,
             builder: (context, state) {
-              return Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Form(
+                  key: context.read<UserLoginCubit>().formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          GlobalTitleTextWidget(
-                              title: 'Welcome Back'.tr(context)),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          GlobalSubTitleTextWidget(
-                              subTitle:
-                                  "We're excited to have you back! We can't wait to see the impact you've made since you last used the app."
-                                      .tr(context)),
-                          const SizedBox(height: 30),
-                          GlobalTextFormFiled(
-                              lableText: "email".tr(context),
-                              keyboardType: TextInputType.emailAddress),
-                          const SizedBox(height: 16),
-                          GlobalTextFormFiled(
-                              lableText: "password".tr(context),
-                              isSecure: state.userPasswordIsSecure,
-                              iconButton: IconButton(
-                                  onPressed: () {
-                                    context
-                                        .read<UserLoginCubit>()
-                                        .toggleShowPassword();
-                                  },
-                                  icon: Icon(state.userPasswordIsSecure
-                                      ? Icons.visibility_off
-                                      : Icons.visibility)),
-                              keyboardType: TextInputType.visiblePassword),
-                          const SizedBox(height: 16),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Checkbox(
-                                    activeColor:
-                                        Theme.of(context).colorScheme.primary,
-                                    value: state.userRememberMe,
-                                    onChanged: (bool? value) {
-                                      context
-                                          .read<UserLoginCubit>()
-                                          .toggleRememberME();
-                                    },
-                                  ),
-                                  Text(
-                                    'Remember me'.tr(context),
-                                  ),
-                                ],
-                              ),
-                              TextButton(
-                                onPressed: () {},
-                                child: Text('Forgot Password?'.tr(context)),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 20),
-                          GlobalButton(text: "Login", onTap: () {}),
-                          const SizedBox(height: 20),
-                          Center(
-                            child: Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              alignment: WrapAlignment.center,
-                              children: [
-                                Text(
-                                  "By logging, you agree to our".tr(context),
-                                  style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onSurface),
-                                ),
-                                GestureDetector(
-                                    onTap: () {},
-                                    child: Text(
-                                      "Terms & Conditions".tr(context),
-                                      style: TextStyle(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary),
-                                    )),
-                                Text(
-                                  "and".tr(context),
-                                  style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onSurface),
-                                ),
-                                GestureDetector(
-                                    onTap: () {},
-                                    child: Text(
-                                      "PrivacyPolicy.".tr(context),
-                                      style: TextStyle(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary),
-                                    )),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 35,
-                          ),
-                        ],
-                      ),
-                      Center(
-                        child: Wrap(
-                          children: [
-                            Text(
-                              "You don't have an account yet. Do you want to register an account?"
-                                  .tr(context),
-                              style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onSurface),
-                            ),
-                            GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              UserSignupScreen()));
-                                },
-                                child: Text(
-                                  "Sign Up".tr(context),
-                                  style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primary),
-                                )),
-                          ],
-                        ),
-                      )
+                    children: [
+                      UserLoginTitleSubtitleWidgets(),
+                      UserLoginEmailPasswordFormfiledWidgets(state: state),
+                      UserLoginForgotPasswordRememberWidgets(state: state),
+                      UserLoginButtonSignInWidget(state: state),
+                      UserLoginPrivacyPolicyTextButtonWidgets(),
+                      UserLoginDontHaveAccountWidgets(),
                     ],
                   ),
                 ),

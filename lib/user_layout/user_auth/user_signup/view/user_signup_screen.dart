@@ -4,6 +4,7 @@ import 'package:blood_donation/user_layout/user_auth/user_signup/view_model/cubi
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/di/service_lacator.dart';
+import '../../../../core/enum/request_state.dart';
 import '../../../../core/location_service/location_service.dart';
 import '../../../../core/widget/global_appbar.dart';
 import '../../../../core/widget/global_snackbar.dart';
@@ -23,7 +24,44 @@ class UserSignupScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => UserSignupCubit(getIt<LocationService>()),
       child: BlocConsumer<UserSignupCubit, UserSignupState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state.loginState == RequestState.loading) {
+            showDialog(
+                context: context,
+                builder: (context) => Scaffold(
+                      backgroundColor: Colors.transparent,
+                      body: Container(
+                        width: double.infinity,
+                        child: Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircularProgressIndicator(),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text("Please Wait ...",
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ));
+          } else if (state.loginState == RequestState.success) {
+            Navigator.pop(context);
+            globalSnackbar(context, "User Created Successfully",
+                backgroundColor: Colors.green);
+            Navigator.pop(context);
+          } else if (state.loginState == RequestState.error) {
+            Navigator.pop(context);
+            globalSnackbar(context, state.errorMessage,
+                backgroundColor: Colors.red);
+          }
+        },
         builder: (context, state) {
           final userSignUpCubit = context.read<UserSignupCubit>();
           return Scaffold(
@@ -78,7 +116,7 @@ class UserSignupScreen extends StatelessWidget {
                                         : "Please Select Gender")
                                 .tr(context));
                       } else {
-                        userSignUpCubit.fetchLoginData();
+                        userSignUpCubit.signupUserWithEmailAndPassword();
                       }
                     }
                   }),

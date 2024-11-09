@@ -44,6 +44,7 @@ class UserSignupLastDateBloodDonationWidget extends StatelessWidget {
                     lastDate: DateTime.now())
                 .then((onValue) {
               if (onValue != null) {
+                userSignUpCubit.lastDonation = onValue;
                 userSignUpCubit.dateLastBloodDonationController.text =
                     '${onValue.day}/${onValue.month}/${onValue.year}';
               }

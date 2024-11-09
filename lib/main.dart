@@ -7,6 +7,7 @@ import 'package:blood_donation/core/style/theme/light_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'core/di/service_lacator.dart';
 import 'core/locale/app_localiztions.dart';
@@ -14,6 +15,11 @@ import 'core/locale/app_localiztions.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ServiceLocator().init();
+  await Supabase.initialize(
+    url: 'https://rcmumkmvatjdvwmxprjc.supabase.co',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJjbXVta212YXRqZHZ3bXhwcmpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzEwNjQ0NDcsImV4cCI6MjA0NjY0MDQ0N30._nV4gsp7dipwWUfWejmKO3PYrituoZSpwzV3t7tl4RU',
+  );
   await CacheHelper.init();
   runApp(const Main());
 }
@@ -41,7 +47,7 @@ class Main extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 theme: lighTheme,
                 darkTheme: darkTheme,
-                themeMode: themeMode,
+                themeMode: ThemeMode.light,
                 home: OnboardingScreen(),
               );
             },

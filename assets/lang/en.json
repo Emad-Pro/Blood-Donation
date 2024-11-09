@@ -79,7 +79,7 @@
     "Height": "Height",
     "Orange": "Orange",
     "Zain": "Zain",
-    "Omniah": "Omniah",
+    "Umniah": "Umniah",
     "Take Photo": "Take Photo",
     "Pick Image": "Pick Image",
     "Please Select Image": "Please Select Image",
@@ -103,5 +103,15 @@
     "Work Hours": "Work Hours",
     "Select File": "Select File",
     "Selected File": "Selected File",
-    "Please provide proof of your hospital's/center's blood donation authorisation": "Please provide proof of your hospital's/center's blood donation authorisation"
+    "Please provide proof of your hospital's/center's blood donation authorisation": "Please provide proof of your hospital's/center's blood donation authorisation",
+    "invalid_credentials": "Invalid login credentials.",
+    "email_not_confirmed": "Email not confirmed. Please verify your email.",
+    "user_already_registered": "User already registered.",
+    "password_too_short": "Password should be at least 6 characters.",
+    "invalid_email_format": "Invalid email format.",
+    "user_not_found": "User not found.",
+    "token_expired": "Token has expired.",
+    "network_error": "Network error. Please check your connection.",
+    "reset_password_token_expired": "Reset password token has expired. Please request a new one.",
+    "User Login Successfully": "User Login Successfully"
 }

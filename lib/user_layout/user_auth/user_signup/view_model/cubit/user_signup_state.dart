@@ -14,6 +14,9 @@ class UserSignupState {
   final Map<String, bool> diseases;
   final bool isDisease;
   final File? slectedProfileImage;
+
+  final RequestState loginState;
+  final String errorMessage;
   UserSignupState(
       {this.selectedBloodType,
       this.selectedGender,
@@ -23,6 +26,8 @@ class UserSignupState {
       this.slectedProfileImage,
       this.isDisease = false,
       this.isSecure = false,
+      this.loginState = RequestState.init,
+      this.errorMessage = '',
       this.diseases = const {
         "HIV/AIDS": false,
         "Viral Hepatitis": false,
@@ -44,18 +49,21 @@ class UserSignupState {
       bool? isDisease,
       File? slectedProfileImage,
       String? selectedPhoneService,
+      RequestState? loginState,
+      String? errorMessage,
       bool? isSecure}) {
     return UserSignupState(
-      selectedBloodType: selectedBloodType ?? this.selectedBloodType,
-      selectedGender: selectedGender ?? this.selectedGender,
-      permissionMessage: permissionMessage ?? this.permissionMessage,
-      permissionRequestState:
-          permissionRequestState ?? this.permissionRequestState,
-      diseases: diseases ?? this.diseases,
-      isDisease: isDisease ?? this.isDisease,
-      slectedProfileImage: slectedProfileImage ?? this.slectedProfileImage,
-      selectedPhoneService: selectedPhoneService ?? this.selectedPhoneService,
-      isSecure: isSecure ?? this.isSecure,
-    );
+        selectedBloodType: selectedBloodType ?? this.selectedBloodType,
+        selectedGender: selectedGender ?? this.selectedGender,
+        permissionMessage: permissionMessage ?? this.permissionMessage,
+        permissionRequestState:
+            permissionRequestState ?? this.permissionRequestState,
+        diseases: diseases ?? this.diseases,
+        isDisease: isDisease ?? this.isDisease,
+        slectedProfileImage: slectedProfileImage ?? this.slectedProfileImage,
+        selectedPhoneService: selectedPhoneService ?? this.selectedPhoneService,
+        isSecure: isSecure ?? this.isSecure,
+        loginState: loginState ?? RequestState.init,
+        errorMessage: errorMessage ?? this.errorMessage);
   }
 }

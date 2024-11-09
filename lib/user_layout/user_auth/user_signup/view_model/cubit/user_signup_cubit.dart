@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../../core/enum/request_state.dart';
 import '../../../../../core/location_service/location_service.dart';
@@ -15,8 +16,8 @@ part 'user_signup_state.dart';
 class UserSignupCubit extends Cubit<UserSignupState> {
   UserSignupCubit(this._locationService) : super(UserSignupState()) {}
   final LocationService _locationService;
-  final List<String> nameServicePhone = ["Orange", "Zain", "Omniah"];
-
+  final List<String> nameServicePhone = ["Orange", "Zain", "Umniah"];
+  final supabase = Supabase.instance.client;
   final List<String> bloodTypes = [
     'A+',
     'A-',
@@ -37,7 +38,7 @@ class UserSignupCubit extends Cubit<UserSignupState> {
   TextEditingController fullNameController = TextEditingController();
   TextEditingController dateLastBloodDonationController =
       TextEditingController();
-
+  DateTime? lastDonation;
   TextEditingController phoneController = TextEditingController();
   TextEditingController phoneCodeController = TextEditingController();
   TextEditingController ageController = TextEditingController();
@@ -47,28 +48,51 @@ class UserSignupCubit extends Cubit<UserSignupState> {
   TextEditingController latitudeController = TextEditingController();
   TextEditingController longitudeController = TextEditingController();
   TextEditingController currentLocationController = TextEditingController();
-  fetchLoginData() async {
-    UserSignupModel userSignupModel = UserSignupModel(
-      email: emailController.text,
-      password: passwordController.text,
-      confirmPassword: confirmPasswordController.text,
-      fullName: fullNameController.text,
-      dateLastBloodDonation: dateLastBloodDonationController.text,
-      phone: phoneController.text,
-      phoneCode: phoneCodeController.text,
-      age: ageController.text,
-      height: heightController.text,
-      weight: weightController.text,
-      latitude: latitudeController.text,
-      longitude: longitudeController.text,
-      currentLocation: currentLocationController.text,
-      selectedBloodType: state.selectedBloodType,
-      selectedGender: state.selectedGender,
-      diseases: state.diseases,
-      isDisease: state.isDisease,
-      selectedProfileImage: state.slectedProfileImage,
-    );
-    print(userSignupModel.toJson());
+  fetchLoginData() async {}
+
+  signupUserWithEmailAndPassword() async {
+    emit(state.copyWith(loginState: RequestState.loading));
+    try {
+      final userAuth = await supabase.auth.signUp(
+        password: passwordController.text,
+        email: emailController.text,
+      );
+      await signupUserToDatabase(userAuth);
+    } catch (e) {
+      emit(state.copyWith(
+          loginState: RequestState.error, errorMessage: e.toString()));
+    }
+  }
+
+  signupUserToDatabase(AuthResponse userAuth) async {
+    try {
+      print(lastDonation);
+      UserSignupModel userSignupModel = UserSignupModel(
+        email: emailController.text,
+        fullName: fullNameController.text,
+        dateLastBloodDonation: dateLastBloodDonationController.text,
+        phone: phoneController.text,
+        phoneCode: phoneCodeController.text,
+        age: int.parse(ageController.text),
+        height: int.parse(heightController.text),
+        weight: int.parse(weightController.text),
+        latitude: double.parse(latitudeController.text),
+        longitude: double.parse(longitudeController.text),
+        currentLocation: currentLocationController.text,
+        selectedBloodType: state.selectedBloodType,
+        selectedGender: state.selectedGender,
+        diseases: state.diseases,
+        isDisease: state.isDisease,
+        uId: userAuth.user!.id,
+        profileImage: "urlImage",
+      );
+
+      await supabase.from("UserAuth").insert(userSignupModel.toJson());
+      emit(state.copyWith(loginState: RequestState.success));
+    } catch (e) {
+      emit(state.copyWith(
+          loginState: RequestState.error, errorMessage: e.toString()));
+    }
   }
 
   Future pickImage() async {
