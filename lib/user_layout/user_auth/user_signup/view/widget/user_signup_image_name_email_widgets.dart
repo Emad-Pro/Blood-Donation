@@ -36,10 +36,10 @@ class UserSignupImageNameEmailWidgets extends StatelessWidget {
                                   .colorScheme
                                   .onSurface
                                   .withOpacity(0.2)),
-                          child: userSignUpCubit.state.slectedProfileImage !=
+                          child: userSignUpCubit.state.selectedProfileImage !=
                                   null
                               ? Image.file(
-                                  userSignUpCubit.state.slectedProfileImage!,
+                                  userSignUpCubit.state.selectedProfileImage!,
                                   fit: BoxFit.cover,
                                 )
                               : Icon(

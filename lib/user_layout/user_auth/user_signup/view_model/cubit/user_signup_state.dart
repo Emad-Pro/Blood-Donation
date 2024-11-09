@@ -13,16 +13,21 @@ class UserSignupState {
   final bool isSecure;
   final Map<String, bool> diseases;
   final bool isDisease;
-  final File? slectedProfileImage;
+  final File? selectedProfileImage;
+
+  final RequestState signUpState;
+  final String errorMessage;
   UserSignupState(
       {this.selectedBloodType,
       this.selectedGender,
       this.permissionMessage = '',
       this.selectedPhoneService,
       this.permissionRequestState = RequestState.init,
-      this.slectedProfileImage,
+      this.selectedProfileImage,
       this.isDisease = false,
       this.isSecure = false,
+      this.signUpState = RequestState.init,
+      this.errorMessage = '',
       this.diseases = const {
         "HIV/AIDS": false,
         "Viral Hepatitis": false,
@@ -42,20 +47,23 @@ class UserSignupState {
       RequestState? permissionRequestState,
       Map<String, bool>? diseases,
       bool? isDisease,
-      File? slectedProfileImage,
+      File? selectedProfileImage,
       String? selectedPhoneService,
+      RequestState? signUpState,
+      String? errorMessage,
       bool? isSecure}) {
     return UserSignupState(
-      selectedBloodType: selectedBloodType ?? this.selectedBloodType,
-      selectedGender: selectedGender ?? this.selectedGender,
-      permissionMessage: permissionMessage ?? this.permissionMessage,
-      permissionRequestState:
-          permissionRequestState ?? this.permissionRequestState,
-      diseases: diseases ?? this.diseases,
-      isDisease: isDisease ?? this.isDisease,
-      slectedProfileImage: slectedProfileImage ?? this.slectedProfileImage,
-      selectedPhoneService: selectedPhoneService ?? this.selectedPhoneService,
-      isSecure: isSecure ?? this.isSecure,
-    );
+        selectedBloodType: selectedBloodType ?? this.selectedBloodType,
+        selectedGender: selectedGender ?? this.selectedGender,
+        permissionMessage: permissionMessage ?? this.permissionMessage,
+        permissionRequestState:
+            permissionRequestState ?? this.permissionRequestState,
+        diseases: diseases ?? this.diseases,
+        isDisease: isDisease ?? this.isDisease,
+        selectedProfileImage: selectedProfileImage ?? this.selectedProfileImage,
+        selectedPhoneService: selectedPhoneService ?? this.selectedPhoneService,
+        isSecure: isSecure ?? this.isSecure,
+        signUpState: signUpState ?? RequestState.init,
+        errorMessage: errorMessage ?? this.errorMessage);
   }
 }
