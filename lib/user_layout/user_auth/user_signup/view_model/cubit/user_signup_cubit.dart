@@ -48,51 +48,98 @@ class UserSignupCubit extends Cubit<UserSignupState> {
   TextEditingController latitudeController = TextEditingController();
   TextEditingController longitudeController = TextEditingController();
   TextEditingController currentLocationController = TextEditingController();
-  fetchLoginData() async {}
 
-  signupUserWithEmailAndPassword() async {
+  // SignUp Auth
+  Future<void> signupUserWithEmailAndPassword() async {
     emit(state.copyWith(loginState: RequestState.loading));
     try {
-      final userAuth = await supabase.auth.signUp(
-        password: passwordController.text,
-        email: emailController.text,
-      );
-      await signupUserToDatabase(userAuth);
+      final userAuth = await _signUpUser();
+      await _addUserToDatabase(userAuth);
+      emit(state.copyWith(loginState: RequestState.success));
+    } on AuthException catch (e) {
+      emit(state.copyWith(
+          loginState: RequestState.error, errorMessage: e.message));
+    } on StorageException catch (e) {
+      emit(state.copyWith(
+          loginState: RequestState.error, errorMessage: e.message));
+    } on PostgrestException catch (e) {
+      emit(
+          state.copyWith(loginState: RequestState.error, errorMessage: e.code));
     } catch (e) {
       emit(state.copyWith(
-          loginState: RequestState.error, errorMessage: e.toString()));
+          loginState: RequestState.error,
+          errorMessage: "An unexpected error occurred"));
     }
   }
 
-  signupUserToDatabase(AuthResponse userAuth) async {
+  Future<AuthResponse> _signUpUser() async {
     try {
-      print(lastDonation);
-      UserSignupModel userSignupModel = UserSignupModel(
+      return await supabase.auth.signUp(
+        password: passwordController.text,
         email: emailController.text,
-        fullName: fullNameController.text,
-        dateLastBloodDonation: dateLastBloodDonationController.text,
-        phone: phoneController.text,
-        phoneCode: phoneCodeController.text,
-        age: int.parse(ageController.text),
-        height: int.parse(heightController.text),
-        weight: int.parse(weightController.text),
-        latitude: double.parse(latitudeController.text),
-        longitude: double.parse(longitudeController.text),
-        currentLocation: currentLocationController.text,
-        selectedBloodType: state.selectedBloodType,
-        selectedGender: state.selectedGender,
-        diseases: state.diseases,
-        isDisease: state.isDisease,
-        uId: userAuth.user!.id,
-        profileImage: "urlImage",
       );
-
-      await supabase.from("UserAuth").insert(userSignupModel.toJson());
-      emit(state.copyWith(loginState: RequestState.success));
-    } catch (e) {
-      emit(state.copyWith(
-          loginState: RequestState.error, errorMessage: e.toString()));
+    } on AuthException catch (e) {
+      throw AuthException(e.code!);
     }
+  }
+
+  Future<void> _addUserToDatabase(AuthResponse userAuth) async {
+    try {
+      final imageUrl = await _uploadProfileImage();
+      final userModel = _createUserSignupModel(userAuth.user!.id, imageUrl);
+      await supabase.from("UserAuth").insert(userModel.toJson());
+    } on StorageException catch (e) {
+      throw StorageException(e.message);
+    } on PostgrestException catch (e) {
+      throw PostgrestException(message: e.code!);
+    }
+  }
+
+  Future<String?> _uploadProfileImage() async {
+    if (state.selectedProfileImage == null) return null;
+    try {
+      final uniqueFileName =
+          "${DateTime.now().microsecondsSinceEpoch}_${state.selectedProfileImage!.path.split("/").last}";
+      final response = await supabase.storage
+          .from('users_images_profile')
+          .upload(uniqueFileName, state.selectedProfileImage!);
+
+      return await supabase.storage
+          .from('users_images_profile')
+          .getPublicUrl(response.split("/").last);
+    } on StorageException catch (e) {
+      throw StorageException(e.message);
+    }
+  }
+
+  UserSignupModel _createUserSignupModel(String userId, String? imageUrl) {
+    return UserSignupModel(
+      email: emailController.text,
+      fullName: fullNameController.text,
+      dateLastBloodDonation: dateLastBloodDonationController.text,
+      phone: phoneController.text,
+      phoneCode: phoneCodeController.text,
+      age: _parseInt(ageController.text),
+      height: _parseInt(heightController.text),
+      weight: _parseInt(weightController.text),
+      latitude: _parseDouble(latitudeController.text),
+      longitude: _parseDouble(latitudeController.text),
+      currentLocation: currentLocationController.text,
+      selectedBloodType: state.selectedBloodType,
+      selectedGender: state.selectedGender,
+      diseases: state.diseases,
+      isDisease: state.isDisease,
+      uId: userId,
+      profileImage: imageUrl ?? '',
+    );
+  }
+
+  int _parseInt(String value) {
+    return int.tryParse(value) ?? 0;
+  }
+
+  double _parseDouble(String value) {
+    return double.tryParse(value) ?? 0.0;
   }
 
   Future pickImage() async {
@@ -100,7 +147,7 @@ class UserSignupCubit extends Cubit<UserSignupState> {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (image == null) return;
       final imageTemp = File(image.path);
-      emit(state.copyWith(slectedProfileImage: imageTemp));
+      emit(state.copyWith(selectedProfileImage: imageTemp));
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
@@ -111,7 +158,7 @@ class UserSignupCubit extends Cubit<UserSignupState> {
       final image = await ImagePicker().pickImage(source: ImageSource.camera);
       if (image == null) return;
       final imageTemp = File(image.path);
-      emit(state.copyWith(slectedProfileImage: imageTemp));
+      emit(state.copyWith(selectedProfileImage: imageTemp));
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }

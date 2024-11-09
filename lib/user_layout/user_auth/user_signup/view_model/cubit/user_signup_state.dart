@@ -13,7 +13,7 @@ class UserSignupState {
   final bool isSecure;
   final Map<String, bool> diseases;
   final bool isDisease;
-  final File? slectedProfileImage;
+  final File? selectedProfileImage;
 
   final RequestState loginState;
   final String errorMessage;
@@ -23,7 +23,7 @@ class UserSignupState {
       this.permissionMessage = '',
       this.selectedPhoneService,
       this.permissionRequestState = RequestState.init,
-      this.slectedProfileImage,
+      this.selectedProfileImage,
       this.isDisease = false,
       this.isSecure = false,
       this.loginState = RequestState.init,
@@ -47,7 +47,7 @@ class UserSignupState {
       RequestState? permissionRequestState,
       Map<String, bool>? diseases,
       bool? isDisease,
-      File? slectedProfileImage,
+      File? selectedProfileImage,
       String? selectedPhoneService,
       RequestState? loginState,
       String? errorMessage,
@@ -60,7 +60,7 @@ class UserSignupState {
             permissionRequestState ?? this.permissionRequestState,
         diseases: diseases ?? this.diseases,
         isDisease: isDisease ?? this.isDisease,
-        slectedProfileImage: slectedProfileImage ?? this.slectedProfileImage,
+        selectedProfileImage: selectedProfileImage ?? this.selectedProfileImage,
         selectedPhoneService: selectedPhoneService ?? this.selectedPhoneService,
         isSecure: isSecure ?? this.isSecure,
         loginState: loginState ?? RequestState.init,

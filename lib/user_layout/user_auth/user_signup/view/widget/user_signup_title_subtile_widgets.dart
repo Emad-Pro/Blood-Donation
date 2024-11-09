@@ -23,7 +23,7 @@ class UserSignupTitleSubtitleWidgets extends StatelessWidget {
                 "Register now and start exploring all the features our app has to offer. We're excited to have you join our community of donors and help save lives!"
                     .tr(context)),
         SizedBox(
-          height: 8,
+          height: 16,
         ),
       ],
     );
