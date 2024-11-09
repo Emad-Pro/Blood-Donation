@@ -6,6 +6,7 @@ class HospitalSignupState {
   final TimeOfDay? closingTime;
   final List<File> selectedDocsFiles;
   final bool isObSecure;
+  final String? selectedPhoneService;
   final List<String> daysOfWeek = [
     'Sun',
     'Mon',
@@ -18,14 +19,16 @@ class HospitalSignupState {
   ];
   final RequestState permissionRequestState;
   final String? permissionMessage;
-  HospitalSignupState(
-      {this.permissionRequestState = RequestState.init,
-      this.permissionMessage,
-      this.selectedDocsFiles = const [],
-      this.selectedDays = const [],
-      this.openingTime,
-      this.closingTime,
-      this.isObSecure = true});
+  HospitalSignupState({
+    this.permissionRequestState = RequestState.init,
+    this.permissionMessage,
+    this.selectedDocsFiles = const [],
+    this.selectedDays = const [],
+    this.openingTime,
+    this.closingTime,
+    this.isObSecure = true,
+    this.selectedPhoneService,
+  });
 
   bool get allSelected => selectedDays.length == daysOfWeek.length - 1;
 
@@ -37,6 +40,7 @@ class HospitalSignupState {
     String? permissionMessage,
     List<File>? selectedDocsFiles,
     bool? isObSecure,
+    String? selectedPhoneService,
   }) {
     return HospitalSignupState(
       selectedDays: selectedDays ?? this.selectedDays,
@@ -47,6 +51,7 @@ class HospitalSignupState {
       permissionMessage: permissionMessage ?? this.permissionMessage,
       selectedDocsFiles: selectedDocsFiles ?? this.selectedDocsFiles,
       isObSecure: isObSecure ?? this.isObSecure,
+      selectedPhoneService: selectedPhoneService ?? this.selectedPhoneService,
     );
   }
 }

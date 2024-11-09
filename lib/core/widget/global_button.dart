@@ -4,7 +4,7 @@ class GlobalButton extends StatelessWidget {
   const GlobalButton(
       {super.key, required this.text, required this.onTap, this.fontSize});
   final String text;
-  final VoidCallback onTap;
+  final void Function()? onTap;
   final double? fontSize;
   @override
   Widget build(BuildContext context) {

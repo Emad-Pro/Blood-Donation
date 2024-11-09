@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../../core/enum/request_state.dart';
 import '../../../../../core/location_service/location_service.dart';
@@ -15,8 +16,8 @@ part 'user_signup_state.dart';
 class UserSignupCubit extends Cubit<UserSignupState> {
   UserSignupCubit(this._locationService) : super(UserSignupState()) {}
   final LocationService _locationService;
-  final List<String> nameServicePhone = ["Orange", "Zain", "Omniah"];
-
+  final List<String> nameServicePhone = ["Orange", "Zain", "Umniah"];
+  final supabase = Supabase.instance.client;
   final List<String> bloodTypes = [
     'A+',
     'A-',
@@ -37,7 +38,7 @@ class UserSignupCubit extends Cubit<UserSignupState> {
   TextEditingController fullNameController = TextEditingController();
   TextEditingController dateLastBloodDonationController =
       TextEditingController();
-
+  DateTime? lastDonation;
   TextEditingController phoneController = TextEditingController();
   TextEditingController phoneCodeController = TextEditingController();
   TextEditingController ageController = TextEditingController();
@@ -47,28 +48,102 @@ class UserSignupCubit extends Cubit<UserSignupState> {
   TextEditingController latitudeController = TextEditingController();
   TextEditingController longitudeController = TextEditingController();
   TextEditingController currentLocationController = TextEditingController();
-  fetchLoginData() async {
-    UserSignupModel userSignupModel = UserSignupModel(
+
+  // SignUp Auth
+  Future<void> signupUserWithEmailAndPassword() async {
+    emit(state.copyWith(signUpState: RequestState.loading));
+    try {
+      final userAuth = await _signUpUser();
+
+      await _addUserToDatabase(userAuth);
+
+      emit(state.copyWith(signUpState: RequestState.success));
+    } on AuthException catch (e) {
+      print("object111".toString());
+      emit(state.copyWith(
+          signUpState: RequestState.error, errorMessage: e.message));
+    } on StorageException catch (e) {
+      print("object222".toString());
+      emit(state.copyWith(
+          signUpState: RequestState.error, errorMessage: e.message));
+    } on PostgrestException catch (e) {
+      print(e.details);
+      emit(state.copyWith(
+          signUpState: RequestState.error, errorMessage: e.message));
+    } catch (e) {
+      emit(state.copyWith(
+          signUpState: RequestState.error,
+          errorMessage: "An unexpected error occurred"));
+    }
+  }
+
+  Future<AuthResponse> _signUpUser() async {
+    try {
+      return await supabase.auth.signUp(
+        password: passwordController.text,
+        email: emailController.text,
+      );
+    } on AuthException catch (e) {
+      throw AuthException(e.code!);
+    }
+  }
+
+  Future<void> _addUserToDatabase(AuthResponse userAuth) async {
+    try {
+      final imageUrl = await _uploadProfileImage();
+      final userModel = _createUserSignupModel(userAuth.user!.id, imageUrl);
+      await supabase.from("UserAuth").insert(userModel.toJson());
+    } on StorageException catch (e) {
+      throw StorageException(e.message);
+    } on PostgrestException catch (e) {
+      throw PostgrestException(message: e.code!);
+    }
+  }
+
+  Future<String?> _uploadProfileImage() async {
+    try {
+      final uniqueFileName =
+          "${DateTime.now().microsecondsSinceEpoch}_${state.selectedProfileImage!.path.split("/").last}";
+      final response = await supabase.storage
+          .from('users_images_profile')
+          .upload(uniqueFileName, state.selectedProfileImage!);
+
+      return await supabase.storage
+          .from('users_images_profile')
+          .getPublicUrl(response.split("/").last);
+    } on StorageException catch (e) {
+      throw StorageException(e.message);
+    }
+  }
+
+  UserSignupModel _createUserSignupModel(String userId, String? imageUrl) {
+    return UserSignupModel(
       email: emailController.text,
-      password: passwordController.text,
-      confirmPassword: confirmPasswordController.text,
       fullName: fullNameController.text,
       dateLastBloodDonation: dateLastBloodDonationController.text,
       phone: phoneController.text,
       phoneCode: phoneCodeController.text,
-      age: ageController.text,
-      height: heightController.text,
-      weight: weightController.text,
-      latitude: latitudeController.text,
-      longitude: longitudeController.text,
+      age: _parseInt(ageController.text),
+      height: _parseInt(heightController.text),
+      weight: _parseInt(weightController.text),
+      latitude: _parseDouble(latitudeController.text),
+      longitude: _parseDouble(latitudeController.text),
       currentLocation: currentLocationController.text,
       selectedBloodType: state.selectedBloodType,
       selectedGender: state.selectedGender,
       diseases: state.diseases,
       isDisease: state.isDisease,
-      selectedProfileImage: state.slectedProfileImage,
+      uId: userId,
+      profileImage: imageUrl ?? '',
     );
-    print(userSignupModel.toJson());
+  }
+
+  int _parseInt(String value) {
+    return int.tryParse(value) ?? 0;
+  }
+
+  double _parseDouble(String value) {
+    return double.tryParse(value) ?? 0.0;
   }
 
   Future pickImage() async {
@@ -76,7 +151,7 @@ class UserSignupCubit extends Cubit<UserSignupState> {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (image == null) return;
       final imageTemp = File(image.path);
-      emit(state.copyWith(slectedProfileImage: imageTemp));
+      emit(state.copyWith(selectedProfileImage: imageTemp));
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
@@ -87,7 +162,7 @@ class UserSignupCubit extends Cubit<UserSignupState> {
       final image = await ImagePicker().pickImage(source: ImageSource.camera);
       if (image == null) return;
       final imageTemp = File(image.path);
-      emit(state.copyWith(slectedProfileImage: imageTemp));
+      emit(state.copyWith(selectedProfileImage: imageTemp));
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }

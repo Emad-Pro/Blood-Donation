@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import '../../../../../core/widget/global_sub_title_text_widget.dart';
 import '../../../../../core/widget/global_title_text_widget.dart';
 
-class UserSignupTitleSubtitleWidgets extends StatelessWidget {
-  const UserSignupTitleSubtitleWidgets({
+class UserLoginTitleSubtitleWidgets extends StatelessWidget {
+  const UserLoginTitleSubtitleWidgets({
     super.key,
   });
 
@@ -14,17 +14,15 @@ class UserSignupTitleSubtitleWidgets extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        GlobalTitleTextWidget(title: "Create Account".tr(context)),
-        SizedBox(
-          height: 8,
+        GlobalTitleTextWidget(title: 'Welcome Back'.tr(context)),
+        const SizedBox(
+          height: 15,
         ),
         GlobalSubTitleTextWidget(
             subTitle:
-                "Register now and start exploring all the features our app has to offer. We're excited to have you join our community of donors and help save lives!"
+                "We're excited to have you back! We can't wait to see the impact you've made since you last used the app."
                     .tr(context)),
-        SizedBox(
-          height: 16,
-        ),
+        const SizedBox(height: 30),
       ],
     );
   }

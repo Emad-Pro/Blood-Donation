@@ -1,6 +1,5 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../view_model/cubit/user_signup_cubit.dart';
 

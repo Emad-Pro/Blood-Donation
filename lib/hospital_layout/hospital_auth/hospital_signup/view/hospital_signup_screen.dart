@@ -38,12 +38,12 @@ class HospitalSignupScreen extends StatelessWidget {
                       hospitalSignupCubit: hospitalSignupCubit),
                   HospitalSignupTimeOpenedClosedWidgets(
                       hospitalSignupCubit: hospitalSignupCubit),
-                  SizedBox(
-                    height: 8,
-                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(
+                        height: 8,
+                      ),
                       Row(
                         children: [
                           SizedBox(
