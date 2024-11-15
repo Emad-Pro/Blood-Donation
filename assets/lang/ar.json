@@ -183,5 +183,9 @@
     "User Login Successfully": "تم تسجيل الدخول بنجاح",
     "Please Wait ...": "يرجى الانتظار ...",
     "User Created Successfully": "تم التسجيل كمتبرع بنجاح",
-    "An unexpected error occurred": "حدث خطأ غير متوقع"
+    "An unexpected error occurred": "حدث خطأ غير متوقع",
+    "(Hospital Or Blood Center) Created Account Successfully": "(المستشفى أو مركز الدم) تم إنشاء الحساب بنجاح",
+    "Please Select Work Days": "الرجاء اختيار ايام العمل",
+    "Please Select Work Hours": "الرجاء اختيار ساعات العمل",
+    "Please upload docs": "قم برفع المستندات"
 }
