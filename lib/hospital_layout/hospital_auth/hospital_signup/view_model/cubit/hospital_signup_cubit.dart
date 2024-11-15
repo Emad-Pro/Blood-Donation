@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:blood_donation/core/enum/request_state.dart';
 import 'package:blood_donation/core/location_service/location_service.dart';
+import 'package:blood_donation/hospital_layout/hospital_auth/hospital_signup/model/hospital_signup_model.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'hospital_signup_state.dart';
 
@@ -22,13 +24,123 @@ class HospitalSignupCubit extends Cubit<HospitalSignupState> {
   TextEditingController currentLocationController = TextEditingController();
   TextEditingController longitudeController = TextEditingController();
   TextEditingController latitudeController = TextEditingController();
-  TextEditingController namePersonController = TextEditingController();
+  TextEditingController primaryContactPersonController =
+      TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  signupHospitalWithEmailAndPassword() async {
+    emit(state.copyWith(signUpHospitalState: RequestState.loading));
+    try {
+      await addHospitalToDatabase();
+      emit(state.copyWith(signUpHospitalState: RequestState.success));
+    } on AuthException catch (e) {
+      emit(state.copyWith(
+          signUpHospitalState: RequestState.error, errorMessage: e.message));
+    } on StorageException catch (e) {
+      emit(state.copyWith(
+          signUpHospitalState: RequestState.error, errorMessage: e.message));
+    } on PostgrestException catch (e) {
+      emit(state.copyWith(
+          signUpHospitalState: RequestState.error, errorMessage: e.message));
+    } catch (e) {
+      emit(state.copyWith(
+          signUpHospitalState: RequestState.error,
+          errorMessage: "An unexpected error occurred"));
+    }
+  }
+
+  //
+  Future<void> addHospitalToDatabase() async {
+    try {
+      final hospitalUID = await signupAuthHospital();
+      final docsUrl = await uploadDocs();
+      final hospitalModel = _createHospitalSignupModel(
+          hospitalUID!.user!.id.toString(), docsUrl!);
+      await Supabase.instance.client
+          .from("HospitalAuth")
+          .insert(hospitalModel.toMap());
+    } on StorageException catch (e) {
+      print(e.message);
+      throw StorageException(e.message);
+    } on PostgrestException catch (e) {
+      print(e.message);
+      throw PostgrestException(message: e.code!);
+    }
+  }
+
+  HospitalSignupModel _createHospitalSignupModel(
+      String hospitalUID, String docsUrl) {
+    final phonePrimartCode =
+        state.selectedPhoneServicePrimaryContactPerson == 'Orange'
+            ? '077'
+            : state.selectedPhoneServicePrimaryContactPerson == 'Zain'
+                ? '079'
+                : state.selectedPhoneServicePrimaryContactPerson == 'Umniah'
+                    ? '078'
+                    : '077';
+    final phoneCode = state.selectedPhoneService == 'Orange'
+        ? '077'
+        : state.selectedPhoneService == 'Zain'
+            ? '079'
+            : state.selectedPhoneService == 'Umniah'
+                ? '078'
+                : '077';
+    return HospitalSignupModel(
+      email: emailController.text,
+      name: nameController.text,
+      password: passwordController.text,
+      phone: "${phoneCode}${phoneController.text}",
+      latitude: _parseDouble(latitudeController.text),
+      longitude: _parseDouble(longitudeController.text),
+      primaryContactPerson:
+          "${phonePrimartCode}${primaryContactPersonController.text}",
+      currentLocation: currentLocationController.text,
+      dayes: state.selectedDays,
+      openingTime: '${state.openingTime!.hour}:${state.openingTime!.minute}',
+      // openingTime: state.openingTime,
+      closingTime: '${state.closingTime!.hour}:${state.closingTime!.minute}',
+      // closingTime: state.closingTime,
+      docsFile: docsUrl,
+      uId: hospitalUID,
+    );
+  }
+
+  Future<AuthResponse?> signupAuthHospital() async {
+    try {
+      return await Supabase.instance.client.auth.signUp(
+          password: passwordController.text,
+          email: emailController.text,
+          data: {"roule": "hospital"});
+    } on AuthException catch (e) {
+      print(e);
+      throw AuthException(e.message);
+    }
+  }
+
+  Future<String?> uploadDocs() async {
+    try {
+      final uniqueFileName =
+          "${DateTime.now().microsecondsSinceEpoch}_${state.selectedDocsFiles[0].path.split("/").last}";
+      final response = await Supabase.instance.client.storage
+          .from('hospital_docs')
+          .upload(uniqueFileName, state.selectedDocsFiles[0]);
+      return await Supabase.instance.client.storage
+          .from("hospital_docs")
+          .getPublicUrl(response.split("/").last);
+    } on StorageException catch (e) {
+      throw StorageException(e.message);
+    }
+  }
 
   //SignUp data
 
   //SignUp data
   toggleServicePhone(String phoneService) {
     emit(state.copyWith(selectedPhoneService: phoneService));
+  }
+
+  toggleServicePhonePrimaryContactNumber(String phoneService) {
+    emit(
+        state.copyWith(selectedPhoneServicePrimaryContactPerson: phoneService));
   }
 
   selectOpeningTime(BuildContext context) async {
@@ -119,5 +231,13 @@ class HospitalSignupCubit extends Cubit<HospitalSignupState> {
           permissionRequestState: RequestState.error,
           permissionMessage: "Filed to get location"));
     }
+  }
+
+  int _parseInt(String value) {
+    return int.tryParse(value) ?? 0;
+  }
+
+  double _parseDouble(String value) {
+    return double.tryParse(value) ?? 0.0;
   }
 }

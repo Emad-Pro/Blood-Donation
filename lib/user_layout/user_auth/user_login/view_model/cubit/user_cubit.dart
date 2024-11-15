@@ -27,10 +27,13 @@ class UserLoginCubit extends Cubit<UserLoginState> {
         email: emailController.text,
         password: passwordController.text,
       )
-          .then((onValue) {
-        print(onValue.user!.id);
+          .then((onValue) async {
+        if (onValue.user!.userMetadata!['role'] == 'user') {
+          emit(state.copyWith(loginState: RequestState.success));
+        } else {
+          await Supabase.instance.client.auth.signOut();
+        }
       });
-      emit(state.copyWith(loginState: RequestState.success));
     } on AuthException catch (e) {
       print(e.code);
       emit(

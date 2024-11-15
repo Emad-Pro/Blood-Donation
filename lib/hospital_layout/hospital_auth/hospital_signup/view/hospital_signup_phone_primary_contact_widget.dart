@@ -49,7 +49,7 @@ class HospitalSignupPhonePrimaryContactWidgets extends StatelessWidget {
                 onChanged: (String? newValue) {
                   if (newValue == 'Orange') {
                     print("077");
-                  } else if (newValue == 'Omniah') {
+                  } else if (newValue == 'Umniah') {
                     print("078");
                   } else if (newValue == 'Zain') {
                     print("079");
@@ -67,7 +67,7 @@ class HospitalSignupPhonePrimaryContactWidgets extends StatelessWidget {
                 lableText: "Phone Number".tr(context),
                 keyboardType: TextInputType.phone,
                 maxLength: 7,
-                textEditingController: hospitalSignupCubit.phoneCodeController,
+                textEditingController: hospitalSignupCubit.phoneController,
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'please enter your phone number'.tr(context);
@@ -79,17 +79,70 @@ class HospitalSignupPhonePrimaryContactWidgets extends StatelessWidget {
           ],
         ),
         SizedBox(height: 8),
-        GlobalTextFormFiled(
-          lableText: "Primary Contact Person".tr(context),
-          keyboardType: TextInputType.name,
-          textEditingController: hospitalSignupCubit.namePersonController,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "Please Enter Primary Contact Person".tr(context);
-            } else {
-              return null;
-            }
-          },
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              width: 90,
+              height: 40,
+              padding: EdgeInsets.symmetric(horizontal: 5),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.2)),
+                  borderRadius: BorderRadius.circular(10)),
+              child: DropdownButton<String>(
+                underline: SizedBox(),
+                isExpanded: true,
+                value: hospitalSignupCubit
+                        .state.selectedPhoneServicePrimaryContactPerson ??
+                    hospitalSignupCubit.nameServicePhone.first,
+                items: hospitalSignupCubit.nameServicePhone
+                    .map((String sericePhone) {
+                  return DropdownMenuItem<String>(
+                    value: sericePhone,
+                    child: Text(
+                      sericePhone.tr(context),
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  if (newValue == 'Orange') {
+                    print("077");
+                  } else if (newValue == 'Umniah') {
+                    print("078");
+                  } else if (newValue == 'Zain') {
+                    print("079");
+                  }
+
+                  hospitalSignupCubit
+                      .toggleServicePhonePrimaryContactNumber(newValue!);
+                },
+              ),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            Expanded(
+              child: GlobalTextFormFiled(
+                lableText: "Primary Contact Person".tr(context),
+                keyboardType: TextInputType.phone,
+                maxLength: 7,
+                textEditingController:
+                    hospitalSignupCubit.primaryContactPersonController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please Enter Primary Contact Person'.tr(context);
+                  }
+                  return null;
+                },
+              ),
+            ),
+          ],
         ),
         SizedBox(height: 8),
       ],
