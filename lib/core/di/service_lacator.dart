@@ -1,3 +1,4 @@
+import 'package:blood_donation/hospital_layout/hospital_main/view_model/cubit/hospital_main_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 import '../locale/cubit/localizations_cubit.dart';
@@ -11,5 +12,8 @@ class ServiceLocator {
     getIt.registerLazySingleton(() => ThemeCubit());
     getIt.registerLazySingleton(() => LocalizationsCubit());
     getIt.registerFactory(() => LocationService());
+
+    ////// Hospital
+    getIt.registerLazySingleton(() => HospitalMainCubit());
   }
 }
