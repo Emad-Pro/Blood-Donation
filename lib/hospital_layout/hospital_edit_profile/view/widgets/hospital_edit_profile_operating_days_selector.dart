@@ -38,8 +38,6 @@ class HospitalEditProfileOperatingDaysSelector extends StatelessWidget {
                   : state.days!
                       .map((day) => day)
                       .join(', ')
-
-                      // Replace the Eng  lish names of the days with the translated names
                       .replaceAll("Sat", "Sat".tr(context))
                       .replaceAll("Fri", "Fri".tr(context))
                       .replaceAll("Sun", "Sun".tr(context))

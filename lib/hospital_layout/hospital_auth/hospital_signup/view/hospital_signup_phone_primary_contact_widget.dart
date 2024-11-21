@@ -71,6 +71,8 @@ class HospitalSignupPhonePrimaryContactWidgets extends StatelessWidget {
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'please enter your phone number'.tr(context);
+                  } else if (value.length < 7) {
+                    return 'please enter your phone number'.tr(context);
                   }
                   return null;
                 },

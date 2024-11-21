@@ -7,6 +7,7 @@ class HospitalEditProfileState extends Equatable {
   final List<String>? days;
   final String? selectedPhoneService;
   final String? selectedPhoneServicePrimaryContactPerson;
+
   final RequestState permissionRequestState;
   final String? permissionMessage;
   final RequestState updateProfileState;

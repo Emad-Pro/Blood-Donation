@@ -73,25 +73,19 @@ class HospitalProfileModel extends Equatable {
 
   factory HospitalProfileModel.fromMap(Map<String, dynamic> map) {
     return HospitalProfileModel(
-      id: map['id'] != null ? map['id'] as int : null,
-      email: map['email'] != null ? map['email'] as String : null,
-      name: map['name'] != null ? map['name'] as String : null,
-      phone: map['phone'] != null ? map['phone'] as String : null,
-      latitude: map['latitude'] != null ? map['latitude'] as double : null,
-      longitude: map['longitude'] != null ? map['longitude'] as double : null,
-      currentLocation: map['currentLocation'] != null
-          ? map['currentLocation'] as String
-          : null,
-      dayes: map['dayes'] != null ? map['dayes'] as String : null,
-      openingTime:
-          map['openingTime'] != null ? map['openingTime'] as String : null,
-      closingTime:
-          map['closingTime'] != null ? map['closingTime'] as String : null,
-      docsFile: map['docsFile'] != null ? map['docsFile'] as String : null,
-      uId: map['uId'] != null ? map['uId'] as String : null,
-      primaryContactPerson: map['primaryContactPerson'] != null
-          ? map['primaryContactPerson'] as String
-          : null,
+      id: map['id'] as int?,
+      email: map['email'] as String?,
+      name: map['name'] as String?,
+      phone: map['phone'] as String?,
+      latitude: map['latitude'] as double?,
+      longitude: map['longitude'] as double?,
+      currentLocation: map['currentLocation'] as String?,
+      dayes: map['dayes'] as String?,
+      openingTime: map['openingTime'] as String?,
+      closingTime: map['closingTime'] as String?,
+      docsFile: map['docsFile'] as String?,
+      uId: map['uId'] as String?,
+      primaryContactPerson: map['primaryContactPerson'] as String?,
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
 
 class HospitalProfileReviewBuildCard extends StatelessWidget {
@@ -34,7 +35,7 @@ class HospitalProfileReviewBuildCard extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "Blood type: $bloodType",
+                        "${"Blood type".tr(context)}: $bloodType",
                         style: TextStyle(color: Colors.green),
                       ),
                     ],

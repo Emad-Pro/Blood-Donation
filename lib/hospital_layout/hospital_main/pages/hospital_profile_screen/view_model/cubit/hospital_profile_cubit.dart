@@ -17,7 +17,6 @@ class HospitalProfileCubit extends Cubit<HospitalProfileState> {
           .from("HospitalAuth")
           .select()
           .eq("uId", subabase.auth.currentUser!.id);
-      print(resonse.first);
       emit(state.copyWith(
           hospitalProfileState: RequestState.success,
           hospitalProfileModel: HospitalProfileModel.fromMap(resonse.first)));
@@ -30,7 +29,8 @@ class HospitalProfileCubit extends Cubit<HospitalProfileState> {
           errorMessage: e.osError!.message));
     } catch (e) {
       emit(state.copyWith(
-          hospitalProfileState: RequestState.error, errorMessage: ""));
+          hospitalProfileState: RequestState.error,
+          errorMessage: e.toString()));
     }
   }
 }
