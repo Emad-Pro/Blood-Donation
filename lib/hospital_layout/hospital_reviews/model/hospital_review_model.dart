@@ -43,11 +43,11 @@ class HospitalReviewModel extends Equatable {
       userId: map['user_id'],
       hospitalId: map['hospital_id'],
       createdAt: map['created_at'],
-      rating: 4.5,
+      rating: map['reating'],
       review: map['review'],
       userName: map['UserAuth']['user_full_name'],
-      hospitalName: map['HospitalAuth']['name'],
       userBloodType: map['UserAuth']['user_blood_type'],
+      hospitalName: map['HospitalAuth']['name'],
     );
   }
 }

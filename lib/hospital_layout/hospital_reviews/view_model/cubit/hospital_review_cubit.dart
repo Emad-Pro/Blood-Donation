@@ -18,7 +18,8 @@ class HospitalReviewCubit extends Cubit<HospitalReviewState> {
       final response = await Supabase.instance.client
           .from('Reviews_hospital')
           .select(
-              'id, review,created_at,HospitalAuth(name),UserAuth(user_full_name,user_blood_type)'); // حدد الأعمدة المطلوبة فقط
+              'id, review,created_at,reating,HospitalAuth(name),UserAuth(user_full_name,user_blood_type)');
+
       emit(state.copyWith(
           reviewsState: RequestState.success,
           hospitalReviewModel:

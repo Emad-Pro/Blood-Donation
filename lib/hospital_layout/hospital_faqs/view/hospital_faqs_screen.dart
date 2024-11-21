@@ -34,9 +34,7 @@ class HospitalFaqsScreen extends StatelessWidget {
 
                   // FAQ List Section
                   SizedBox(height: 16),
-                  Expanded(
-                    child: HospitalFaqsList(),
-                  ),
+                  Expanded(child: HospitalFaqsList()),
                 ],
               ),
             );

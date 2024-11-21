@@ -1,5 +1,5 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
-import 'package:blood_donation/hospital_layout/hospital_reating/view_model/cubit/hospital_review_cubit.dart';
+import 'package:blood_donation/hospital_layout/hospital_reviews/view_model/cubit/hospital_review_cubit.dart';
 import 'package:flutter/material.dart';
 
 import '../methods/calc_avergs.dart';
