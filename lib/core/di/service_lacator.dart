@@ -1,3 +1,4 @@
+import 'package:blood_donation/hospital_layout/hospital_main/pages/hospital_profile_screen/view_model/cubit/hospital_profile_cubit.dart';
 import 'package:blood_donation/hospital_layout/hospital_main/view_model/cubit/hospital_main_cubit.dart';
 import 'package:get_it/get_it.dart';
 
@@ -15,5 +16,6 @@ class ServiceLocator {
 
     ////// Hospital
     getIt.registerLazySingleton(() => HospitalMainCubit());
+    getIt.registerLazySingleton(() => HospitalProfileCubit());
   }
 }

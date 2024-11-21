@@ -1,5 +1,6 @@
 import 'package:blood_donation/app/public/choose_screen/view/choose_screen.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
+import 'package:blood_donation/core/shared_preferences/cache_helper.dart';
 import 'package:blood_donation/core/style/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +69,8 @@ class OnboardingScreen extends StatelessWidget {
       ),
       body: OnBoardingSlider(
         finishButtonText: 'Login'.tr(context),
-        onFinish: () {
+        onFinish: () async {
+          await CacheHelper.saveData(key: "boarding", value: true);
           Navigator.push(
             context,
             CupertinoPageRoute(
@@ -87,7 +89,9 @@ class OnboardingScreen extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        trailingFunction: () {},
+        trailingFunction: () async {
+          await CacheHelper.saveData(key: "boarding", value: true);
+        },
         controllerColor: kDarkBlueColor,
         totalPage: 3,
         headerBackgroundColor: Theme.of(context).colorScheme.surface,
