@@ -156,16 +156,16 @@ class HospitalSignupCubit extends Cubit<HospitalSignupState> {
     ;
   }
 
-  toggleIsSecure() {
-    emit(state.copyWith(isObSecure: !state.isObSecure));
-  }
-
   selectClosingTime(BuildContext context) async {
     final picked = await showTimePicker(
       context: context,
       initialTime: TimeOfDay(hour: 23, minute: 0),
     );
     if (picked != null) emit(state.copyWith(closingTime: picked));
+  }
+
+  toggleIsSecure() {
+    emit(state.copyWith(isObSecure: !state.isObSecure));
   }
 
   void toggleDay(String day) {

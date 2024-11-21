@@ -1,5 +1,5 @@
 import 'package:blood_donation/core/di/service_lacator.dart';
-import 'package:blood_donation/core/enum/request_state.dart';
+
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:blood_donation/core/location_service/location_service.dart';
 import 'package:blood_donation/core/widget/global_appbar.dart';
