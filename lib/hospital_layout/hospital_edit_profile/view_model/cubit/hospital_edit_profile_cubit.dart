@@ -28,7 +28,6 @@ class HospitalEditProfileCubit extends Cubit<HospitalEditProfileState> {
   TextEditingController latitudeController = TextEditingController();
   TextEditingController longitudeController = TextEditingController();
   TextEditingController currentLocationController = TextEditingController();
-  TextEditingController dayesController = TextEditingController();
 
   TextEditingController docsFileController = TextEditingController();
   TextEditingController primaryContactPersonController =
@@ -63,7 +62,6 @@ class HospitalEditProfileCubit extends Cubit<HospitalEditProfileState> {
           .from("HospitalAuth")
           .update(map.toMap())
           .eq("uId", profile.uId!);
-      print(profile.id!);
       emit(state.copyWith(updateProfileState: RequestState.success));
     } on SocketException catch (e) {
       emit(state.copyWith(
@@ -75,22 +73,10 @@ class HospitalEditProfileCubit extends Cubit<HospitalEditProfileState> {
   }
 
   HospitalSignupModel _createHospitalSignupModel() {
-    final phonePrimartCode =
-        state.selectedPhoneServicePrimaryContactPerson == 'Orange'
-            ? '077'
-            : state.selectedPhoneServicePrimaryContactPerson == 'Zain'
-                ? '079'
-                : state.selectedPhoneServicePrimaryContactPerson == 'Umniah'
-                    ? '078'
-                    : '077';
-    final phoneCode = state.selectedPhoneService == 'Orange'
-        ? '077'
-        : state.selectedPhoneService == 'Zain'
-            ? '079'
-            : state.selectedPhoneService == 'Umniah'
-                ? '078'
-                : '077';
-    print(currentLocationController.text);
+    final phonePrimartCode = _getPhoneServiceWithName(
+        state.selectedPhoneServicePrimaryContactPerson!);
+    final phoneCode = _getPhoneServiceWithName(state.selectedPhoneService!);
+
     return HospitalSignupModel(
       email: emailController.text,
       name: nameController.text,
@@ -102,14 +88,21 @@ class HospitalEditProfileCubit extends Cubit<HospitalEditProfileState> {
       currentLocation: currentLocationController.text,
       dayes: state.days,
       openingTime: '${state.openingTime!.hour}:${state.openingTime!.minute}',
-      // openingTime: state.openingTime,
       closingTime: '${state.closingTime!.hour}:${state.closingTime!.minute}',
-      // closingTime: state.closingTime,
       docsFile: profile.docsFile,
       uId: profile.uId.toString(),
     );
   }
-// دوال مساعدة
+
+  String _getPhoneServiceWithName(String serviceName) {
+    return serviceName == 'Orange'
+        ? '077'
+        : serviceName == 'Zain'
+            ? '079'
+            : serviceName == 'Umniah'
+                ? '078'
+                : '077';
+  }
 
   void _initializeTextFields() {
     nameController.text = profile.name!;
@@ -118,7 +111,7 @@ class HospitalEditProfileCubit extends Cubit<HospitalEditProfileState> {
     latitudeController.text = profile.latitude!.toString();
     longitudeController.text = profile.longitude!.toString();
     currentLocationController.text = profile.currentLocation!;
-    dayesController.text = profile.dayes!;
+
     docsFileController.text = profile.docsFile!;
     primaryContactPersonController.text =
         profile.primaryContactPerson!.replaceRange(0, 3, '');

@@ -65,7 +65,6 @@ class HospitalFaqsCubit extends Cubit<HospitalFaqsState> {
         .where((faq) =>
             faq.question.tr(context).toLowerCase().contains(searchQuery))
         .toList();
-    print(matchingFaqs[0].question.tr(context));
     emit(state.copyWith(faqsSearchResult: matchingFaqs));
   }
 }

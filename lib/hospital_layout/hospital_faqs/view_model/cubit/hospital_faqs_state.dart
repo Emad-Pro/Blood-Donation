@@ -2,8 +2,10 @@
 part of 'hospital_faqs_cubit.dart';
 
 class HospitalFaqsState extends Equatable {
-  const HospitalFaqsState(
-      {this.donationInfo = const [], this.faqsSearchResult = const []});
+  const HospitalFaqsState({
+    this.donationInfo = const [],
+    this.faqsSearchResult = const [],
+  });
   final List<bool> donationInfo;
   final List<HospitalFaqsModel> faqsSearchResult;
 

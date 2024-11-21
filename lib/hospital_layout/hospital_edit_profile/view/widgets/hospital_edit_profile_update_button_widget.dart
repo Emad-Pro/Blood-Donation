@@ -34,7 +34,9 @@ class HospitalEditProfileUpdateButtonWidget extends StatelessWidget {
                           context, "Please Select Work Days".tr(context),
                           backgroundColor: Colors.red);
                     } else {
-                      cubit.update();
+                      if (cubit.formKey.currentState!.validate()) {
+                        cubit.update();
+                      }
                     }
                   },
                   child: Text("Update".tr(context))));
