@@ -14,6 +14,7 @@ class HospitalMainScreen extends StatelessWidget {
       builder: (context, state) {
         final cubit = getIt<HospitalMainCubit>();
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           // appBar: AppBar(
           //   title: Text(cubit.titles[state.currentIndex]),
           // ),
@@ -24,7 +25,7 @@ class HospitalMainScreen extends StatelessWidget {
             onTap: (index) {
               cubit.changeIndex(index);
             },
-            items: cubit.items,
+            items: cubit.items(context),
           ),
         );
       },

@@ -8,6 +8,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../../app/settings_screen/view/settigns_screen.dart';
 import '../../../../../core/di/service_lacator.dart';
 import '../../../../hospital_edit_profile/view/hospital_edit_profile_screen.dart';
+import '../../../../hospital_faqs/view/hospital_faqs_screen.dart';
+import '../../../../hospital_reating/view/hospital_review_screen.dart';
 import 'widget/hospital_profile_header_widgets.dart';
 
 class HospitalProfileScreen extends StatelessWidget {
@@ -22,18 +24,7 @@ class HospitalProfileScreen extends StatelessWidget {
         switch (state.hospitalProfileState) {
           case RequestState.init:
           case RequestState.loading:
-            return Center(
-                child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircularProgressIndicator(),
-                SizedBox(height: 15),
-                Text(
-                  "Loading...".tr(context),
-                )
-              ],
-            ));
+            return HospitalProfileLoading();
           case RequestState.success:
             return Container(
               width: double.infinity,
@@ -57,21 +48,8 @@ class HospitalProfileScreen extends StatelessWidget {
                           : MediaQuery.sizeOf(context).height / 1.5,
                       child: ListView(
                         children: [
-                          ListTile(
-                            contentPadding: EdgeInsets.all(15),
-                            title: Text("Edit Profile".tr(context)),
-                            leading: CircleAvatar(child: Icon(Icons.edit)),
-                            trailing: Icon(Icons.arrow_forward_ios),
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          HospitalEditProfileScreen(
-                                            profile:
-                                                state.hospitalProfileModel!,
-                                          )));
-                            },
+                          HospitalPorfileEditProfileTile(
+                            state: state,
                           ),
                           ListTile(
                             contentPadding: EdgeInsets.all(15),
@@ -94,7 +72,13 @@ class HospitalProfileScreen extends StatelessWidget {
                             leading:
                                 CircleAvatar(child: Icon(Icons.comment_sharp)),
                             trailing: Icon(Icons.arrow_forward_ios),
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          HospitalReviewScreen()));
+                            },
                           ),
                           HospitalProfileSettingsTile(),
                           ListTile(
@@ -102,7 +86,13 @@ class HospitalProfileScreen extends StatelessWidget {
                             title: Text("FAQs".tr(context)),
                             leading: CircleAvatar(child: Icon(Icons.feed)),
                             trailing: Icon(Icons.arrow_forward_ios),
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          HospitalFaqsScreen()));
+                            },
                           ),
                           HospitalProfileLogoutTile(),
                         ],
@@ -129,6 +119,53 @@ class HospitalProfileScreen extends StatelessWidget {
               ),
             );
         }
+      },
+    );
+  }
+}
+
+class HospitalProfileLoading extends StatelessWidget {
+  const HospitalProfileLoading({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        CircularProgressIndicator(),
+        SizedBox(height: 15),
+        Text(
+          "Loading...".tr(context),
+        )
+      ],
+    ));
+  }
+}
+
+class HospitalPorfileEditProfileTile extends StatelessWidget {
+  const HospitalPorfileEditProfileTile({
+    super.key,
+    required this.state,
+  });
+  final HospitalProfileState state;
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: EdgeInsets.all(15),
+      title: Text("Edit Profile".tr(context)),
+      leading: CircleAvatar(child: Icon(Icons.edit)),
+      trailing: Icon(Icons.arrow_forward_ios),
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HospitalEditProfileScreen(
+                      profile: state.hospitalProfileModel!,
+                    )));
       },
     );
   }

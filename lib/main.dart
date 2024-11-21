@@ -1,4 +1,3 @@
-import 'package:blood_donation/app/public/onboarding_screen/view/onboarding_screen.dart';
 import 'package:blood_donation/core/locale/cubit/localizations_cubit.dart';
 import 'package:blood_donation/core/shared_preferences/cache_helper.dart';
 import 'package:blood_donation/core/style/theme/bloc/theme_bloc.dart';

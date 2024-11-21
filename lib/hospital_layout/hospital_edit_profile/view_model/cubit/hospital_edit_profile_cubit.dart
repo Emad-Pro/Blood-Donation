@@ -138,8 +138,21 @@ class HospitalEditProfileCubit extends Cubit<HospitalEditProfileState> {
     }
   }
 
-  List<String> _parseDays(String days) {
-    return days.replaceAll('[', '').replaceAll(']', '').split(',');
+  List<String> _parseDays(String? days) {
+    if (days == null || days.isEmpty) {
+      return [];
+    }
+    try {
+      return days
+          .replaceAll('[', '')
+          .replaceAll(']', '')
+          .split(',')
+          .map((e) => e.trim())
+          .toList();
+    } catch (e) {
+      print('Error parsing days: $e');
+      return [];
+    }
   }
 
   TimeOfDay _parseTimeOfDay(String time) {
