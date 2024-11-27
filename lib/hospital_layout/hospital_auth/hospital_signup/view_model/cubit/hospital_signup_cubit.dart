@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../../../core/shared_preferences/cache_helper.dart';
+
 part 'hospital_signup_state.dart';
 
 class HospitalSignupCubit extends Cubit<HospitalSignupState> {
@@ -31,6 +33,9 @@ class HospitalSignupCubit extends Cubit<HospitalSignupState> {
     emit(state.copyWith(signUpHospitalState: RequestState.loading));
     try {
       await addHospitalToDatabase();
+      await CacheHelper.saveData(
+          key: "password", value: passwordController.text);
+
       emit(state.copyWith(signUpHospitalState: RequestState.success));
     } on AuthException catch (e) {
       emit(state.copyWith(
@@ -49,7 +54,7 @@ class HospitalSignupCubit extends Cubit<HospitalSignupState> {
   }
 
   //
-  Future<void> addHospitalToDatabase() async {
+  Future addHospitalToDatabase() async {
     try {
       final hospitalUID = await signupAuthHospital();
       final docsUrl = await uploadDocs();
@@ -59,10 +64,8 @@ class HospitalSignupCubit extends Cubit<HospitalSignupState> {
           .from("HospitalAuth")
           .insert(hospitalModel.toMap());
     } on StorageException catch (e) {
-      print(e.message);
       throw StorageException(e.message);
     } on PostgrestException catch (e) {
-      print(e.message);
       throw PostgrestException(message: e.code!);
     }
   }

@@ -13,6 +13,9 @@ class HospitalEditProfileState extends Equatable {
   final RequestState updateProfileState;
   final String? updateProfileMessage;
 
+  final RequestState changePasswordState;
+  final String? changePasswordMessage;
+
   HospitalEditProfileState(
       {this.openingTime,
       this.closingTime,
@@ -22,7 +25,9 @@ class HospitalEditProfileState extends Equatable {
       this.permissionRequestState = RequestState.init,
       this.permissionMessage,
       this.updateProfileState = RequestState.init,
-      this.updateProfileMessage});
+      this.updateProfileMessage,
+      this.changePasswordState = RequestState.init,
+      this.changePasswordMessage = ''});
 
   @override
   List<Object?> get props => [
@@ -34,34 +39,39 @@ class HospitalEditProfileState extends Equatable {
         permissionRequestState,
         permissionMessage,
         updateProfileState,
-        updateProfileMessage
+        updateProfileMessage,
+        changePasswordState,
+        changePasswordMessage
       ];
 
-  HospitalEditProfileState copyWith({
-    TimeOfDay? openingTime,
-    TimeOfDay? closingTime,
-    List<String>? days,
-    String? selectedPhoneService,
-    String? selectedPhoneServicePrimaryContactPerson,
-    RequestState? permissionRequestState,
-    String? permissionMessage,
-    RequestState? updateProfileState,
-    String? updateProfileMessage,
-  }) {
+  HospitalEditProfileState copyWith(
+      {TimeOfDay? openingTime,
+      TimeOfDay? closingTime,
+      List<String>? days,
+      String? selectedPhoneService,
+      String? selectedPhoneServicePrimaryContactPerson,
+      RequestState? permissionRequestState,
+      String? permissionMessage,
+      RequestState? updateProfileState,
+      String? updateProfileMessage,
+      RequestState? changePasswordState,
+      String? changePasswordMessage}) {
     return HospitalEditProfileState(
-      openingTime: openingTime ?? this.openingTime,
-      closingTime: closingTime ?? this.closingTime,
-      days: days ?? this.days,
-      selectedPhoneService: selectedPhoneService ?? this.selectedPhoneService,
-      selectedPhoneServicePrimaryContactPerson:
-          selectedPhoneServicePrimaryContactPerson ??
-              this.selectedPhoneServicePrimaryContactPerson,
-      permissionRequestState:
-          permissionRequestState ?? this.permissionRequestState,
-      permissionMessage: permissionMessage ?? this.permissionMessage,
-      updateProfileState: updateProfileState ?? this.updateProfileState,
-      updateProfileMessage: updateProfileMessage ?? this.updateProfileMessage,
-    );
+        openingTime: openingTime ?? this.openingTime,
+        closingTime: closingTime ?? this.closingTime,
+        days: days ?? this.days,
+        selectedPhoneService: selectedPhoneService ?? this.selectedPhoneService,
+        selectedPhoneServicePrimaryContactPerson:
+            selectedPhoneServicePrimaryContactPerson ??
+                this.selectedPhoneServicePrimaryContactPerson,
+        permissionRequestState:
+            permissionRequestState ?? this.permissionRequestState,
+        permissionMessage: permissionMessage ?? this.permissionMessage,
+        updateProfileState: updateProfileState ?? this.updateProfileState,
+        updateProfileMessage: updateProfileMessage ?? this.updateProfileMessage,
+        changePasswordState: changePasswordState ?? this.changePasswordState,
+        changePasswordMessage:
+            changePasswordMessage ?? this.changePasswordMessage);
   }
 
   final List<String> daysOfWeek = [

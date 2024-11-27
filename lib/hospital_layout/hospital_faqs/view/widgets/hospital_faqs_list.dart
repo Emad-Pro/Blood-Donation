@@ -11,6 +11,8 @@ class HospitalFaqsList extends StatelessWidget {
     final listDonationFaqs = context.read<HospitalFaqsCubit>().donationInfo;
 
     return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       itemCount: state.faqsSearchResult.isNotEmpty
           ? state.faqsSearchResult.length
           : listDonationFaqs.length,
@@ -40,11 +42,13 @@ class HospitalFaqsList extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        answer,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary),
+                      Expanded(
+                        child: Text(
+                          answer,
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary),
+                        ),
                       ),
                     ],
                   ),

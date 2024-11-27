@@ -1,5 +1,7 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:blood_donation/core/location_service/location_service.dart';
+import 'package:blood_donation/core/shared_preferences/cache_helper.dart';
+import 'package:blood_donation/core/widget/globla_textformfiled.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../hospital_main/pages/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
@@ -53,8 +55,16 @@ class HospitalEditProfileScreen extends StatelessWidget {
                     SizedBox(height: 15),
                     HospitalEditProfileWorkHoursSelector(cubit: cubit),
                     SizedBox(height: 15),
-                    HospitalEditProfileUpdateButtonWidget(
-                        cubit: cubit, state: state)
+                    Row(
+                      children: [
+                        Expanded(
+                          child: HospitalEditProfileUpdateButtonWidget(
+                              cubit: cubit, state: state),
+                        ),
+                        SizedBox(width: 10),
+                        HospitalEditPorfileChangePasswordButton(cubit: cubit),
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -63,5 +73,125 @@ class HospitalEditProfileScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class HospitalEditPorfileChangePasswordButton extends StatelessWidget {
+  const HospitalEditPorfileChangePasswordButton(
+      {super.key, required this.cubit});
+  final HospitalEditProfileCubit cubit;
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return HospitalEditProfileChangePasswords(cubit: cubit);
+          }));
+        },
+        child: Text("Edit Password".tr(context)),
+      ),
+    );
+  }
+}
+
+class HospitalEditProfileChangePasswords extends StatelessWidget {
+  const HospitalEditProfileChangePasswords({Key? key, required this.cubit})
+      : super(key: key);
+  final HospitalEditProfileCubit cubit;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Change Password".tr(context)),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Form(
+          key: cubit.changePasswordKey,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  height: 15,
+                ),
+                GlobalTextFormFiled(
+                    isSecure: true,
+                    lableText: "Old Password".tr(context),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please Enter Old Password".tr(context);
+                      } else if (CacheHelper.getSaveData(key: "password") !=
+                          value) {
+                        return "Old Password Not Match".tr(context);
+                      } else
+                        return null;
+                    }),
+                SizedBox(
+                  height: 12,
+                ),
+                GlobalTextFormFiled(
+                    isSecure: true,
+                    textEditingController: cubit.passwordController,
+                    lableText: "New Password".tr(context),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please Enter new password".tr(context);
+                      } else if (value !=
+                          cubit.confirmPasswordController.text) {
+                        return "Password Not Match".tr(context);
+                      } else
+                        return null;
+                    }),
+                SizedBox(
+                  height: 12,
+                ),
+                GlobalTextFormFiled(
+                    isSecure: true,
+                    textEditingController: cubit.confirmPasswordController,
+                    lableText: "Confirm new Password".tr(context),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please Enter Password".tr(context);
+                      } else if (value !=
+                          cubit.confirmPasswordController.text) {
+                        return "Password Not Match".tr(context);
+                      } else
+                        return null;
+                    }),
+                SizedBox(
+                  height: 15,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      if (cubit.changePasswordKey.currentState!.validate()) {
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                    title: Text("Change Password".tr(context)),
+                                    content: Text(
+                                        "Are you sure to change password"
+                                            .tr(context)),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          child: Text("Cancel".tr(context))),
+                                      TextButton(
+                                          onPressed: () =>
+                                              cubit.changePassword(),
+                                          child: Text("Confirm".tr(context)))
+                                    ]));
+                      }
+                    },
+                    child: Text("Change Password".tr(context))),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+    ;
   }
 }

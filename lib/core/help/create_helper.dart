@@ -3,17 +3,16 @@ import 'dart:io';
 void main() {
   // قائمة بأسماء الكلاسات
   List<String> classNames = [
-    "HospitalProfileFaqsTile",
-    "HospitalProfileReviewsTile",
-    "HospitalProfileLoading",
-    "HospitalPorfileEditProfileTile",
-    "HospitalProfileSettingsTile",
-    "HospitalProfileLogoutTile",
+    "HospitalHomeResentListview",
+    "HospitalHomeResentText",
+    "HospitalHomeEmergencyButton",
+    "HospitalHomeSlider",
+    "HospitalHomeAppbar",
   ];
 
   // مسار إنشاء الملفات
   String outputPath =
-      '../../hospital_layout/hospital_main/pages/hospital_profile_screen/view/widgets/';
+      '../../hospital_layout/hospital_main/pages/hospital_home_screen/view/widgets/';
 
   // التأكد من وجود المجلد
   Directory(outputPath).createSync(recursive: true);

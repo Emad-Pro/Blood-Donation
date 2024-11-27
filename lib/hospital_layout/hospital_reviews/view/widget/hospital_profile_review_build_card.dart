@@ -1,5 +1,8 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
+import '../../../../core/auto_direction.dart';
 
 class HospitalProfileReviewBuildCard extends StatelessWidget {
   const HospitalProfileReviewBuildCard({
@@ -42,15 +45,26 @@ class HospitalProfileReviewBuildCard extends StatelessWidget {
                   ),
                 ),
                 Row(
-                  children: List.generate(rating.toInt(), (index) {
-                    return Icon(Icons.star, color: Colors.orange, size: 18);
-                  }),
+                  children: [
+                    Text(" (${rating.toString()})"),
+                    RatingBarIndicator(
+                      rating: rating,
+                      itemBuilder: (context, index) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      itemCount: 5,
+                      itemSize: 20.0,
+                      direction: Axis.horizontal,
+                    ),
+                  ],
                 ),
               ],
             ),
             SizedBox(height: 8),
-            Text(
-              text,
+            AutoDirection(
+              text: text,
+              child: Text(text),
             ),
             SizedBox(height: 16),
           ],
