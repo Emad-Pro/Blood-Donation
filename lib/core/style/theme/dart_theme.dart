@@ -4,6 +4,7 @@ import '../../di/service_lacator.dart';
 import '../../locale/cubit/localizations_cubit.dart';
 
 ThemeData darkTheme = ThemeData.dark().copyWith(
+    cardTheme: CardTheme(color: Colors.white12),
     textTheme: Typography().white.apply(
         fontFamily: getIt<LocalizationsCubit>().state.languageCode == "ar"
             ? "ibm"

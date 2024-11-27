@@ -10,7 +10,6 @@ import '../../../../core/widget/global_button.dart';
 import '../../../../core/widget/global_sub_title_text_widget.dart';
 import '../../../../core/widget/global_title_text_widget.dart';
 import '../../../../core/widget/globla_textformfiled.dart';
-import '../../../../user_layout/user_auth/user_login/view_model/cubit/user_cubit.dart';
 
 class HospitalLoginScreen extends StatelessWidget {
   const HospitalLoginScreen({super.key});

@@ -13,7 +13,7 @@ class HospitalEditProfileEmailField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GlobalTextFormFiled(
-      readOnly: true,
+      readOnly: false,
       lableText: "Email".tr(context),
       textEditingController: cubit.emailController,
       validator: (value) {
