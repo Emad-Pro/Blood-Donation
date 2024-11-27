@@ -1,5 +1,6 @@
 // File for class HospitalProfileLogoutTile
 
+import 'package:blood_donation/app/public/choose_screen/view/choose_screen.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -50,7 +51,14 @@ class HospitalProfileLogoutTile extends StatelessWidget {
                             backgroundColor: WidgetStateProperty.all(
                                 Theme.of(context).colorScheme.primary)),
                         onPressed: () {
-                          Supabase.instance.client.auth.signOut();
+                          Supabase.instance.client.auth
+                              .signOut()
+                              .then((onValue) {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (builder) {
+                              return ChooseScreen();
+                            }));
+                          });
                           Navigator.pop(context);
                         },
                         child: Text("Logout".tr(context))),

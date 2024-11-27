@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:blood_donation/core/enum/request_state.dart';
+import 'package:blood_donation/core/shared_preferences/cache_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -22,18 +23,26 @@ class UserLoginCubit extends Cubit<UserLoginState> {
   signInWithEmailAndPassword() async {
     emit(state.copyWith(loginState: RequestState.loading));
     try {
-      await Supabase.instance.client.auth
-          .signInWithPassword(
+      final response = await Supabase.instance.client.auth.signInWithPassword(
         email: emailController.text,
         password: passwordController.text,
-      )
-          .then((onValue) async {
-        if (onValue.user!.userMetadata!['role'] == 'user') {
-          emit(state.copyWith(loginState: RequestState.success));
-        } else {
-          await Supabase.instance.client.auth.signOut();
-        }
-      });
+      );
+      if (response.user!.identities!.first.identityData!['roule'] == 'user') {
+        await CacheHelper.saveData(
+            key: "password", value: passwordController.text);
+        emit(state.copyWith(loginState: RequestState.success));
+      } else if (response.user!.identities!.first.identityData!['roule'] ==
+          'hospital') {
+        emit(state.copyWith(
+            loginState: RequestState.error,
+            errorMessage: "Authorization Error"));
+      } else {
+        emit(state.copyWith(
+            loginState: RequestState.error,
+            errorMessage: "Authorization Error"));
+      }
+
+      await Supabase.instance.client.auth.signOut();
     } on AuthException catch (e) {
       print(e.code);
       emit(

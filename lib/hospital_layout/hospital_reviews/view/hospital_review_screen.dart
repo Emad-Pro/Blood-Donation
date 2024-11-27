@@ -19,6 +19,7 @@ class HospitalReviewScreen extends StatelessWidget {
         ),
         body: BlocBuilder<HospitalReviewCubit, HospitalReviewState>(
           builder: (context, state) {
+            final cubit = context.read<HospitalReviewCubit>();
             switch (state.reviewsState) {
               case RequestState.init:
               case RequestState.loading:
@@ -30,7 +31,10 @@ class HospitalReviewScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      HospitalProfileReviewHeaderWidget(state: state),
+                      HospitalProfileReviewHeaderWidget(
+                        state: state,
+                        cubit: cubit,
+                      ),
                       SizedBox(
                         child: ListView.builder(
                             itemCount: state.hospitalReviewModel!.length,

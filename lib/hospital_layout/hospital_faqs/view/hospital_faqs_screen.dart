@@ -22,8 +22,7 @@ class HospitalFaqsScreen extends StatelessWidget {
           builder: (context, state) {
             return Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: ListView(
                 children: [
                   // Header Section
                   HospitalFaqsHeader(),
@@ -34,7 +33,7 @@ class HospitalFaqsScreen extends StatelessWidget {
 
                   // FAQ List Section
                   SizedBox(height: 16),
-                  Expanded(child: HospitalFaqsList()),
+                  HospitalFaqsList()
                 ],
               ),
             );

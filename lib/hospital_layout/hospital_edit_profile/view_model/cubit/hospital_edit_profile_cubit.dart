@@ -33,6 +33,10 @@ class HospitalEditProfileCubit extends Cubit<HospitalEditProfileState> {
   TextEditingController primaryContactPersonController =
       TextEditingController();
 
+  /// for Change Password
+  TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  final changePasswordKey = GlobalKey<FormState>();
   void initFailed() {
     _initializeTextFields();
     final selectedPhoneService = _getPhoneService(profile.phone!);
@@ -58,17 +62,56 @@ class HospitalEditProfileCubit extends Cubit<HospitalEditProfileState> {
       emit(state.copyWith(updateProfileState: RequestState.loading));
       final supabase = Supabase.instance.client;
       final map = _createHospitalSignupModel();
+      if (profile.email != emailController.text) {
+        print("email");
+        await updateEmail();
+      }
       await supabase
           .from("HospitalAuth")
           .update(map.toMap())
           .eq("uId", profile.uId!);
+
       emit(state.copyWith(updateProfileState: RequestState.success));
     } on SocketException catch (e) {
       emit(state.copyWith(
           updateProfileState: RequestState.error,
           updateProfileMessage: e.osError!.message));
     } catch (e) {
-      emit(state.copyWith(updateProfileState: RequestState.error));
+      emit(state.copyWith(
+          updateProfileState: RequestState.error,
+          updateProfileMessage: e.toString()));
+    }
+  }
+
+  changePassword() {
+    try {
+      emit(state.copyWith(changePasswordState: RequestState.loading));
+      final supabase = Supabase.instance.client;
+      supabase.auth
+          .updateUser(UserAttributes(password: passwordController.text));
+      emit(state.copyWith(changePasswordState: RequestState.success));
+    } on AuthException catch (e) {
+      emit(state.copyWith(
+          permissionRequestState: RequestState.error,
+          permissionMessage: e.message));
+    }
+  }
+
+  updateEmail() async {
+    try {
+      final supabase = Supabase.instance.client;
+      print(emailController.text);
+      await supabase.auth
+          .updateUser(UserAttributes(email: emailController.text));
+      //   supabase.auth.signOut();
+    } on AuthException catch (e) {
+      emit(state.copyWith(
+          updateProfileState: RequestState.error,
+          updateProfileMessage: e.message));
+    } on SocketException catch (e) {
+      emit(state.copyWith(
+          updateProfileState: RequestState.error,
+          updateProfileMessage: e.message));
     }
   }
 
