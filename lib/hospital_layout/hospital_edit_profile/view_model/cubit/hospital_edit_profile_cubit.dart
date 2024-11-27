@@ -34,9 +34,11 @@ class HospitalEditProfileCubit extends Cubit<HospitalEditProfileState> {
       TextEditingController();
 
   /// for Change Password
+
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final changePasswordKey = GlobalKey<FormState>();
+
   void initFailed() {
     _initializeTextFields();
     final selectedPhoneService = _getPhoneService(profile.phone!);

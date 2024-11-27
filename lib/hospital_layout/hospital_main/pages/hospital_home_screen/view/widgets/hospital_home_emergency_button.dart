@@ -1,6 +1,7 @@
 // File for class HospitalHomeEmergencyButton
 
 import 'package:blood_donation/core/locale/app_localiztions.dart';
+import 'package:blood_donation/hospital_layout/hospital_emergency/view/hospital_emergency.dart';
 import 'package:flutter/material.dart';
 
 class HospitalHomeEmergencyButton extends StatelessWidget {
@@ -13,7 +14,10 @@ class HospitalHomeEmergencyButton extends StatelessWidget {
     return SliverToBoxAdapter(
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => HospitalEmergency()));
+        },
         child: Card(
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
