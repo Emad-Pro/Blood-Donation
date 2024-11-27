@@ -2,6 +2,7 @@ import 'package:blood_donation/hospital_layout/hospital_main/pages/hospital_prof
 import 'package:blood_donation/hospital_layout/hospital_main/view_model/cubit/hospital_main_cubit.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../hospital_layout/hospital_emergency/view_model/cubit/hospital_emergency_cubit.dart';
 import '../../hospital_layout/hospital_main/pages/hospital_home_screen/view_model/cubit/hospital_home_cubit.dart';
 import '../locale/cubit/localizations_cubit.dart';
 import '../location_service/location_service.dart';
@@ -18,6 +19,7 @@ class ServiceLocator {
     ////// Hospital
     getIt.registerLazySingleton(() => HospitalMainCubit());
     getIt.registerLazySingleton(() => HospitalHomeCubit());
+    getIt.registerLazySingleton(() => HospitalEmergencyCubit());
     getIt.registerLazySingleton(() => HospitalProfileCubit());
   }
 }
