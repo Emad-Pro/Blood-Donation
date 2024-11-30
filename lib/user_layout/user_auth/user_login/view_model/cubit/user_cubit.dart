@@ -21,12 +21,10 @@ class UserLoginCubit extends Cubit<UserLoginState> {
   }
 
   signInWithEmailAndPassword() async {
-    emit(state.copyWith(loginState: RequestState.loading));
     try {
+      emit(state.copyWith(loginState: RequestState.loading));
       final response = await Supabase.instance.client.auth.signInWithPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      );
+          email: emailController.text, password: passwordController.text);
       if (response.user!.identities!.first.identityData!['roule'] == 'user') {
         await CacheHelper.saveData(
             key: "password", value: passwordController.text);
@@ -41,8 +39,6 @@ class UserLoginCubit extends Cubit<UserLoginState> {
             loginState: RequestState.error,
             errorMessage: "Authorization Error"));
       }
-
-      await Supabase.instance.client.auth.signOut();
     } on AuthException catch (e) {
       print(e.code);
       emit(

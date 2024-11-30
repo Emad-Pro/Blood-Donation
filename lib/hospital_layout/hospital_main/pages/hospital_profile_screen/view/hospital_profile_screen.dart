@@ -46,8 +46,8 @@ class HospitalProfileScreen extends StatelessWidget {
                     child: SizedBox(
                       height: MediaQuery.sizeOf(context).height < 550 ||
                               MediaQuery.sizeOf(context).width < 350
-                          ? MediaQuery.sizeOf(context).height / 1.7
-                          : MediaQuery.sizeOf(context).height / 1.6,
+                          ? MediaQuery.sizeOf(context).height / 1.9
+                          : MediaQuery.sizeOf(context).height / 1.8,
                       child: ListView(
                         children: [
                           HospitalPorfileEditProfileTile(state: state),

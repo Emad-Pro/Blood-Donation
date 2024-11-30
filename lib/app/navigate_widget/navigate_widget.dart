@@ -27,10 +27,11 @@ class _NavigateWidgetState extends State<NavigateWidget> {
 
         final session = snapshot.data?.session;
         if (session == null) {
+          print(session);
           return const ChooseScreen();
         }
 
-        final user = session.user!;
+        final user = session.user;
         final identityData = user.identities?.first.identityData;
 
         if (identityData != null || identityData!['roule'] != null) {
@@ -38,7 +39,7 @@ class _NavigateWidgetState extends State<NavigateWidget> {
           if (roule == 'hospital' && roule != null) {
             print(roule);
             return const HospitalMainScreen();
-          } else if (roule == 'user') {
+          } else if (roule == 'user' && roule != null) {
             return const UserMainScreen();
           } else {
             return const ChooseScreen();
