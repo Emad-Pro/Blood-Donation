@@ -1,4 +1,9 @@
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../core/di/service_lacator.dart';
+import '../view_model/cubit/user_main_cubit.dart';
 
 class UserMainScreen extends StatelessWidget {
   const UserMainScreen({Key? key}) : super(key: key);
@@ -7,12 +12,21 @@ class UserMainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("User Main Screen")),
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text("THIS IS MAIN SCREEN")],
-        ),
+      body: BlocBuilder<UserMainCubit, UserMainState>(
+          bloc: getIt<UserMainCubit>(),
+          builder: (context, state) {
+            return getIt<UserMainCubit>().screens[state.currentIndex];
+          }),
+      bottomNavigationBar: BlocBuilder<UserMainCubit, UserMainState>(
+        bloc: getIt<UserMainCubit>(),
+        builder: (context, state) {
+          return BottomNavyBar(
+              items: getIt<UserMainCubit>().items,
+              selectedIndex: state.currentIndex,
+              onItemSelected: (index) {
+                getIt<UserMainCubit>().toggleBottomNavyBar(index);
+              });
+        },
       ),
     );
   }
