@@ -16,6 +16,9 @@ class HospitalEditProfileState extends Equatable {
   final RequestState changePasswordState;
   final String? changePasswordMessage;
 
+  final bool oldPasswordIsSecure;
+  final bool newPsswordIsSecure;
+
   HospitalEditProfileState(
       {this.openingTime,
       this.closingTime,
@@ -27,7 +30,9 @@ class HospitalEditProfileState extends Equatable {
       this.updateProfileState = RequestState.init,
       this.updateProfileMessage,
       this.changePasswordState = RequestState.init,
-      this.changePasswordMessage = ''});
+      this.changePasswordMessage = '',
+      this.oldPasswordIsSecure = true,
+      this.newPsswordIsSecure = true});
 
   @override
   List<Object?> get props => [
@@ -41,7 +46,9 @@ class HospitalEditProfileState extends Equatable {
         updateProfileState,
         updateProfileMessage,
         changePasswordState,
-        changePasswordMessage
+        changePasswordMessage,
+        oldPasswordIsSecure,
+        newPsswordIsSecure
       ];
 
   HospitalEditProfileState copyWith(
@@ -55,7 +62,9 @@ class HospitalEditProfileState extends Equatable {
       RequestState? updateProfileState,
       String? updateProfileMessage,
       RequestState? changePasswordState,
-      String? changePasswordMessage}) {
+      String? changePasswordMessage,
+      bool? oldPasswordIsSecure,
+      bool? newPsswordIsSecure}) {
     return HospitalEditProfileState(
         openingTime: openingTime ?? this.openingTime,
         closingTime: closingTime ?? this.closingTime,
@@ -71,7 +80,9 @@ class HospitalEditProfileState extends Equatable {
         updateProfileMessage: updateProfileMessage ?? this.updateProfileMessage,
         changePasswordState: changePasswordState ?? this.changePasswordState,
         changePasswordMessage:
-            changePasswordMessage ?? this.changePasswordMessage);
+            changePasswordMessage ?? this.changePasswordMessage,
+        oldPasswordIsSecure: oldPasswordIsSecure ?? this.oldPasswordIsSecure,
+        newPsswordIsSecure: newPsswordIsSecure ?? this.newPsswordIsSecure);
   }
 
   final List<String> daysOfWeek = [

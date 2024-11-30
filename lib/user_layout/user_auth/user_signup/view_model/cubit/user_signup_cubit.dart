@@ -82,7 +82,7 @@ class UserSignupCubit extends Cubit<UserSignupState> {
       return await supabase.auth.signUp(
           password: passwordController.text,
           email: emailController.text,
-          data: {'role': 'user'});
+          data: {'roule': 'user'});
     } on AuthException catch (e) {
       throw AuthException(e.code!);
     }
