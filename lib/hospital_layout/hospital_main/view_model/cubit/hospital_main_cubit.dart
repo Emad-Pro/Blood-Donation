@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
-import 'package:blood_donation/hospital_layout/hospital_main/pages/hospital_donations_screen/view/hospital_donations_screen.dart';
+import 'package:blood_donation/hospital_layout/hospital_main/pages/hospital_donar_screen/view/hospital_donar_screen.dart';
 import 'package:blood_donation/hospital_layout/hospital_main/pages/hospital_home_screen/view/hospital_home_screen.dart';
 import 'package:blood_donation/hospital_layout/hospital_main/pages/hospital_profile_screen/view/hospital_profile_screen.dart';
 import 'package:equatable/equatable.dart';
@@ -12,7 +12,7 @@ class HospitalMainCubit extends Cubit<HospitalMainState> {
   HospitalMainCubit() : super(HospitalMainState());
   final List<Widget> screens = [
     HospitalHomeScreen(),
-    HospitalDonationsScreen(),
+    HospitalDonarScreen(),
     HospitalProfileScreen()
   ]; // For Screens
 

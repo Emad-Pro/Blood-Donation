@@ -15,10 +15,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ServiceLocator().init();
   await Supabase.initialize(
-    url: 'https://rcmumkmvatjdvwmxprjc.supabase.co',
-    anonKey:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJjbXVta212YXRqZHZ3bXhwcmpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzEwNjQ0NDcsImV4cCI6MjA0NjY0MDQ0N30._nV4gsp7dipwWUfWejmKO3PYrituoZSpwzV3t7tl4RU',
-  );
+      url: 'https://rcmumkmvatjdvwmxprjc.supabase.co',
+      anonKey:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJjbXVta212YXRqZHZ3bXhwcmpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzEwNjQ0NDcsImV4cCI6MjA0NjY0MDQ0N30._nV4gsp7dipwWUfWejmKO3PYrituoZSpwzV3t7tl4RU');
   await CacheHelper.init();
   OnBoardingSkip.initCheckBoarding();
   runApp(const Main());
