@@ -1,3 +1,5 @@
+import 'package:blood_donation/app/privacy_policy/view/privacy_policy.dart';
+import 'package:blood_donation/app/terms_and_conditions/view/terms_and_conditions.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +30,11 @@ class UserLoginPrivacyPolicyTextButtonWidgets extends StatelessWidget {
                   ),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      // Handle Terms & Conditions tap
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  TermsAndConditionsScreen()));
                     },
                 ),
                 TextSpan(
@@ -44,7 +50,10 @@ class UserLoginPrivacyPolicyTextButtonWidgets extends StatelessWidget {
                   ),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      // Handle Privacy Policy tap
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PrivacyPolicyScreen()));
                     },
                 ),
               ],

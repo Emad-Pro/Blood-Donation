@@ -11,7 +11,26 @@ class UserMainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("User Main Screen")),
+      appBar: AppBar(
+        title: BlocBuilder<UserMainCubit, UserMainState>(
+          bloc: getIt<UserMainCubit>(),
+          builder: (context, state) {
+            return Text(
+              getIt<UserMainCubit>().titles[state.currentIndex],
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
+            );
+          },
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.notifications_active_outlined,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          )
+        ],
+      ),
       body: BlocBuilder<UserMainCubit, UserMainState>(
           bloc: getIt<UserMainCubit>(),
           builder: (context, state) {
@@ -21,7 +40,8 @@ class UserMainScreen extends StatelessWidget {
         bloc: getIt<UserMainCubit>(),
         builder: (context, state) {
           return BottomNavyBar(
-              items: getIt<UserMainCubit>().items,
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              items: getIt<UserMainCubit>().items(context),
               selectedIndex: state.currentIndex,
               onItemSelected: (index) {
                 getIt<UserMainCubit>().toggleBottomNavyBar(index);

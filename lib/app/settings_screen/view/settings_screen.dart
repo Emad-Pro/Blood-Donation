@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 import '../../../core/style/theme/bloc/theme_bloc.dart';
 
-class SettignsScreen extends StatelessWidget {
-  const SettignsScreen({Key? key}) : super(key: key);
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
