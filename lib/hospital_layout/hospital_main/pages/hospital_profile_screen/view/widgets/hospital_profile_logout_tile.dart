@@ -2,6 +2,7 @@
 
 import 'package:blood_donation/app/public/choose_screen/view/choose_screen.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
+import 'package:blood_donation/hospital_layout/hospital_auth/hospital_login/view/hospital_login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -54,10 +55,10 @@ class HospitalProfileLogoutTile extends StatelessWidget {
                           Supabase.instance.client.auth
                               .signOut()
                               .then((onValue) {
-                            Navigator.push(context,
+                            Navigator.pushAndRemoveUntil(context,
                                 MaterialPageRoute(builder: (builder) {
-                              return ChooseScreen();
-                            }));
+                              return HospitalLoginScreen();
+                            }), (route) => false);
                           });
                           Navigator.pop(context);
                         },

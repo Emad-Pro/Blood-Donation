@@ -1,3 +1,5 @@
+import 'package:blood_donation/app/privacy_policy/view/privacy_policy.dart';
+import 'package:blood_donation/app/terms_and_conditions/view/terms_and_conditions.dart';
 import 'package:blood_donation/core/enum/request_state.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:blood_donation/hospital_layout/hospital_auth/hospital_login/view/listener/hospital_login_listener.dart';
@@ -139,7 +141,14 @@ class HospitalLoginScreen extends StatelessWidget {
                                             .onSurface),
                                   ),
                                   GestureDetector(
-                                      onTap: () {},
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TermsAndConditionsScreen(),
+                                            ));
+                                      },
                                       child: Text(
                                         "Terms & Conditions".tr(context),
                                         style: TextStyle(
@@ -155,7 +164,14 @@ class HospitalLoginScreen extends StatelessWidget {
                                             .onSurface),
                                   ),
                                   GestureDetector(
-                                      onTap: () {},
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PrivacyPolicyScreen(),
+                                            ));
+                                      },
                                       child: Text(
                                         "PrivacyPolicy.".tr(context),
                                         style: TextStyle(

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:blood_donation/user_layout/user_main/view/pages/user_profile/view/user_main_profile_screen.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -9,27 +10,28 @@ class UserMainCubit extends Cubit<UserMainState> {
   UserMainCubit() : super(UserMainState());
   final List<Widget> screens = [
     Text("Home"),
-    Text("Profile"),
+    UserMainProfileScreen(),
     Text("Find Hospital"),
   ];
+  final List<String> titles = ["Home", "Profile", "Find Hospital"];
 
-  final List<BottomNavyBarItem> items = [
-    BottomNavyBarItem(
-      icon: Icon(Icons.home),
-      title: Text("Home"),
-      activeColor: Colors.black,
-    ),
-    BottomNavyBarItem(
-      icon: Icon(Icons.person),
-      title: Text("Profile"),
-      activeColor: Colors.black,
-    ),
-    BottomNavyBarItem(
-      icon: Icon(Icons.search),
-      title: Text("Find Hospital"),
-      activeColor: Colors.black,
-    ),
-  ];
+  List<BottomNavyBarItem> items(BuildContext context) => [
+        BottomNavyBarItem(
+          icon: Icon(Icons.home),
+          title: Text("Home"),
+          activeColor: Theme.of(context).colorScheme.primary,
+        ),
+        BottomNavyBarItem(
+          icon: Icon(Icons.person),
+          title: Text("Profile"),
+          activeColor: Theme.of(context).colorScheme.primary,
+        ),
+        BottomNavyBarItem(
+          icon: Icon(Icons.search),
+          title: Text("Find Hospital"),
+          activeColor: Theme.of(context).colorScheme.primary,
+        ),
+      ];
 
   toggleBottomNavyBar(int index) {
     emit(state.copyWith(currentIndex: index));

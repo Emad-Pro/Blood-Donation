@@ -3,7 +3,7 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../app/settings_screen/view/settigns_screen.dart';
+import '../../../../../../app/settings_screen/view/settings_screen.dart';
 
 class HospitalProfileSettingsTile extends StatelessWidget {
   const HospitalProfileSettingsTile({
@@ -19,7 +19,7 @@ class HospitalProfileSettingsTile extends StatelessWidget {
       trailing: Icon(Icons.arrow_forward_ios),
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SettignsScreen()));
+            context, MaterialPageRoute(builder: (context) => SettingsScreen()));
       },
     );
   }
