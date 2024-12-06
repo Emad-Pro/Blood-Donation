@@ -1,10 +1,9 @@
-import 'package:blood_donation/app/public/onboarding_screen/view/onboarding_screen.dart';
 import 'package:blood_donation/core/locale/cubit/localizations_cubit.dart';
 import 'package:blood_donation/core/shared_preferences/cache_helper.dart';
 import 'package:blood_donation/core/style/theme/bloc/theme_bloc.dart';
 import 'package:blood_donation/core/style/theme/dart_theme.dart';
 import 'package:blood_donation/core/style/theme/light_theme.dart';
-import 'package:blood_donation/user_layout/user_main/view/pages/user_profile/view/user_main_profile_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

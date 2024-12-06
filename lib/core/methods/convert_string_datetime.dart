@@ -8,3 +8,11 @@ convertStringDateTime(String date) {
   final getLang = getIt<LocalizationsCubit>().state.languageCode;
   return "${DateFormat.yMMMEd('${getLang}').format(dateTime)} - ${DateFormat.jm('${getLang}').format(dateTime)}";
 }
+
+convertResultDateTime(String date) {
+  final getLang = getIt<LocalizationsCubit>().state.languageCode;
+  final inputFormat = DateFormat('d/M/yyyy');
+  final dateTime = inputFormat.parse(date);
+
+  return DateFormat.yMMMEd('${getLang}').format(dateTime);
+}

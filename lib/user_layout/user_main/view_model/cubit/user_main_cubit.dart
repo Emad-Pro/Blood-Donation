@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:blood_donation/user_layout/user_main/view/pages/user_profile/view/user_main_profile_screen.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:equatable/equatable.dart';
@@ -18,17 +19,17 @@ class UserMainCubit extends Cubit<UserMainState> {
   List<BottomNavyBarItem> items(BuildContext context) => [
         BottomNavyBarItem(
           icon: Icon(Icons.home),
-          title: Text("Home"),
+          title: Text("Home".tr(context)),
           activeColor: Theme.of(context).colorScheme.primary,
         ),
         BottomNavyBarItem(
           icon: Icon(Icons.person),
-          title: Text("Profile"),
+          title: Text("Profile".tr(context)),
           activeColor: Theme.of(context).colorScheme.primary,
         ),
         BottomNavyBarItem(
           icon: Icon(Icons.search),
-          title: Text("Find Hospital"),
+          title: Text("Find Hospital".tr(context)),
           activeColor: Theme.of(context).colorScheme.primary,
         ),
       ];

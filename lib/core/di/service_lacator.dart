@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 
 import '../../hospital_layout/hospital_emergency/view_model/cubit/hospital_emergency_cubit.dart';
 import '../../hospital_layout/hospital_main/pages/hospital_home_screen/view_model/cubit/hospital_home_cubit.dart';
+import '../../user_layout/user_main/view/pages/user_profile/view_model/user_profile_cubit.dart';
 import '../../user_layout/user_main/view_model/cubit/user_main_cubit.dart';
 import '../locale/cubit/localizations_cubit.dart';
 import '../location_service/location_service.dart';
@@ -19,6 +20,7 @@ class ServiceLocator {
 
     ///// User
     getIt.registerLazySingleton(() => UserMainCubit());
+    getIt.registerLazySingleton(() => UserProfileCubit());
 
     ////// Hospital
     getIt.registerLazySingleton(() => HospitalMainCubit());

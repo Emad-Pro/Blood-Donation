@@ -7,7 +7,7 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
     cardTheme: CardTheme(color: Colors.white12),
     textTheme: Typography().white.apply(
         fontFamily: getIt<LocalizationsCubit>().state.languageCode == "ar"
-            ? "ibm"
+            ? "cairo"
             : "inter"),
     colorScheme: ColorScheme(
       primary: Colors.red.shade400,

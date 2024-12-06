@@ -60,3 +60,6 @@ flutter:
     - family: "ibm"
       fonts:
         - asset: assets/fonts/ibm/IBMPlexSansArabic-Regular.ttf
+    - family: "cairo"
+      fonts:
+        - asset: assets/fonts/cairo/cairo.ttf
