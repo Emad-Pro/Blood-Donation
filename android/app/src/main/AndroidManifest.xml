@@ -6,7 +6,7 @@
         android:label="blood_donation"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBaaOIhALPbZmx1rFYKC-pxqns3AdCGnJA"/>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="Your Api"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
