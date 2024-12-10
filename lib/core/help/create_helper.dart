@@ -3,15 +3,18 @@ import 'dart:io';
 void main() {
   // قائمة بأسماء الكلاسات
   List<String> classNames = [
-    "HospitalDonerReceivedRequeests",
-    "HospitalMyRequestPage",
-    "HospitalDonerBuildMyRequestPending",
-    "HospitalDonerBuildDonerRequesttem",
+    "UserEditProfileUpdateButton",
+    "UserEditProfileDiseasesButtonWidget",
+    "UserEditProfileLastDateBloodDonationWidget",
+    "UserEditProfileSelecetBloodType",
+    "UserEditProfileWeightHeightAgeAndSelectGenderWidget",
+    "UserEditProfilePhoneNumberWidgets",
+    "UserEditProfileLocationWidgets",
+    "UserEditProfileImageNameEmailWidgets",
   ];
 
   // مسار إنشاء الملفات
-  String outputPath =
-      '../../hospital_layout/hospital_main/pages/hospital_doner_screen/view/widgets/';
+  String outputPath = '../../user_layout/user_edit_profile/view/widgets/';
 
   // التأكد من وجود المجلد
   Directory(outputPath).createSync(recursive: true);

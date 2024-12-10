@@ -121,7 +121,7 @@ class UserSignupCubit extends Cubit<UserSignupState> {
       email: emailController.text,
       fullName: fullNameController.text,
       dateLastBloodDonation: dateLastBloodDonationController.text,
-      phone: phoneController.text,
+      phone: "${phoneCodeController.text}${phoneController.text}",
       phoneCode: phoneCodeController.text,
       age: _parseInt(ageController.text),
       height: _parseInt(heightController.text),

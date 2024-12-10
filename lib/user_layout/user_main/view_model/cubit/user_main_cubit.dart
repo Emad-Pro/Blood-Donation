@@ -1,8 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:blood_donation/user_layout/user_main/view/pages/user_profile/view/user_main_profile_screen.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+
+import '../../view/pages/user_find/view/user_main_find_screen.dart';
 
 part 'user_main_state.dart';
 
@@ -11,24 +14,24 @@ class UserMainCubit extends Cubit<UserMainState> {
   final List<Widget> screens = [
     Text("Home"),
     UserMainProfileScreen(),
-    Text("Find Hospital"),
+    UserMainFindScreen(),
   ];
   final List<String> titles = ["Home", "Profile", "Find Hospital"];
 
   List<BottomNavyBarItem> items(BuildContext context) => [
         BottomNavyBarItem(
           icon: Icon(Icons.home),
-          title: Text("Home"),
+          title: Text("Home".tr(context)),
           activeColor: Theme.of(context).colorScheme.primary,
         ),
         BottomNavyBarItem(
           icon: Icon(Icons.person),
-          title: Text("Profile"),
+          title: Text("Profile".tr(context)),
           activeColor: Theme.of(context).colorScheme.primary,
         ),
         BottomNavyBarItem(
           icon: Icon(Icons.search),
-          title: Text("Find Hospital"),
+          title: Text("Find Hospital".tr(context)),
           activeColor: Theme.of(context).colorScheme.primary,
         ),
       ];

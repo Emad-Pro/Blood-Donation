@@ -11,7 +11,7 @@ class GlobalTitleTextWidget extends StatelessWidget {
       title,
       style: TextStyle(
           fontWeight: FontWeight.bold,
-          fontFamily: AppFonts.primaryFont,
+          //  fontFamily: AppFonts.primaryFont,
           fontSize: 24,
           color: Theme.of(context).colorScheme.primary),
     );

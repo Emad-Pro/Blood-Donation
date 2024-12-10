@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 ThemeData lighTheme = ThemeData.light().copyWith(
   textTheme: Typography().black.apply(
       fontFamily: getIt<LocalizationsCubit>().state.languageCode == "ar"
-          ? "ibm"
+          ? "cairo"
           : "inter"),
   scaffoldBackgroundColor: Colors.white,
   colorScheme: ColorScheme(
