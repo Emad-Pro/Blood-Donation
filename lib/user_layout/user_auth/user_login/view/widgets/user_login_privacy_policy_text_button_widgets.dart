@@ -60,9 +60,7 @@ class UserLoginPrivacyPolicyTextButtonWidgets extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(
-          height: 35,
-        ),
+        const SizedBox(height: 35),
       ],
     );
   }

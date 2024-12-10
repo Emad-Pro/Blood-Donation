@@ -12,7 +12,7 @@ class GlobalSubTitleTextWidget extends StatelessWidget {
       subTitle,
       style: const TextStyle(
           fontWeight: FontWeight.w400,
-          fontFamily: AppFonts.primaryFont,
+          //    fontFamily: AppFonts.primaryFont,
           color: AppColors.greyLightColor),
     );
   }

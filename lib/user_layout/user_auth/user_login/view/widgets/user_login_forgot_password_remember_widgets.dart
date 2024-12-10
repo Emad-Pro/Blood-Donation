@@ -2,6 +2,7 @@ import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../app/public/forgot_password/user_forgot_password_screen.dart';
 import '../../view_model/cubit/user_cubit.dart';
 
 class UserLoginForgotPasswordRememberWidgets extends StatelessWidget {
@@ -28,7 +29,12 @@ class UserLoginForgotPasswordRememberWidgets extends StatelessWidget {
           ],
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ForgotPasswordScreen()));
+          },
           child: Text('Forgot Password?'.tr(context)),
         ),
       ],

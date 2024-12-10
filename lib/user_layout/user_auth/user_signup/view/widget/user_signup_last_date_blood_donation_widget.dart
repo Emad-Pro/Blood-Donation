@@ -26,7 +26,6 @@ class UserSignupLastDateBloodDonationWidget extends StatelessWidget {
               return 'please enter your date of last blood donation'
                   .tr(context);
             }
-
             return null;
           },
           lableText: "Date of last blood donation".tr(context),

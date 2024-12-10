@@ -1,3 +1,4 @@
+import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +17,7 @@ class UserMainScreen extends StatelessWidget {
           bloc: getIt<UserMainCubit>(),
           builder: (context, state) {
             return Text(
-              getIt<UserMainCubit>().titles[state.currentIndex],
+              getIt<UserMainCubit>().titles[state.currentIndex].tr(context),
               style: TextStyle(color: Theme.of(context).colorScheme.primary),
             );
           },

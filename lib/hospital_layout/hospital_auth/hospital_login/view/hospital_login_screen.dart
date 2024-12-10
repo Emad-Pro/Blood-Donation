@@ -1,4 +1,5 @@
 import 'package:blood_donation/app/privacy_policy/view/privacy_policy.dart';
+import 'package:blood_donation/app/public/choose_screen/view/choose_screen.dart';
 import 'package:blood_donation/app/terms_and_conditions/view/terms_and_conditions.dart';
 import 'package:blood_donation/core/enum/request_state.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
@@ -8,20 +9,33 @@ import 'package:blood_donation/hospital_layout/hospital_auth/hospital_signup/vie
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../app/public/forgot_password/user_forgot_password_screen.dart';
 import '../../../../core/widget/global_button.dart';
 import '../../../../core/widget/global_sub_title_text_widget.dart';
 import '../../../../core/widget/global_title_text_widget.dart';
 import '../../../../core/widget/globla_textformfiled.dart';
 
 class HospitalLoginScreen extends StatelessWidget {
-  const HospitalLoginScreen({super.key});
-
-  @override
+  const HospitalLoginScreen({super.key, this.isBack = false});
+  final bool isBack;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Login".tr(context)),
+        actions: [
+          if (isBack)
+            IconButton(
+              icon: Icon(
+                Icons.keyboard_double_arrow_up_rounded,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ChooseScreen()));
+              },
+            ),
+        ],
       ),
       body: BlocProvider(
         create: (context) => HospitalLoginCubit(),
@@ -107,7 +121,13 @@ class HospitalLoginScreen extends StatelessWidget {
                                   ],
                                 ),
                                 TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ForgotPasswordScreen()));
+                                  },
                                   child: Text('Forgot Password?'.tr(context)),
                                 ),
                               ],
