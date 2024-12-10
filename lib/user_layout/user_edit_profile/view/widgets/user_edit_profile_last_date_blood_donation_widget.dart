@@ -1,16 +1,15 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/widget/globla_textformfiled.dart';
-import '../../view_model/cubit/user_signup_cubit.dart';
+import '../../../../core/widget/globla_textformfiled.dart';
+import '../../view_model/cubit/user_edit_profile_cubit.dart';
 
-class UserSignupLastDateBloodDonationWidget extends StatelessWidget {
-  const UserSignupLastDateBloodDonationWidget({
+class UserEditProfileLastDateBloodDonationWidget extends StatelessWidget {
+  const UserEditProfileLastDateBloodDonationWidget({
     super.key,
-    required this.userSignUpCubit,
+    required this.userEditProfileCubit,
   });
-
-  final UserSignupCubit userSignUpCubit;
+  final UserEditProfileCubit userEditProfileCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +28,7 @@ class UserSignupLastDateBloodDonationWidget extends StatelessWidget {
             return null;
           },
           lableText: "Date of last blood donation".tr(context),
-          textEditingController:
-              userSignUpCubit.dateLastBloodDonationController,
+          textEditingController: userEditProfileCubit.lastDonationController,
           readOnly: true,
           onTap: () async {
             DateTime currentDate = DateTime.now();
@@ -38,13 +36,13 @@ class UserSignupLastDateBloodDonationWidget extends StatelessWidget {
                 currentDate.year, currentDate.month - 3, currentDate.day);
             await showDatePicker(
                     context: context,
-                    firstDate: DateTime(1970),
+                    firstDate: threeMonthsAgo,
                     initialDate: threeMonthsAgo,
                     lastDate: DateTime.now())
                 .then((onValue) {
               if (onValue != null) {
-                userSignUpCubit.lastDonation = onValue;
-                userSignUpCubit.dateLastBloodDonationController.text =
+                //    userSignUpCubit.lastDonation = onValue;
+                userEditProfileCubit.lastDonationController.text =
                     '${onValue.day}/${onValue.month}/${onValue.year}';
               }
             });

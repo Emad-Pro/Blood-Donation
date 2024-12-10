@@ -34,13 +34,18 @@ Future<dynamic> userProfileLogoutShowDialog(BuildContext context) {
                           Theme.of(context).colorScheme.surface),
                       backgroundColor: WidgetStateProperty.all(
                           Theme.of(context).colorScheme.primary)),
-                  onPressed: () {
-                    Supabase.instance.client.auth.signOut().then((onValue) {});
-                    Navigator.pushAndRemoveUntil(context,
-                        MaterialPageRoute(builder: (builder) {
-                      return UserLoginScreen();
-                    }), (route) => false);
+                  onPressed: () async {
+                    await Supabase.instance.client.auth.signOut();
                     Navigator.pop(context);
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (builder) {
+                        return UserLoginScreen(
+                          isBack: true,
+                        );
+                      }),
+                      (route) => false,
+                    );
                   },
                   child: Text("Logout".tr(context))),
             ),

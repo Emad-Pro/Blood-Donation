@@ -283,5 +283,16 @@
     "cm": "سم",
     "I am available to donate": "أنا متاح للتبرع",
     "Rewards": "المكافأت",
-    "kg": "كجم"
+    "kg": "كجم",
+    "Delete Image": "حذف الصورة المختارة",
+    "Please enter your email or phone number":"الرجاء ادخاال الايميل او رقم الهاتف",
+    "Password Recovred Successfully": "تم استعادة كلمة المرور بنجاح",
+    "km": "كم",
+    "Search Hospital or blood center":"ابحث عن مستشفى او مركز تبرع بالدم",
+"Select a Governorate":"اختر المحافظة",
+"Select a Nearby":"اختر المسافة",
+"Select a Day":"اختر يوم العمل",
+"Search":"البحث",
+"Hospital Search Result":"نتيجة البحث عن المستشفى او مركز تبرع بالدم",
+"Send Blood Request":"أرسال طلب تبرع بالدم"
 }

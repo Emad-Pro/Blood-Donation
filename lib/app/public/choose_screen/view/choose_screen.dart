@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/widget/global_button.dart';
 import '../../../../core/widget/global_sub_title_text_widget.dart';
-import '../../../../core/widget/global_title_text_widget.dart';
 import '../../../../user_layout/user_auth/user_login/view/user_login_screen.dart';
 import 'widget/build_choose_options_card.dart';
 
@@ -21,6 +20,12 @@ class ChooseScreen extends StatelessWidget {
         builder: (context, state) {
           final cubit = BlocProvider.of<ChooseCubit>(context);
           return Scaffold(
+            appBar: AppBar(
+              title: Text(
+                "Choose Account Type".tr(context),
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              ),
+            ),
             body: SafeArea(
                 child: SingleChildScrollView(
               child: Padding(
@@ -28,9 +33,6 @@ class ChooseScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    GlobalTitleTextWidget(
-                      title: "Choose Account Type".tr(context),
-                    ),
                     const SizedBox(
                       height: 10,
                     ),

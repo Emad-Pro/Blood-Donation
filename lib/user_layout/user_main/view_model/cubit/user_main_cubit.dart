@@ -5,6 +5,8 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
+import '../../view/pages/user_find/view/user_main_find_screen.dart';
+
 part 'user_main_state.dart';
 
 class UserMainCubit extends Cubit<UserMainState> {
@@ -12,7 +14,7 @@ class UserMainCubit extends Cubit<UserMainState> {
   final List<Widget> screens = [
     Text("Home"),
     UserMainProfileScreen(),
-    Text("Find Hospital"),
+    UserMainFindScreen(),
   ];
   final List<String> titles = ["Home", "Profile", "Find Hospital"];
 

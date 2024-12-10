@@ -42,7 +42,7 @@ class Main extends StatelessWidget {
                   AppLocaliztions.delegate,
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate
                 ],
                 debugShowCheckedModeBanner: false,
                 theme: lighTheme,

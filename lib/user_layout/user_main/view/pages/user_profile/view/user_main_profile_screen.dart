@@ -11,32 +11,30 @@ import 'widgets/user_profile_person_info_card_widgets.dart';
 class UserMainProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: BlocBuilder<UserProfileCubit, UserProfileState>(
-          bloc: getIt<UserProfileCubit>()..getUserProfile(),
-          builder: (context, state) {
-            switch (state.userProfileState) {
-              case RequestState.init:
-              case RequestState.loading:
-                return Center(child: CircularProgressIndicator());
-              case RequestState.success:
-                return Column(
-                  children: [
-                    UserProfileHeaderWidgets(state: state),
-                    UserProfilePersonInfoCardWidgets(state: state),
-                    UserProfileAvailabilityAndDonationDateWidgets(state: state),
-                    UserProfileOptionsWidgets(),
-                  ],
-                );
-              case RequestState.error:
-                return Center(
-                  child: Text(state.errorMessage),
-                );
-            }
-          },
-        ),
-      ),
+    return BlocBuilder<UserProfileCubit, UserProfileState>(
+      bloc: getIt<UserProfileCubit>()..getUserProfile(),
+      builder: (context, state) {
+        switch (state.userProfileState) {
+          case RequestState.init:
+          case RequestState.loading:
+            return Center(child: CircularProgressIndicator());
+          case RequestState.success:
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  UserProfileHeaderWidgets(state: state),
+                  UserProfilePersonInfoCardWidgets(state: state),
+                  UserProfileAvailabilityAndDonationDateWidgets(state: state),
+                  UserProfileOptionsWidgets(state: state),
+                ],
+              ),
+            );
+          case RequestState.error:
+            return Center(
+              child: Text(state.errorMessage),
+            );
+        }
+      },
     );
   }
 }

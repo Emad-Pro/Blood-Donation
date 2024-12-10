@@ -3,18 +3,18 @@ import 'dart:io';
 void main() {
   // قائمة بأسماء الكلاسات
   List<String> classNames = [
-    "UserProfileOptionsWidgets",
-    "userProfileLogoutShowDialog",
-    "UserProfileAvailabilityAndDonationDateWidgets",
-    "UserProfilePersonInfoCardWidgets",
-    "UserProfileHeaderWidgets",
-    "UserProfileStatCard",
-    "UserProfileOptionTile",
+    "UserEditProfileUpdateButton",
+    "UserEditProfileDiseasesButtonWidget",
+    "UserEditProfileLastDateBloodDonationWidget",
+    "UserEditProfileSelecetBloodType",
+    "UserEditProfileWeightHeightAgeAndSelectGenderWidget",
+    "UserEditProfilePhoneNumberWidgets",
+    "UserEditProfileLocationWidgets",
+    "UserEditProfileImageNameEmailWidgets",
   ];
 
   // مسار إنشاء الملفات
-  String outputPath =
-      '../../user_layout/user_main/view/pages/user_profile/view/widgets/';
+  String outputPath = '../../user_layout/user_edit_profile/view/widgets/';
 
   // التأكد من وجود المجلد
   Directory(outputPath).createSync(recursive: true);
