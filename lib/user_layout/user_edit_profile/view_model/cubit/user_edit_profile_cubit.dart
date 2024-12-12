@@ -18,6 +18,37 @@ class UserEditProfileCubit extends Cubit<UserEditProfileState> {
       : super(UserEditProfileState()) {
     getData();
   }
+  TextEditingController docsFileController = TextEditingController();
+  TextEditingController primaryContactPersonController =
+      TextEditingController();
+
+  /// for Change Password
+
+  TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  final changePasswordKey = GlobalKey<FormState>();
+  toggleShowNewPassowrd() {
+    emit(state.copyWith(newPsswordIsSecure: !state.newPsswordIsSecure));
+  }
+
+  toggleShowOldPassowrd() {
+    emit(state.copyWith(oldPasswordIsSecure: !state.oldPasswordIsSecure));
+  }
+
+  changePassword() {
+    try {
+      emit(state.copyWith(changePasswordState: RequestState.loading));
+      final supabase = Supabase.instance.client;
+      supabase.auth
+          .updateUser(UserAttributes(password: passwordController.text));
+      emit(state.copyWith(changePasswordState: RequestState.success));
+    } on AuthException catch (e) {
+      emit(state.copyWith(
+          permissionRequestState: RequestState.error,
+          permissionMessage: e.message));
+    }
+  }
+
   final List<String> nameServicePhone = ["Orange", "Zain", "Umniah"];
   final List<String> bloodTypes = [
     'A+',

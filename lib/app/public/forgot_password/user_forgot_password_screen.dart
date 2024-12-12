@@ -1,3 +1,4 @@
+import 'package:blood_donation/app/public/reset_password_screen/reset_password_screen.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:blood_donation/core/widget/global_button.dart';
 import 'package:blood_donation/core/widget/global_sub_title_text_widget.dart';
@@ -7,8 +8,11 @@ import 'package:blood_donation/app/public/forgot_password/view_model/cubit/forgo
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:pinput/pinput.dart';
+
 import '../../../core/enum/request_state.dart';
 import '../../../core/widget/global_snackbar.dart';
+import 'enter_code_otp_fileds_widget.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   const ForgotPasswordScreen({super.key});
@@ -19,14 +23,7 @@ class ForgotPasswordScreen extends StatelessWidget {
       create: (context) => ForgotPasswordCubit(),
       child: BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
         listener: (context, state) {
-          if (state.forgotPasswordState == RequestState.error) {
-            globalSnackbar(context, state.errorMessage,
-                backgroundColor: Colors.red);
-          } else if (state.forgotPasswordState == RequestState.success) {
-            globalSnackbar(context, "Password Recovry Successfully".tr(context),
-                backgroundColor: Colors.green);
-            Navigator.pop(context);
-          }
+          forgotPasswortListener(state, context);
         },
         builder: (context, state) {
           return Scaffold(
@@ -71,26 +68,49 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ),
               ),
             ),
-            bottomNavigationBar: Padding(
-                padding: EdgeInsets.only(left: 20, right: 20, bottom: 30),
-                child: GlobalButton(
-                    text: 'Reset Password'.tr(context),
-                    onTap: () {
-                      if (context
-                          .read<ForgotPasswordCubit>()
-                          .formKey
-                          .currentState!
-                          .validate()) {
-                        context.read<ForgotPasswordCubit>().resetPassword();
-                        context
-                            .read<ForgotPasswordCubit>()
-                            .emailController
-                            .clear();
-                      }
-                    })),
+            bottomNavigationBar: state.forgotPasswordState ==
+                    RequestState.loading
+                ? Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(),
+                      Text("Loading...".tr(context))
+                    ],
+                  )
+                : Padding(
+                    padding: EdgeInsets.only(left: 20, right: 20, bottom: 30),
+                    child: GlobalButton(
+                        text: 'Reset Password'.tr(context),
+                        onTap: () {
+                          final cubit = context.read<ForgotPasswordCubit>();
+                          if (cubit.formKey.currentState!.validate()) {
+                            cubit.otpController.clear();
+                            cubit.newPassowordController.clear();
+                            cubit.confirmPasswordController.clear();
+                            context.read<ForgotPasswordCubit>().resetPassword();
+                          }
+                        })),
           );
         },
       ),
     );
+  }
+
+  void forgotPasswortListener(ForgotPasswordState state, BuildContext context) {
+    final cubit = context.read<ForgotPasswordCubit>();
+
+    if (state.forgotPasswordState == RequestState.error) {
+      globalSnackbar(context, state.errorMessage, backgroundColor: Colors.red);
+    }
+    if (state.forgotPasswordState == RequestState.success) {
+      showModalBottomSheet(
+          isScrollControlled: true,
+          context: context,
+          builder: (context) => EnterCodeOtpFiledsWidget(cubit: cubit));
+      globalSnackbar(context,
+          "Activation code has been sent.. Check your email".tr(context),
+          backgroundColor: Colors.green);
+    }
   }
 }
