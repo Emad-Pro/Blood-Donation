@@ -333,5 +333,14 @@
 "Select a Nearby":"Select a Nearby",
 "Select a Day":"Select Work Time",
 "Search":"Search","Hospital Search Result":"Result Search Hospital or blood center",
-"Send Blood Request":"Send Blood Request"
+"Send Blood Request":"Send Blood Request",
+"Activation code has been sent.. Check your email":"Activation code has been sent.. Check your email"
+,"Enter Verification Code":"Enter Verification Code",
+"We have sent the verification code to":"We have sent the verification code to ",
+"OTP verified successfully":"OTP verified successfully",
+"Enter New Password":"Enter New Password",
+"Please Enter Your New Password":"Please Enter Your New Password",
+"Enter Password":"Enter Password",
+"Re-Enter Password":"Re-Enter Password",
+"Save Password":"Save Password"
 }

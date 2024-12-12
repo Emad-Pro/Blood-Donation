@@ -21,8 +21,12 @@ class HospitalHomeSlider extends StatelessWidget {
           child: Container(
               margin: EdgeInsets.symmetric(vertical: 20),
               width: double.infinity,
-              height: 120,
+              height: state.listReviewsSlider != null &&
+                      state.listReviewsSlider!.length != 0
+                  ? 200
+                  : 0,
               child: Builder(builder: (context) {
+                print(state.listReviewsSlider);
                 switch (state.reviewsSliderState) {
                   case RequestState.init:
                   case RequestState.loading:
@@ -31,46 +35,52 @@ class HospitalHomeSlider extends StatelessWidget {
                     return Center(
                         child: Text(state.errorReviewsSliderMessage!));
                   case RequestState.success:
-                    return CarouselSlider.builder(
-                      options: CarouselOptions(
-                        aspectRatio: 2.0,
-                        enlargeCenterPage: true,
-                        viewportFraction: 1,
-                        scrollDirection: Axis.horizontal,
-                        autoPlay: true,
-                      ),
-                      itemCount: state.listReviewsSlider!.length,
-                      itemBuilder: (context, index, inde) {
-                        return Card(
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 0.2,
-                                    "assets/images/hospital_images/slider${1 + index}.png"),
-                                Expanded(
-                                  child: AutoDirection(
-                                    text: state.listReviewsSlider![index],
-                                    child: Text(
-                                      "'${state.listReviewsSlider![index]}'",
-                                      maxLines: 5,
-                                      // textAlign: TextAlign.center,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold,
+                    return state.listReviewsSlider != null &&
+                            state.listReviewsSlider!.length != 0
+                        ? CarouselSlider.builder(
+                            options: CarouselOptions(
+                              aspectRatio: 2.0,
+                              enlargeCenterPage: true,
+                              viewportFraction: 1,
+                              scrollDirection: Axis.horizontal,
+                              autoPlay: true,
+                            ),
+                            itemCount: state.listReviewsSlider!.isNotEmpty
+                                ? state.listReviewsSlider!.length
+                                : [].length,
+                            itemBuilder: (context, index, inde) {
+                              return Card(
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  child: Row(
+                                    children: [
+                                      Image.asset(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.2,
+                                          "assets/images/hospital_images/slider${1 + index}.png"),
+                                      Expanded(
+                                        child: AutoDirection(
+                                          text: state.listReviewsSlider![index],
+                                          child: Text(
+                                            "'${state.listReviewsSlider![index]}'",
+                                            maxLines: 5,
+                                            // textAlign: TextAlign.center,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    );
+                              );
+                            },
+                          )
+                        : Container();
                 }
               })),
         );

@@ -5,8 +5,16 @@
     <application
         android:label="blood_donation"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="Your Api"/>
+        android:icon="@mipmap/ic_launcher"
+        android:hardwareAccelerated="true">
+       
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <!-- Update this value to your google maps api key. -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBeyFmaA0FXC2f7q6ARMrtBe8EyBIglxxk" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

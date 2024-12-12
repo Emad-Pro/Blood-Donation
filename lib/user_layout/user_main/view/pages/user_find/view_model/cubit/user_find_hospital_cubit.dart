@@ -132,7 +132,9 @@ class UserFindHospitalCubit extends Cubit<UserFindHospitalState> {
       hospitals = hospitals
           .where((hospital) =>
               hospital.name != null &&
-              hospital.name!.contains(nameController.text))
+              hospital.name!
+                  .toLowerCase()
+                  .contains(nameController.text.toLowerCase()))
           .toList();
     }
 

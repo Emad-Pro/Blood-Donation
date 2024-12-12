@@ -285,7 +285,7 @@
     "Rewards": "المكافأت",
     "kg": "كجم",
     "Delete Image": "حذف الصورة المختارة",
-    "Please enter your email or phone number":"الرجاء ادخاال الايميل او رقم الهاتف",
+    "Please enter your email or phone number":"الرجاء ادخال البريد الالكتروني او رقم الهاتف",
     "Password Recovred Successfully": "تم استعادة كلمة المرور بنجاح",
     "km": "كم",
     "Search Hospital or blood center":"ابحث عن مستشفى او مركز تبرع بالدم",
@@ -294,5 +294,27 @@
 "Select a Day":"اختر يوم العمل",
 "Search":"البحث",
 "Hospital Search Result":"نتيجة البحث عن المستشفى او مركز تبرع بالدم",
-"Send Blood Request":"أرسال طلب تبرع بالدم"
+"Send Blood Request":"أرسال طلب تبرع بالدم",
+"Activation code has been sent.. Check your email":"تم ارسال كود التفعيل .. راجع البريد الالكتروني الخاص بك",
+"Enter Verification Code":"أدخل رمز التحقق",
+"We have sent the verification code to":"لقد أرسلنا رمز التحقق إلى ",
+"OTP verified successfully":"تم تحقق OTP بنجاح",
+"Enter New Password":"الرجاء ادخال كلمة المرور الجديدة",
+"Please Enter Your New Password":"الرجاء اعد كتابة كلمة المرور الجديدة",
+"Enter Password":"كلمة المرور",
+"Re-Enter Password":"تاكيد كلمة المرور",
+"Save Password":"حفظ كلمة المرور"
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
