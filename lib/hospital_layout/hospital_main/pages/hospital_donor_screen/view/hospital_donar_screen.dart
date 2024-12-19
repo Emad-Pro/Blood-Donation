@@ -23,14 +23,14 @@ class _HospitalDonarScreenState extends State<HospitalDonarScreen>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Doners"),
+          title: const Text("Donors"),
           bottom: TabBar(
             indicatorColor: Theme.of(context).colorScheme.primary,
             dividerColor: Colors.transparent,
             controller: tabController,
             tabs: [
               Tab(text: "Received Requests"),
-              Tab(text: "My Request"),
+              Tab(text: "History Donations"),
             ],
           ),
         ),

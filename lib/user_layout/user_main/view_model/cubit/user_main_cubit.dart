@@ -6,13 +6,14 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 import '../../view/pages/user_find/view/user_main_find_screen.dart';
+import '../../view/pages/user_home/view/user_main_home_screen.dart';
 
 part 'user_main_state.dart';
 
 class UserMainCubit extends Cubit<UserMainState> {
   UserMainCubit() : super(UserMainState());
   final List<Widget> screens = [
-    Text("Home"),
+    UserMainHomeScreen(),
     UserMainProfileScreen(),
     UserMainFindScreen(),
   ];
