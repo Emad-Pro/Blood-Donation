@@ -9,6 +9,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../../../../../core/location_service/location_service.dart';
 import '../../../../../../../core/methods/calculate_distance.dart';
 
 part 'user_find_hospital_state.dart';
@@ -102,8 +103,11 @@ class UserFindHospitalCubit extends Cubit<UserFindHospitalState> {
       if (userCubit != null &&
           userCubit.latitude != null &&
           userCubit.longitude != null) {
-        hospitals = filterLocationsByDistance(userCubit.longitude!,
-            userCubit.latitude!, state.selectedNearby!.toDouble(), hospitals);
+        hospitals = LocationService().filterLocationsByDistance(
+            userCubit.longitude!,
+            userCubit.latitude!,
+            state.selectedNearby!.toDouble(),
+            hospitals);
       }
     }
 
@@ -132,7 +136,9 @@ class UserFindHospitalCubit extends Cubit<UserFindHospitalState> {
       hospitals = hospitals
           .where((hospital) =>
               hospital.name != null &&
-              hospital.name!.contains(nameController.text))
+              hospital.name!
+                  .toLowerCase()
+                  .contains(nameController.text.toLowerCase()))
           .toList();
     }
 

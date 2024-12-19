@@ -14,6 +14,12 @@ class UserEditProfileState extends Equatable {
   final RequestState upoladImageState;
   final RequestState editProfileState;
   final String? errorMessage;
+
+  final RequestState changePasswordState;
+  final String? changePasswordMessage;
+
+  final bool oldPasswordIsSecure;
+  final bool newPsswordIsSecure;
   UserEditProfileState(
       {this.selectedPhoneService,
       this.selectedGender,
@@ -36,7 +42,11 @@ class UserEditProfileState extends Equatable {
       this.selectedProfileImage,
       this.upoladImageState = RequestState.init,
       this.editProfileState = RequestState.init,
-      this.errorMessage});
+      this.errorMessage,
+      this.changePasswordState = RequestState.init,
+      this.changePasswordMessage,
+      this.oldPasswordIsSecure = true,
+      this.newPsswordIsSecure = true});
 
   @override
   List<Object?> get props => [
@@ -51,22 +61,31 @@ class UserEditProfileState extends Equatable {
         selectedProfileImage,
         upoladImageState,
         editProfileState,
-        errorMessage
+        errorMessage,
+        changePasswordState,
+        changePasswordMessage,
+        oldPasswordIsSecure,
+        newPsswordIsSecure
       ];
 
-  UserEditProfileState copyWith(
-      {String? selectedPhoneService,
-      String? selectedGender,
-      String? selectedBloodType,
-      Map<String, bool>? diseases,
-      bool? isDisease,
-      String? imageProfile,
-      RequestState? permissionRequestState,
-      String? permissionMessage,
-      File? selectedProfileImage,
-      RequestState? upoladImageState,
-      RequestState? editProfileState,
-      String? errorMessage}) {
+  UserEditProfileState copyWith({
+    String? selectedPhoneService,
+    String? selectedGender,
+    String? selectedBloodType,
+    Map<String, bool>? diseases,
+    bool? isDisease,
+    String? imageProfile,
+    RequestState? permissionRequestState,
+    String? permissionMessage,
+    File? selectedProfileImage,
+    RequestState? upoladImageState,
+    RequestState? editProfileState,
+    String? errorMessage,
+    RequestState? changePasswordState,
+    String? changePasswordMessage,
+    bool? oldPasswordIsSecure,
+    bool? newPsswordIsSecure,
+  }) {
     return UserEditProfileState(
         selectedPhoneService: selectedPhoneService ?? this.selectedPhoneService,
         selectedGender: selectedGender ?? this.selectedGender,
@@ -80,6 +99,11 @@ class UserEditProfileState extends Equatable {
         selectedProfileImage: selectedProfileImage,
         upoladImageState: upoladImageState ?? this.upoladImageState,
         editProfileState: editProfileState ?? this.editProfileState,
-        errorMessage: errorMessage ?? this.errorMessage);
+        errorMessage: errorMessage ?? this.errorMessage,
+        changePasswordState: changePasswordState ?? this.changePasswordState,
+        changePasswordMessage:
+            changePasswordMessage ?? this.changePasswordMessage,
+        oldPasswordIsSecure: oldPasswordIsSecure ?? this.oldPasswordIsSecure,
+        newPsswordIsSecure: newPsswordIsSecure ?? this.newPsswordIsSecure);
   }
 }

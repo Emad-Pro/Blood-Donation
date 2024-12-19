@@ -15,20 +15,20 @@ class UserMainFindScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: BlocConsumer<UserFindHospitalCubit, UserFindHospitalState>(
-        listener: (context, state) {
-          if (state.searchState == RequestState.success) {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return UserMainFindHospitalResult(
-                searchResult: state.searchResult!,
-              );
-            }));
-          }
-        },
-        bloc: getIt<UserFindHospitalCubit>(),
-        builder: (context, state) {
-          return Padding(
+    return BlocConsumer<UserFindHospitalCubit, UserFindHospitalState>(
+      listener: (context, state) {
+        if (state.searchState == RequestState.success) {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return UserMainFindHospitalResult(
+              searchResult: state.searchResult!,
+            );
+          }));
+        }
+      },
+      bloc: getIt<UserFindHospitalCubit>(),
+      builder: (context, state) {
+        return SingleChildScrollView(
+          child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
@@ -206,12 +206,13 @@ class UserMainFindScreen extends StatelessWidget {
                         text: "Search".tr(context),
                         onTap: () {
                           getIt<UserFindHospitalCubit>().searchWithAllFilters();
-                        }),
+                        },
+                      ),
               ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

@@ -1,12 +1,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <application
         android:label="blood_donation"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="Your Api"/>
+        android:icon="@mipmap/ic_launcher"
+        android:hardwareAccelerated="true">
+        <meta-data
+            android:name="flutterWorkManagerInitializationChannel"
+            android:value="be.tramckrijte.workmanager/foreground_channel_work_manager" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <!-- Update this value to your google maps api key. -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

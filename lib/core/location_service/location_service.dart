@@ -1,6 +1,9 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 
+import '../../hospital_layout/hospital_main/pages/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
+import '../methods/calculate_distance.dart';
+
 class LocationService {
   Future<bool> checkAndRequestPermission() async {
     LocationPermission permission = await Geolocator.checkPermission();
@@ -47,5 +50,20 @@ class LocationService {
 
   Future<void> openLocationSettings() async {
     await Geolocator.openLocationSettings();
+  }
+
+  List<HospitalProfileModel> filterLocationsByDistance(
+      double userLat,
+      double userLon,
+      double maxDistance,
+      List<HospitalProfileModel> locations) {
+    return locations.where((location) {
+      if (location.latitude == null || location.longitude == null) {
+        return false;
+      }
+      double distance = calculateDistance(
+          userLat, userLon, location.latitude!, location.longitude!);
+      return distance <= maxDistance; // التحقق من المسافة
+    }).toList();
   }
 }

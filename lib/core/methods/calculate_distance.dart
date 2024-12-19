@@ -22,15 +22,3 @@ double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
 double _degreesToRadians(double degrees) {
   return degrees * pi / 180;
 }
-
-List<HospitalProfileModel> filterLocationsByDistance(double userLat,
-    double userLon, double maxDistance, List<HospitalProfileModel> locations) {
-  return locations.where((location) {
-    if (location.latitude == null || location.longitude == null) {
-      return false;
-    }
-    double distance = calculateDistance(
-        userLat, userLon, location.latitude!, location.longitude!);
-    return distance <= maxDistance; // التحقق من المسافة
-  }).toList();
-}
