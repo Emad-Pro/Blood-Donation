@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/di/service_lacator.dart';
 import '../../../core/enum/request_state.dart';
 import '../../../core/widget/global_snackbar.dart';
+import '../../user_edit_password/view/user_edit_password_screen.dart';
 import 'widgets/user_edit_profile_diseases_button_widget.dart';
 import 'widgets/user_edit_profile_image_name_email_widgets.dart';
 import 'widgets/user_edit_profile_last_date_blood_donation_widget.dart';
@@ -41,7 +42,21 @@ class UserEditProfileScreen extends StatelessWidget {
         builder: (context, state) {
           final userEditProfileCubit = context.read<UserEditProfileCubit>();
           return Scaffold(
-            appBar: AppBar(title: Text("Edit Profile".tr(context))),
+            appBar: AppBar(
+              title: Text("Edit Profile".tr(context)),
+              actions: [
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UserEditPasswordScreen(
+                                    cubit: userEditProfileCubit,
+                                  )));
+                    },
+                    child: Text("Change Password".tr(context)))
+              ],
+            ),
             body: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(12.0),

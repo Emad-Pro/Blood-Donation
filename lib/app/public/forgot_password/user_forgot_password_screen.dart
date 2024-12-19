@@ -1,4 +1,3 @@
-import 'package:blood_donation/app/public/reset_password_screen/reset_password_screen.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:blood_donation/core/widget/global_button.dart';
 import 'package:blood_donation/core/widget/global_sub_title_text_widget.dart';
@@ -7,8 +6,6 @@ import 'package:blood_donation/core/widget/globla_textformfiled.dart';
 import 'package:blood_donation/app/public/forgot_password/view_model/cubit/forgot_password_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:pinput/pinput.dart';
 
 import '../../../core/enum/request_state.dart';
 import '../../../core/widget/global_snackbar.dart';
