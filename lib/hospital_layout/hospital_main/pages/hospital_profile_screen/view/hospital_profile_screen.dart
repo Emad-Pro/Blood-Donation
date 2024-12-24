@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../../core/di/service_lacator.dart';
 import 'widgets/hospital_porfile_edit_profile_tile.dart';
-import 'widgets/hospital_profile_faqs_tile.dart';
 import 'widgets/hospital_profile_header_widgets.dart';
 import 'widgets/hospital_profile_loading.dart';
 import 'widgets/hospital_profile_logout_tile.dart';
@@ -59,18 +58,11 @@ class HospitalProfileScreen extends StatelessWidget {
                             trailing: Icon(Icons.arrow_forward_ios),
                             onTap: () {},
                           ),
-                          ListTile(
-                            contentPadding: EdgeInsets.all(15),
-                            title: Text("Appointmnet".tr(context)),
-                            leading: CircleAvatar(child: Icon(Icons.timeline)),
-                            trailing: Icon(Icons.arrow_forward_ios),
-                            onTap: () {},
-                          ),
                           HospitalProfileReviewsTile(
                             hospitalName: state.hospitalProfileModel!.name!,
                           ),
                           HospitalProfileSettingsTile(),
-                          HospitalProfileFAGSTile(),
+                          //     HospitalProfileFAGSTile(),
                           HospitalProfileLogoutTile(
                             userUid: state.hospitalProfileModel!.uId!,
                           ),

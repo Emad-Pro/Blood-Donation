@@ -12,6 +12,7 @@ class UserSignupPhoneNumberWidgets extends StatelessWidget {
   final UserSignupCubit userSignUpCubit;
   @override
   Widget build(BuildContext context) {
+    print(userSignUpCubit.phoneController);
     return Column(
       children: [
         Row(
@@ -46,12 +47,8 @@ class UserSignupPhoneNumberWidgets extends StatelessWidget {
                 }).toList(),
                 onChanged: (String? newValue) {
                   if (newValue == 'Orange') {
-                    print("077");
                   } else if (newValue == 'Omniah') {
-                    print("078");
-                  } else if (newValue == 'Zain') {
-                    print("079");
-                  }
+                  } else if (newValue == 'Zain') {}
 
                   userSignUpCubit.toggleServicePhone(newValue!);
                 },
@@ -65,7 +62,7 @@ class UserSignupPhoneNumberWidgets extends StatelessWidget {
                 lableText: "Phone Number".tr(context),
                 keyboardType: TextInputType.phone,
                 maxLength: 7,
-                textEditingController: userSignUpCubit.phoneCodeController,
+                textEditingController: userSignUpCubit.phoneController,
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'please enter your phone number'.tr(context);

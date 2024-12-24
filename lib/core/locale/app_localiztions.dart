@@ -6,8 +6,7 @@ import 'dart:convert';
 
 class AppLocaliztions {
   static Locale locale = const Locale("en");
-  static Locale localEn = const Locale("en");
-  static Locale localAr = const Locale("en");
+
   late Map<String, String> _localizedStrings;
   late Map<String, String> _localizedArStrings;
   late Map<String, String> _localizedEnStrings;

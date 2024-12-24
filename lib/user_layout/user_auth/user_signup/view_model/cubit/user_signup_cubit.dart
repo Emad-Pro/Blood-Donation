@@ -29,7 +29,7 @@ class UserSignupCubit extends Cubit<UserSignupState> {
     'O-',
     "I don't know"
   ];
-  final List<String> genderTypes = ['Male', 'Female', 'Other'];
+  final List<String> genderTypes = ['Male', 'Female'];
 
   final formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
@@ -73,7 +73,7 @@ class UserSignupCubit extends Cubit<UserSignupState> {
           signUpState: RequestState.error, errorMessage: e.message));
     } on PostgrestException catch (e) {
       print("asb");
-      print(e.details);
+      print(e);
       emit(state.copyWith(
           signUpState: RequestState.error, errorMessage: e.message));
     } catch (e) {
@@ -92,6 +92,7 @@ class UserSignupCubit extends Cubit<UserSignupState> {
     } on StorageException catch (e) {
       throw StorageException(e.message);
     } on PostgrestException catch (e) {
+      print(e);
       throw PostgrestException(message: e.code!);
     }
   }
@@ -117,7 +118,8 @@ class UserSignupCubit extends Cubit<UserSignupState> {
       email: emailController.text,
       fullName: fullNameController.text,
       dateLastBloodDonation: dateLastBloodDonationController.text,
-      phone: "${phoneCodeController.text}${phoneController.text}",
+      phone:
+          "${state.selectedPhoneService == 'Orange' ? '077' : state.selectedPhoneService == 'Zain' ? '079' : state.selectedPhoneService == 'Umniah' ? '078' : '077'}${phoneController.text}",
       phoneCode: phoneCodeController.text,
       age: _parseInt(ageController.text),
       height: _parseInt(heightController.text),
