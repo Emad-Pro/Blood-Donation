@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "177901254743",
+    "project_id": "give-life-50fd4",
+    "storage_bucket": "give-life-50fd4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177901254743:android:2b60fb0a03d3904daa8b12",
+        "android_client_info": {
+          "package_name": "com.example.blood_donation"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdd8T7QiJyXG93I_wpNERNj11vQ5W3VHY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

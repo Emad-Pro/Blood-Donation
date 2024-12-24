@@ -1,6 +1,5 @@
 // File for class HospitalHomeResentText
 
-import 'package:blood_donation/app/public/choose_screen/view/choose_screen.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
 

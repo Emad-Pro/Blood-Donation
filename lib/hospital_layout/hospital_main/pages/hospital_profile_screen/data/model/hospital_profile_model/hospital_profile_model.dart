@@ -1,6 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 
 class HospitalProfileModel extends Equatable {
@@ -17,22 +15,22 @@ class HospitalProfileModel extends Equatable {
   final String? docsFile;
   final String? uId;
   final String? primaryContactPerson;
-
-  const HospitalProfileModel({
-    this.id,
-    this.email,
-    this.name,
-    this.phone,
-    this.latitude,
-    this.longitude,
-    this.currentLocation,
-    this.dayes,
-    this.openingTime,
-    this.closingTime,
-    this.docsFile,
-    this.uId,
-    this.primaryContactPerson,
-  });
+  final String? oneSignalId;
+  const HospitalProfileModel(
+      {this.id,
+      this.email,
+      this.name,
+      this.phone,
+      this.latitude,
+      this.longitude,
+      this.currentLocation,
+      this.dayes,
+      this.openingTime,
+      this.closingTime,
+      this.docsFile,
+      this.uId,
+      this.primaryContactPerson,
+      this.oneSignalId});
 
   @override
   List<Object?> get props {
@@ -50,6 +48,7 @@ class HospitalProfileModel extends Equatable {
       docsFile,
       uId,
       primaryContactPerson,
+      oneSignalId
     ];
   }
 
@@ -68,24 +67,25 @@ class HospitalProfileModel extends Equatable {
       'docsFile': docsFile,
       'uId': uId,
       'primaryContactPerson': primaryContactPerson,
+      "onesignal_id": oneSignalId
     };
   }
 
   factory HospitalProfileModel.fromMap(Map<String, dynamic> map) {
     return HospitalProfileModel(
-      id: map['id'] as int?,
-      email: map['email'] as String?,
-      name: map['name'] as String?,
-      phone: map['phone'] as String?,
-      latitude: map['latitude'] as double?,
-      longitude: map['longitude'] as double?,
-      currentLocation: map['currentLocation'] as String?,
-      dayes: map['dayes'] as String?,
-      openingTime: map['openingTime'] as String?,
-      closingTime: map['closingTime'] as String?,
-      docsFile: map['docsFile'] as String?,
-      uId: map['uId'] as String?,
-      primaryContactPerson: map['primaryContactPerson'] as String?,
-    );
+        id: map['id'] as int?,
+        email: map['email'] as String?,
+        name: map['name'] as String?,
+        phone: map['phone'] as String?,
+        latitude: map['latitude'] as double?,
+        longitude: map['longitude'] as double?,
+        currentLocation: map['currentLocation'] as String?,
+        dayes: map['dayes'] as String?,
+        openingTime: map['openingTime'] as String?,
+        closingTime: map['closingTime'] as String?,
+        docsFile: map['docsFile'] as String?,
+        uId: map['uId'] as String?,
+        primaryContactPerson: map['primaryContactPerson'] as String?,
+        oneSignalId: map["onesignal_id"] as String?);
   }
 }

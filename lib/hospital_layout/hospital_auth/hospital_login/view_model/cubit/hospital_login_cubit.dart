@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:blood_donation/core/enum/request_state.dart';
 import 'package:blood_donation/core/shared_preferences/cache_helper.dart';
-import 'package:equatable/equatable.dart';
+
 import 'package:flutter/material.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'hospital_login_state.dart';
@@ -32,8 +33,15 @@ class HospitalLoginCubit extends Cubit<HospitalLoginState> {
         await CacheHelper.saveData(
             key: "password", value: passwordController.text);
         emit(state.copyWith(loginState: RequestState.success));
+        var externalId =
+            "${DateTime.now().millisecondsSinceEpoch.toString()}"; // You will supply the external id to the OneSignal SDK
+        await OneSignal.login(externalId);
+        await Supabase.instance.client
+            .from("HospitalAuth")
+            .update({"onesignal_id": externalId}).eq("uId", response.user!.id);
       } else if (response.user!.identities!.first.identityData!['roule'] ==
           'user') {
+        Supabase.instance.client.auth.signOut();
         emit(state.copyWith(
             loginState: RequestState.error,
             errorMessage: "Authorization Error"));

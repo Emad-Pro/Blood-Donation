@@ -13,7 +13,7 @@ class GoogleMapsScreen extends StatefulWidget {
 }
 
 class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
-  late GoogleMapController _mapController;
+  late GoogleMapController mapController;
   late LatLng _initialPosition;
 
   @override
@@ -31,7 +31,7 @@ class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
         zoom: 12.0, // مستوى التكبير
       ),
       onMapCreated: (GoogleMapController controller) {
-        _mapController = controller;
+        mapController = controller;
       },
       markers: {
         Marker(

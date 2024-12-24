@@ -1,9 +1,9 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:blood_donation/user_layout/user_edit_profile/view/user_edit_profile_screen.dart';
-import 'package:blood_donation/user_layout/user_main/view/pages/user_profile/view_model/user_profile_cubit.dart';
+import 'package:blood_donation/user_layout/user_profile/view_model/user_profile_cubit.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../../app/settings_screen/view/settings_screen.dart';
+import '../../../../app/settings_screen/view/settings_screen.dart';
 import 'user_profile_logout_show_dialog.dart';
 import 'user_profile_option_tile.dart';
 
@@ -46,7 +46,7 @@ class UserProfileOptionsWidgets extends StatelessWidget {
             icon: Icons.logout,
             title: "Logout".tr(context),
             onTap: () {
-              userProfileLogoutShowDialog(context);
+              userProfileLogoutShowDialog(context, state.userSignupModel!.uId!);
             }),
       ],
     );

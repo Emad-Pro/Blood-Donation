@@ -1,16 +1,13 @@
-import 'dart:math';
-
 import 'package:bloc/bloc.dart';
 import 'package:blood_donation/core/di/service_lacator.dart';
 import 'package:blood_donation/core/enum/request_state.dart';
 import 'package:blood_donation/hospital_layout/hospital_main/pages/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
-import 'package:blood_donation/user_layout/user_main/view/pages/user_profile/view_model/user_profile_cubit.dart';
+import 'package:blood_donation/user_layout/user_profile/view_model/user_profile_cubit.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../../../../../core/location_service/location_service.dart';
-import '../../../../../../../core/methods/calculate_distance.dart';
+import '../../../../core/location_service/location_service.dart';
 
 part 'user_find_hospital_state.dart';
 

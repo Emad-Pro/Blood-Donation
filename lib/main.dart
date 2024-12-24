@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:workmanager/workmanager.dart';
 import 'app/navigate_widget/onboarding_widget.dart';
@@ -30,7 +31,12 @@ void main() async {
   await Supabase.initialize(
       url: 'https://rcmumkmvatjdvwmxprjc.supabase.co',
       anonKey:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJjbXVta212YXRqZHZ3bXhwcmpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzEwNjQ0NDcsImV4cCI6MjA0NjY0MDQ0N30._nV4gsp7dipwWUfWejmKO3PYrituoZSpwzV3t7tl4RU');
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJjbXVta212YXRqZHZ3bXhwcmpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ3OTA4NDcsImV4cCI6MjA1MDM2Njg0N30.TPdgz4UKyUrGTXc9YUi4zeAgLLbwYjHVa2RBvRV5jl8');
+  OneSignal.Debug.setLogLevel(OSLogLevel.info);
+
+  OneSignal.initialize("cb0266c5-a7c7-458d-ac6f-5fef6ba42e43");
+  OneSignal.Notifications.requestPermission(true);
+
   await CacheHelper.init();
   OnBoardingSkip.initCheckBoarding();
 

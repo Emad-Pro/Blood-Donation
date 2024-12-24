@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../style/colors.dart';
-import '../style/fonts.dart';
 
 class GlobalSubTitleTextWidget extends StatelessWidget {
   const GlobalSubTitleTextWidget({super.key, required this.subTitle});
