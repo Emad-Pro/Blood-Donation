@@ -91,7 +91,6 @@ class _NavigateWidgetState extends State<NavigateWidget> {
           if (identityData != null || identityData!['roule'] != null) {
             final roule = identityData['roule'];
             if (roule == 'hospital' && roule != null) {
-              print(roule);
               return const HospitalMainScreen();
             } else if (roule == 'user' && roule != null) {
               return const UserMainScreen();

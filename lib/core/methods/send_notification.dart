@@ -15,7 +15,8 @@ Future<String> sendNotification(
     "include_external_user_ids": recivedIds,
     "contents": {"en": contents, "ar": contentAr},
     "headings": {"en": headings, "ar": headingAr},
-    "big_picture": "https://www.shutterstock.com/image-photo/example-image.jpg"
+    "big_picture": bigPicture ??
+        "https://img.freepik.com/free-photo/young-adult-woman-with-creative-makeup-glamour-generative-ai_188544-9633.jpg"
   };
 
   try {
@@ -27,7 +28,7 @@ Future<String> sendNotification(
         headers: {
           'Content-Type': 'application/json',
           'Authorization':
-              'Basic os_v2_app_zmbgnrnhy5cy3ldpl7xwxjboinscv5rfrj6uydfhlkrkr2nhyl6tqrvmizkzehxtlxxezrw764jpx2mps6y2whe7afszvqv2xi7ii7q', // أضف مفتاح API الخاص بـ OneSignal
+              'Basic os_v2_app_zmbgnrnhy5cy3ldpl7xwxjboinscv5rfrj6uydfhlkrkr2nhyl6tqrvmizkzehxtlxxezrw764jpx2mps6y2whe7afszvqv2xi7ii7q',
         },
       ),
     );

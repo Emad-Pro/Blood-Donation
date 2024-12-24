@@ -4,6 +4,7 @@ import 'package:blood_donation/user_layout/user_profile/view_model/user_profile_
 import 'package:flutter/material.dart';
 
 import '../../../../app/settings_screen/view/settings_screen.dart';
+import '../../../hospital_faqs/view/hospital_faqs_screen.dart';
 import 'user_profile_logout_show_dialog.dart';
 import 'user_profile_option_tile.dart';
 
@@ -41,6 +42,14 @@ class UserProfileOptionsWidgets extends StatelessWidget {
         UserProfileOptionTile(
           icon: Icons.card_giftcard,
           title: "Rewards".tr(context),
+        ),
+        UserProfileOptionTile(
+          icon: Icons.card_giftcard,
+          title: "Rewards".tr(context),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => HospitalFaqsScreen()));
+          },
         ),
         UserProfileOptionTile(
             icon: Icons.logout,

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HospitalDonerBuildMyRequestPending extends StatelessWidget {
-  const HospitalDonerBuildMyRequestPending({
-    super.key,
-  });
-
+  const HospitalDonerBuildMyRequestPending({super.key, this.isReject = false});
+  final bool isReject;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -90,37 +88,7 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                   ),
                 ],
               ),
-              Row(
-                children: [
-                  Row(
-                    children: [
-                      Icon(Icons.pending, color: Colors.red),
-                      const SizedBox(width: 5),
-                      const Text(
-                        "Request pending",
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Spacer(),
-                  // Cancel Button
-                  TextButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.cancel,
-                      color: Colors.red,
-                    ),
-                    label: const Text(
-                      "Cancel",
-                      style: TextStyle(color: Colors.red),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
+            if (isReject==false)      Row(
                 children: [
                   Row(
                     children: [
@@ -154,6 +122,41 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                   ),
                 ],
               ),
+              if (isReject)
+                Row(
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.close, color: Colors.red),
+                        const SizedBox(width: 5),
+                        const Text(
+                          "Request Rejected",
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Spacer(),
+                    Row(
+                      children: [
+                        // Donor Info Button
+                        TextButton.icon(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.info,
+                            color: Colors.blue,
+                          ),
+                          label: const Text(
+                            "donor info",
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
             ],
           ),
         ),
