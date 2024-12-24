@@ -53,38 +53,34 @@ class UserSignupCubit extends Cubit<UserSignupState> {
   Future<void> signupUserWithEmailAndPassword() async {
     emit(state.copyWith(signUpState: RequestState.loading));
     try {
-      final userAuth = await _signUpUser();
+      final userAuth = await supabase.auth.signUp(
+        password: passwordController.text,
+        email: emailController.text,
+        data: {'roule': 'user'},
+      );
+      ;
 
       await _addUserToDatabase(userAuth);
 
       emit(state.copyWith(signUpState: RequestState.success));
     } on AuthException catch (e) {
-      print("object111".toString());
+      print(e.message);
       emit(state.copyWith(
           signUpState: RequestState.error, errorMessage: e.message));
     } on StorageException catch (e) {
-      print("object222".toString());
+      print("ase");
       emit(state.copyWith(
           signUpState: RequestState.error, errorMessage: e.message));
     } on PostgrestException catch (e) {
+      print("asb");
       print(e.details);
       emit(state.copyWith(
           signUpState: RequestState.error, errorMessage: e.message));
     } catch (e) {
+      print(e);
       emit(state.copyWith(
           signUpState: RequestState.error,
           errorMessage: "An unexpected error occurred"));
-    }
-  }
-
-  Future<AuthResponse> _signUpUser() async {
-    try {
-      return await supabase.auth.signUp(
-          password: passwordController.text,
-          email: emailController.text,
-          data: {'roule': 'user'});
-    } on AuthException catch (e) {
-      throw AuthException(e.code!);
     }
   }
 

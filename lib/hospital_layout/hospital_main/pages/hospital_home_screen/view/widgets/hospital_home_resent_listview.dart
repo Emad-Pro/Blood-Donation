@@ -60,7 +60,7 @@ class HospitalHomeResentListview extends StatelessWidget {
                       });
 
                 case RequestState.error:
-                  return Center(child: Text(state.recentDontionsMessage!));
+                  return Center(child: Text(state.recentDontionsMessage));
               }
             }));
   }

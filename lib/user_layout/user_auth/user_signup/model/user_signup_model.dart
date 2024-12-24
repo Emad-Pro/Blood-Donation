@@ -17,6 +17,7 @@ class UserSignupModel {
   bool? isDisease;
   String? profileImage;
   String? uId;
+  String? oneSignalId;
 
   UserSignupModel(
       {this.email,
@@ -36,7 +37,8 @@ class UserSignupModel {
       this.isDisease,
       this.profileImage,
       this.uId,
-      this.id});
+      this.id,
+      this.oneSignalId});
 
   UserSignupModel.fromJson(Map<String, dynamic> json) {
     email = json['user_email'];
@@ -57,6 +59,7 @@ class UserSignupModel {
     profileImage = json['profile_image'];
     uId = json['uId'];
     id = json['id'];
+    oneSignalId = json['onesignal_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -77,7 +80,8 @@ class UserSignupModel {
       'is_disease': isDisease,
       'profile_image': profileImage,
       'uId': uId,
-      'id': id
+      'id': id,
+      'onesignal_id': oneSignalId
     };
   }
 }

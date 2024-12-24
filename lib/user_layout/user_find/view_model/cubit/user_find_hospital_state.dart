@@ -20,6 +20,7 @@ class UserFindHospitalState extends Equatable {
   final String? errorMessage;
   final List<HospitalProfileModel>? searchResult;
   final RequestState searchState;
+
   @override
   List<Object?> get props => [
         selectedGovernorate,
@@ -29,18 +30,19 @@ class UserFindHospitalState extends Equatable {
         hospitalsState,
         errorMessage,
         searchResult,
-        searchState
+        searchState,
       ];
 
-  UserFindHospitalState copyWith(
-      {String? selectedGovernorate,
-      int? selectedNearby,
-      String? selectedDay,
-      List<HospitalProfileModel>? hospitalsModel,
-      RequestState? hospitalsState,
-      String? errorMessage,
-      RequestState? searchState,
-      List<HospitalProfileModel>? searchResult}) {
+  UserFindHospitalState copyWith({
+    String? selectedGovernorate,
+    int? selectedNearby,
+    String? selectedDay,
+    List<HospitalProfileModel>? hospitalsModel,
+    RequestState? hospitalsState,
+    String? errorMessage,
+    RequestState? searchState,
+    List<HospitalProfileModel>? searchResult,
+  }) {
     return UserFindHospitalState(
       selectedGovernorate: selectedGovernorate ?? this.selectedGovernorate,
       selectedNearby: selectedNearby ?? this.selectedNearby,
@@ -61,15 +63,19 @@ class UserFindHospitalState extends Equatable {
       RequestState? hospitalsState,
       String? errorMessage,
       RequestState? searchState,
-      List<HospitalProfileModel>? searchResult}) {
+      List<HospitalProfileModel>? searchResult,
+      String? selectedTime,
+      String? selectedTimeBloodDonationAppointment,
+      RequestState? sendRequestAppointmentState}) {
     return UserFindHospitalState(
-        selectedGovernorate: selectedGovernorate,
-        selectedNearby: selectedNearby,
-        selectedDay: selectedDay,
-        hospitalsModel: hospitalsModel ?? this.hospitalsModel,
-        hospitalsState: hospitalsState ?? this.hospitalsState,
-        errorMessage: errorMessage ?? this.errorMessage,
-        searchResult: searchResult ?? this.searchResult,
-        searchState: searchState ?? RequestState.init);
+      selectedGovernorate: selectedGovernorate,
+      selectedNearby: selectedNearby,
+      selectedDay: selectedDay,
+      hospitalsModel: hospitalsModel ?? this.hospitalsModel,
+      hospitalsState: hospitalsState ?? this.hospitalsState,
+      errorMessage: errorMessage ?? this.errorMessage,
+      searchResult: searchResult ?? this.searchResult,
+      searchState: searchState ?? RequestState.init,
+    );
   }
 }

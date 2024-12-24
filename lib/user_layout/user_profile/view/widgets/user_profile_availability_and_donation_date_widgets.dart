@@ -1,8 +1,8 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
-import 'package:blood_donation/user_layout/user_main/view/pages/user_profile/view_model/user_profile_cubit.dart';
+import 'package:blood_donation/user_layout/user_profile/view_model/user_profile_cubit.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../../core/methods/convert_string_datetime.dart';
+import '../../../../core/methods/convert_string_datetime.dart';
 
 class UserProfileAvailabilityAndDonationDateWidgets extends StatelessWidget {
   const UserProfileAvailabilityAndDonationDateWidgets(

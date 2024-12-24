@@ -22,7 +22,7 @@ class EnterNewPsswordScreen extends StatelessWidget {
         bloc: cubit,
         listener: (context, state) {
           if (state.resetPasswordState == RequestState.error) {
-            globalSnackbar(context, state.resetPasswordMessage!,
+            globalSnackbar(context, state.resetPasswordMessage,
                 backgroundColor: Colors.red);
           } else if (state.resetPasswordState == RequestState.success) {
             Navigator.pop(context);

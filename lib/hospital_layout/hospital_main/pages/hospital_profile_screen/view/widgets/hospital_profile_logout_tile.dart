@@ -1,16 +1,12 @@
-// File for class HospitalProfileLogoutTile
-
-import 'package:blood_donation/app/public/choose_screen/view/choose_screen.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:blood_donation/hospital_layout/hospital_auth/hospital_login/view/hospital_login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HospitalProfileLogoutTile extends StatelessWidget {
-  const HospitalProfileLogoutTile({
-    super.key,
-  });
-
+  const HospitalProfileLogoutTile({super.key, required this.userUid});
+  final String userUid;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -53,6 +49,11 @@ class HospitalProfileLogoutTile extends StatelessWidget {
                                 Theme.of(context).colorScheme.primary)),
                         onPressed: () async {
                           await Supabase.instance.client.auth.signOut();
+
+                          await OneSignal.logout();
+                          await Supabase.instance.client
+                              .from("HospitalAuth")
+                              .update({"onesignal_id": ""}).eq("uId", userUid);
                           Navigator.pop(context);
                           Navigator.pushAndRemoveUntil(context,
                               MaterialPageRoute(builder: (builder) {

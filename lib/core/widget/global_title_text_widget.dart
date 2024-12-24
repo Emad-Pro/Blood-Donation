@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../style/fonts.dart';
-
 class GlobalTitleTextWidget extends StatelessWidget {
   const GlobalTitleTextWidget({super.key, required this.title});
   final String title;

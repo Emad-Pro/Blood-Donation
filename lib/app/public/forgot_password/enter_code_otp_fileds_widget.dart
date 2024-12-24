@@ -40,8 +40,7 @@ class EnterCodeOtpFiledsWidget extends StatelessWidget {
                     isScrollControlled: true,
                     builder: (context) {
                       return EnterNewPsswordScreen(
-                          accessToken:
-                              state.authResponse!.session!.accessToken!,
+                          accessToken: state.authResponse!.session!.accessToken,
                           cubit: cubit);
                     });
               }

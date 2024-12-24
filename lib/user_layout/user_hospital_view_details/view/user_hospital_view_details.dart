@@ -5,8 +5,10 @@ import 'widgets/user_hospital_details_section.dart';
 import 'widgets/user_hospital_header_section.dart';
 
 class UserHospitalViewDetails extends StatelessWidget {
-  const UserHospitalViewDetails({Key? key, required this.hospitalProfileModel})
-      : super(key: key);
+  const UserHospitalViewDetails({
+    Key? key,
+    required this.hospitalProfileModel,
+  }) : super(key: key);
 
   final HospitalProfileModel hospitalProfileModel;
 
@@ -19,7 +21,9 @@ class UserHospitalViewDetails extends StatelessWidget {
         child: Column(
           children: [
             UserHospitalHeaderSection(
-                primaryColor: Theme.of(context).colorScheme.primary),
+              primaryColor: Theme.of(context).colorScheme.primary,
+              hospitalProfileModel: hospitalProfileModel,
+            ),
             UserHospitalDetailsSection(
                 hospitalProfileModel: hospitalProfileModel),
           ],

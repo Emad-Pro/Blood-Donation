@@ -71,7 +71,9 @@ class HospitalProfileScreen extends StatelessWidget {
                           ),
                           HospitalProfileSettingsTile(),
                           HospitalProfileFAGSTile(),
-                          HospitalProfileLogoutTile(),
+                          HospitalProfileLogoutTile(
+                            userUid: state.hospitalProfileModel!.uId!,
+                          ),
                         ],
                       ),
                     ),

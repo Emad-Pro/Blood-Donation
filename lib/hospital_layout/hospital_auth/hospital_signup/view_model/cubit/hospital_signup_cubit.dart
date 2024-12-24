@@ -236,10 +236,6 @@ class HospitalSignupCubit extends Cubit<HospitalSignupState> {
     }
   }
 
-  int _parseInt(String value) {
-    return int.tryParse(value) ?? 0;
-  }
-
   double _parseDouble(String value) {
     return double.tryParse(value) ?? 0.0;
   }
