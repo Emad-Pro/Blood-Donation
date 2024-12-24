@@ -28,10 +28,7 @@ class UserSendAppointmentCubit extends Cubit<UserSendAppointmentState> {
     }).then((onValue) {
       sendNotification(
         contentAr:
-            "لقد تم حجز موعد التبرع بالدم يوم ${state.selectedDayBloodDonationAppointment!.trAr(context)} في تمام الساعة ${state.selectedTimeBloodDonationAppointment!.replaceAll("AM", "صباحا").replaceAll(
-                  "PM",
-                  "ٌمساءاً",
-                )}",
+            "لقد تم حجز موعد التبرع بالدم يوم ${state.selectedDayBloodDonationAppointment!.trAr(context)} في تمام الساعة ${state.selectedTimeBloodDonationAppointment!.replaceAll("AM", "صباحا").replaceAll("PM", "ٌمساءاً")}",
         contents: content,
         headings: title,
         headingAr: "موعد التبرع بالدم",

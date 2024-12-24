@@ -80,7 +80,6 @@ class UserSignupModel {
       'is_disease': isDisease,
       'profile_image': profileImage,
       'uId': uId,
-      'id': id,
       'onesignal_id': oneSignalId
     };
   }

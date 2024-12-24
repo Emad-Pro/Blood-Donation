@@ -7,9 +7,14 @@ class HospitalMyRequestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 3,
+      itemCount: 4,
       itemBuilder: (context, index) {
-        return HospitalDonerBuildMyRequestPending();
+        if (index % 2 == 0) {
+          return HospitalDonerBuildMyRequestPending(
+            isReject: true,
+          );
+        } else
+          return HospitalDonerBuildMyRequestPending();
       },
     );
   }

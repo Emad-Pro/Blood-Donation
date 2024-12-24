@@ -31,9 +31,11 @@ class UserLoginCubit extends Cubit<UserLoginState> {
         await CacheHelper.saveData(
             key: "password", value: passwordController.text);
         emit(state.copyWith(loginState: RequestState.success));
+
         var externalId =
             "${DateTime.now().millisecondsSinceEpoch.toString()}"; // You will supply the external id to the OneSignal SDK
-        OneSignal.login(externalId);
+
+        await OneSignal.login(externalId);
         await Supabase.instance.client
             .from("UserAuth")
             .update({"onesignal_id": externalId}).eq("uId", response.user!.id);
