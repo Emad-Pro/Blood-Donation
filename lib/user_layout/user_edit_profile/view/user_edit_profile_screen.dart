@@ -2,7 +2,7 @@ import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:blood_donation/core/location_service/location_service.dart';
 import 'package:blood_donation/user_layout/user_auth/user_signup/model/user_signup_model.dart';
 import 'package:blood_donation/user_layout/user_edit_profile/view_model/cubit/user_edit_profile_cubit.dart';
-import 'package:blood_donation/user_layout/user_main/view/pages/user_profile/view_model/user_profile_cubit.dart';
+import 'package:blood_donation/user_layout/user_profile/view_model/user_profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/di/service_lacator.dart';

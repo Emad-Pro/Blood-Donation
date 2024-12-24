@@ -1,13 +1,17 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:blood_donation/hospital_layout/hospital_main/pages/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
+
 import 'package:flutter/material.dart';
 
-import '../../../../../user_hospital_view_details/view/user_hospital_view_details.dart';
+import '../../user_hospital_view_details/view/user_hospital_view_details.dart';
 
 class UserMainFindHospitalResult extends StatelessWidget {
-  const UserMainFindHospitalResult({Key? key, required this.searchResult})
-      : super(key: key);
+  const UserMainFindHospitalResult({
+    Key? key,
+    required this.searchResult,
+  }) : super(key: key);
   final List<HospitalProfileModel> searchResult;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

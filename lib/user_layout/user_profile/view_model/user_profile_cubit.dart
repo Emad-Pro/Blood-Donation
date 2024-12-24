@@ -9,7 +9,7 @@ part 'user_profile_state.dart';
 class UserProfileCubit extends Cubit<UserProfileState> {
   UserProfileCubit() : super(UserProfileState());
   final supabase = Supabase.instance.client;
-  void getUserProfile() async {
+  getUserProfile() async {
     emit(state.copyWith(userProfileState: RequestState.loading));
     try {
       final result = await supabase

@@ -1,12 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
-import 'package:blood_donation/user_layout/user_main/view/pages/user_profile/view/user_main_profile_screen.dart';
+import 'package:blood_donation/user_layout/user_profile/view/user_main_profile_screen.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-import '../../view/pages/user_find/view/user_main_find_screen.dart';
-import '../../view/pages/user_home/view/user_main_home_screen.dart';
+import '../../../user_find/view/user_main_find_screen.dart';
+import '../../../user_home/view/user_main_home_screen.dart';
 
 part 'user_main_state.dart';
 

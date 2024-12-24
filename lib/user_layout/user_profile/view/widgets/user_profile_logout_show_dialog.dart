@@ -1,10 +1,12 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../../../../user_auth/user_login/view/user_login_screen.dart';
+import '../../../user_auth/user_login/view/user_login_screen.dart';
 
-Future<dynamic> userProfileLogoutShowDialog(BuildContext context) {
+Future<dynamic> userProfileLogoutShowDialog(
+    BuildContext context, String userUid) {
   return showDialog(
       context: context,
       builder: (context) {
@@ -36,6 +38,10 @@ Future<dynamic> userProfileLogoutShowDialog(BuildContext context) {
                           Theme.of(context).colorScheme.primary)),
                   onPressed: () async {
                     await Supabase.instance.client.auth.signOut();
+                    await OneSignal.logout();
+                    await Supabase.instance.client
+                        .from("UserAuth")
+                        .update({"onesignal_id": ""}).eq("uId", userUid);
                     Navigator.pop(context);
                     Navigator.pushAndRemoveUntil(
                       context,

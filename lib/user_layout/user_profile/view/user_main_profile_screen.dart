@@ -1,8 +1,8 @@
 import 'package:blood_donation/core/enum/request_state.dart';
-import 'package:blood_donation/user_layout/user_main/view/pages/user_profile/view_model/user_profile_cubit.dart';
+import 'package:blood_donation/user_layout/user_profile/view_model/user_profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../../core/di/service_lacator.dart';
+import '../../../core/di/service_lacator.dart';
 import 'widgets/user_profile_availability_and_donation_date_widgets.dart';
 import 'widgets/user_profile_header_widgets.dart';
 import 'widgets/user_profile_options_widgets.dart';

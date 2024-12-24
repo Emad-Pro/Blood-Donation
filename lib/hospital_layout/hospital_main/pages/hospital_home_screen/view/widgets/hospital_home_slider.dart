@@ -32,8 +32,7 @@ class HospitalHomeSlider extends StatelessWidget {
                   case RequestState.loading:
                     return Center(child: CircularProgressIndicator());
                   case RequestState.error:
-                    return Center(
-                        child: Text(state.errorReviewsSliderMessage!));
+                    return Center(child: Text(state.errorReviewsSliderMessage));
                   case RequestState.success:
                     return state.listReviewsSlider != null &&
                             state.listReviewsSlider!.length != 0

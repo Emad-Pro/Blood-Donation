@@ -1,7 +1,5 @@
 import 'dart:math';
 
-import '../../hospital_layout/hospital_main/pages/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
-
 double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
   const earthRadius = 6371; // نصف قطر الأرض بالكيلومترات
 
