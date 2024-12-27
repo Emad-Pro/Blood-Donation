@@ -13,7 +13,7 @@ void showScheduleDialog(BuildContext context,
       return BlocProvider(
         create: (context) => UserSendAppointmentCubit(),
         child: AlertDialog(
-          title: Text("Select Donation Time"),
+          title: Text("Select Donation Time".tr(context)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -21,7 +21,7 @@ void showScheduleDialog(BuildContext context,
                 builder: (context, state) {
                   return DropdownButtonFormField<String>(
                     value: state.selectedDayBloodDonationAppointment,
-                    hint: Text("Select a Day"),
+                    hint: Text("Select a Day".tr(context)),
                     items: hospitalProfileModel.dayes!
                         .replaceAll("[", "")
                         .replaceAll("]", "")
@@ -109,7 +109,7 @@ void showScheduleDialog(BuildContext context,
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("Cancel"),
+              child: Text("Cancel".tr(context)),
             ),
             BlocBuilder<UserSendAppointmentCubit, UserSendAppointmentState>(
               builder: (context, state) {
@@ -132,7 +132,7 @@ void showScheduleDialog(BuildContext context,
                               hospitalProfileModel, contentEn, title, context);
                     }
                   },
-                  child: Text("Confirm"),
+                  child: Text("Confirm".tr(context)),
                 );
               },
             ),

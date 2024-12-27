@@ -1,3 +1,4 @@
+import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
 
 class HospitalDonerBuildDonerRequestItem extends StatelessWidget {
@@ -31,7 +32,7 @@ class HospitalDonerBuildDonerRequestItem extends StatelessWidget {
                         ),
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
-                          children: const [
+                          children: [
                             Icon(
                               Icons.bloodtype,
                               color: Colors.red,
@@ -47,7 +48,7 @@ class HospitalDonerBuildDonerRequestItem extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 5),
-                            Text("0.3 Unit"),
+                            Text("0.3 ${"unit".tr(context)}"),
                           ],
                         ),
                       ),
@@ -58,25 +59,22 @@ class HospitalDonerBuildDonerRequestItem extends StatelessWidget {
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text(
-                          "Female, 21yr old",
+                          "${"Female".tr(context)}, 21 ${"yr old".tr(context)}",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         SizedBox(height: 5),
-                        Text("kirthika"),
-                        Text("rediyarpalayam, puducherry"),
+                        Text("Ahmed Abdullah"),
                         SizedBox(height: 5),
-                        Text("3 Km"),
+                        Text("3 ${"km".tr(context)}"),
                         SizedBox(height: 5),
                         Text(
-                          "AGS Hospital, Moolakulam",
-                          style: TextStyle(
-                            fontStyle: FontStyle.italic,
-                          ),
+                          "Amman, Jordan",
+                          style: TextStyle(fontStyle: FontStyle.italic),
                         ),
                       ],
                     ),
@@ -101,7 +99,7 @@ class HospitalDonerBuildDonerRequestItem extends StatelessWidget {
                       showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
-                                title: const Text("Reject Donor"),
+                                title: Text("Reject Donor"),
                                 content: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -124,12 +122,12 @@ class HospitalDonerBuildDonerRequestItem extends StatelessWidget {
                               ));
                     },
                     icon: const Icon(Icons.close, color: Colors.red),
-                    label: const Text("Reject"),
+                    label: Text("Reject".tr(context)),
                   ),
                   TextButton.icon(
                     onPressed: () {},
                     icon: const Icon(Icons.check, color: Colors.green),
-                    label: const Text("Accept"),
+                    label: Text("Accept".tr(context)),
                   ),
                 ],
               ),

@@ -1,3 +1,4 @@
+import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
 
 class HospitalDonerBuildMyRequestPending extends StatelessWidget {
@@ -28,7 +29,7 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                         ),
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
-                          children: const [
+                          children: [
                             Icon(
                               Icons.bloodtype,
                               color: Colors.red,
@@ -44,7 +45,7 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 5),
-                            Text("0.3 Unit"),
+                            Text("0.3 ${"unit".tr(context)}"),
                           ],
                         ),
                       ),
@@ -55,22 +56,21 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text(
-                          "Female, 21yr old",
+                          "${"Female".tr(context)}, 21 ${"yr old".tr(context)}",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         SizedBox(height: 5),
-                        Text("kirthika"),
-                        Text("rediyarpalayam, puducherry"),
+                        Text("Lama Abdulrahman"),
                         SizedBox(height: 5),
-                        Text("3 Km"),
+                        Text("3 ${"km".tr(context)}"),
                         SizedBox(height: 5),
                         Text(
-                          "AGS Hospital, Moolakulam",
+                          "Amaan , joardn",
                           style: TextStyle(
                             fontStyle: FontStyle.italic,
                           ),
@@ -88,40 +88,41 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                   ),
                 ],
               ),
-            if (isReject==false)      Row(
-                children: [
-                  Row(
-                    children: [
-                      Icon(Icons.check_circle, color: Colors.green),
-                      const SizedBox(width: 5),
-                      const Text(
-                        "Request accepted",
-                        style: TextStyle(
-                          color: Colors.green,
-                          fontWeight: FontWeight.bold,
+              if (isReject == false)
+                Row(
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.check_circle, color: Colors.green),
+                        const SizedBox(width: 5),
+                        Text(
+                          "Request accepted".tr(context),
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Spacer(),
-                  Row(
-                    children: [
-                      // Donor Info Button
-                      TextButton.icon(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.info,
-                          color: Colors.blue,
-                        ),
-                        label: const Text(
-                          "donor info",
-                          style: TextStyle(color: Colors.blue),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
+                      ],
+                    ),
+                    Spacer(),
+                    Row(
+                      children: [
+                        // Donor Info Button
+                        TextButton.icon(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.info,
+                            color: Colors.blue,
+                          ),
+                          label: Text(
+                            "donor info".tr(context),
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               if (isReject)
                 Row(
                   children: [
@@ -129,8 +130,8 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                       children: [
                         Icon(Icons.close, color: Colors.red),
                         const SizedBox(width: 5),
-                        const Text(
-                          "Request Rejected",
+                        Text(
+                          "Request Rejected".tr(context),
                           style: TextStyle(
                             color: Colors.red,
                             fontWeight: FontWeight.bold,
@@ -148,8 +149,8 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                             Icons.info,
                             color: Colors.blue,
                           ),
-                          label: const Text(
-                            "donor info",
+                          label: Text(
+                            "donor info".tr(context),
                             style: TextStyle(color: Colors.blue),
                           ),
                         )

@@ -19,8 +19,8 @@
     "onboarding_subtitle3": "Receive alerts when there’s a blood shortage or when your blood type is urgently needed. Be ready to help at the right moment.",
     "Choose Account Type": "Choose Account Type",
     "Please select your account type to proceed, whether you want to donate or represent a hospital in need of support. Choose the option that best suits your role to help contribute to healthcare services.": "Please select your account type to proceed, whether you want to donate or represent a hospital in need of support. Choose the option that best suits your role to help contribute to healthcare services.",
-    "Blood Doner": "Blood Doner",
-    "Hospital Or Center blood Doner": "Hospital Or Center blood Doner",
+    "Blood Donor": "Blood Donor",
+    "Hospital Or Center Blood Donor": "Hospital Or Center Blood Donor",
     "Continue": "Continue",
     "Welcome Back": "Welcome Back",
     "We're excited to have you back! We can't wait to see the impact you've made since you last used the app.": "We're excited to have you back! We can't wait to see the impact you've made since you last used the app.",
@@ -328,9 +328,9 @@
     "Please enter your email or phone number":"Please enter your email or phone number"
     ,"Password Recovred Successfully":"Password Recovred Successfully",
     "km": "KM",
-        "Search Hospital or blood center":"Search Hospital or blood center",
-"Select a Governorate":"Select a Governorate",
-"Select a Nearby":"Select a Nearby",
+    "Search Hospital or blood center":"Search Hospital or blood center",
+    "Select a Governorate":"Select a Governorate",
+    "Select a Nearby":"Select a Nearby",
 "Select a Day":"Select Work Time",
 "Search":"Search","Hospital Search Result":"Result Search Hospital or blood center",
 "Send Blood Request":"Send Blood Request",
@@ -344,5 +344,40 @@
 "Re-Enter Password":"Re-Enter Password",
 "Save Password":"Save Password",
 "am":"AM",
-"pm":"PM"
+"pm":"PM",
+"Received Requests":"Received Requests",
+"History Donations":"History Donations",
+"unit":"Unit",
+"yr old":"Year old",
+"Reject":"Reject",
+
+"Accept":"Accept",
+"Request accepted":"Request accepted",
+"Request Rejected":"Request Rejected",
+"donor info":"Donor info",
+"When do you need the blood donation?":"When do you need the blood donation?",
+"Urgent":"Urgent",
+"Today":"Today",
+"Tomorrow":"Tomorrow",
+"Select Time":"Select Time",
+"What blood groups do you need?":"What blood groups do you need?",
+"How many units are needed?":"How many units are needed?",
+"Select Units Required":"Select Units Required",
+"Location Distance":"Location Distance",
+"Select Location Distance":"Select Location Distance",
+"Request Blood":"Request Blood",
+"Select Blood Group":"Select Blood Group"
+,"Call":"Call"
+,"blood now":"Blood Now",
+"Select Donation Time":"Select Donation Time"
+
+
+
+
+
+
+
+
+
+
 }

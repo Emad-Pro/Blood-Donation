@@ -19,8 +19,8 @@
     "onboarding_subtitle3": "احصل على تنبيهات عندما يكون هناك نقص في الدم أو عندما تكون فصيلة الدم الخاصة بك مطلوبة بشكل عاجل. كن مستعدًا للمساعدة في اللحظة المناسبة.",
     "Choose Account Type": "اختر نوع الحساب",
     "Please select your account type to proceed, whether you want to donate or represent a hospital in need of support. Choose the option that best suits your role to help contribute to healthcare services.": "يرجى اختيار نوع حسابك للمتابعة، سواء كنت ترغب في التبرع أو كنت تمثل مستشفى يحتاج إلى دعم. اختر الخيار الذي يناسب دورك للمساهمة في تقديم الرعاية الصحية.",
-    "Blood Doner": "متبرع بالدم",
-    "Hospital Or Center blood Doner": "مستشفي او مركز التبرع بالدم",
+    "Blood Donor": "متبرع بالدم",
+    "Hospital Or Center Blood Donor": "مستشفي او مركز التبرع بالدم",
     "Continue": "متابعة",
     "Welcome Back": "مرحباً بعودتك",
     "We're excited to have you back! We can't wait to see the impact you've made since you last used the app.": "نحن متحمسون لعودتك! لا يمكننا الانتظار لرؤية ما حققته منذ آخر مرة استخدمت فيها التطبيق.",
@@ -305,7 +305,42 @@
 "Re-Enter Password":"تاكيد كلمة المرور",
 "Save Password":"حفظ كلمة المرور",
 "am":"ص"
-,"pm":"م"
+,"pm":"م",
+
+"Received Requests":"طلبات  التبرع",
+"History Donations":"سجل التبرع",
+"unit":"وحده",
+"yr old":"سنة",
+"Reject":"رفض",
+"Accept":"قبول",
+"Request accepted":"طلب مقبول",
+"Request Rejected":"طلب مرفوض",
+"donor info":"معلومات المتبرع",
+"When do you need the blood donation?":"متي تحتاج التبرع بالدم؟",
+"Urgent":"عاجلاً",
+"Today":"اليوم",
+"Tomorrow":"غداً",
+"Select Time":"اختر الوقت",
+"What blood groups do you need?":"ماهي فصائل الدم المطلوبة",
+"How many units are needed?":"كم عدد الوحدات المطلوبة ؟",
+"Select Units Required":"اختر الوحدات المطلوبة",
+"Location Distance":"البُعد  عن الموقع",
+"Select Location Distance":"اختر مسافة الموقع",
+"Request Blood":"طلب تبرع بالدم",
+"Select Blood Group":"اختر الفصائل المطلوبة",
+"Call":"اتصال",
+"blood now":"تبرع الان",
+"Select Donation Time":"اختر وقت التبرع"
+
+
+
+
+
+
+
+
+
+
 
 
 
