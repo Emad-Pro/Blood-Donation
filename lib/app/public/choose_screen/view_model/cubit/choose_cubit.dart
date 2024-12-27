@@ -10,11 +10,11 @@ class ChooseCubit extends Cubit<ChooseState> {
   List<ChooseAccoutTypeModel> chooseAccoutTypeModel = [
     ChooseAccoutTypeModel(
         imagePath: "assets/images/choose/blood-pressure.png",
-        title: "Blood Doner",
+        title: "Blood Donor",
         index: 1),
     ChooseAccoutTypeModel(
         imagePath: "assets/images/choose/medical-center.png",
-        title: "Hospital Or Center blood Doner",
+        title: "Hospital Or Center Blood Donor",
         index: 2),
   ];
 

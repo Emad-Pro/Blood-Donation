@@ -44,8 +44,8 @@ class UserProfileOptionsWidgets extends StatelessWidget {
           title: "Rewards".tr(context),
         ),
         UserProfileOptionTile(
-          icon: Icons.card_giftcard,
-          title: "Rewards".tr(context),
+          icon: Icons.question_answer,
+          title: "FAQs".tr(context),
           onTap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => HospitalFaqsScreen()));

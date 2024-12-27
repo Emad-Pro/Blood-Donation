@@ -43,7 +43,10 @@ class UserEditProfileScreen extends StatelessWidget {
           final userEditProfileCubit = context.read<UserEditProfileCubit>();
           return Scaffold(
             appBar: AppBar(
-              title: Text("Edit Profile".tr(context)),
+              title: Text(
+                "Edit Profile".tr(context),
+                style: TextStyle(fontSize: 16),
+              ),
               actions: [
                 ElevatedButton(
                     onPressed: () {

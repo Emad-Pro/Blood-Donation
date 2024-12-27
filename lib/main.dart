@@ -32,7 +32,7 @@ void main() async {
       url: 'https://rcmumkmvatjdvwmxprjc.supabase.co',
       anonKey:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJjbXVta212YXRqZHZ3bXhwcmpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ3OTA4NDcsImV4cCI6MjA1MDM2Njg0N30.TPdgz4UKyUrGTXc9YUi4zeAgLLbwYjHVa2RBvRV5jl8');
-//  OneSignal.Debug.setLogLevel(OSLogLevel.);
+  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
 
   OneSignal.initialize("cb0266c5-a7c7-458d-ac6f-5fef6ba42e43");
   OneSignal.Notifications.requestPermission(true);

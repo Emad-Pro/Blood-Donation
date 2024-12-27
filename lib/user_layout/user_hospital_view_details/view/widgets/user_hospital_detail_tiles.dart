@@ -33,7 +33,7 @@ class UserHospitalDetailTiles extends StatelessWidget {
       ),
       UserHospitalDetailTile(
         icon: Icons.date_range,
-        text: parseDays(hospitalProfileModel.dayes!).join(", "),
+        text: parseDays(hospitalProfileModel.dayes!, context).join(", "),
         primaryColor: primaryColor,
       ),
       UserHospitalDetailTile(

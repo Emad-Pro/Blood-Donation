@@ -24,7 +24,7 @@ class HospitalEmergency extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('When do you need the blood?'),
+                Text('When do you need the blood donation?'.tr(context)),
                 SizedBox(height: 8),
                 DropdownButtonFormField<String>(
                   decoration: InputDecoration(
@@ -33,20 +33,22 @@ class HospitalEmergency extends StatelessWidget {
                     ),
                   ),
                   items: [
-                    DropdownMenuItem(value: 'Urgent', child: Text('Urgent')),
-                    DropdownMenuItem(value: 'Today', child: Text('Today')),
                     DropdownMenuItem(
-                        value: 'Tomorrow', child: Text('Tomorrow')),
+                        value: 'Urgent', child: Text('Urgent'.tr(context))),
+                    DropdownMenuItem(
+                        value: 'Today', child: Text('Today'.tr(context))),
+                    DropdownMenuItem(
+                        value: 'Tomorrow', child: Text('Tomorrow'.tr(context))),
                   ],
                   onChanged: (value) {
                     getIt<HospitalEmergencyCubit>().toggleTimeNeeded(value!);
                   },
-                  hint: Text('Select Time'),
+                  hint: Text('Select Time'.tr(context)),
                 ),
                 SizedBox(height: 16),
 
                 // Blood group
-                Text('What blood group do you need?'),
+                Text('What blood groups do you need?'.tr(context)),
                 SizedBox(height: 8),
                 GlobalTextFormFiled(
                   textEditingController:
@@ -58,7 +60,7 @@ class HospitalEmergency extends StatelessWidget {
                 ),
                 SizedBox(height: 16),
 
-                Text('How many units are needed?'),
+                Text('How many units are needed?'.tr(context)),
                 SizedBox(height: 8),
                 DropdownButtonFormField<int>(
                   decoration: InputDecoration(
@@ -70,38 +72,38 @@ class HospitalEmergency extends StatelessWidget {
                     50,
                     (index) => DropdownMenuItem(
                       value: index + 1,
-                      child: Text('${index + 1} Unit'),
+                      child: Text('${index + 1} ${"unit".tr(context)}'),
                     ),
                   ),
                   onChanged: (value) {
                     getIt<HospitalEmergencyCubit>().toggleUnitsRequired(value!);
                   },
-                  hint: Text('Select Units Required'),
+                  hint: Text('Select Units Required'.tr(context)),
                 ),
                 SizedBox(height: 16),
 
                 // Location
-                Text('Location Distance'),
-                SizedBox(height: 8),
-                DropdownButtonFormField<int>(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                  ),
-                  items: List.generate(
-                    10,
-                    (index) => DropdownMenuItem(
-                      value: index + 1,
-                      child: Text('${index + 1} KM'),
-                    ),
-                  ),
-                  onChanged: (value) {
-                    getIt<HospitalEmergencyCubit>()
-                        .toggleLocationDistance(value!);
-                  },
-                  hint: Text('Select Location Distance'),
-                ),
+                // Text('Location Distance'),
+                // SizedBox(height: 8),
+                // DropdownButtonFormField<int>(
+                //   decoration: InputDecoration(
+                //     border: OutlineInputBorder(
+                //       borderRadius: BorderRadius.circular(12.0),
+                //     ),
+                //   ),
+                //   items: List.generate(
+                //     10,
+                //     (index) => DropdownMenuItem(
+                //       value: index + 1,
+                //       child: Text('${index + 1} KM'),
+                //     ),
+                //   ),
+                //   onChanged: (value) {
+                //     getIt<HospitalEmergencyCubit>()
+                //         .toggleLocationDistance(value!);
+                //   },
+                //   hint: Text('Select Location Distance'),
+                // ),
                 SizedBox(height: 32),
 
                 // Request Button
@@ -131,7 +133,7 @@ class HospitalEmergency extends StatelessWidget {
             ),
           ),
           child: Text(
-            'Request Blood',
+            'Request Blood'.tr(context),
             style: TextStyle(fontSize: 16),
           ),
         ),
@@ -154,7 +156,7 @@ class HospitalEmergency extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Select Blood Group"),
+                      Text("Select Blood Group".tr(context)),
                       Expanded(
                         child: ListView(
                           shrinkWrap: true,

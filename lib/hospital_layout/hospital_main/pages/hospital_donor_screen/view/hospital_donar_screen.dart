@@ -1,3 +1,4 @@
+import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
 import 'widgets/hospital_doner_received_requeests.dart';
 import 'widgets/hospital_my_request_page.dart';
@@ -23,14 +24,14 @@ class _HospitalDonarScreenState extends State<HospitalDonarScreen>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Donors"),
+          title: Text("Donors".tr(context)),
           bottom: TabBar(
             indicatorColor: Theme.of(context).colorScheme.primary,
             dividerColor: Colors.transparent,
             controller: tabController,
             tabs: [
-              Tab(text: "Received Requests"),
-              Tab(text: "History Donations"),
+              Tab(text: "Received Requests".tr(context)),
+              Tab(text: "History Donations".tr(context)),
             ],
           ),
         ),
