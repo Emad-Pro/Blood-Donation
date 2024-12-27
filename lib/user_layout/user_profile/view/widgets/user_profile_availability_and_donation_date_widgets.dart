@@ -12,20 +12,20 @@ class UserProfileAvailabilityAndDonationDateWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ListTile(
-          leading: Switch(
-            value: true,
-            onChanged: (value) {},
-            activeColor: Theme.of(context).colorScheme.primary,
-          ),
-          title: Text(
-            "I am available to donate".tr(context),
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
-          ),
-        ),
+        // ListTile(
+        //   leading: Switch(
+        //     value: true,
+        //     onChanged: (value) {},
+        //     activeColor: Theme.of(context).colorScheme.primary,
+        //   ),
+        //   title: Text(
+        //     "I am available to donate".tr(context),
+        //     style: TextStyle(
+        //       fontWeight: FontWeight.bold,
+        //       fontSize: 16,
+        //     ),
+        //   ),
+        // ),
 
         // Donation Date Section
         ListTile(
@@ -61,8 +61,8 @@ class UserProfileAvailabilityAndDonationDateWidgets extends StatelessWidget {
           ),
           subtitle: Text(convertResultDateTime(
               state.userSignupModel!.dateLastBloodDonation!)),
-          trailing: Icon(Icons.arrow_forward_ios,
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5)),
+          // trailing: Icon(Icons.arrow_forward_ios,
+          //     color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5)),
         ),
 
         Divider(),

@@ -31,21 +31,21 @@ class UserEditProfileLastDateBloodDonationWidget extends StatelessWidget {
           textEditingController: userEditProfileCubit.lastDonationController,
           readOnly: true,
           onTap: () async {
-            DateTime currentDate = DateTime.now();
-            DateTime threeMonthsAgo = DateTime(
-                currentDate.year, currentDate.month - 3, currentDate.day);
-            await showDatePicker(
-                    context: context,
-                    firstDate: threeMonthsAgo,
-                    initialDate: threeMonthsAgo,
-                    lastDate: DateTime.now())
-                .then((onValue) {
-              if (onValue != null) {
-                //    userSignUpCubit.lastDonation = onValue;
-                userEditProfileCubit.lastDonationController.text =
-                    '${onValue.day}/${onValue.month}/${onValue.year}';
-              }
-            });
+            // DateTime currentDate = DateTime.now();
+            // DateTime threeMonthsAgo = DateTime(
+            //     currentDate.year, currentDate.month - 3, currentDate.day);
+            // await showDatePicker(
+            //         context: context,
+            //         firstDate: threeMonthsAgo,
+            //         initialDate: threeMonthsAgo,
+            //         lastDate: DateTime.now())
+            //     .then((onValue) {
+            //   if (onValue != null) {
+            //     //    userSignUpCubit.lastDonation = onValue;
+            //     userEditProfileCubit.lastDonationController.text =
+            //         '${onValue.day}/${onValue.month}/${onValue.year}';
+            //   }
+            // });
           },
         ),
         SizedBox(

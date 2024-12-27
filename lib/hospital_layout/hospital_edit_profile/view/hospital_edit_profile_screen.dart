@@ -27,10 +27,7 @@ class HospitalEditProfileScreen extends StatelessWidget {
         title: Text(
           "Edit Profile".tr(context),
         ),
-        actions: [
-          ElevatedButton(
-              onPressed: () {}, child: Text("Change Password".tr(context))),
-        ],
+        actions: [],
       ),
       body: BlocProvider(
         create: (context) =>

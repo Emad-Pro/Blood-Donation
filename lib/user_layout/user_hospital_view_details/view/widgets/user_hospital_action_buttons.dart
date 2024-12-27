@@ -1,3 +1,4 @@
+import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../hospital_layout/hospital_main/pages/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
@@ -23,13 +24,13 @@ class UserHospitalActionButtons extends StatelessWidget {
         children: [
           UserHospitalActionButton(
             icon: Icons.call,
-            label: 'Call',
+            label: 'Call'.tr(context),
             primaryColor: primaryColor,
             onPressed: () {},
           ),
           UserHospitalActionButton(
             icon: Icons.bloodtype_outlined,
-            label: 'تبرع الان',
+            label: 'blood now'.tr(context),
             primaryColor: primaryColor,
             onPressed: () {
               showScheduleDialog(
