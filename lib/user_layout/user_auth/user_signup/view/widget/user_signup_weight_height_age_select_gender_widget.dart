@@ -14,25 +14,38 @@ class UserSignupWeightHeightAgeAndSelectGenderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        GlobalTextFormFiled(
+          keyboardType: TextInputType.number,
+          readOnly: true,
+          textEditingController: userSignUpCubit.ageController,
+          validator: (value) {
+            if (value!.isEmpty) {
+              return 'Date of birth required'.tr(context);
+            } else
+              return null;
+          },
+          lableText: "Date of birth".tr(context),
+          //  maxLength: 2,
+          onTap: () {
+            showDatePicker(
+              context: context,
+              initialDate: DateTime.now(),
+              firstDate: DateTime(1900),
+              lastDate: DateTime.now(),
+            ).then((value) {
+              if (value != null) {
+                userSignUpCubit.ageController.text =
+                    "${value.year}-${value.month}-${value.day}";
+              }
+            });
+          },
+          iconButton: Icon(Icons.calendar_month),
+        ),
+        SizedBox(
+          height: 8,
+        ),
         Row(
           children: [
-            Expanded(
-              child: GlobalTextFormFiled(
-                keyboardType: TextInputType.number,
-                textEditingController: userSignUpCubit.ageController,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Age required'.tr(context);
-                  } else
-                    return null;
-                },
-                lableText: "Age".tr(context),
-                maxLength: 2,
-              ),
-            ),
-            SizedBox(
-              width: 8,
-            ),
             Expanded(
               child: GlobalTextFormFiled(
                 keyboardType: TextInputType.number,

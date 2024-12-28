@@ -330,7 +330,17 @@
 "Select Blood Group":"اختر الفصائل المطلوبة",
 "Call":"اتصال",
 "blood now":"تبرع الان",
-"Select Donation Time":"اختر وقت التبرع"
+"Select Donation Time":"اختر وقت التبرع",
+"Add Review":"إضافة مراجعة",
+"Write your review here...":"اكتب مراجعتك هنا ...",
+"Submit Review":" ارسال المراجعة",
+"Please enter your review":"الرجاء ادخال مراجعتك",
+"Review Added Successfully":"تم اضافة المراجعة بنجاح"
+,"Failed To Add Review":"فشل اضافة المراجعة"
+
+,"Date of birth required":"تاريخ الميلاد مطلوب"
+,"Date of birth":"تاريخ الميلاد"
+
 
 
 

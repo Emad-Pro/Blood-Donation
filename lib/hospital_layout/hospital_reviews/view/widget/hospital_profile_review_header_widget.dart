@@ -3,6 +3,7 @@ import 'package:blood_donation/hospital_layout/hospital_reviews/view_model/cubit
 import 'package:flutter/material.dart';
 import 'package:rating_summary/rating_summary.dart';
 
+import '../../../../core/methods/calculate_reating.dart';
 import '../methods/calc_avergs.dart';
 
 class HospitalProfileReviewHeaderWidget extends StatelessWidget {
@@ -12,8 +13,7 @@ class HospitalProfileReviewHeaderWidget extends StatelessWidget {
   final HospitalReviewCubit cubit;
   @override
   Widget build(BuildContext context) {
-    final values = cubit
-        .calculateRatingsDistribution(state.hospitalReviewModel!)
+    final values = calculateRatingsDistribution(state.hospitalReviewModel!)
         .values
         .toList();
 
@@ -27,7 +27,7 @@ class HospitalProfileReviewHeaderWidget extends StatelessWidget {
         SizedBox(height: 16),
         RatingSummary(
           color: Theme.of(context).colorScheme.primary,
-          counter: cubit.state.hospitalReviewModel!.length,
+          counter: state.hospitalReviewModel!.length,
           average: calculateAverageRating(state.hospitalReviewModel!),
           showAverage: true,
           counterFiveStars: values[4],

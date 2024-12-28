@@ -5,6 +5,7 @@ import 'package:blood_donation/core/enum/request_state.dart';
 import 'package:equatable/equatable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../../core/methods/calculate_reating.dart';
 import '../../model/hospital_review_model.dart';
 
 part 'hospital_review_state.dart';
@@ -31,26 +32,5 @@ class HospitalReviewCubit extends Cubit<HospitalReviewState> {
       emit(state.copyWith(
           reviewsState: RequestState.error, errorMessage: e.toString()));
     }
-  }
-
-  Map<int, int> calculateRatingsDistribution(
-      List<HospitalReviewModel>? hospitalReviewModel) {
-    Map<int, int> distribution = {
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0,
-    };
-
-    // تمرير جميع التقييمات وتحديث التوزيع
-    for (HospitalReviewModel rating in hospitalReviewModel!) {
-      if (distribution.containsKey(rating.rating!.toInt())) {
-        distribution[rating.rating!.toInt()] =
-            distribution[rating.rating!.toInt()]! + 1;
-      }
-    }
-
-    return distribution;
   }
 }
