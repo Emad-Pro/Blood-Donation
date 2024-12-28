@@ -21,7 +21,9 @@ class UserProfilePersonInfoCardWidgets extends StatelessWidget {
               children: [
                 UserProfileStatCard(
                   label: "Age".tr(context),
-                  value: state.userSignupModel!.age.toString(),
+                  value: (DateTime.now().year -
+                          DateTime.parse(state.userSignupModel!.age!).year)
+                      .toString(),
                   icon: Icons.calendar_today,
                 ),
                 UserProfileStatCard(

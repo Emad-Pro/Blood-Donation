@@ -121,7 +121,7 @@ class UserSignupCubit extends Cubit<UserSignupState> {
       phone:
           "${state.selectedPhoneService == 'Orange' ? '077' : state.selectedPhoneService == 'Zain' ? '079' : state.selectedPhoneService == 'Umniah' ? '078' : '077'}${phoneController.text}",
       phoneCode: phoneCodeController.text,
-      age: _parseInt(ageController.text),
+      age: ageController.text,
       height: _parseInt(heightController.text),
       weight: _parseInt(weightController.text),
       latitude: _parseDouble(latitudeController.text),

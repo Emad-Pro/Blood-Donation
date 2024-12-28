@@ -48,6 +48,7 @@ class UserSignupWeightHeightAgeAndSelectGenderWidget extends StatelessWidget {
           children: [
             Expanded(
               child: GlobalTextFormFiled(
+                iconButton: Icon(Icons.line_weight),
                 keyboardType: TextInputType.number,
                 maxLength: 3,
                 textEditingController: userSignUpCubit.weightController,
@@ -66,6 +67,7 @@ class UserSignupWeightHeightAgeAndSelectGenderWidget extends StatelessWidget {
             Expanded(
               child: GlobalTextFormFiled(
                 maxLength: 3,
+                iconButton: Icon(Icons.height),
                 keyboardType: TextInputType.number,
                 textEditingController: userSignUpCubit.heightController,
                 validator: (value) {

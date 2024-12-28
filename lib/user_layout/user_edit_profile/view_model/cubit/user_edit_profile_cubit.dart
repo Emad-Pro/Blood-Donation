@@ -99,7 +99,7 @@ class UserEditProfileCubit extends Cubit<UserEditProfileState> {
       dateLastBloodDonation: lastDonationController.text,
       phoneCode: _getPhoneServiceWithName(state.selectedPhoneService!),
       phone: "${phoneController.text}",
-      age: int.parse(ageController.text),
+      age: ageController.text,
       height: int.parse(heightController.text),
       weight: int.parse(weightController.text),
       latitude: double.parse(lateController.text),
