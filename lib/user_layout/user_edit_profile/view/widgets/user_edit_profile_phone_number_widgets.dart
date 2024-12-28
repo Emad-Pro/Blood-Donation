@@ -55,6 +55,7 @@ class UserEditProfilePhoneNumberWidgets extends StatelessWidget {
               child: GlobalTextFormFiled(
                 lableText: "Phone Number".tr(context),
                 keyboardType: TextInputType.phone,
+                iconButton: Icon(Icons.phone),
                 maxLength: 7,
                 textEditingController: userEditProfileCubit.phoneController,
                 validator: (value) {

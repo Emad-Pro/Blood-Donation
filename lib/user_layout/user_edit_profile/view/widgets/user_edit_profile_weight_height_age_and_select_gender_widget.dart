@@ -14,27 +14,38 @@ class UserEditProfileWeightHeightAgeAndSelectGenderWidget
   Widget build(BuildContext context) {
     return Column(
       children: [
+        GlobalTextFormFiled(
+          textEditingController: userEditProfileCubit.ageController,
+          iconButton: Icon(Icons.calendar_month),
+          validator: (value) {
+            if (value!.isEmpty) {
+              return 'Date of birth required'.tr(context);
+            } else
+              return null;
+          },
+          lableText: "Date of birth".tr(context),
+          onTap: () {
+            showDatePicker(
+              context: context,
+              initialDate: DateTime.now(),
+              firstDate: DateTime(1900),
+              lastDate: DateTime.now(),
+            ).then((value) {
+              if (value != null) {
+                userEditProfileCubit.ageController.text =
+                    "${value.year}-${value.month}-${value.day}";
+              }
+            });
+          },
+        ),
+        SizedBox(
+          height: 8,
+        ),
         Row(
           children: [
             Expanded(
               child: GlobalTextFormFiled(
-                keyboardType: TextInputType.number,
-                textEditingController: userEditProfileCubit.ageController,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Age required'.tr(context);
-                  } else
-                    return null;
-                },
-                lableText: "Age".tr(context),
-                maxLength: 2,
-              ),
-            ),
-            SizedBox(
-              width: 8,
-            ),
-            Expanded(
-              child: GlobalTextFormFiled(
+                iconButton: Icon(Icons.line_weight),
                 keyboardType: TextInputType.number,
                 maxLength: 3,
                 textEditingController: userEditProfileCubit.weightController,
@@ -53,6 +64,7 @@ class UserEditProfileWeightHeightAgeAndSelectGenderWidget
             Expanded(
               child: GlobalTextFormFiled(
                 maxLength: 3,
+                iconButton: Icon(Icons.height),
                 keyboardType: TextInputType.number,
                 textEditingController: userEditProfileCubit.heightController,
                 validator: (value) {

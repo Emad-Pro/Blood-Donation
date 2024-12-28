@@ -5,7 +5,7 @@ class UserSignupModel {
   String? dateLastBloodDonation;
   String? phone;
   String? phoneCode;
-  int? age;
+  String? age;
   int? height;
   int? weight;
   double? latitude;

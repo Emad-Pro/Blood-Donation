@@ -1,11 +1,14 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
+import 'package:blood_donation/core/methods/calculate_reating.dart';
 import 'package:flutter/material.dart';
 
-class HospitalDonerBuildDonerRequestItem extends StatelessWidget {
-  const HospitalDonerBuildDonerRequestItem({
-    super.key,
-  });
+import '../../../../../../core/methods/calculate_distance.dart';
+import '../../pages/hospital_donor_received_requests_page/model/hospital_donor_recevied_requests_model.dart';
 
+class HospitalDonerBuildDonerRequestItem extends StatelessWidget {
+  const HospitalDonerBuildDonerRequestItem(
+      {super.key, required this.hospitalDonorReceviedRequestsModel});
+  final HospitalDonorReceviedRequestsModel? hospitalDonorReceviedRequestsModel;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -40,7 +43,8 @@ class HospitalDonerBuildDonerRequestItem extends StatelessWidget {
                             ),
                             SizedBox(height: 5),
                             Text(
-                              "AB+",
+                              hospitalDonorReceviedRequestsModel!
+                                  .userprofileModel!.selectedBloodType!,
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -48,7 +52,8 @@ class HospitalDonerBuildDonerRequestItem extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 5),
-                            Text("0.3 ${"unit".tr(context)}"),
+                            Text(
+                                "${hospitalDonorReceviedRequestsModel!.unit} ${"unit".tr(context)}"),
                           ],
                         ),
                       ),
@@ -61,19 +66,22 @@ class HospitalDonerBuildDonerRequestItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "${"Female".tr(context)}, 21 ${"yr old".tr(context)}",
+                          "${"${hospitalDonorReceviedRequestsModel!.userprofileModel!.selectedGender!}".tr(context)}, ${DateTime.now().year - DateTime.parse(hospitalDonorReceviedRequestsModel!.userprofileModel!.age!).year} ${"yr old".tr(context)}",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         SizedBox(height: 5),
-                        Text("Ahmed Abdullah"),
-                        SizedBox(height: 5),
-                        Text("3 ${"km".tr(context)}"),
+                        Text(hospitalDonorReceviedRequestsModel!
+                            .userprofileModel!.fullName!),
                         SizedBox(height: 5),
                         Text(
-                          "Amman, Jordan",
+                            "${calculateDistance(hospitalDonorReceviedRequestsModel!.hospitalprofileModel!.latitude!, hospitalDonorReceviedRequestsModel!.hospitalprofileModel!.longitude!, hospitalDonorReceviedRequestsModel!.userprofileModel!.latitude!, hospitalDonorReceviedRequestsModel!.userprofileModel!.longitude!).round()} ${"km".tr(context)}"),
+                        SizedBox(height: 5),
+                        Text(
+                          hospitalDonorReceviedRequestsModel!
+                              .userprofileModel!.currentLocation!,
                           style: TextStyle(fontStyle: FontStyle.italic),
                         ),
                       ],

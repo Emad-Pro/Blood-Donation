@@ -63,6 +63,7 @@ class UserSignupImageNameEmailWidgets extends StatelessWidget {
           child: Column(
             children: [
               GlobalTextFormFiled(
+                iconButton: Icon(Icons.person),
                 lableText: "Full Name".tr(context),
                 textEditingController: userSignUpCubit.fullNameController,
                 keyboardType: TextInputType.name,
@@ -75,6 +76,7 @@ class UserSignupImageNameEmailWidgets extends StatelessWidget {
               ),
               SizedBox(height: 8),
               GlobalTextFormFiled(
+                iconButton: Icon(Icons.email),
                 lableText: "Email".tr(context),
                 keyboardType: TextInputType.emailAddress,
                 textEditingController: userSignUpCubit.emailController,
