@@ -2,7 +2,6 @@ import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import '../../../core/di/service_lacator.dart';
 import '../view_model/cubit/user_main_cubit.dart';

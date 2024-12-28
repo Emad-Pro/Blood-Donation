@@ -369,10 +369,16 @@
 "Select Blood Group":"Select Blood Group"
 ,"Call":"Call"
 ,"blood now":"Blood Now",
-"Select Donation Time":"Select Donation Time"
+"Select Donation Time":"Select Donation Time",
+"Add Review":"Add Review",
+"Write your review here...":"Write your review here...",
+"Submit Review":"Submit Review",
 
-
-
+"Please enter your review":"Please enter your review",
+"Review Added Successfully":"Review Added Successfully"
+,"Failed To Add Review":"Failed To Add Review"
+,"Date of birth required":"Date of birth required"
+,"Date of birth":"Date of birth"
 
 
 
