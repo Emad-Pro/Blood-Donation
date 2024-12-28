@@ -42,13 +42,7 @@ class HospitalReviewScreen extends StatelessWidget {
                             physics: NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
                               return HospitalProfileReviewBuildCard(
-                                rating:
-                                    state.hospitalReviewModel![index].rating!,
-                                name:
-                                    state.hospitalReviewModel![index].userName!,
-                                text: state.hospitalReviewModel![index].review!,
-                                bloodType: state
-                                    .hospitalReviewModel![index].userBloodType!,
+                                review: state.hospitalReviewModel![index],
                               );
                             }),
                       )

@@ -1,21 +1,13 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
+import 'package:blood_donation/hospital_layout/hospital_reviews/model/hospital_review_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../../../core/auto_direction.dart';
 
 class HospitalProfileReviewBuildCard extends StatelessWidget {
-  const HospitalProfileReviewBuildCard({
-    super.key,
-    required this.rating,
-    required this.name,
-    required this.text,
-    required this.bloodType,
-  });
-  final double rating;
-  final String name;
-  final String text;
-  final String bloodType;
+  const HospitalProfileReviewBuildCard({super.key, required this.review});
+  final HospitalReviewModel review;
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +26,11 @@ class HospitalProfileReviewBuildCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        name,
+                        review.userName!,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "${"Blood type".tr(context)}: $bloodType",
+                        "${"Blood type".tr(context)}: ${review.userBloodType}",
                         style: TextStyle(color: Colors.green),
                       ),
                     ],
@@ -46,9 +38,9 @@ class HospitalProfileReviewBuildCard extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Text(" (${rating.toString()})"),
+                    Text(" (${review.rating.toString()})"),
                     RatingBarIndicator(
-                      rating: rating,
+                      rating: review.rating!,
                       itemBuilder: (context, index) => Icon(
                         Icons.star,
                         color: Colors.amber,
@@ -63,8 +55,8 @@ class HospitalProfileReviewBuildCard extends StatelessWidget {
             ),
             SizedBox(height: 8),
             AutoDirection(
-              text: text,
-              child: Text(text),
+              text: review.review!,
+              child: Text(review.review!),
             ),
             SizedBox(height: 16),
           ],

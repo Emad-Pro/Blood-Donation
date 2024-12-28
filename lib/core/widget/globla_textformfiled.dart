@@ -15,7 +15,7 @@ class GlobalTextFormFiled extends StatelessWidget {
   final String? lableText;
   final bool? isSecure;
   final TextInputType? keyboardType;
-  final IconButton? iconButton;
+  final Widget? iconButton;
   final TextEditingController? textEditingController;
   final String? Function(String?)? validator;
   final bool? readOnly;

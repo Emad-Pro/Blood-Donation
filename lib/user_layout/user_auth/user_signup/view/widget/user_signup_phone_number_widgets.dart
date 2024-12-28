@@ -60,6 +60,7 @@ class UserSignupPhoneNumberWidgets extends StatelessWidget {
             Expanded(
               child: GlobalTextFormFiled(
                 lableText: "Phone Number".tr(context),
+                iconButton: Icon(Icons.phone),
                 keyboardType: TextInputType.phone,
                 maxLength: 7,
                 textEditingController: userSignUpCubit.phoneController,

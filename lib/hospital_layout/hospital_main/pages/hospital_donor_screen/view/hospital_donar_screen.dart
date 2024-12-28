@@ -1,5 +1,6 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
+import '../pages/hospital_donor_received_requests_page/view/hospital_donor_received_requests_page.dart';
 import 'widgets/hospital_doner_received_requeests.dart';
 import 'widgets/hospital_my_request_page.dart';
 
@@ -37,7 +38,10 @@ class _HospitalDonarScreenState extends State<HospitalDonarScreen>
         ),
         body: TabBarView(
           controller: tabController,
-          children: [HospitalDonerReceivedRequests(), HospitalMyRequestPage()],
+          children: [
+            HospitalDonerReceivedRequestsPage(),
+            HospitalMyRequestPage()
+          ],
         ));
   }
 }
