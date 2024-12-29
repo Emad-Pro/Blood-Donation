@@ -3,6 +3,7 @@ import 'package:blood_donation/core/widget/global_snackbar.dart';
 import 'package:blood_donation/user_layout/user_send_appointment/view_model/cubit/user_send_appointment_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../core/enum/request_state.dart';
 import '../../../hospital_layout/hospital_main/pages/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
 
 void showScheduleDialog(BuildContext context,
@@ -17,29 +18,69 @@ void showScheduleDialog(BuildContext context,
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              BlocBuilder<UserSendAppointmentCubit, UserSendAppointmentState>(
+              BlocConsumer<UserSendAppointmentCubit, UserSendAppointmentState>(
+                listener: (context, state) {
+                  if (state.sendRequestAppointmentState ==
+                      RequestState.success) {
+                    Navigator.pop(context);
+                    globalSnackbar(
+                        context, "Request Sent Successfully".tr(context),
+                        backgroundColor: Colors.green);
+                  }
+                  if (state.sendRequestAppointmentState == RequestState.error) {
+                    Navigator.pop(context);
+                    globalSnackbar(
+                        context,
+                        state.errorMessage!.tr(context) != ""
+                            ? state.errorMessage!.tr(context)
+                            : state.errorMessage!,
+                        backgroundColor: Colors.red);
+                  }
+                },
                 builder: (context, state) {
-                  return DropdownButtonFormField<String>(
-                    value: state.selectedDayBloodDonationAppointment,
-                    hint: Text("Select a Day".tr(context)),
-                    items: hospitalProfileModel.dayes!
-                        .replaceAll("[", "")
-                        .replaceAll("]", "")
-                        .replaceAll(" ", "")
-                        .split(",")
-                        .map((String day) {
-                      return DropdownMenuItem<String>(
-                        value: day.replaceAll(" ", ""),
-                        child: Text(day.replaceAll(" ", "").tr(context)),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      context
-                          .read<UserSendAppointmentCubit>()
-                          .toggleSelectedDayBloodDonationAppointment(
-                              value!.replaceAll(" ", ""));
-                      print(value);
-                    },
+                  return Column(
+                    children: [
+                      DropdownButtonFormField<String>(
+                        value: state.selectUnitCountBloodDonationAppointment,
+                        hint: Text("Select Count Unit".tr(context)),
+                        items:
+                            List.generate(5, (index) => (index + 1).toString())
+                                .map((String unit) {
+                          return DropdownMenuItem<String>(
+                            value: unit,
+                            child: Text(unit),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          context
+                              .read<UserSendAppointmentCubit>()
+                              .toggleSelectUnitCountBloodDonationAppoinment(
+                                  value!);
+                        },
+                      ),
+                      DropdownButtonFormField<String>(
+                        value: state.selectedDayBloodDonationAppointment,
+                        hint: Text("Select a Day".tr(context)),
+                        items: hospitalProfileModel.dayes!
+                            .replaceAll("[", "")
+                            .replaceAll("]", "")
+                            .replaceAll(" ", "")
+                            .split(",")
+                            .map((String day) {
+                          return DropdownMenuItem<String>(
+                            value: day.replaceAll(" ", ""),
+                            child: Text(day.replaceAll(" ", "").tr(context)),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          context
+                              .read<UserSendAppointmentCubit>()
+                              .toggleSelectedDayBloodDonationAppointment(
+                                  value!.replaceAll(" ", ""));
+                          print(value);
+                        },
+                      ),
+                    ],
                   );
                 },
               ),
@@ -116,11 +157,18 @@ void showScheduleDialog(BuildContext context,
                 return ElevatedButton(
                   onPressed: () {
                     if (state.selectedDayBloodDonationAppointment == null ||
-                        state.selectedTimeBloodDonationAppointment == null) {
+                        state.selectedTimeBloodDonationAppointment == null ||
+                        state.selectUnitCountBloodDonationAppointment == null) {
                       if (state.selectedDayBloodDonationAppointment == null) {
-                        globalSnackbar(context, "Please Select Day");
+                        globalSnackbar(
+                            context, "Please Select Day".tr(context));
+                      } else if (state.selectedTimeBloodDonationAppointment ==
+                          null) {
+                        globalSnackbar(
+                            context, "Please Select Time".tr(context));
                       } else {
-                        globalSnackbar(context, "Please Select Time");
+                        globalSnackbar(
+                            context, "Please Select Count Unit".tr(context));
                       }
                     } else {
                       final contentEn =
@@ -132,7 +180,10 @@ void showScheduleDialog(BuildContext context,
                               hospitalProfileModel, contentEn, title, context);
                     }
                   },
-                  child: Text("Confirm".tr(context)),
+                  child:
+                      state.sendRequestAppointmentState == RequestState.loading
+                          ? CircularProgressIndicator()
+                          : Text("Confirm".tr(context)),
                 );
               },
             ),

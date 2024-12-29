@@ -378,12 +378,38 @@
 "Review Added Successfully":"Review Added Successfully"
 ,"Failed To Add Review":"Failed To Add Review"
 ,"Date of birth required":"Date of birth required"
-,"Date of birth":"Date of birth"
+,"Date of birth":"Date of birth",
+"You have a pending request":"You have a pending request",
+"Request Sent Successfully":"Request Sent Successfully",
+"Select Count Unit":"Select Count Unit",
+"Please Select Day":"Please Select Day",
+"Please Select Time":"Please Select Time",
+"Please Select Count Unit":"Please Select Count Unit","It must have been 2 months since your last donation.":"It must have been 2 months since your last donation."
+,"My Appointments":"My Appointments"
+,
+"Date:":"Date: ",
+"Time:":"Time: ",
+"Status:":"Status: ",
+"Unit Count:":"Unit Count: ",
+"Close":"Close",
+"pending":"pending",
+"Appointment Deleted Successfully":"Appointment Deleted Successfully"
+,"Error Deleting Appointment":"Error Deleting Appointment"
+,"No Appointments":"No Appointments"
+,
+"Request Updated Successfully":"Request Updated Successfully",
+"Request Update Failed":"Request Update Failed",
+"Reason":"Reason","Reject Donor":"Reject Donor","No Donor Requests":"No Donor Requests",
+"Donor Info":"Donor Info",
+"Personal Info":"Personal Info",
+"Name":"Name",
 
+"Gender":"Gender",
+"Blood Type":"Blood Type",
+"Phone":"Phone",
 
-
-
-
-
-
+"Address":"Address",
+"Diseases Info":"Diseases Info","false":"false","true":"true",
+"submit":"submit",
+"No History":"No History Blood Donations"
 }

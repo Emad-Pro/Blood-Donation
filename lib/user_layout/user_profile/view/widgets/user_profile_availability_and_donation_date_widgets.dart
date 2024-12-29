@@ -43,7 +43,8 @@ class UserProfileAvailabilityAndDonationDateWidgets extends StatelessWidget {
                     ),
                     Text(
                       state.userSignupModel!.dateLastBloodDonation!
-                          .split('/')[0],
+                          .split('-')
+                          .last,
                       style:
                           TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),

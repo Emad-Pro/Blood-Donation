@@ -19,29 +19,82 @@ class UserSendAppointmentCubit extends Cubit<UserSendAppointmentState> {
 
     await getIt<UserProfileCubit>().getUserProfile();
 
-    await Supabase.instance.client.from("hospital_appointment").insert({
-      "hospital_id": model.uId,
-      "user_id": getIt<UserProfileCubit>().state.userSignupModel!.uId,
-      "content": content,
-      "title": title,
-      "status": "pending",
-    }).then((onValue) {
-      sendNotification(
-        contentAr:
-            "لقد تم حجز موعد التبرع بالدم يوم ${state.selectedDayBloodDonationAppointment!.trAr(context)} في تمام الساعة ${state.selectedTimeBloodDonationAppointment!.replaceAll("AM", "صباحا").replaceAll("PM", "ٌمساءاً")}",
-        contents: content,
-        headings: title,
-        headingAr: "موعد التبرع بالدم",
-        recivedIds: ["${model.oneSignalId}"],
-      );
-      emit(state.copyWith(sendRequestAppointmentState: RequestState.success));
-    }).catchError((onError) {
-      emit(state.copyWith(sendRequestAppointmentState: RequestState.error));
+    final uid = getIt<UserProfileCubit>().state.userSignupModel!.uId;
+    await Supabase.instance.client
+        .from("hospital_appointment")
+        .select("user_id")
+        .eq("user_id", uid!)
+        .eq("status", "pending")
+        .then((onValue) async {
+      if (onValue.isEmpty) {
+        print(getIt<UserProfileCubit>()
+            .state
+            .userSignupModel!
+            .dateLastBloodDonation);
+        int monthsDifference = calculateMonthsDifference(DateTime.parse(
+            getIt<UserProfileCubit>()
+                .state
+                .userSignupModel!
+                .dateLastBloodDonation!));
+
+        if (monthsDifference < 2) {
+          emit(state.copyWith(
+              sendRequestAppointmentState: RequestState.error,
+              errorMessage:
+                  "It must have been 2 months since your last donation."));
+        } else {
+          await Supabase.instance.client.from("hospital_appointment").insert({
+            "hospital_id": model.uId,
+            "user_id": uid,
+            "content": content,
+            "title": title,
+            "status": "pending",
+            "time": state.selectedTimeBloodDonationAppointment,
+            "day": state.selectedDayBloodDonationAppointment,
+            "unit": state.selectUnitCountBloodDonationAppointment
+          }).then((onValue) {
+            sendNotification(
+              contentAr:
+                  "لقد تم حجز موعد التبرع بالدم يوم ${state.selectedDayBloodDonationAppointment!.trAr(context)} في تمام الساعة ${state.selectedTimeBloodDonationAppointment!.replaceAll("AM", "صباحا").replaceAll("PM", "ٌمساءاً")}",
+              contents: content,
+              headings: title,
+              headingAr: "موعد التبرع بالدم",
+              recivedIds: ["${model.oneSignalId}"],
+            );
+            emit(state.copyWith(
+                sendRequestAppointmentState: RequestState.success));
+          }).catchError((onError) {
+            emit(state.copyWith(
+                sendRequestAppointmentState: RequestState.error));
+          });
+        }
+      } else {
+        emit(state.copyWith(
+            sendRequestAppointmentState: RequestState.error,
+            errorMessage: "You have a pending request"));
+      }
     });
   }
 
+  toggleSelectUnitCountBloodDonationAppoinment(String unitCount) =>
+      emit(state.copyWith(selectUnitCountBloodDonationAppointment: unitCount));
   toggleSelectedDayBloodDonationAppointment(String day) =>
       emit(state.copyWith(selectedDayBloodDonationAppointment: day));
   toggleSelectedTimeBloodDonationAppoinment(String time) =>
       emit(state.copyWith(selectedTimeBloodDonationAppointment: time));
+
+  int calculateMonthsDifference(DateTime startDate) {
+    DateTime today = DateTime.now();
+    int yearsDiff = today.year - startDate.year;
+    int monthsDiff = today.month - startDate.month;
+
+    // حساب العدد الكلي للأشهر
+    int totalMonths = (yearsDiff * 12) + monthsDiff;
+
+    if (today.day < startDate.day) {
+      totalMonths--;
+    }
+
+    return totalMonths;
+  }
 }
