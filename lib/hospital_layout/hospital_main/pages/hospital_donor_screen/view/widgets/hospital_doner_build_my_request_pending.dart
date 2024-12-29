@@ -1,9 +1,14 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../../../../../core/methods/calculate_distance.dart';
+import '../../pages/hospital_donor_received_requests_page/model/hospital_donor_recevied_requests_model.dart';
+import 'hospital_doner_build_doner_request_item.dart';
 
 class HospitalDonerBuildMyRequestPending extends StatelessWidget {
-  const HospitalDonerBuildMyRequestPending({super.key, this.isReject = false});
-  final bool isReject;
+  const HospitalDonerBuildMyRequestPending({super.key, required this.model});
+  final HospitalDonorReceviedRequestsModel model;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,10 +28,7 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                   Column(
                     children: [
                       Container(
-                        decoration: BoxDecoration(
-                          color: Colors.red.shade50,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                        decoration: BoxDecoration(),
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
@@ -37,15 +39,13 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                             ),
                             SizedBox(height: 5),
                             Text(
-                              "AB+",
+                              model.userprofileModel!.selectedBloodType!,
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.red,
                               ),
                             ),
-                            SizedBox(height: 5),
-                            Text("0.3 ${"unit".tr(context)}"),
                           ],
                         ),
                       ),
@@ -58,29 +58,34 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "${"Female".tr(context)}, 21 ${"yr old".tr(context)}",
+                          "${"${model.userprofileModel!.selectedGender!}".tr(context)}, ${DateTime.now().year - DateTime.parse(model.userprofileModel!.age!).year} ${"yr old".tr(context)}",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         SizedBox(height: 5),
-                        Text("Lama Abdulrahman"),
-                        SizedBox(height: 5),
-                        Text("3 ${"km".tr(context)}"),
+                        Text(model.userprofileModel!.fullName!),
                         SizedBox(height: 5),
                         Text(
-                          "Amaan , joardn",
-                          style: TextStyle(
-                            fontStyle: FontStyle.italic,
-                          ),
-                        ),
+                            "${calculateDistance(model.hospitalprofileModel!.latitude!, model.hospitalprofileModel!.longitude!, model.userprofileModel!.latitude!, model.userprofileModel!.longitude!).round()} ${"km".tr(context)}"),
+                        SizedBox(height: 5),
+                        Text(model.userprofileModel!.currentLocation!,
+                            style: TextStyle(fontStyle: FontStyle.italic)),
+                        SizedBox(height: 5),
+                        Text("${model.unit} ${"unit".tr(context)}"),
                       ],
                     ),
                   ),
                   // Call Icon
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      final Uri phone = Uri(
+                        scheme: 'tel',
+                        path: model!.hospitalprofileModel!.phone!,
+                      );
+                      launchUrl(phone);
+                    },
                     icon: const Icon(
                       Icons.phone,
                       color: Colors.green,
@@ -88,7 +93,7 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                   ),
                 ],
               ),
-              if (isReject == false)
+              if (model.status == "accepted")
                 Row(
                   children: [
                     Row(
@@ -109,7 +114,12 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                       children: [
                         // Donor Info Button
                         TextButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) => DonorInfoShowDialog(
+                                    hospitalDonorReceviedRequestsModel: model));
+                          },
                           icon: const Icon(
                             Icons.info,
                             color: Colors.blue,
@@ -123,7 +133,7 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                     ),
                   ],
                 ),
-              if (isReject)
+              if (model.status == "Rejected")
                 Row(
                   children: [
                     Row(
@@ -144,7 +154,12 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                       children: [
                         // Donor Info Button
                         TextButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) => DonorInfoShowDialog(
+                                    hospitalDonorReceviedRequestsModel: model));
+                          },
                           icon: const Icon(
                             Icons.info,
                             color: Colors.blue,

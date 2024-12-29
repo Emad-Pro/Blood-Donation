@@ -11,7 +11,7 @@ convertStringDateTime(String date) {
 
 convertResultDateTime(String date) {
   final getLang = getIt<LocalizationsCubit>().state.languageCode;
-  final inputFormat = DateFormat('d/M/yyyy');
+  final inputFormat = DateFormat('yyyy-M-d');
   final dateTime = inputFormat.parse(date);
 
   return DateFormat.yMMMEd('${getLang}').format(dateTime);
