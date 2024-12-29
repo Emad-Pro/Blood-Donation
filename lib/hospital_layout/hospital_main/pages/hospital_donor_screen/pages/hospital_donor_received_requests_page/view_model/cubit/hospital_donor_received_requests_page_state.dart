@@ -6,29 +6,47 @@ class HospitalDonorReceivedRequestsState extends Equatable {
   final List<HospitalDonorReceviedRequestsModel>?
       hospitalDonorReceviedRequestsModel;
   final String errorMessage;
-
+  final RequestState updateAppointmentState;
+  final RequestState historyAppointmentState;
+  final List<HospitalDonorReceviedRequestsModel>?
+      historyDonorReceviedRequestsModel;
   HospitalDonorReceivedRequestsState(
       {this.hospitaldonorReceivedState = RequestState.init,
       this.hospitalDonorReceviedRequestsModel,
-      this.errorMessage = ''});
+      this.errorMessage = '',
+      this.updateAppointmentState = RequestState.init,
+      this.historyDonorReceviedRequestsModel,
+      this.historyAppointmentState = RequestState.init});
   @override
   List<Object?> get props => [
         hospitaldonorReceivedState,
         hospitalDonorReceviedRequestsModel,
         errorMessage,
+        updateAppointmentState,
+        historyDonorReceviedRequestsModel,
+        historyAppointmentState
       ];
 
   HospitalDonorReceivedRequestsState copyWith(
       {RequestState? hospitaldonorReceivedState,
       String? errorMessage,
       List<HospitalDonorReceviedRequestsModel>?
-          hospitalDonorReceviedRequestsModel}) {
+          hospitalDonorReceviedRequestsModel,
+      RequestState? updateAppointmentState,
+      RequestState? historyAppointmentState,
+      List<HospitalDonorReceviedRequestsModel>?
+          historyDonorReceviedRequestsModel}) {
     return HospitalDonorReceivedRequestsState(
-        hospitaldonorReceivedState:
-            hospitaldonorReceivedState ?? this.hospitaldonorReceivedState,
-        errorMessage: errorMessage ?? this.errorMessage,
-        hospitalDonorReceviedRequestsModel:
-            hospitalDonorReceviedRequestsModel ??
-                this.hospitalDonorReceviedRequestsModel);
+      updateAppointmentState: updateAppointmentState ?? RequestState.init,
+      hospitaldonorReceivedState:
+          hospitaldonorReceivedState ?? this.hospitaldonorReceivedState,
+      errorMessage: errorMessage ?? this.errorMessage,
+      hospitalDonorReceviedRequestsModel: hospitalDonorReceviedRequestsModel ??
+          this.hospitalDonorReceviedRequestsModel,
+      historyAppointmentState:
+          historyAppointmentState ?? this.historyAppointmentState,
+      historyDonorReceviedRequestsModel: historyDonorReceviedRequestsModel ??
+          this.historyDonorReceviedRequestsModel,
+    );
   }
 }

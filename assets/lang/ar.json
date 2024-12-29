@@ -339,7 +339,42 @@
 ,"Failed To Add Review":"فشل اضافة المراجعة"
 
 ,"Date of birth required":"تاريخ الميلاد مطلوب"
-,"Date of birth":"تاريخ الميلاد"
+,"Date of birth":"تاريخ الميلاد",
+"You have a pending request":"لديك طلب تبرع معلق بالفعل",
+"Request Sent Successfully":"تم ارسال طلب التبرع بنجاح ",
+
+"Select Count Unit":"اختر عدد الوحدات",
+"Please Select Day":"برجاء تحديد يوم للتبرع",
+"Please Select Time":"برجاء تحديد ساعه للتبرع",
+"Please Select Count Unit":"برجاء اختيار عدد الوحدات",
+"It must have been 2 months since your last donation.":"لا بد أن يكون قد مر شهران منذ تبرعك الأخير.",
+"My Appointments":"مواعيد التبرع",
+"Date:":"اليوم: ",
+"Time:":"الساعة: ",
+"Status:":"الحالة: ",
+"Unit Count:":"عدد الوحدات:",
+"Close":"اغلاق","pending":"معلق",
+"Appointment Deleted Successfully":"تم حذف الموعد بنجاح",
+"Error Deleting Appointment":"حدث خطأ في حذف الموعد",
+"No Appointments":"لا يوجد مواعيد",
+"Request Updated Successfully":"تم تحديث الطلب بنجاح",
+"Request Update Failed":"فشل تحديث الطلب",
+"Reason":"السبب",
+"Reject Donor":"رفض المتبرع",
+"No Donor Requests":"لا يوجد طلبات التبرع",
+
+"Donor Info":"معلومات المتبرع",
+"Personal Info":"معلومات شخصية",
+"Name":"الاسم",
+
+"Gender":"النوع",
+"Blood Type":"فصيلة الدم",
+"Phone":"رقم الهاتف",
+
+"Address":"العنوان",
+"Diseases Info":"معلومات الامراض","false":"غير موجود","true":"موجود"
+,"submit":"ارسال",
+"No History":"لا يوجد سجلات تبرع"
 
 
 
