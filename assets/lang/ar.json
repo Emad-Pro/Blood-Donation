@@ -375,7 +375,9 @@
 "Diseases Info":"معلومات الامراض","false":"غير موجود","true":"موجود"
 ,"submit":"ارسال",
 "No History":"لا يوجد سجلات تبرع"
-
+,"accepted"
+:"مقبول","Rejected":"مرفوض",
+"Send Message":"إرسال رسالة"
 
 
 

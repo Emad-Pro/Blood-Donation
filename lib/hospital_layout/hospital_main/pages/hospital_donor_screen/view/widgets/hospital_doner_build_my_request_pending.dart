@@ -1,4 +1,5 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
+import 'package:easy_url_launcher/easy_url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -79,12 +80,9 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                   ),
                   // Call Icon
                   IconButton(
-                    onPressed: () {
-                      final Uri phone = Uri(
-                        scheme: 'tel',
-                        path: model!.hospitalprofileModel!.phone!,
-                      );
-                      launchUrl(phone);
+                    onPressed: () async {
+                      await EasyLauncher.call(
+                          number: model.hospitalprofileModel!.phone!);
                     },
                     icon: const Icon(
                       Icons.phone,
