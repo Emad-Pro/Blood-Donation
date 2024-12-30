@@ -411,5 +411,8 @@
 "Address":"Address",
 "Diseases Info":"Diseases Info","false":"false","true":"true",
 "submit":"submit",
-"No History":"No History Blood Donations"
+"No History":"No History Blood Donations",
+"accepted":"Accepted",
+"Rejected":"Rejected",
+"Send Message":"Send Message"
 }

@@ -1,5 +1,7 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
+import 'package:easy_url_launcher/easy_url_launcher.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../hospital_layout/hospital_main/pages/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
 import '../../../user_send_appointment/view/blood_request_dialog.dart';
@@ -26,7 +28,9 @@ class UserHospitalActionButtons extends StatelessWidget {
             icon: Icons.call,
             label: 'Call'.tr(context),
             primaryColor: primaryColor,
-            onPressed: () {},
+            onPressed: () async {
+              await EasyLauncher.call(number: hospitalProfileModel!.phone!);
+            },
           ),
           UserHospitalActionButton(
             icon: Icons.bloodtype_outlined,
