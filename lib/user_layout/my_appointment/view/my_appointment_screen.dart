@@ -43,7 +43,8 @@ class MyAppointmentScreen extends StatelessWidget {
                                 CircleAvatar(child: Icon(Icons.local_hospital)),
                             title:
                                 Text(state.appointments![index].hospitalName!),
-                            subtitle: Text(state.appointments![index].status!),
+                            subtitle: Text(
+                                state.appointments![index].status!.tr(context)),
                             onTap: () {
                               showDialog(
                                   context: context,

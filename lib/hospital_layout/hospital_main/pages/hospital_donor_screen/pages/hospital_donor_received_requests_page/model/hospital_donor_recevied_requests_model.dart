@@ -9,7 +9,7 @@ class HospitalDonorReceviedRequestsModel extends Equatable {
   final String? time;
   final String? status;
   final String? point;
-  final double? unit;
+  final dynamic unit;
   final String? createdAt;
   final String? day;
   final String? reason;
