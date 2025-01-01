@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:blood_donation/core/di/service_lacator.dart';
 import 'package:blood_donation/core/enum/request_state.dart';
+import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:blood_donation/hospital_layout/hospital_main/pages/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
+import 'package:blood_donation/main.dart';
 import 'package:blood_donation/user_layout/user_profile/view_model/user_profile_cubit.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +90,7 @@ class UserFindHospitalCubit extends Cubit<UserFindHospitalState> {
   }
 
   /* Search Method */
-  searchWithAllFilters() async {
+  searchWithAllFilters(BuildContext context) async {
     emit(state.copyWith(searchState: RequestState.loading));
 
     // احصل على قائمة المستشفيات الحالية
@@ -120,12 +122,18 @@ class UserFindHospitalCubit extends Cubit<UserFindHospitalState> {
     // تطبيق تصفية حسب المحافظة إذا تم تحديدها
     if (state.selectedGovernorate != null &&
         state.selectedGovernorate!.isNotEmpty) {
-      hospitals = hospitals
-          .where((hospital) =>
-              hospital.currentLocation != null &&
+      hospitals = hospitals.where((hospital) {
+        if (RegExp(r'[\u0600-\u06FF]').hasMatch(hospital.currentLocation!)) {
+          return hospital.currentLocation != null &&
               hospital.currentLocation!
-                  .contains("${state.selectedGovernorate}"))
-          .toList();
+                  .contains("${state.selectedGovernorate!.trAr(context)}");
+        } else {
+          return hospital.currentLocation != null &&
+              hospital.currentLocation!
+                  .toLowerCase()
+                  .contains("${state.selectedGovernorate!.toLowerCase()}");
+        }
+      }).toList();
     }
 
     // تطبيق تصفية حسب الاسم إذا تم إدخال قيمة

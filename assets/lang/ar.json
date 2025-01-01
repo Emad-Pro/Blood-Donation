@@ -308,7 +308,7 @@
 ,"pm":"م",
 
 "Received Requests":"طلبات  التبرع",
-"History Donations":"سجل التبرع",
+"History Donations":"سجل طلبات التبرع",
 "unit":"وحده",
 "yr old":"سنة",
 "Reject":"رفض",
@@ -377,8 +377,19 @@
 "No History":"لا يوجد سجلات تبرع"
 ,"accepted"
 :"مقبول","Rejected":"مرفوض",
-"Send Message":"إرسال رسالة"
-
+"Send Message":"إرسال رسالة",
+    "Amman":"عمان",
+    "Zarqa":"الزرقاء",
+    "Irbid":"اربد",
+    "Balqa":"بلقاء",
+    "Madaba":"مادبا",
+    "Karak":"كرك",
+    "Tafilah":"طفيلة",
+    "Maan":"معان",
+    "Aqaba":"العقبة",
+    "Jerash":"جرش",
+    "Ajloun":"عجلون",
+    "Mafraq":"مفرق"
 
 
 

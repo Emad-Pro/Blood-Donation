@@ -41,24 +41,6 @@ void showScheduleDialog(BuildContext context,
                   return Column(
                     children: [
                       DropdownButtonFormField<String>(
-                        value: state.selectUnitCountBloodDonationAppointment,
-                        hint: Text("Select Count Unit".tr(context)),
-                        items:
-                            List.generate(5, (index) => (index + 1).toString())
-                                .map((String unit) {
-                          return DropdownMenuItem<String>(
-                            value: unit,
-                            child: Text(unit),
-                          );
-                        }).toList(),
-                        onChanged: (value) {
-                          context
-                              .read<UserSendAppointmentCubit>()
-                              .toggleSelectUnitCountBloodDonationAppoinment(
-                                  value!);
-                        },
-                      ),
-                      DropdownButtonFormField<String>(
                         value: state.selectedDayBloodDonationAppointment,
                         hint: Text("Select a Day".tr(context)),
                         items: hospitalProfileModel.dayes!
@@ -157,18 +139,13 @@ void showScheduleDialog(BuildContext context,
                 return ElevatedButton(
                   onPressed: () {
                     if (state.selectedDayBloodDonationAppointment == null ||
-                        state.selectedTimeBloodDonationAppointment == null ||
-                        state.selectUnitCountBloodDonationAppointment == null) {
+                        state.selectedTimeBloodDonationAppointment == null) {
                       if (state.selectedDayBloodDonationAppointment == null) {
                         globalSnackbar(
                             context, "Please Select Day".tr(context));
-                      } else if (state.selectedTimeBloodDonationAppointment ==
-                          null) {
-                        globalSnackbar(
-                            context, "Please Select Time".tr(context));
                       } else {
                         globalSnackbar(
-                            context, "Please Select Count Unit".tr(context));
+                            context, "Please Select Time".tr(context));
                       }
                     } else {
                       final contentEn =

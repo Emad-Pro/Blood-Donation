@@ -17,11 +17,11 @@ class UserHospitalAppBarWidget extends StatelessWidget
       actions: [
         IconButton(
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => UserViewReviewHospitalScreen(
-                          hospitalUid: hospitalUid)));
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => UserViewReviewHospitalScreen(
+              //             hospitalUid: hospitalUid)));
             },
             icon: const Icon(Icons.star_rounded)),
       ],

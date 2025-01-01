@@ -82,28 +82,6 @@ class HospitalEmergency extends StatelessWidget {
                 ),
                 SizedBox(height: 16),
 
-                // Location
-                // Text('Location Distance'),
-                // SizedBox(height: 8),
-                // DropdownButtonFormField<int>(
-                //   decoration: InputDecoration(
-                //     border: OutlineInputBorder(
-                //       borderRadius: BorderRadius.circular(12.0),
-                //     ),
-                //   ),
-                //   items: List.generate(
-                //     10,
-                //     (index) => DropdownMenuItem(
-                //       value: index + 1,
-                //       child: Text('${index + 1} KM'),
-                //     ),
-                //   ),
-                //   onChanged: (value) {
-                //     getIt<HospitalEmergencyCubit>()
-                //         .toggleLocationDistance(value!);
-                //   },
-                //   hint: Text('Select Location Distance'),
-                // ),
                 SizedBox(height: 32),
 
                 // Request Button

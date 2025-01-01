@@ -74,7 +74,7 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                         Text(model.userprofileModel!.currentLocation!,
                             style: TextStyle(fontStyle: FontStyle.italic)),
                         SizedBox(height: 5),
-                        Text("${model.unit} ${"unit".tr(context)}"),
+                        //   Text("${model.unit} ${"unit".tr(context)}"),
                       ],
                     ),
                   ),

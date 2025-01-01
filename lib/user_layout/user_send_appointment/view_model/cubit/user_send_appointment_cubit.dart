@@ -51,7 +51,6 @@ class UserSendAppointmentCubit extends Cubit<UserSendAppointmentState> {
             "status": "pending",
             "time": state.selectedTimeBloodDonationAppointment,
             "day": state.selectedDayBloodDonationAppointment,
-            "unit": state.selectUnitCountBloodDonationAppointment
           }).then((onValue) {
             sendNotification(
               contentAr:
@@ -76,8 +75,6 @@ class UserSendAppointmentCubit extends Cubit<UserSendAppointmentState> {
     });
   }
 
-  toggleSelectUnitCountBloodDonationAppoinment(String unitCount) =>
-      emit(state.copyWith(selectUnitCountBloodDonationAppointment: unitCount));
   toggleSelectedDayBloodDonationAppointment(String day) =>
       emit(state.copyWith(selectedDayBloodDonationAppointment: day));
   toggleSelectedTimeBloodDonationAppoinment(String time) =>

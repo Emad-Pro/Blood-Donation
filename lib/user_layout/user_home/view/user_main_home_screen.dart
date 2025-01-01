@@ -5,8 +5,20 @@ class UserMainHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ElevatedButton(onPressed: () async {}, child: Text("Home")),
+    return Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.home_outlined,
+            size: 100,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          SizedBox(height: 20),
+          Text("Home Screen")
+        ],
+      ),
     );
   }
 }

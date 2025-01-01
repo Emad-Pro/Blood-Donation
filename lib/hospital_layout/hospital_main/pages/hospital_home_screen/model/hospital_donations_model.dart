@@ -6,7 +6,7 @@ class HospitalDonationsModel extends Equatable {
   final String? donerId;
   final String? hospitalId;
   final String? donerName;
-  final String? requestOrder;
+  final bool? requestOrder;
 
   HospitalDonationsModel(
       {this.createdAt,
@@ -30,7 +30,7 @@ class HospitalDonationsModel extends Equatable {
     print(json);
     return HospitalDonationsModel(
       createdAt: json['created_at'],
-      bloodType: json['blood_type'],
+      bloodType: json['UserAuth']['user_blood_type'],
       donerId: json['donaer_id'],
       hospitalId: json['hospital_id'],
       donerName: json['UserAuth']['user_full_name'],

@@ -62,8 +62,10 @@ class LocationService {
         return false;
       }
       double distance = calculateDistance(
-          userLat, userLon, location.latitude!, location.longitude!);
-      return distance <= maxDistance; // التحقق من المسافة
+          userLat, userLon, location.longitude!, location.latitude!);
+
+      print(distance);
+      return distance <= maxDistance;
     }).toList();
   }
 }
