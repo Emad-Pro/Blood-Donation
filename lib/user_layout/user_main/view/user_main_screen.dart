@@ -23,13 +23,13 @@ class UserMainScreen extends StatelessWidget {
           },
         ),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.notifications_active_outlined,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-          )
+          // IconButton(
+          //   onPressed: () {},
+          //   icon: Icon(
+          //     Icons.notifications_active_outlined,
+          //     color: Theme.of(context).colorScheme.primary,
+          //   ),
+          // )
         ],
       ),
       body: BlocBuilder<UserMainCubit, UserMainState>(

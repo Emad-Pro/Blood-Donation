@@ -87,8 +87,6 @@ class HospitalDonerBuildDonerRequestItem extends StatelessWidget {
                           style: TextStyle(fontStyle: FontStyle.italic),
                         ),
                         SizedBox(height: 5),
-                        Text(
-                            "${hospitalDonorReceviedRequestsModel!.unit} ${"unit".tr(context)}"),
                       ],
                     ),
                   ),
@@ -185,12 +183,13 @@ class HospitalDonerBuildDonerRequestItem extends StatelessWidget {
                   TextButton.icon(
                     onPressed: () {
                       getIt<HospitalDonorReceivedRequestsCubit>().proccessOrder(
-                          hospitalDonorReceviedRequestsModel!.id!.toString(),
-                          "accepted",
-                          hospitalModel: hospitalDonorReceviedRequestsModel!
-                              .hospitalprofileModel!,
-                          userprofileModel: hospitalDonorReceviedRequestsModel!
-                              .userprofileModel!);
+                        hospitalDonorReceviedRequestsModel!.id!.toString(),
+                        "accepted",
+                        hospitalModel: hospitalDonorReceviedRequestsModel!
+                            .hospitalprofileModel!,
+                        userprofileModel: hospitalDonorReceviedRequestsModel!
+                            .userprofileModel!,
+                      );
                     },
                     icon: const Icon(Icons.check, color: Colors.green),
                     label: Text("Accept".tr(context)),

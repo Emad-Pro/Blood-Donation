@@ -125,7 +125,7 @@ class UserSignupCubit extends Cubit<UserSignupState> {
       height: _parseInt(heightController.text),
       weight: _parseInt(weightController.text),
       latitude: _parseDouble(latitudeController.text),
-      longitude: _parseDouble(latitudeController.text),
+      longitude: _parseDouble(longitudeController.text),
       currentLocation: currentLocationController.text,
       selectedBloodType: state.selectedBloodType,
       selectedGender: state.selectedGender,

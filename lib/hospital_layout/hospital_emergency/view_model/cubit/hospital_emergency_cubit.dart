@@ -23,6 +23,7 @@ class HospitalEmergencyCubit extends Cubit<HospitalEmergencyState> {
     bloodSelectedController.text = selectedDayes.join(', ');
   }
 
+  sendEmergencyRequest() {}
   toggleTimeNeeded(String timeNeeded) {
     emit(state.copyWith(timeNeeded: timeNeeded));
   }
