@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:blood_donation/core/enum/request_state.dart';
+import 'package:blood_donation/core/methods/send_notification.dart';
 import 'package:blood_donation/user_layout/my_appointment/model/my_appointment_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -22,7 +23,7 @@ class MyAppointmentCubit extends Cubit<MyAppointmentState> {
       final uid = getIt<UserProfileCubit>().state.userSignupModel!.uId;
       final response = await Supabase.instance.client
           .from("hospital_appointment")
-          .select("HospitalAuth(name),*")
+          .select("HospitalAuth(name,onesignal_id),*")
           .eq("user_id", uid!);
       emit(
         state.copyWith(
@@ -72,6 +73,35 @@ class MyAppointmentCubit extends Cubit<MyAppointmentState> {
       emit(state.copyWith(
         errorMessage: e.toString(),
         appointmentsDeleteState: RequestState.error,
+      ));
+    }
+  }
+
+  Future<void> updateMyAppointment(String id, String? oneSignalId) async {
+    emit(state.copyWith(appointmentsUpdateState: RequestState.loading));
+    try {
+      await Supabase.instance.client
+          .from("hospital_appointment")
+          .update({"status": "canceled"}).eq("id", id);
+      sendNotification(
+          contents: "Appointment has been Canceled",
+          headings: "Blood Donation",
+          contentAr: "تم إلغاء الموعد",
+          headingAr: "التبرع بالدم",
+          recivedIds: [oneSignalId]);
+      emit(state.copyWith(appointmentsUpdateState: RequestState.success));
+      await getMyAppointments();
+    } on SocketException catch (e) {
+      emit(state.copyWith(
+        appointmentsUpdateState: RequestState.error,
+      ));
+    } on PostgrestException catch (e) {
+      emit(state.copyWith(
+        appointmentsUpdateState: RequestState.error,
+      ));
+    } on Exception catch (e) {
+      emit(state.copyWith(
+        appointmentsUpdateState: RequestState.error,
       ));
     }
   }

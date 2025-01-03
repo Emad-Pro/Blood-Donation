@@ -35,8 +35,8 @@ class HospitalSignupPasswordWidgets extends StatelessWidget {
                 hospitalSignupCubit.toggleIsSecure();
               },
               icon: Icon(hospitalSignupCubit.state.isObSecure
-                  ? Icons.visibility
-                  : Icons.visibility_off)),
+                  ? Icons.visibility_off
+                  : Icons.visibility)),
         ),
         SizedBox(height: 8),
         GlobalTextFormFiled(
@@ -57,8 +57,8 @@ class HospitalSignupPasswordWidgets extends StatelessWidget {
                 hospitalSignupCubit.toggleIsSecure();
               },
               icon: Icon(hospitalSignupCubit.state.isObSecure
-                  ? Icons.visibility
-                  : Icons.visibility_off)),
+                  ? Icons.visibility_off
+                  : Icons.visibility)),
         ),
         SizedBox(height: 8),
       ],

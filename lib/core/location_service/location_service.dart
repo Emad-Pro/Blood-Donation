@@ -64,8 +64,8 @@ class LocationService {
       double distance = calculateDistance(
           userLat, userLon, location.longitude!, location.latitude!);
 
-      print(distance);
-      return distance <= maxDistance;
+      print(distance <= ((maxDistance.toInt()) + .5));
+      return distance <= ((maxDistance.toInt()) + .5);
     }).toList();
   }
 }

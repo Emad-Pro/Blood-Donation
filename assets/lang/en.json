@@ -426,6 +426,25 @@
 "Aqaba":"Aqaba",
 "Jerash":"Jerash",
 "Ajloun":"Ajloun",
-"Mafraq":"Mafraq"
+"Mafraq":"Mafraq",
+"canceled":"Canceled",
+"Appointment Canceled Successfully":"Appointment Canceled Successfully",
+"Error Canceled Appointment":"Error Canceled Appointment","You have a Accepted request":"You have a Accepted request"
+,"Canceled By Donor":"Canceled By Donor",
+
+"Well-Controlled Diabetes":"Well-Controlled Diabetes",
+"Hypertension":"Hypertension",
+"Seasonal Allergies":"Seasonal Allergies",
+"Asthma":"Asthma",
+"Thalassemia Minor":"Thalassemia Minor",
+"Hypothyroidism/Hyperthyroidism":"Hypothyroidism/Hyperthyroidism",
+"Hereditary Hemochromatosis":"Hereditary Hemochromatosis"
+
+
+
+
+
+
+
 
 }

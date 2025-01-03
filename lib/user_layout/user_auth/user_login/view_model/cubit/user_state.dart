@@ -7,7 +7,7 @@ class UserLoginState {
   final String? errorMessage;
 
   UserLoginState(
-      {this.userPasswordIsSecure = false,
+      {this.userPasswordIsSecure = true,
       this.userRememberMe = false,
       this.errorMessage = '',
       this.loginState = RequestState.init});

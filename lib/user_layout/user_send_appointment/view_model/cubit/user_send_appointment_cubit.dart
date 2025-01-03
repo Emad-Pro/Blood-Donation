@@ -27,41 +27,54 @@ class UserSendAppointmentCubit extends Cubit<UserSendAppointmentState> {
         .eq("status", "pending")
         .then((onValue) async {
       if (onValue.isEmpty) {
-        print(getIt<UserProfileCubit>()
-            .state
-            .userSignupModel!
-            .dateLastBloodDonation);
         int monthsDifference = calculateMonthsDifference(DateTime.parse(
             getIt<UserProfileCubit>()
                 .state
                 .userSignupModel!
                 .dateLastBloodDonation!));
-
         if (monthsDifference < 2) {
           emit(state.copyWith(
               sendRequestAppointmentState: RequestState.error,
               errorMessage:
                   "It must have been 2 months since your last donation."));
         } else {
-          await Supabase.instance.client.from("hospital_appointment").insert({
-            "hospital_id": model.uId,
-            "user_id": uid,
-            "content": content,
-            "title": title,
-            "status": "pending",
-            "time": state.selectedTimeBloodDonationAppointment,
-            "day": state.selectedDayBloodDonationAppointment,
-          }).then((onValue) {
-            sendNotification(
-              contentAr:
-                  "لقد تم حجز موعد التبرع بالدم يوم ${state.selectedDayBloodDonationAppointment!.trAr(context)} في تمام الساعة ${state.selectedTimeBloodDonationAppointment!.replaceAll("AM", "صباحا").replaceAll("PM", "ٌمساءاً")}",
-              contents: content,
-              headings: title,
-              headingAr: "موعد التبرع بالدم",
-              recivedIds: ["${model.oneSignalId}"],
-            );
-            emit(state.copyWith(
-                sendRequestAppointmentState: RequestState.success));
+          await Supabase.instance.client
+              .from("hospital_appointment")
+              .select("user_id")
+              .eq("user_id", uid!)
+              .eq("status", "accepted")
+              .then((onValue) async {
+            if (onValue.isEmpty) {
+              await Supabase.instance.client
+                  .from("hospital_appointment")
+                  .insert({
+                "hospital_id": model.uId,
+                "user_id": uid,
+                "content": content,
+                "title": title,
+                "status": "pending",
+                "time": state.selectedTimeBloodDonationAppointment,
+                "day": state.selectedDayBloodDonationAppointment,
+              }).then((onValue) {
+                sendNotification(
+                  contentAr:
+                      "لقد تم حجز موعد التبرع بالدم يوم ${state.selectedDayBloodDonationAppointment!.trAr(context)} في تمام الساعة ${state.selectedTimeBloodDonationAppointment!.replaceAll("AM", "صباحا").replaceAll("PM", "ٌمساءاً")}",
+                  contents: content,
+                  headings: title,
+                  headingAr: "موعد التبرع بالدم",
+                  recivedIds: ["${model.oneSignalId}"],
+                );
+                emit(state.copyWith(
+                    sendRequestAppointmentState: RequestState.success));
+              }).catchError((onError) {
+                emit(state.copyWith(
+                    sendRequestAppointmentState: RequestState.error));
+              });
+            } else {
+              emit(state.copyWith(
+                  sendRequestAppointmentState: RequestState.error,
+                  errorMessage: "You have a Accepted request"));
+            }
           }).catchError((onError) {
             emit(state.copyWith(
                 sendRequestAppointmentState: RequestState.error));

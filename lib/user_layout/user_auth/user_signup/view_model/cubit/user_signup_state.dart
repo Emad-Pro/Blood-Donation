@@ -25,7 +25,7 @@ class UserSignupState {
       this.permissionRequestState = RequestState.init,
       this.selectedProfileImage,
       this.isDisease = false,
-      this.isSecure = false,
+      this.isSecure = true,
       this.signUpState = RequestState.init,
       this.errorMessage = '',
       this.diseases = const {
@@ -38,6 +38,13 @@ class UserSignupState {
         "Uncontrolled Diabetes": false,
         "Chronic Kidney Disease": false,
         "Hereditary Blood Diseases": false,
+        "Well-Controlled Diabetes": false,
+        "Hypertension": false,
+        "Seasonal Allergies": false,
+        "Asthma": false,
+        "Thalassemia Minor": false,
+        "Hypothyroidism/Hyperthyroidism": false,
+        "Hereditary Hemochromatosis": false
       }});
 
   UserSignupState copyWith(

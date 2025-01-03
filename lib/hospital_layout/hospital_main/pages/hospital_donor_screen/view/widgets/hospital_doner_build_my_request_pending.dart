@@ -69,7 +69,7 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                         Text(model.userprofileModel!.fullName!),
                         SizedBox(height: 5),
                         Text(
-                            "${calculateDistance(model.hospitalprofileModel!.latitude!, model.hospitalprofileModel!.longitude!, model.userprofileModel!.latitude!, model.userprofileModel!.longitude!).round()} ${"km".tr(context)}"),
+                            "${calculateDistance(model.hospitalprofileModel!.latitude!, model.hospitalprofileModel!.longitude!, model.userprofileModel!.latitude!, model.userprofileModel!.longitude!)} ${"km".tr(context)}"),
                         SizedBox(height: 5),
                         Text(model.userprofileModel!.currentLocation!,
                             style: TextStyle(fontStyle: FontStyle.italic)),
@@ -91,20 +91,31 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                   ),
                 ],
               ),
-              if (model.status == "accepted")
+              if (model.status == "accepted" || model.status == "canceled")
                 Row(
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.check_circle, color: Colors.green),
+                        model.status == "accepted"
+                            ? Icon(Icons.check_circle, color: Colors.green)
+                            : Icon(Icons.close, color: Colors.orange),
                         const SizedBox(width: 5),
-                        Text(
-                          "Request accepted".tr(context),
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold,
+                        if (model.status == "accepted")
+                          Text(
+                            "Request accepted".tr(context),
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
+                        if (model.status == "canceled")
+                          Text(
+                            "Canceled By Donor".tr(context),
+                            style: TextStyle(
+                              color: Colors.orange,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                       ],
                     ),
                     Spacer(),

@@ -26,6 +26,15 @@ class MyAppointmentScreen extends StatelessWidget {
               globalSnackbar(context, "Error Deleting Appointment".tr(context),
                   backgroundColor: Colors.red);
             }
+            if (state.appointmentsUpdateState == RequestState.success) {
+              globalSnackbar(
+                  context, "Appointment Canceled Successfully".tr(context),
+                  backgroundColor: Colors.green);
+            }
+            if (state.appointmentsUpdateState == RequestState.error) {
+              globalSnackbar(context, "Error Canceled Appointment".tr(context),
+                  backgroundColor: Colors.red);
+            }
           },
           builder: (context, state) {
             switch (state.appointmentsState) {
@@ -39,82 +48,103 @@ class MyAppointmentScreen extends StatelessWidget {
                         itemCount: state.appointments?.length,
                         itemBuilder: (context, index) {
                           return ListTile(
-                            leading:
-                                CircleAvatar(child: Icon(Icons.local_hospital)),
-                            title:
-                                Text(state.appointments![index].hospitalName!),
-                            subtitle: Text(
-                                state.appointments![index].status!.tr(context)),
-                            onTap: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      title: Text(state
-                                          .appointments![index].hospitalName!),
-                                      content: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text("Date:".tr(context)),
-                                                Text(state
-                                                    .appointments![index].day!
+                              leading: CircleAvatar(
+                                  child: Icon(Icons.local_hospital)),
+                              title: Text(
+                                  state.appointments![index].hospitalName!),
+                              subtitle: Text(state.appointments![index].status!
+                                  .tr(context)),
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: Text(state.appointments![index]
+                                            .hospitalName!),
+                                        content: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text("Date:".tr(context)),
+                                                  Text(state
+                                                      .appointments![index].day!
+                                                      .tr(context)),
+                                                ],
+                                              ),
+                                              Divider(),
+                                              Row(children: [
+                                                Text("Time:".tr(context)),
+                                                Text(state.appointments![index]
+                                                    .time!),
+                                              ]),
+                                              Divider(),
+                                              Row(children: [
+                                                Text("Status:".tr(context)),
+                                                Text(state.appointments![index]
+                                                    .status!
                                                     .tr(context)),
-                                              ],
-                                            ),
-                                            Divider(),
-                                            Row(children: [
-                                              Text("Time:".tr(context)),
-                                              Text(state
-                                                  .appointments![index].time!),
-                                            ]),
-                                            Divider(),
-                                            Row(children: [
-                                              Text("Status:".tr(context)),
-                                              Text(state
-                                                  .appointments![index].status!
-                                                  .tr(context)),
-                                            ]),
-                                            Divider(),
-                                            Row(children: [
-                                              Text("Unit Count:".tr(context)),
-                                              Text(state
-                                                  .appointments![index].unit!),
-                                            ]),
-                                            Divider(),
-                                          ],
+                                              ]),
+                                              Divider(),
+                                              Row(children: [
+                                                Text("Unit Count:".tr(context)),
+                                                Text(state.appointments![index]
+                                                    .unit!),
+                                              ]),
+                                              Divider(),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      actions: [
-                                        TextButton(
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            child: Text("Close".tr(context)))
-                                      ],
-                                    );
-                                  });
-                            },
-                            trailing:
-                                state.appointments![index].status == "pending"
-                                    ? state.appointmentsDeleteState ==
-                                            RequestState.loading
-                                        ? CircularProgressIndicator()
-                                        : IconButton(
-                                            icon: Icon(Icons.delete),
-                                            onPressed: () {
-                                              context
-                                                  .read<MyAppointmentCubit>()
-                                                  .deleteMyAppointment(state
-                                                      .appointments![index].id!
-                                                      .toString());
-                                            },
-                                          )
-                                    : null,
-                          );
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text("Close".tr(context)))
+                                        ],
+                                      );
+                                    });
+                              },
+                              trailing: (state.appointments![index].status ==
+                                      "pending")
+                                  ? state.appointmentsDeleteState ==
+                                          RequestState.loading
+                                      ? CircularProgressIndicator()
+                                      : IconButton(
+                                          icon: Icon(Icons.delete),
+                                          onPressed: () {
+                                            context
+                                                .read<MyAppointmentCubit>()
+                                                .deleteMyAppointment(state
+                                                    .appointments![index].id!
+                                                    .toString());
+                                          },
+                                        )
+                                  : state.appointments![index].status ==
+                                          "accepted"
+                                      ? state.appointmentsUpdateState ==
+                                              RequestState.loading
+                                          ? CircularProgressIndicator()
+                                          : IconButton(
+                                              icon: Icon(Icons.close),
+                                              onPressed: () {
+                                                context
+                                                    .read<MyAppointmentCubit>()
+                                                    .updateMyAppointment(
+                                                        state
+                                                            .appointments![
+                                                                index]
+                                                            .id!
+                                                            .toString(),
+                                                        state
+                                                            .appointments![
+                                                                index]
+                                                            .oneSignalId!);
+                                              },
+                                            )
+                                      : null);
                         },
                       );
               case RequestState.error:

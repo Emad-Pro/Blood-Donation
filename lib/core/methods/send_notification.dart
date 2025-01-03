@@ -4,7 +4,7 @@ Future<String> sendNotification(
     {required String contents,
     required String headings,
     String? bigPicture,
-    List<String>? recivedIds,
+    List<String?>? recivedIds,
     String? contentAr,
     String? headingAr}) async {
   final dio = Dio();
@@ -15,8 +15,7 @@ Future<String> sendNotification(
     "include_external_user_ids": recivedIds,
     "contents": {"en": contents, "ar": contentAr},
     "headings": {"en": headings, "ar": headingAr},
-    "big_picture": bigPicture ??
-        "https://img.freepik.com/free-photo/young-adult-woman-with-creative-makeup-glamour-generative-ai_188544-9633.jpg"
+    "big_picture": bigPicture
   };
 
   try {
