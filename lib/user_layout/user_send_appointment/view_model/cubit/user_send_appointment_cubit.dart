@@ -32,7 +32,7 @@ class UserSendAppointmentCubit extends Cubit<UserSendAppointmentState> {
                 .state
                 .userSignupModel!
                 .dateLastBloodDonation!));
-        if (monthsDifference < 2) {
+        if (monthsDifference <= 3) {
           emit(state.copyWith(
               sendRequestAppointmentState: RequestState.error,
               errorMessage:

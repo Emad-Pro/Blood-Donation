@@ -88,12 +88,6 @@ class MyAppointmentScreen extends StatelessWidget {
                                                     .tr(context)),
                                               ]),
                                               Divider(),
-                                              Row(children: [
-                                                Text("Unit Count:".tr(context)),
-                                                Text(state.appointments![index]
-                                                    .unit!),
-                                              ]),
-                                              Divider(),
                                             ],
                                           ),
                                         ),

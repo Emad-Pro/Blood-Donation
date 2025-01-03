@@ -26,7 +26,7 @@
     "We're excited to have you back! We can't wait to see the impact you've made since you last used the app.": "نحن متحمسون لعودتك! لا يمكننا الانتظار لرؤية ما حققته منذ آخر مرة استخدمت فيها التطبيق.",
     "Forgot Password": "نسيت كلمة المرور",
     "In our app, we take the security of your information seriously.": "في تطبيقنا، نحن نأخذ أمان معلوماتك على محمل الجد.",
-    "Email or Phone Number": "البريد الإلكتروني أو رقم الهاتف",
+    "Email or Phone Number": "البريد الإلكتروني ",
     "Reset Password": "إعادة تعيين كلمة المرور",
     "Password recovery": "استعادة كلمة المرور",
     "Create Account": "إنشاء حساب",
@@ -403,9 +403,18 @@
 "Asthma":"الربو",
 "Thalassemia Minor":"الثلاسيميا الصغرى",
 "Hypothyroidism/Hyperthyroidism":"قصور/فرط نشاط الغدة الدرقية",
-"Hereditary Hemochromatosis":"داء ترسب الأصبغة الدموية الوراثي"
+"Hereditary Hemochromatosis":"داء ترسب الأصبغة الدموية الوراثي",
+"Something went wrong":"حدث خطاء",
+"Send Request Emergency":"ارسال طلب تبرع عاجل",
+"Count Users":"عدد المستخدمين",
+"Send":"أرسال",
+"cancel":"اغلاق",
 
 
+
+"Please Select Blood Group":"برجاء اختيار فصيلة الدم",
+"Please Select Time Needed":"برجاء اختيار الوقت المطلوب",
+"Please Select Units Required":"برجاء اختيار عدد الوحدات المطلوبة"
 
 
 
