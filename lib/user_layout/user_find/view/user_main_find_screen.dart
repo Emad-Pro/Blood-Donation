@@ -91,7 +91,7 @@ class UserMainFindBody extends StatelessWidget {
                               .map((governorate) {
                             return DropdownMenuItem<String>(
                               value: governorate,
-                              child: Text(governorate),
+                              child: Text(governorate.tr(context)),
                             );
                           }).toList(),
                           onChanged: (newValue) {
@@ -221,7 +221,8 @@ class UserMainFindBody extends StatelessWidget {
                 : GlobalButton(
                     text: "Search".tr(context),
                     onTap: () {
-                      getIt<UserFindHospitalCubit>().searchWithAllFilters();
+                      getIt<UserFindHospitalCubit>()
+                          .searchWithAllFilters(context);
                     },
                   ),
           ],

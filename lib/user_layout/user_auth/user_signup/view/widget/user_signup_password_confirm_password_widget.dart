@@ -26,8 +26,8 @@ class UserSignupPasswordConfirmPasswordWidgets extends StatelessWidget {
                 userSignUpCubit.togglePasswordSecure();
               },
               icon: Icon(userSignUpCubit.state.isSecure
-                  ? Icons.visibility
-                  : Icons.visibility_off)),
+                  ? Icons.visibility_off
+                  : Icons.visibility)),
           validator: (value) {
             if (value!.isEmpty) {
               return 'please enter your password'.tr(context);
@@ -49,8 +49,8 @@ class UserSignupPasswordConfirmPasswordWidgets extends StatelessWidget {
                 userSignUpCubit.togglePasswordSecure();
               },
               icon: Icon(userSignUpCubit.state.isSecure
-                  ? Icons.visibility
-                  : Icons.visibility_off)),
+                  ? Icons.visibility_off
+                  : Icons.visibility)),
           textEditingController: userSignUpCubit.confirmPasswordController,
           lableText: "Confirm Password".tr(context),
           validator: (value) {

@@ -5,14 +5,14 @@ class UserSendAppointmentState extends Equatable {
   final String? selectedTimeBloodDonationAppointment;
   final String? selectedDayBloodDonationAppointment;
   final RequestState sendRequestAppointmentState;
-  final String? selectUnitCountBloodDonationAppointment;
+
   final String? errorMessage;
-  UserSendAppointmentState(
-      {this.selectedTimeBloodDonationAppointment,
-      this.selectedDayBloodDonationAppointment,
-      this.sendRequestAppointmentState = RequestState.init,
-      this.errorMessage,
-      this.selectUnitCountBloodDonationAppointment});
+  UserSendAppointmentState({
+    this.selectedTimeBloodDonationAppointment,
+    this.selectedDayBloodDonationAppointment,
+    this.sendRequestAppointmentState = RequestState.init,
+    this.errorMessage,
+  });
 
   @override
   List<Object?> get props => [
@@ -20,27 +20,24 @@ class UserSendAppointmentState extends Equatable {
         selectedDayBloodDonationAppointment,
         sendRequestAppointmentState,
         errorMessage,
-        selectUnitCountBloodDonationAppointment
       ];
 
-  UserSendAppointmentState copyWith(
-      {String? selectedTimeBloodDonationAppointment,
-      String? selectedDayBloodDonationAppointment,
-      RequestState? sendRequestAppointmentState,
-      String? errorMessage,
-      String? selectUnitCountBloodDonationAppointment}) {
+  UserSendAppointmentState copyWith({
+    String? selectedTimeBloodDonationAppointment,
+    String? selectedDayBloodDonationAppointment,
+    RequestState? sendRequestAppointmentState,
+    String? errorMessage,
+  }) {
     return UserSendAppointmentState(
-        selectedTimeBloodDonationAppointment:
-            selectedTimeBloodDonationAppointment ??
-                this.selectedTimeBloodDonationAppointment,
-        selectedDayBloodDonationAppointment:
-            selectedDayBloodDonationAppointment ??
-                this.selectedDayBloodDonationAppointment,
-        sendRequestAppointmentState:
-            sendRequestAppointmentState ?? this.sendRequestAppointmentState,
-        errorMessage: errorMessage ?? this.errorMessage,
-        selectUnitCountBloodDonationAppointment:
-            selectUnitCountBloodDonationAppointment ??
-                this.selectUnitCountBloodDonationAppointment);
+      selectedTimeBloodDonationAppointment:
+          selectedTimeBloodDonationAppointment ??
+              this.selectedTimeBloodDonationAppointment,
+      selectedDayBloodDonationAppointment:
+          selectedDayBloodDonationAppointment ??
+              this.selectedDayBloodDonationAppointment,
+      sendRequestAppointmentState:
+          sendRequestAppointmentState ?? this.sendRequestAppointmentState,
+      errorMessage: errorMessage ?? this.errorMessage,
+    );
   }
 }

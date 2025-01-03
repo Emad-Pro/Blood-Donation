@@ -7,12 +7,14 @@ class MyAppointmentState extends Equatable {
   final String errorMessage;
   final RequestState appointmentsDeleteState;
   final String appointmentsDeleteErrorMessage;
+  final RequestState appointmentsUpdateState;
   const MyAppointmentState(
       {this.appointments,
       this.appointmentsState = RequestState.init,
       this.errorMessage = '',
       this.appointmentsDeleteState = RequestState.init,
-      this.appointmentsDeleteErrorMessage = ''});
+      this.appointmentsDeleteErrorMessage = '',
+      this.appointmentsUpdateState = RequestState.init});
 
   @override
   List<Object?> get props => [
@@ -20,7 +22,8 @@ class MyAppointmentState extends Equatable {
         appointmentsState,
         errorMessage,
         appointmentsDeleteState,
-        appointmentsDeleteErrorMessage
+        appointmentsDeleteErrorMessage,
+        appointmentsUpdateState
       ];
 
   MyAppointmentState copyWith(
@@ -28,14 +31,15 @@ class MyAppointmentState extends Equatable {
       RequestState? appointmentsState,
       String? errorMessage,
       RequestState? appointmentsDeleteState,
-      String? appointmentsDeleteErrorMessage}) {
+      String? appointmentsDeleteErrorMessage,
+      RequestState? appointmentsUpdateState}) {
     return MyAppointmentState(
-      appointments: appointments ?? this.appointments,
-      appointmentsState: appointmentsState ?? this.appointmentsState,
-      errorMessage: errorMessage ?? this.errorMessage,
-      appointmentsDeleteState: appointmentsDeleteState ?? RequestState.init,
-      appointmentsDeleteErrorMessage:
-          appointmentsDeleteErrorMessage ?? this.appointmentsDeleteErrorMessage,
-    );
+        appointments: appointments ?? this.appointments,
+        appointmentsState: appointmentsState ?? this.appointmentsState,
+        errorMessage: errorMessage ?? this.errorMessage,
+        appointmentsDeleteState: appointmentsDeleteState ?? RequestState.init,
+        appointmentsDeleteErrorMessage: appointmentsDeleteErrorMessage ??
+            this.appointmentsDeleteErrorMessage,
+        appointmentsUpdateState: appointmentsUpdateState ?? RequestState.init);
   }
 }

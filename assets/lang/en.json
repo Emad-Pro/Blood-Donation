@@ -20,7 +20,7 @@
     "Choose Account Type": "Choose Account Type",
     "Please select your account type to proceed, whether you want to donate or represent a hospital in need of support. Choose the option that best suits your role to help contribute to healthcare services.": "Please select your account type to proceed, whether you want to donate or represent a hospital in need of support. Choose the option that best suits your role to help contribute to healthcare services.",
     "Blood Donor": "Blood Donor",
-    "Hospital Or Center Blood Donor": "Hospital Or Center Blood Donor",
+    "Hospital Or Center Blood Donor": "Hospital Or Blood Center",
     "Continue": "Continue",
     "Welcome Back": "Welcome Back",
     "We're excited to have you back! We can't wait to see the impact you've made since you last used the app.": "We're excited to have you back! We can't wait to see the impact you've made since you last used the app.",
@@ -317,7 +317,7 @@
     "Please Enter new password": "Please Enter new password",
     "Confirm new Password": "Confirm new Password",
     "Password Changed Successfully": "Password Changed Successfully",
-    "Emergency Alart Now": "Emergency Alart Now",
+    "Emergency Alart Now": "Emergency Alert Now",
     "Recent Donations": "Recent Donations",
     "Find Hospital": "Find Hospital",
     "cm": "CM",
@@ -346,7 +346,7 @@
 "am":"AM",
 "pm":"PM",
 "Received Requests":"Received Requests",
-"History Donations":"History Donations",
+"History Donations":"Requests History",
 "unit":"Unit",
 "yr old":"Year old",
 "Reject":"Reject",
@@ -368,7 +368,7 @@
 "Request Blood":"Request Blood",
 "Select Blood Group":"Select Blood Group"
 ,"Call":"Call"
-,"blood now":"Blood Now",
+,"blood now":"Donate Now",
 "Select Donation Time":"Select Donation Time",
 "Add Review":"Add Review",
 "Write your review here...":"Write your review here...",
@@ -409,10 +409,42 @@
 "Phone":"Phone",
 
 "Address":"Address",
-"Diseases Info":"Diseases Info","false":"false","true":"true",
+"Diseases Info":"Diseases Info","false":"No","true":"Yes",
 "submit":"submit",
 "No History":"No History Blood Donations",
 "accepted":"Accepted",
 "Rejected":"Rejected",
-"Send Message":"Send Message"
+"Send Message":"Send Message",
+"Amman":"Amman",
+"Zarqa":"Zarqa",
+"Irbid":"Irbid",
+"Balqa":"Balqa",
+"Madaba":"Madaba",
+"Karak":"Karak",
+"Tafilah":"Tafilah",
+"Maan":"Maan",
+"Aqaba":"Aqaba",
+"Jerash":"Jerash",
+"Ajloun":"Ajloun",
+"Mafraq":"Mafraq",
+"canceled":"Canceled",
+"Appointment Canceled Successfully":"Appointment Canceled Successfully",
+"Error Canceled Appointment":"Error Canceled Appointment","You have a Accepted request":"You have a Accepted request"
+,"Canceled By Donor":"Canceled By Donor",
+
+"Well-Controlled Diabetes":"Well-Controlled Diabetes",
+"Hypertension":"Hypertension",
+"Seasonal Allergies":"Seasonal Allergies",
+"Asthma":"Asthma",
+"Thalassemia Minor":"Thalassemia Minor",
+"Hypothyroidism/Hyperthyroidism":"Hypothyroidism/Hyperthyroidism",
+"Hereditary Hemochromatosis":"Hereditary Hemochromatosis"
+
+
+
+
+
+
+
+
 }
