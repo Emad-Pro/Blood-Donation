@@ -33,8 +33,8 @@ class UserHospitalDetailsSection extends StatelessWidget {
             SizedBox(
               height: 600,
               child: GoogleMapsScreen(
-                longitude: hospitalProfileModel.latitude!,
-                latitude: hospitalProfileModel.longitude!,
+                longitude: hospitalProfileModel.longitude!,
+                latitude: hospitalProfileModel.latitude!,
               ),
             ),
             const SizedBox(height: 15),
