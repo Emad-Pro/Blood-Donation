@@ -7,7 +7,7 @@ class HospitalLoginState {
   final String? errorMessage;
 
   HospitalLoginState(
-      {this.hospitalPasswordIsSecure = false,
+      {this.hospitalPasswordIsSecure = true,
       this.hospitalRememberMe = false,
       this.errorMessage = '',
       this.loginState = RequestState.init});

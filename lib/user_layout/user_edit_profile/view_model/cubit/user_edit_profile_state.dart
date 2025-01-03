@@ -33,7 +33,14 @@ class UserEditProfileState extends Equatable {
         "Cancer": false,
         "Uncontrolled Diabetes": false,
         "Chronic Kidney Disease": false,
-        "Hereditary Blood Diseases": false
+        "Hereditary Blood Diseases": false,
+        "Well-Controlled Diabetes": false,
+        "Hypertension": false,
+        "Seasonal Allergies": false,
+        "Asthma": false,
+        "Thalassemia Minor": false,
+        "Hypothyroidism/Hyperthyroidism": false,
+        "Hereditary Hemochromatosis": false
       },
       this.permissionRequestState = RequestState.init,
       this.permissionMessage = '',

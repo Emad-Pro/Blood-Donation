@@ -391,11 +391,19 @@
     "Ajloun":"عجلون",
     "Mafraq":"مفرق"
 
-
-
-
-
-
+,"canceled":"ملغي",
+"Appointment Canceled Successfully":"تم الغاء الموعد بنجاح",
+"Error Canceled Appointment":"حدث خطاء في الغاء الموعد",
+"You have a Accepted request":"لديك طلب تبرع مقبول بالفعل"
+,
+"Canceled By Donor":"ملغي من قب المستخدم",
+"Well-Controlled Diabetes":"السكري المنضبط",
+"Hypertension":"ارتفاع ضغط الدم",
+"Seasonal Allergies":"الحساسية الموسمية",
+"Asthma":"الربو",
+"Thalassemia Minor":"الثلاسيميا الصغرى",
+"Hypothyroidism/Hyperthyroidism":"قصور/فرط نشاط الغدة الدرقية",
+"Hereditary Hemochromatosis":"داء ترسب الأصبغة الدموية الوراثي"
 
 
 

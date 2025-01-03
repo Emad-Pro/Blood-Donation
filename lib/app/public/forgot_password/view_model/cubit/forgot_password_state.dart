@@ -17,7 +17,7 @@ class ForgotPasswordState extends Equatable {
       this.resetPasswordMessage = '',
       this.otpState = RequestState.init,
       this.otpMessage = '',
-      this.isSecure = false,
+      this.isSecure = true,
       this.authResponse});
 
   @override
