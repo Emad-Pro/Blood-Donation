@@ -16,7 +16,6 @@ userLoginListener(BuildContext context, UserLoginState state) {
         MaterialPageRoute(builder: (context) => UserMainScreen()),
         (Route<dynamic> route) => false);
   } else if (state.loginState == RequestState.error) {
-    Navigator.pop(context);
     globalSnackbar(context, state.errorMessage!.tr(context),
         backgroundColor: Colors.red);
   }

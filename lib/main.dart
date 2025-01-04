@@ -86,17 +86,14 @@ void callbackDispatcher() {
         supabase.identities!.isNotEmpty &&
         supabase.identities!.first.identityData != null &&
         supabase.identities!.first.identityData!['roule'] == 'user') {
-      print("Executing background task in WorkManager...");
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
-        print("Error: خدمة الموقع غير مفعلة");
         return Future.value(false);
       }
 
       LocationPermission permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied ||
           permission == LocationPermission.deniedForever) {
-        print("Error: الصلاحيات مرفوضة");
         return Future.value(false);
       }
       try {
