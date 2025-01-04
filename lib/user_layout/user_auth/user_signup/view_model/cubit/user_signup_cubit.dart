@@ -86,7 +86,13 @@ class UserSignupCubit extends Cubit<UserSignupState> {
 
   Future<void> _addUserToDatabase(AuthResponse userAuth) async {
     try {
-      final imageUrl = await _uploadProfileImage();
+      final String? imageUrl;
+      if (state.selectedProfileImage != null) {
+        imageUrl = await _uploadProfileImage();
+      } else {
+        imageUrl = null;
+      }
+
       final userModel = _createUserSignupModel(userAuth.user!.id, imageUrl);
       await supabase.from("UserAuth").insert(userModel.toJson());
     } on StorageException catch (e) {

@@ -5,7 +5,7 @@ class HospitalEmergencyState extends Equatable {
 
   final String? timeNeeded;
   final int locationDistance;
-  final int unitsRequired;
+  final int? unitsRequired;
   final RequestState usersState;
   final RequestState sendEmergencyRequestNotificationState;
   const HospitalEmergencyState(
@@ -19,11 +19,11 @@ class HospitalEmergencyState extends Equatable {
         'O+': false,
         'O-': false
       },
-      this.timeNeeded = '',
+      this.timeNeeded,
       this.usersState = RequestState.init,
       this.sendEmergencyRequestNotificationState = RequestState.init,
       this.locationDistance = 0,
-      this.unitsRequired = 0,
+      this.unitsRequired,
       this.userSignupModel,
       this.searchUserResult,
       this.searchUserState = RequestState.init});

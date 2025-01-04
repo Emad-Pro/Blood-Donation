@@ -69,7 +69,7 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                         Text(model.userprofileModel!.fullName!),
                         SizedBox(height: 5),
                         Text(
-                            "${calculateDistance(model.hospitalprofileModel!.latitude!, model.hospitalprofileModel!.longitude!, model.userprofileModel!.latitude!, model.userprofileModel!.longitude!)} ${"km".tr(context)}"),
+                            "${calculateDistance(model.hospitalprofileModel!.latitude!, model.hospitalprofileModel!.longitude!, model.userprofileModel!.latitude!, model.userprofileModel!.longitude!).round()} ${"km".tr(context)}"),
                         SizedBox(height: 5),
                         Text(model.userprofileModel!.currentLocation!,
                             style: TextStyle(fontStyle: FontStyle.italic)),

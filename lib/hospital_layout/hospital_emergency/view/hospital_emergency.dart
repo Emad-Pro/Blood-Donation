@@ -34,7 +34,7 @@ class HospitalEmergency extends StatelessWidget {
                     Text('When do you need the blood donation?'.tr(context)),
                     SizedBox(height: 8),
                     DropdownButtonFormField<String>(
-                      value: state.timeNeeded ?? 'Urgent',
+                      value: state.timeNeeded,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.0),
@@ -73,7 +73,7 @@ class HospitalEmergency extends StatelessWidget {
                     Text('How many units are needed?'.tr(context)),
                     SizedBox(height: 8),
                     DropdownButtonFormField<int>(
-                      value: state.unitsRequired == 0 ? 1 : state.unitsRequired,
+                      value: state.unitsRequired,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.0),
