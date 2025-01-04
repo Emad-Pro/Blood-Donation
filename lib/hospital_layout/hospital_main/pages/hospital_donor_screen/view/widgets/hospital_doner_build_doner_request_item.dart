@@ -1,9 +1,6 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
-import 'package:blood_donation/core/methods/calculate_reating.dart';
 import 'package:easy_url_launcher/easy_url_launcher.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 import '../../../../../../core/di/service_lacator.dart';
 import '../../../../../../core/methods/calculate_distance.dart';
 import '../../pages/hospital_donor_received_requests_page/model/hospital_donor_recevied_requests_model.dart';
@@ -135,45 +132,63 @@ class HospitalDonerBuildDonerRequestItem extends StatelessWidget {
                           context: context,
                           builder: (context) => AlertDialog(
                                 title: Text("Reject Donor".tr(context)),
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    TextFormField(
-                                      controller: getIt<
-                                              HospitalDonorReceivedRequestsCubit>()
-                                          .reasonController,
-                                      decoration: InputDecoration(
-                                        hintText: "Reason".tr(context),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
+                                content: Form(
+                                  key: getIt<
+                                          HospitalDonorReceivedRequestsCubit>()
+                                      .formKey,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextFormField(
+                                        controller: getIt<
+                                                HospitalDonorReceivedRequestsCubit>()
+                                            .reasonController,
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "Please enter a reason"
+                                                .tr(context);
+                                          }
+                                          return null;
+                                        },
+                                        decoration: InputDecoration(
+                                          hintText: "Reason".tr(context),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        getIt<HospitalDonorReceivedRequestsCubit>()
-                                            .proccessOrder(
-                                          hospitalDonorReceviedRequestsModel!
-                                              .id!
-                                              .toString(),
-                                          "Rejected",
-                                          reason: getIt<
+                                      const SizedBox(height: 10),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          if (getIt<
                                                   HospitalDonorReceivedRequestsCubit>()
-                                              .reasonController
-                                              .text,
-                                          userprofileModel:
+                                              .formKey
+                                              .currentState!
+                                              .validate()) {
+                                            getIt<HospitalDonorReceivedRequestsCubit>()
+                                                .proccessOrder(
                                               hospitalDonorReceviedRequestsModel!
-                                                  .userprofileModel!,
-                                          hospitalModel:
-                                              hospitalDonorReceviedRequestsModel!
-                                                  .hospitalprofileModel!,
-                                        );
-                                      },
-                                      child: Text("submit".tr(context)),
-                                    )
-                                  ],
+                                                  .id!
+                                                  .toString(),
+                                              "Rejected",
+                                              reason: getIt<
+                                                      HospitalDonorReceivedRequestsCubit>()
+                                                  .reasonController
+                                                  .text,
+                                              userprofileModel:
+                                                  hospitalDonorReceviedRequestsModel!
+                                                      .userprofileModel!,
+                                              hospitalModel:
+                                                  hospitalDonorReceviedRequestsModel!
+                                                      .hospitalprofileModel!,
+                                            );
+                                          }
+                                        },
+                                        child: Text("submit".tr(context)),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ));
                     },
