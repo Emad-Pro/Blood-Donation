@@ -18,6 +18,8 @@ class HospitalDonorReceivedRequestsCubit
   HospitalDonorReceivedRequestsCubit()
       : super(HospitalDonorReceivedRequestsState());
   TextEditingController reasonController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
   getData() async {
     emit(state.copyWith(hospitaldonorReceivedState: RequestState.loading));
     final supabase = Supabase.instance.client;

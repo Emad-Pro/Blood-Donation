@@ -396,7 +396,7 @@
 "Error Canceled Appointment":"حدث خطاء في الغاء الموعد",
 "You have a Accepted request":"لديك طلب تبرع مقبول بالفعل"
 ,
-"Canceled By Donor":"ملغي من قب المستخدم",
+"Canceled By Donor":"ملغي من قبل المستخدم",
 "Well-Controlled Diabetes":"السكري المنضبط",
 "Hypertension":"ارتفاع ضغط الدم",
 "Seasonal Allergies":"الحساسية الموسمية",
@@ -409,24 +409,8 @@
 "Count Users":"عدد المستخدمين",
 "Send":"أرسال",
 "cancel":"اغلاق",
-
-
-
+"Please enter a reason":"برجاء ادخال سبب",
 "Please Select Blood Group":"برجاء اختيار فصيلة الدم",
 "Please Select Time Needed":"برجاء اختيار الوقت المطلوب",
 "Please Select Units Required":"برجاء اختيار عدد الوحدات المطلوبة"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

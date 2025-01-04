@@ -121,12 +121,12 @@ class HospitalEmergency extends StatelessWidget {
                             globalSnackbar(context,
                                 "Please Select Blood Group".tr(context),
                                 backgroundColor: Colors.red);
-                          } else if (state.timeNeeded == '' ||
-                              state.unitsRequired == 0) {
+                          } else if (state.timeNeeded == null ||
+                              state.unitsRequired == null) {
                             globalSnackbar(
                                 context,
                                 backgroundColor: Colors.red,
-                                state.timeNeeded == ''
+                                state.timeNeeded == null
                                     ? "Please Select Time Needed".tr(context)
                                     : "Please Select Units Required"
                                         .tr(context));
