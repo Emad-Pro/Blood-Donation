@@ -28,7 +28,7 @@ class HospitalDonorReceivedRequestsCubit
           .select("UserAuth(*),HospitalAuth(*),*")
           .eq("hospital_id", supabase.auth.currentUser!.id)
           .eq("status", "pending")
-          .order("created_at", ascending: true);
+          .order("created_at", ascending: false);
       emit(state.copyWith(
           hospitaldonorReceivedState: RequestState.success,
           hospitalDonorReceviedRequestsModel: result
@@ -111,7 +111,7 @@ class HospitalDonorReceivedRequestsCubit
           .select("UserAuth(*),HospitalAuth(*),*")
           .eq("hospital_id", supabase.auth.currentUser!.id)
           .neq("status", "pending")
-          .order("created_at", ascending: true);
+          .order("created_at", ascending: false);
       emit(state.copyWith(
           historyAppointmentState: RequestState.success,
           historyDonorReceviedRequestsModel: result

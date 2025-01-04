@@ -24,7 +24,8 @@ class MyAppointmentCubit extends Cubit<MyAppointmentState> {
       final response = await Supabase.instance.client
           .from("hospital_appointment")
           .select("HospitalAuth(name,onesignal_id),*")
-          .eq("user_id", uid!);
+          .eq("user_id", uid!)
+          .order("created_at", ascending: false);
       emit(
         state.copyWith(
           appointments:
