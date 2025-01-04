@@ -19,16 +19,13 @@ class UserSignupButton extends StatelessWidget {
           text: "Sign Up".tr(context),
           onTap: () {
             if (userSignUpCubit.formKey.currentState!.validate()) {
-              if (state.selectedProfileImage == null ||
-                  state.selectedBloodType == null ||
+              if (state.selectedBloodType == null ||
                   state.selectedGender == null) {
                 globalSnackbar(
                     context,
-                    (state.selectedProfileImage == null
-                        ? "Please Select Image".tr(context)
-                        : state.selectedBloodType == null
-                            ? "Please Select Blood Type".tr(context)
-                            : "Please Select Gender".tr(context)));
+                    (state.selectedBloodType == null
+                        ? "Please Select Blood Type".tr(context)
+                        : "Please Select Gender".tr(context)));
               } else {
                 userSignUpCubit.signupUserWithEmailAndPassword();
               }

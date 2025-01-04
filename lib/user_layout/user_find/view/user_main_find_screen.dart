@@ -116,58 +116,58 @@ class UserMainFindBody extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            Container(
-              width: double.infinity,
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withOpacity(0.2)),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: DropdownButton<int>(
-                          underline: Container(),
-                          isExpanded: true,
-                          hint: Text("Select a Nearby".tr(context)),
-                          value: state.selectedNearby,
-                          items: getIt<UserFindHospitalCubit>()
-                              .nearby
-                              .map((governorate) {
-                            return DropdownMenuItem<int>(
-                              value: governorate,
-                              child: Text(
-                                  "${governorate.toString()} ${"km".tr(context)}"),
-                            );
-                          }).toList(),
-                          onChanged: (newValue) {
-                            getIt<UserFindHospitalCubit>()
-                                .toggleNearby(newValue!);
-                          },
-                        ),
-                      ),
-                      if (state.selectedNearby != null)
-                        IconButton(
-                          onPressed: () {
-                            getIt<UserFindHospitalCubit>().clearNearby();
-                          },
-                          icon: Icon(
-                            Icons.clear,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
+            // Container(
+            //   width: double.infinity,
+            //   child: Container(
+            //     decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.circular(12),
+            //         color: Theme.of(context)
+            //             .colorScheme
+            //             .onSurface
+            //             .withOpacity(0.2)),
+            //     child: Padding(
+            //       padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            //       child: Row(
+            //         children: [
+            //           Expanded(
+            //             child: DropdownButton<int>(
+            //               underline: Container(),
+            //               isExpanded: true,
+            //               hint: Text("Select a Nearby".tr(context)),
+            //               value: state.selectedNearby,
+            //               items: getIt<UserFindHospitalCubit>()
+            //                   .nearby
+            //                   .map((governorate) {
+            //                 return DropdownMenuItem<int>(
+            //                   value: governorate,
+            //                   child: Text(
+            //                       "${governorate.toString()} ${"km".tr(context)}"),
+            //                 );
+            //               }).toList(),
+            //               onChanged: (newValue) {
+            //                 getIt<UserFindHospitalCubit>()
+            //                     .toggleNearby(newValue!);
+            //               },
+            //             ),
+            //           ),
+            //           if (state.selectedNearby != null)
+            //             IconButton(
+            //               onPressed: () {
+            //                 getIt<UserFindHospitalCubit>().clearNearby();
+            //               },
+            //               icon: Icon(
+            //                 Icons.clear,
+            //                 color: Theme.of(context).colorScheme.primary,
+            //               ),
+            //             ),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 20,
+            // ),
             Container(
               width: double.infinity,
               child: Container(
