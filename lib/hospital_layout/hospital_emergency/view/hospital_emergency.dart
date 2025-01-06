@@ -12,6 +12,7 @@ class HospitalEmergency extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    getIt<HospitalEmergencyCubit>().getUsersData();
     return BlocConsumer<HospitalEmergencyCubit, HospitalEmergencyState>(
       bloc: getIt<HospitalEmergencyCubit>()..getUsersData(),
       builder: (context, state) {
@@ -204,8 +205,10 @@ class HospitalEmergency extends StatelessWidget {
         if (state.sendEmergencyRequestNotificationState ==
             RequestState.success) {
           Navigator.pop(context);
+          getIt<HospitalEmergencyCubit>().clearFileds();
           globalSnackbar(context, "Request Sent Successfully".tr(context),
               backgroundColor: Colors.green);
+          Navigator.pop(context);
         }
       },
     );
