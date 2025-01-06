@@ -33,7 +33,7 @@ class UserEditProfileWeightHeightAgeAndSelectGenderWidget
             ).then((value) {
               if (value != null) {
                 userEditProfileCubit.ageController.text =
-                    "${value.year}-${value.month}-${value.day}";
+                    "${value.year}-${value.month < 10 ? '0${value.month}' : value.month}-${value.day < 10 ? '0${value.day}' : value.day}";
               }
             });
           },

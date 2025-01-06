@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/di/service_lacator.dart';
 import '../../../core/enum/request_state.dart';
+import '../../user_profile/view_model/user_profile_cubit.dart';
 import 'user_main_find_hospital_result.dart';
 
 class UserMainFindScreen extends StatelessWidget {
@@ -27,6 +28,7 @@ class UserMainFindScreen extends StatelessWidget {
       },
       bloc: getIt<UserFindHospitalCubit>(),
       builder: (context, state) {
+        getIt<UserProfileCubit>().getUserProfile();
         switch (state.hospitalsState) {
           case RequestState.init:
           case RequestState.loading:

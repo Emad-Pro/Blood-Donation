@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:blood_donation/app/public/choose_screen/view/choose_screen.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
@@ -96,24 +98,49 @@ class HospitalEmergencyCubit extends Cubit<HospitalEmergencyState> {
   sendEmergencyRequest(BuildContext context, List<String> ids) async {
     emit(state.copyWith(
         sendEmergencyRequestNotificationState: RequestState.loading));
-    await getIt<HospitalProfileCubit>().getInfo();
-    List<String> bloodNames = [];
-    state.bloodSelected.entries.forEach((element) {
-      if (element.value == true) {
-        bloodNames.add(element.key);
-      }
-    });
-    sendNotification(
-      contents:
-          "${getIt<HospitalProfileCubit>().state.hospitalProfileModel!.name} We Need Emergency Blood Type ${bloodNames.join(', ')} ${state.timeNeeded!.trEn(context)} Units Count :${state.unitsRequired}",
-      headings: "Emergency Blood Request",
-      recivedIds: ids,
-      contentAr:
-          "${getIt<HospitalProfileCubit>().state.hospitalProfileModel!.name}نحتاج لطلب تبرع بالدم نوع ${bloodNames.join(', ')} ${state.timeNeeded!.trAr(context)} وحدات :${state.unitsRequired}",
-      headingAr: "طلب تبرع عاجل بالدم",
-    );
-    emit(state.copyWith(
-        sendEmergencyRequestNotificationState: RequestState.success));
+    try {
+      await getIt<HospitalProfileCubit>().getInfo();
+      List<String> bloodNames = [];
+      state.bloodSelected.entries.forEach((element) {
+        if (element.value == true) {
+          bloodNames.add(element.key);
+        }
+      });
+      sendNotification(
+        contents:
+            "${getIt<HospitalProfileCubit>().state.hospitalProfileModel!.name} We Need Emergency Blood Type ${bloodNames.join(', ')} ${state.timeNeeded!.trEn(context)} Units Count :${state.unitsRequired}",
+        headings: "Emergency Blood Request",
+        recivedIds: ids,
+        contentAr:
+            "${getIt<HospitalProfileCubit>().state.hospitalProfileModel!.name}نحتاج لطلب تبرع بالدم نوع ${bloodNames.join(', ')} ${state.timeNeeded!.trAr(context)} وحدات :${state.unitsRequired}",
+        headingAr: "طلب تبرع عاجل بالدم",
+      );
+      emit(state.copyWith(
+        sendEmergencyRequestNotificationState: RequestState.success,
+      ));
+    } on SocketException catch (e) {
+      emit(state.copyWith(
+          sendEmergencyRequestNotificationState: RequestState.error));
+    }
+  }
+
+  clearFileds() {
+    emit(state.clear(
+      bloodSelected: Map.from({
+        'A+': false,
+        'A-': false,
+        'B+': false,
+        'B-': false,
+        'AB+': false,
+        'AB-': false,
+        'O+': false,
+        'O-': false,
+      }),
+      timeNeeded: null,
+      locationDistance: null,
+      unitsRequired: null,
+    ));
+    bloodSelectedController.text = "";
   }
 
   TextEditingController bloodSelectedController = TextEditingController();
