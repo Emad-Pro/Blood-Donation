@@ -4,8 +4,10 @@ import 'package:bloc/bloc.dart';
 import 'package:blood_donation/core/location_service/location_service.dart';
 import 'package:blood_donation/hospital_layout/hospital_main/pages/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
 import 'package:equatable/equatable.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../core/enum/request_state.dart';
@@ -32,6 +34,26 @@ class HospitalEditProfileCubit extends Cubit<HospitalEditProfileState> {
   TextEditingController docsFileController = TextEditingController();
   TextEditingController primaryContactPersonController =
       TextEditingController();
+  Future<void> pickMultipleFiles() async {
+    List<File> files = state.selectedDocsFiles;
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      allowMultiple: false,
+      type: FileType.custom,
+      allowedExtensions: ['pdf', 'doc', 'docx', 'jpeg', 'jpg', 'png'],
+    );
+
+    if (result != null) {
+      files = result.paths.map((path) => File(path!)).toList();
+
+      emit(state.copyWith(selectedDocsFiles: files));
+    } else {
+      print("لم يتم اختيار أي ملفات.");
+    }
+  }
+
+  deletePickFile() {
+    emit(state.copyWith(selectedDocsFiles: []));
+  }
 
   /// for Change Password
 
@@ -70,12 +92,17 @@ class HospitalEditProfileCubit extends Cubit<HospitalEditProfileState> {
   update() async {
     try {
       emit(state.copyWith(updateProfileState: RequestState.loading));
+      String? docsUrl;
+      if (state.selectedDocsFiles.isNotEmpty) {
+        docsUrl = await uploadDocs();
+      }
+      print(docsUrl);
       final supabase = Supabase.instance.client;
-      final map = _createHospitalSignupModel();
+      final map = _createHospitalSignupModel(docsUrl);
       if (profile.email != emailController.text) {
-        print("email");
         await updateEmail();
       }
+
       await supabase
           .from("HospitalAuth")
           .update(map.toMap())
@@ -90,6 +117,24 @@ class HospitalEditProfileCubit extends Cubit<HospitalEditProfileState> {
       emit(state.copyWith(
           updateProfileState: RequestState.error,
           updateProfileMessage: e.toString()));
+    }
+  }
+
+  Future<String?> uploadDocs() async {
+    try {
+      final uniqueFileName =
+          "${DateTime.now().microsecondsSinceEpoch}_${state.selectedDocsFiles[0].path.split("/").last}";
+      final response = await Supabase.instance.client.storage
+          .from('hospital_docs')
+          .upload(uniqueFileName, state.selectedDocsFiles[0]);
+      final path = await Supabase.instance.client.storage
+          .from("hospital_docs")
+          .getPublicUrl(response.split("/").last);
+      ;
+
+      return path;
+    } on StorageException catch (e) {
+      throw StorageException(e.message);
     }
   }
 
@@ -125,7 +170,7 @@ class HospitalEditProfileCubit extends Cubit<HospitalEditProfileState> {
     }
   }
 
-  HospitalSignupModel _createHospitalSignupModel() {
+  HospitalSignupModel _createHospitalSignupModel(String? docsUrl) {
     final phonePrimartCode = _getPhoneServiceWithName(
         state.selectedPhoneServicePrimaryContactPerson!);
     final phoneCode = _getPhoneServiceWithName(state.selectedPhoneService!);
@@ -142,8 +187,9 @@ class HospitalEditProfileCubit extends Cubit<HospitalEditProfileState> {
       dayes: state.days,
       openingTime: '${state.openingTime!.hour}:${state.openingTime!.minute}',
       closingTime: '${state.closingTime!.hour}:${state.closingTime!.minute}',
-      docsFile: profile.docsFile,
+      docsFile: docsUrl ?? profile.docsFile,
       uId: profile.uId.toString(),
+      status: docsUrl != null ? "isPending" : profile.status,
     );
   }
 

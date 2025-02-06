@@ -13,6 +13,7 @@ class HospitalSignupModel {
   final String? openingTime;
   final String? closingTime;
   final String? docsFile;
+  final String? status;
   HospitalSignupModel(
       {this.uId,
       this.email,
@@ -26,7 +27,8 @@ class HospitalSignupModel {
       this.dayes,
       this.openingTime,
       this.closingTime,
-      this.docsFile});
+      this.docsFile,
+      this.status});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -42,6 +44,7 @@ class HospitalSignupModel {
       'openingTime': openingTime,
       'closingTime': closingTime,
       'docsFile': docsFile,
+      'status': status
     };
   }
 }
