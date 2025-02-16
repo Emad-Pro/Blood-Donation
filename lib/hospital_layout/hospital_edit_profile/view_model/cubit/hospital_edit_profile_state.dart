@@ -18,7 +18,7 @@ class HospitalEditProfileState extends Equatable {
 
   final bool oldPasswordIsSecure;
   final bool newPsswordIsSecure;
-
+  final List<File> selectedDocsFiles;
   HospitalEditProfileState(
       {this.openingTime,
       this.closingTime,
@@ -32,7 +32,8 @@ class HospitalEditProfileState extends Equatable {
       this.changePasswordState = RequestState.init,
       this.changePasswordMessage = '',
       this.oldPasswordIsSecure = true,
-      this.newPsswordIsSecure = true});
+      this.newPsswordIsSecure = true,
+      this.selectedDocsFiles = const []});
 
   @override
   List<Object?> get props => [
@@ -48,7 +49,8 @@ class HospitalEditProfileState extends Equatable {
         changePasswordState,
         changePasswordMessage,
         oldPasswordIsSecure,
-        newPsswordIsSecure
+        newPsswordIsSecure,
+        selectedDocsFiles
       ];
 
   HospitalEditProfileState copyWith(
@@ -64,7 +66,8 @@ class HospitalEditProfileState extends Equatable {
       RequestState? changePasswordState,
       String? changePasswordMessage,
       bool? oldPasswordIsSecure,
-      bool? newPsswordIsSecure}) {
+      bool? newPsswordIsSecure,
+      List<File>? selectedDocsFiles}) {
     return HospitalEditProfileState(
         openingTime: openingTime ?? this.openingTime,
         closingTime: closingTime ?? this.closingTime,
@@ -82,7 +85,8 @@ class HospitalEditProfileState extends Equatable {
         changePasswordMessage:
             changePasswordMessage ?? this.changePasswordMessage,
         oldPasswordIsSecure: oldPasswordIsSecure ?? this.oldPasswordIsSecure,
-        newPsswordIsSecure: newPsswordIsSecure ?? this.newPsswordIsSecure);
+        newPsswordIsSecure: newPsswordIsSecure ?? this.newPsswordIsSecure,
+        selectedDocsFiles: selectedDocsFiles ?? this.selectedDocsFiles);
   }
 
   final List<String> daysOfWeek = [

@@ -9,11 +9,8 @@ convertStringDateTime(String date) {
   return "${DateFormat.yMMMEd('${getLang}').format(dateTime)} - ${DateFormat.jm('${getLang}').format(dateTime)}";
 }
 
-convertResultDateTime(String date) {
+convertResultDateTime(DateTime date) {
   final getLang = getIt<LocalizationsCubit>().state.languageCode;
-  final inputFormat = DateFormat('yyyy-MM-dd');
-  final dateTime = inputFormat.parse(date);
-  print(date);
-  print(DateFormat.yMMMEd('${getLang}').format(dateTime));
-  return DateFormat.yMMMEd('${getLang}').format(dateTime);
+
+  return DateFormat.yMMMEd('${getLang}').format(date);
 }

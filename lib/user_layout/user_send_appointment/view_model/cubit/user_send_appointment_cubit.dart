@@ -27,11 +27,11 @@ class UserSendAppointmentCubit extends Cubit<UserSendAppointmentState> {
         .eq("status", "pending")
         .then((onValue) async {
       if (onValue.isEmpty) {
-        int monthsDifference = calculateMonthsDifference(DateTime.parse(
+        int monthsDifference = calculateMonthsDifference(
             getIt<UserProfileCubit>()
                 .state
                 .userSignupModel!
-                .dateLastBloodDonation!));
+                .dateLastBloodDonation!);
         print(monthsDifference);
         if (monthsDifference < 3) {
           emit(state.copyWith(

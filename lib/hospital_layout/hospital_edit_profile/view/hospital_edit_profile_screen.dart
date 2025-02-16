@@ -4,6 +4,7 @@ import 'package:blood_donation/core/shared_preferences/cache_helper.dart';
 import 'package:blood_donation/core/widget/globla_textformfiled.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../core/widget/global_button.dart';
 import '../../hospital_main/pages/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
 import '../view_model/cubit/hospital_edit_profile_cubit.dart';
 import 'widgets/hospital_edit_profile_current_location_field.dart';
@@ -17,8 +18,9 @@ import 'widgets/hospital_edit_profile_work_hours_selector.dart';
 
 class HospitalEditProfileScreen extends StatelessWidget {
   final HospitalProfileModel profile;
-
-  const HospitalEditProfileScreen({Key? key, required this.profile})
+  final bool isReview;
+  const HospitalEditProfileScreen(
+      {Key? key, required this.profile, this.isReview = false})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -60,12 +62,53 @@ class HospitalEditProfileScreen extends StatelessWidget {
                     SizedBox(height: 15),
                     Row(
                       children: [
+                        SizedBox(
+                            width: 80,
+                            height: 40,
+                            child: GlobalButton(
+                                text: "Select File".tr(context),
+                                onTap: () {
+                                  cubit.pickMultipleFiles();
+                                },
+                                fontSize: 14)),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              SizedBox(width: 10),
+                              if (state.selectedDocsFiles.isNotEmpty)
+                                Expanded(
+                                  child: Text(
+                                    state.selectedDocsFiles[0].path
+                                        .split('/')
+                                        .last,
+                                    style: TextStyle(fontSize: 14),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              if (state.selectedDocsFiles.isEmpty)
+                                Text("${"Selected File".tr(context)} (0)"),
+                              if (state.selectedDocsFiles.isNotEmpty)
+                                IconButton(
+                                    onPressed: () {
+                                      cubit.deletePickFile();
+                                    },
+                                    icon: Icon(Icons.delete))
+                            ],
+                          ),
+                        ),
+                        SizedBox(width: 15),
+                      ],
+                    ),
+                    SizedBox(height: 15),
+                    Row(
+                      children: [
                         Expanded(
                           child: HospitalEditProfileUpdateButtonWidget(
-                              cubit: cubit, state: state),
+                              isReview: isReview, cubit: cubit, state: state),
                         ),
                         SizedBox(width: 10),
-                        HospitalEditPorfileChangePasswordButton(cubit: cubit),
+                        if (isReview)
+                          HospitalEditPorfileChangePasswordButton(cubit: cubit),
                       ],
                     )
                   ],

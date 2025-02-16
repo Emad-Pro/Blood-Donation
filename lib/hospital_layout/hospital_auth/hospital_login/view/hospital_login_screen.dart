@@ -40,8 +40,7 @@ class HospitalLoginScreen extends StatelessWidget {
       body: BlocProvider(
         create: (context) => HospitalLoginCubit(),
         child: SingleChildScrollView(
-          child: BlocConsumer<HospitalLoginCubit, HospitalLoginState>(
-            listener: hospitalLoginListener,
+          child: BlocBuilder<HospitalLoginCubit, HospitalLoginState>(
             builder: (context, state) {
               final hospitalLoginCuibt = context.read<HospitalLoginCubit>();
 
@@ -144,7 +143,8 @@ class HospitalLoginScreen extends StatelessWidget {
                                           .formKey.currentState!
                                           .validate()) {
                                         hospitalLoginCuibt
-                                            .hospitalSigninWithEmailAndPassword();
+                                            .hospitalSigninWithEmailAndPassword(
+                                                context);
                                       }
                                     }),
                             const SizedBox(height: 20),

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../view/listener/user_login_listener.dart';
+
 part 'user_state.dart';
 
 class UserLoginCubit extends Cubit<UserLoginState> {
@@ -21,7 +23,7 @@ class UserLoginCubit extends Cubit<UserLoginState> {
     emit(state.copyWith(userRememberMe: !state.userRememberMe));
   }
 
-  signInWithEmailAndPassword() async {
+  signInWithEmailAndPassword(BuildContext context) async {
     try {
       emit(state.copyWith(loginState: RequestState.loading));
       final response = await Supabase.instance.client.auth.signInWithPassword(
@@ -30,29 +32,28 @@ class UserLoginCubit extends Cubit<UserLoginState> {
       if (response.user!.identities!.first.identityData!['roule'] == 'user') {
         await CacheHelper.saveData(
             key: "password", value: passwordController.text);
-        emit(state.copyWith(loginState: RequestState.success));
 
-        var externalId =
-            "${DateTime.now().millisecondsSinceEpoch.toString()}"; // You will supply the external id to the OneSignal SDK
+        var externalId = "${DateTime.now().millisecondsSinceEpoch.toString()}";
 
         await OneSignal.login(externalId);
         await Supabase.instance.client
             .from("UserAuth")
             .update({"onesignal_id": externalId}).eq("uId", response.user!.id);
+        emit(state.copyWith(loginState: RequestState.success));
+        loginUserDonerSuccess(context);
       } else if (response.user!.identities!.first.identityData!['roule'] ==
           'hospital') {
-        emit(state.copyWith(
-            loginState: RequestState.error,
-            errorMessage: "Authorization Error"));
+        await Supabase.instance.client.auth.signOut();
+        loginUserDonerError(context, "You are not a user");
+        emit(state.copyWith(loginState: RequestState.error));
       } else {
-        emit(state.copyWith(
-            loginState: RequestState.error,
-            errorMessage: "Authorization Error"));
+        emit(state.copyWith(loginState: RequestState.error));
+        loginUserDonerError(context, "Authorization Error");
       }
     } on AuthException catch (e) {
       print(e.code);
-      emit(
-          state.copyWith(loginState: RequestState.error, errorMessage: e.code));
+      emit(state.copyWith(loginState: RequestState.error));
+      loginUserDonerError(context, "Authorization Error");
     }
   }
 }
