@@ -45,7 +45,7 @@ class HospitalRejected extends StatelessWidget {
                 ),
                 Expanded(
                   child: GlobalButton(
-                      text: "Edit Data",
+                      text: "Edit Data".tr(context),
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {

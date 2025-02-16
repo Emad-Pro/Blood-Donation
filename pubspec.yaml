@@ -37,9 +37,10 @@ dependencies:
   onesignal_flutter: ^5.1.2
   firebase_core:
   firebase_messaging:
-
   dio: ^5.7.0
   easy_url_launcher: ^0.0.7
+  chewie: ^1.10.0
+  video_player:
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +59,7 @@ flutter:
     - assets/logo/
     - assets/images/recycle/
     - assets/images/hospital_images/
+    - assets/video/
   fonts:
     - family: inter
       fonts:

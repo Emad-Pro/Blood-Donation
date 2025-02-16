@@ -2,7 +2,7 @@ class UserSignupModel {
   String? email;
   int? id;
   String? fullName;
-  String? dateLastBloodDonation;
+  DateTime? dateLastBloodDonation; // ✅ تغيير النوع إلى DateTime
   String? phone;
   String? phoneCode;
   String? age;
@@ -43,7 +43,21 @@ class UserSignupModel {
   UserSignupModel.fromJson(Map<String, dynamic> json) {
     email = json['user_email'];
     fullName = json['user_full_name'];
-    dateLastBloodDonation = json['user_last_dontaion'].toString();
+
+    // ✅ التأكد من نوع البيانات قبل التحويل
+    if (json['user_last_dontaion'] != null) {
+      if (json['user_last_dontaion'] is String) {
+        try {
+          dateLastBloodDonation = DateTime.parse(json['user_last_dontaion']);
+        } catch (e) {
+          print("Error parsing date string: $e");
+        }
+      } else if (json['user_last_dontaion'] is int) {
+        dateLastBloodDonation =
+            DateTime.fromMillisecondsSinceEpoch(json['user_last_dontaion']);
+      }
+    }
+
     phone = json['user_phone'];
     phoneCode = json['user_phone_code'];
     age = json['user_age'];
@@ -63,10 +77,12 @@ class UserSignupModel {
   }
 
   Map<String, dynamic> toJson() {
+    print("Date is ${dateLastBloodDonation?.toIso8601String()}");
     return {
       'user_email': email,
       'user_full_name': fullName,
-      'user_last_dontaion': dateLastBloodDonation,
+      'user_last_dontaion': dateLastBloodDonation
+          ?.toIso8601String(), // ✅ تحويل DateTime إلى ISO String
       'user_phone': "${phoneCode}${phone}",
       'user_age': age,
       'user_height': height,

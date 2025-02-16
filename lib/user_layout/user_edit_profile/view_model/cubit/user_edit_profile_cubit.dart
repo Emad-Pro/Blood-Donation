@@ -96,7 +96,8 @@ class UserEditProfileCubit extends Cubit<UserEditProfileState> {
       id: userSignupModel.id,
       email: emailController.text,
       fullName: nameController.text,
-      dateLastBloodDonation: lastDonationController.text,
+      dateLastBloodDonation: DateTime.fromMillisecondsSinceEpoch(
+          int.parse(lastDonationController.text)),
       phoneCode: _getPhoneServiceWithName(state.selectedPhoneService!),
       phone: "${phoneController.text}",
       age: ageController.text,
@@ -144,7 +145,8 @@ class UserEditProfileCubit extends Cubit<UserEditProfileState> {
     heightController.text = userSignupModel.height!.toString();
     lateController.text = userSignupModel.latitude!.toString();
     longController.text = userSignupModel.longitude!.toString();
-    lastDonationController.text = userSignupModel.dateLastBloodDonation!;
+    lastDonationController.text =
+        userSignupModel.dateLastBloodDonation!.toIso8601String();
     emit(state.copyWith(
         imageProfile: userSignupModel.profileImage,
         selectedGender: userSignupModel.selectedGender,
