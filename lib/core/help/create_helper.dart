@@ -3,20 +3,15 @@ import 'dart:io';
 void main() {
   // قائمة بأسماء الكلاسات
   List<String> classNames = [
-    "UserHospitalAppBarWidget",
-    "UserHospitalHeaderSection",
-    "UserHospitalImageContainer",
-    "UserHospitalActionButtons",
-    "UserHospitalActionButton",
-    "UserHospitalDetailsSection",
-    "UserHospitalHeaderRow",
-    "UserHospitalDetailTiles",
-    "UserHospitalDetailTile",
+    "UserMainListViewBloodType",
+    "UserMainHomeCarouselWidget",
+    "UserMainTitleText",
+    "UserMainHomePointsWidget",
+    "BuildBloodTypeInfoWidget",
   ];
 
   // مسار إنشاء الملفات
-  String outputPath =
-      '../../user_layout/user_hospital_view_details/view/widgets/';
+  String outputPath = '../../user_layout/user_home/view/widget/';
 
   // التأكد من وجود المجلد
   Directory(outputPath).createSync(recursive: true);

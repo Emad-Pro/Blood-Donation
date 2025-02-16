@@ -16,6 +16,7 @@ class HospitalProfileModel extends Equatable {
   final String? uId;
   final String? primaryContactPerson;
   final String? oneSignalId;
+  final String? status;
   const HospitalProfileModel(
       {this.id,
       this.email,
@@ -30,7 +31,8 @@ class HospitalProfileModel extends Equatable {
       this.docsFile,
       this.uId,
       this.primaryContactPerson,
-      this.oneSignalId});
+      this.oneSignalId,
+      this.status});
 
   @override
   List<Object?> get props {
@@ -48,7 +50,8 @@ class HospitalProfileModel extends Equatable {
       docsFile,
       uId,
       primaryContactPerson,
-      oneSignalId
+      oneSignalId,
+      status
     ];
   }
 
@@ -67,7 +70,8 @@ class HospitalProfileModel extends Equatable {
       'docsFile': docsFile,
       'uId': uId,
       'primaryContactPerson': primaryContactPerson,
-      "onesignal_id": oneSignalId
+      "onesignal_id": oneSignalId,
+      "status": status
     };
   }
 
@@ -86,6 +90,7 @@ class HospitalProfileModel extends Equatable {
         docsFile: map['docsFile'] as String?,
         uId: map['uId'] as String?,
         primaryContactPerson: map['primaryContactPerson'] as String?,
-        oneSignalId: map["onesignal_id"] as String?);
+        oneSignalId: map["onesignal_id"] as String?,
+        status: map["status"] as String?);
   }
 }

@@ -104,6 +104,7 @@ class HospitalSignupCubit extends Cubit<HospitalSignupState> {
       // closingTime: state.closingTime,
       docsFile: docsUrl,
       uId: hospitalUID,
+      status: "isPending",
     );
   }
 

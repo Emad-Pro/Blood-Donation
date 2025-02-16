@@ -3,7 +3,7 @@ import 'package:blood_donation/user_layout/user_auth/user_login/view_model/cubit
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../app/public/choose_screen/view/choose_screen.dart';
-import 'listner/user_login_listener.dart';
+import 'listener/user_login_listener.dart';
 import 'widgets/user_login_button_signin_widget.dart';
 import 'widgets/user_login_dont_hove_account_widgets.dart';
 import 'widgets/user_login_email_password_formfiled_widgets.dart';
@@ -36,8 +36,7 @@ class UserLoginScreen extends StatelessWidget {
       body: BlocProvider(
         create: (context) => UserLoginCubit(),
         child: SingleChildScrollView(
-          child: BlocConsumer<UserLoginCubit, UserLoginState>(
-            listener: userLoginListener,
+          child: BlocBuilder<UserLoginCubit, UserLoginState>(
             builder: (context, state) {
               return Padding(
                 padding: const EdgeInsets.all(16.0),

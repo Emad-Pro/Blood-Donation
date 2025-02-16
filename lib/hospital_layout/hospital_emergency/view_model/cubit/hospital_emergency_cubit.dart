@@ -61,8 +61,7 @@ class HospitalEmergencyCubit extends Cubit<HospitalEmergencyState> {
     final resultFilterByBlood = filtersUsersByBloodType();
 
     resultFilterByBlood.forEach((user) {
-      int monthsDiff = calculateMonthsDifference(
-          DateTime.parse(user.dateLastBloodDonation!));
+      int monthsDiff = calculateMonthsDifference(user.dateLastBloodDonation!);
 
       // افترض أن user يحتوي على إحداثيات المتبرع lat و lon
       double distance = calculateDistance(

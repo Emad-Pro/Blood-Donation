@@ -64,20 +64,16 @@ class UserSignupCubit extends Cubit<UserSignupState> {
 
       emit(state.copyWith(signUpState: RequestState.success));
     } on AuthException catch (e) {
-      print(e.message);
       emit(state.copyWith(
           signUpState: RequestState.error, errorMessage: e.message));
     } on StorageException catch (e) {
-      print("ase");
       emit(state.copyWith(
           signUpState: RequestState.error, errorMessage: e.message));
     } on PostgrestException catch (e) {
-      print("asb");
-      print(e);
       emit(state.copyWith(
           signUpState: RequestState.error, errorMessage: e.message));
     } catch (e) {
-      print(e);
+      print("aaaaaaaaaaaaaaaaaaaaaa${e}");
       emit(state.copyWith(
           signUpState: RequestState.error,
           errorMessage: "An unexpected error occurred"));
@@ -96,9 +92,9 @@ class UserSignupCubit extends Cubit<UserSignupState> {
       final userModel = _createUserSignupModel(userAuth.user!.id, imageUrl);
       await supabase.from("UserAuth").insert(userModel.toJson());
     } on StorageException catch (e) {
+      print(e.message);
       throw StorageException(e.message);
     } on PostgrestException catch (e) {
-      print(e);
       throw PostgrestException(message: e.code!);
     }
   }
@@ -123,7 +119,8 @@ class UserSignupCubit extends Cubit<UserSignupState> {
     return UserSignupModel(
       email: emailController.text,
       fullName: fullNameController.text,
-      dateLastBloodDonation: dateLastBloodDonationController.text,
+      dateLastBloodDonation:
+          DateTime.parse(dateLastBloodDonationController.text),
       phone:
           "${state.selectedPhoneService == 'Orange' ? '077' : state.selectedPhoneService == 'Zain' ? '079' : state.selectedPhoneService == 'Umniah' ? '078' : '077'}${phoneController.text}",
       phoneCode: phoneCodeController.text,

@@ -10,11 +10,12 @@ class HospitalEditProfileUpdateButtonWidget extends StatelessWidget {
     super.key,
     required this.cubit,
     required this.state,
+    required this.isReview,
   });
 
   final HospitalEditProfileCubit cubit;
   final HospitalEditProfileState state;
-
+  final bool isReview;
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
@@ -36,6 +37,7 @@ class HospitalEditProfileUpdateButtonWidget extends StatelessWidget {
                     } else {
                       if (cubit.formKey.currentState!.validate()) {
                         cubit.update();
+                        print("isReviewsssssssss");
                       }
                     }
                   },

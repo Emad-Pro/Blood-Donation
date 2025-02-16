@@ -27,7 +27,9 @@ class UserLoginButtonSignInWidget extends StatelessWidget {
                       .formKey
                       .currentState!
                       .validate()) {
-                    context.read<UserLoginCubit>().signInWithEmailAndPassword();
+                    context
+                        .read<UserLoginCubit>()
+                        .signInWithEmailAndPassword(context);
                   }
                 }),
         const SizedBox(height: 20),
