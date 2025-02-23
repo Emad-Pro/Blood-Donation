@@ -1,7 +1,7 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:blood_donation/core/widget/global_button.dart';
 import 'package:blood_donation/hospital_layout/hospital_edit_profile/view/hospital_edit_profile_screen.dart';
-import 'package:blood_donation/hospital_layout/hospital_main/pages/hospital_profile_screen/view_model/cubit/hospital_profile_cubit.dart';
+import 'package:blood_donation/hospital_layout/hospital_profile_screen/view_model/cubit/hospital_profile_cubit.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/di/service_lacator.dart';

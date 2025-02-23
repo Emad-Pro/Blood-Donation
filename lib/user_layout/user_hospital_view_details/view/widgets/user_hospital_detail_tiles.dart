@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/methods/parse_days.dart';
-import '../../../../hospital_layout/hospital_main/pages/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
+import '../../../../hospital_layout/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
 import 'user_hospital_detail_tile.dart';
 
 class UserHospitalDetailTiles extends StatelessWidget {

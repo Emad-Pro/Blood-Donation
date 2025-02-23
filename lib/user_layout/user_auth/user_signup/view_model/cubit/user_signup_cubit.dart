@@ -91,6 +91,9 @@ class UserSignupCubit extends Cubit<UserSignupState> {
 
       final userModel = _createUserSignupModel(userAuth.user!.id, imageUrl);
       await supabase.from("UserAuth").insert(userModel.toJson());
+      await supabase
+          .from("donation_point")
+          .insert({"uId": userAuth.user!.id, "point": 0});
     } on StorageException catch (e) {
       print(e.message);
       throw StorageException(e.message);
