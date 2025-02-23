@@ -5,7 +5,7 @@ import 'package:blood_donation/core/widget/globla_textformfiled.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/widget/global_button.dart';
-import '../../hospital_main/pages/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
+import '../../hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
 import '../view_model/cubit/hospital_edit_profile_cubit.dart';
 import 'widgets/hospital_edit_profile_current_location_field.dart';
 import 'widgets/hospital_edit_profile_email_field.dart';

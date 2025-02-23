@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../hospital_layout/hospital_main/pages/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
+import '../../../hospital_layout/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
 import 'widgets/user_hospital_app_bar_widget.dart';
 import 'widgets/user_hospital_details_section.dart';
 import 'widgets/user_hospital_header_section.dart';

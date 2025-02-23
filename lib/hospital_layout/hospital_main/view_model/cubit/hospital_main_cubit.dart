@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
-import 'package:blood_donation/hospital_layout/hospital_main/pages/hospital_donor_screen/view/hospital_donar_screen.dart';
-import 'package:blood_donation/hospital_layout/hospital_main/pages/hospital_home_screen/view/hospital_home_screen.dart';
-import 'package:blood_donation/hospital_layout/hospital_main/pages/hospital_profile_screen/view/hospital_profile_screen.dart';
+import 'package:blood_donation/hospital_layout/hospital_donor_screen/hospital_donar_screen.dart';
+import 'package:blood_donation/hospital_layout/hospital_home_screen/view/hospital_home_screen.dart';
+import 'package:blood_donation/hospital_layout/hospital_profile_screen/view/hospital_profile_screen.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 

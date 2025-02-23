@@ -7,7 +7,7 @@ import '../../../../core/di/service_lacator.dart';
 import '../../../../core/enum/request_state.dart';
 import '../../../../core/widget/global_snackbar.dart';
 import '../../../hospital_auth/hospital_login/view/hospital_login_screen.dart';
-import '../../../hospital_main/pages/hospital_profile_screen/view_model/cubit/hospital_profile_cubit.dart';
+import '../../../hospital_profile_screen/view_model/cubit/hospital_profile_cubit.dart';
 import '../../view_model/cubit/hospital_edit_profile_cubit.dart';
 
 /// Listens to the state changes of the hospital edit profile process and

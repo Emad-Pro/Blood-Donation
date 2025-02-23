@@ -6,7 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../core/di/service_lacator.dart';
 import '../../../../core/enum/request_state.dart';
 import '../../../../core/methods/send_notification.dart';
-import '../../../../hospital_layout/hospital_main/pages/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
+import '../../../../hospital_layout/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
 import '../../../user_profile/view_model/user_profile_cubit.dart';
 
 part 'user_send_appointment_state.dart';

@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:blood_donation/app/public/choose_screen/view/choose_screen.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:blood_donation/core/methods/send_notification.dart';
-import 'package:blood_donation/hospital_layout/hospital_main/pages/hospital_profile_screen/view_model/cubit/hospital_profile_cubit.dart';
+import 'package:blood_donation/hospital_layout/hospital_profile_screen/view_model/cubit/hospital_profile_cubit.dart';
 import 'package:blood_donation/user_layout/user_auth/user_signup/model/user_signup_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';

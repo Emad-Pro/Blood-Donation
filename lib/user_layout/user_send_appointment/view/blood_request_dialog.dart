@@ -4,7 +4,7 @@ import 'package:blood_donation/user_layout/user_send_appointment/view_model/cubi
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/enum/request_state.dart';
-import '../../../hospital_layout/hospital_main/pages/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
+import '../../../hospital_layout/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
 
 void showScheduleDialog(BuildContext context,
     {required HospitalProfileModel hospitalProfileModel}) {
