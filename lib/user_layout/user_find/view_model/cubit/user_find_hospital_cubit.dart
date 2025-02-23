@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:blood_donation/core/di/service_lacator.dart';
 import 'package:blood_donation/core/enum/request_state.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
-import 'package:blood_donation/hospital_layout/hospital_main/pages/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
+import 'package:blood_donation/hospital_layout/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
 import 'package:blood_donation/main.dart';
 import 'package:blood_donation/user_layout/user_profile/view_model/user_profile_cubit.dart';
 import 'package:equatable/equatable.dart';

@@ -43,8 +43,6 @@ class UserSignupModel {
   UserSignupModel.fromJson(Map<String, dynamic> json) {
     email = json['user_email'];
     fullName = json['user_full_name'];
-
-    // ✅ التأكد من نوع البيانات قبل التحويل
     if (json['user_last_dontaion'] != null) {
       if (json['user_last_dontaion'] is String) {
         try {
@@ -81,8 +79,7 @@ class UserSignupModel {
     return {
       'user_email': email,
       'user_full_name': fullName,
-      'user_last_dontaion': dateLastBloodDonation
-          ?.toIso8601String(), // ✅ تحويل DateTime إلى ISO String
+      'user_last_dontaion': dateLastBloodDonation?.toIso8601String(),
       'user_phone': "${phoneCode}${phone}",
       'user_age': age,
       'user_height': height,
