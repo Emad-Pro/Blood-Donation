@@ -34,21 +34,17 @@ class HospitalProfileScreen extends StatelessWidget {
               child: Column(
                 children: [
                   HospitalProfileHeaderWidgets(state: state),
-                  Spacer(),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(24),
-                        topRight: Radius.circular(24),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surface,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(24),
+                          topRight: Radius.circular(24),
+                        ),
                       ),
-                    ),
-                    child: SizedBox(
-                      height: MediaQuery.sizeOf(context).height < 550 ||
-                              MediaQuery.sizeOf(context).width < 350
-                          ? MediaQuery.sizeOf(context).height / 1.9
-                          : MediaQuery.sizeOf(context).height / 1.8,
                       child: ListView(
+                        shrinkWrap: true,
                         children: [
                           HospitalPorfileEditProfileTile(state: state),
                           ListTile(
@@ -69,7 +65,6 @@ class HospitalProfileScreen extends StatelessWidget {
                             hospitalName: state.hospitalProfileModel!.name!,
                           ),
                           HospitalProfileSettingsTile(),
-                          //     HospitalProfileFAGSTile(),
                           HospitalProfileLogoutTile(
                             userUid: state.hospitalProfileModel!.uId!,
                           ),
