@@ -17,8 +17,7 @@ class UserHospitalViewDetails extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: UserHospitalAppBarWidget(
-        title: hospitalProfileModel.name!,
-        hospitalUid: hospitalProfileModel.uId!,
+        hospitalProfileModel: hospitalProfileModel!,
       ),
       body: SingleChildScrollView(
         child: Column(

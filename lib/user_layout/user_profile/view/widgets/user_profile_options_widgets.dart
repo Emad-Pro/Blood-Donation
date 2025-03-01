@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../../../../app/settings_screen/view/settings_screen.dart';
 import '../../../hospital_faqs/view/hospital_faqs_screen.dart';
 import '../../../my_appointment/view/my_appointment_screen.dart';
+import '../../../user_payments/view/user_pyments_screen.dart';
 import 'user_profile_logout_show_dialog.dart';
 import 'user_profile_option_tile.dart';
 
@@ -41,8 +42,14 @@ class UserProfileOptionsWidgets extends StatelessWidget {
           },
         ),
         UserProfileOptionTile(
-          icon: Icons.card_giftcard,
-          title: "Rewards".tr(context),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => UserPymentsScreen()),
+            );
+          },
+          icon: Icons.card_travel,
+          title: "My Payments".tr(context),
         ),
         UserProfileOptionTile(
           icon: Icons.question_answer,

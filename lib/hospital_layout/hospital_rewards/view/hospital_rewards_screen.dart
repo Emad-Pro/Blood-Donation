@@ -1,8 +1,10 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
 
+import '../../hospital_exchenged/view/hospital_exchenged_screen.dart';
 import '../../hospital_give_Reward_for_request_donation/view/hospital_give_Reward_for_request_donation.dart';
 import '../../hospital_give_rewards_emergency/view/hospital_give_rewards_emergency.dart';
+import '../../hospital_medicine_rewards/view/hospital_medicine_rewards_screen.dart';
 
 class HospitalRewardsScreen extends StatelessWidget {
   const HospitalRewardsScreen({Key? key}) : super(key: key);
@@ -69,7 +71,29 @@ class HospitalRewardsScreen extends StatelessWidget {
                     .withValues(alpha: 0.6),
                 size: 16,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return HospitalMedicineRewardsScreen();
+                }));
+              },
+            ),
+            ListTile(
+              title: Text("Exchanged medicines".tr(context)),
+              leading:
+                  CircleAvatar(child: Icon(Icons.card_membership_outlined)),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                color: Theme.of(context)
+                    .colorScheme
+                    .onSurface
+                    .withValues(alpha: 0.6),
+                size: 16,
+              ),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return HospitalExchengedScreen();
+                }));
+              },
             ),
           ],
         ),
