@@ -1,3 +1,4 @@
+import 'package:blood_donation/core/di/service_lacator.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,9 +16,9 @@ class UserMainListViewBloodType extends StatelessWidget {
     return ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: context.read<UserHomeCubit>().bloodInfoList.length,
+        itemCount: getIt<UserHomeCubit>().bloodInfoList.length,
         itemBuilder: (context, index) {
-          final list = context.read<UserHomeCubit>().bloodInfoList;
+          final list = getIt<UserHomeCubit>().bloodInfoList;
           return BuildBloodTypeInfoWidget(
             title: list[index].values.first.tr(context),
             value: list[index].keys.first.tr(context),

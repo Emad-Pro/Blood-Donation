@@ -3,7 +3,9 @@ import 'package:blood_donation/user_layout/user_home/view_model/cubit/user_home_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/di/service_lacator.dart';
 import '../../../../core/enum/request_state.dart';
+import '../../data/model/user_point.dart';
 
 class UserMainHomePointsWidget extends StatelessWidget {
   const UserMainHomePointsWidget({
@@ -30,7 +32,7 @@ class UserMainHomePointsWidget extends StatelessWidget {
               ),
               Row(
                 children: [
-                  context.read<UserHomeCubit>().state.userPointState ==
+                  getIt<UserHomeCubit>().state.userPointState ==
                           RequestState.loading
                       ? Row(
                           children: [
@@ -41,7 +43,7 @@ class UserMainHomePointsWidget extends StatelessWidget {
                           ],
                         )
                       : Text(
-                          " ${context.read<UserHomeCubit>().state.userPointModel!.point.toString()} ",
+                          " ${getIt<UserHomeCubit>().state.userPointModel == null ? 0 : getIt<UserHomeCubit>().state.userPointModel?.point.toString()} ",
                           style: TextStyle(
                               fontSize: 26, fontWeight: FontWeight.bold),
                         ),

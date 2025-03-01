@@ -1,6 +1,8 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../app/privacy_policy/view/privacy_policy.dart';
+import '../../../../../app/terms_and_conditions/view/terms_and_conditions.dart';
 import '../../../../../core/widget/global_button.dart';
 import '../../view_model/cubit/hospital_signup_cubit.dart';
 
@@ -62,7 +64,57 @@ class HospitalSignupSelectFileWidget extends StatelessWidget {
           "Please provide proof of your hospital's/center's blood donation authorisation"
               .tr(context),
           style: TextStyle(color: Theme.of(context).colorScheme.primary),
-        )
+        ),
+        SizedBox(
+          height: 8,
+        ),
+        Center(
+          child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            alignment: WrapAlignment.center,
+            children: [
+              Text(
+                "By logging, you agree to our".tr(context),
+                style:
+                    TextStyle(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TermsAndConditionsScreen(),
+                        ));
+                  },
+                  child: Text(
+                    "Terms & Conditions".tr(context),
+                    style:
+                        TextStyle(color: Theme.of(context).colorScheme.primary),
+                  )),
+              Text(
+                "and".tr(context),
+                style:
+                    TextStyle(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PrivacyPolicyScreen(),
+                        ));
+                  },
+                  child: Text(
+                    "PrivacyPolicy.".tr(context),
+                    style:
+                        TextStyle(color: Theme.of(context).colorScheme.primary),
+                  )),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 35,
+        ),
       ],
     );
   }
