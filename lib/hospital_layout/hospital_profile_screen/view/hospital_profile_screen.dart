@@ -34,6 +34,9 @@ class HospitalProfileScreen extends StatelessWidget {
               child: Column(
                 children: [
                   HospitalProfileHeaderWidgets(state: state),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(

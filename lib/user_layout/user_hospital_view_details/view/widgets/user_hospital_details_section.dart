@@ -30,13 +30,13 @@ class UserHospitalDetailsSection extends StatelessWidget {
             UserHospitalDetailTiles(
                 hospitalProfileModel: hospitalProfileModel,
                 primaryColor: primaryColor),
-            SizedBox(
-              height: 600,
-              child: GoogleMapsScreen(
-                longitude: hospitalProfileModel.longitude!,
-                latitude: hospitalProfileModel.latitude!,
-              ),
-            ),
+            // SizedBox(
+            //   height: 600,
+            //   child: GoogleMapsScreen(
+            //     longitude: hospitalProfileModel.longitude!,
+            //     latitude: hospitalProfileModel.latitude!,
+            //   ),
+            // ),
             const SizedBox(height: 15),
           ],
         ),

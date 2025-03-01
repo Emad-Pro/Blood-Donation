@@ -6,20 +6,22 @@ import 'package:rating_summary/rating_summary.dart';
 
 import '../../../core/enum/request_state.dart';
 import '../../../core/methods/calculate_reating.dart';
+import '../../../hospital_layout/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
 import '../../../hospital_layout/hospital_reviews/view/methods/calc_avergs.dart';
 import '../../../hospital_layout/hospital_reviews/view/widget/hospital_profile_review_build_card.dart';
 import '../view_model/cubit/user_view_review_hospital_cubit.dart';
 import 'user_add_review_in_hospital_screen.dart';
 
 class UserViewReviewHospitalScreen extends StatelessWidget {
-  const UserViewReviewHospitalScreen({Key? key, required this.hospitalUid})
+  const UserViewReviewHospitalScreen(
+      {Key? key, required this.hospitalProfileModel})
       : super(key: key);
-  final String hospitalUid;
+  final HospitalProfileModel hospitalProfileModel;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          UserViewReviewHospitalCubit()..getReviewsWithUid(hospitalUid),
+      create: (context) => UserViewReviewHospitalCubit()
+        ..getReviewsWithUid(hospitalProfileModel.uId!),
       child: BlocConsumer<UserViewReviewHospitalCubit,
           UserViewReviewHospitalState>(
         listener: (context, state) {
@@ -48,7 +50,8 @@ class UserViewReviewHospitalScreen extends StatelessWidget {
                         context: context,
                         isScrollControlled: false,
                         builder: (context) => UserAddReviewInHospitalScreen(
-                            cubit: cubit, hospitalUid: hospitalUid));
+                            cubit: cubit,
+                            hospitalUid: hospitalProfileModel.uId!));
                   },
                 )
               ],
