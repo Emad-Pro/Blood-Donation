@@ -86,11 +86,10 @@ class HospitalGiveRewardForRequestDonation extends StatelessWidget {
                                                                       .id!,
                                                                   context:
                                                                       context,
-                                                                  userId: state
+                                                                  userprofileModel: state
                                                                       .getAcceptedRequestsModel![
                                                                           index]
-                                                                      .userprofileModel!
-                                                                      .oneSignalId!);
+                                                                      .userprofileModel!);
                                                             }),
                                                       ),
                                                       SizedBox(

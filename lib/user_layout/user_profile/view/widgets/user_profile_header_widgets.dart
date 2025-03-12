@@ -14,13 +14,21 @@ class UserProfileHeaderWidgets extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CircleAvatar(
-            radius: 36,
-            backgroundImage: NetworkImage(
-              state.userSignupModel!
-                  .profileImage!, // Replace with the user's image URL
-            ),
-          ),
+          state.userSignupModel!.profileImage != null
+              ? CircleAvatar(
+                  radius: 36,
+                  child: Icon(
+                    Icons.person,
+                    size: 30,
+                  ),
+                )
+              : CircleAvatar(
+                  radius: 36,
+                  backgroundImage: NetworkImage(
+                    state.userSignupModel!
+                        .profileImage!, // Replace with the user's image URL
+                  ),
+                ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(

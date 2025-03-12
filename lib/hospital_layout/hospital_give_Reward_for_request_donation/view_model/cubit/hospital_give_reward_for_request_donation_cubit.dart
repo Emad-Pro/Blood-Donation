@@ -9,6 +9,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../../user_layout/user_auth/user_signup/model/user_signup_model.dart';
 import '../../../received_history_donations/model/hospital_donor_recevied_requests_model.dart';
 
 part 'hospital_give_reward_for_request_donation_state.dart';
@@ -60,24 +61,29 @@ class HospitalGiveRewardForRequestDonationCubit
   confirmDonation(
       {required int id,
       required BuildContext context,
-      required String userId}) async {
+      required UserSignupModel userprofileModel}) async {
     emit(state.copyWith(confirmRequestState: RequestState.loading));
     try {
       await Supabase.instance.client.from("hospital_appointment").update({
         "status": "completed",
         "unit": int.parse(bagsController.text)
       }).eq("id", id);
-      Supabase.instance.client.rpc('increment_point', params: {
-        'uId': userId,
-        'value': int.parse(bagsController.text) * 100
-      });
+      await Supabase.instance.client
+          .rpc('increment_points', params: {
+            'uid': userprofileModel.uId,
+            'value': int.parse(bagsController.text) * 100
+          })
+          .then((onValue) {})
+          .catchError((onError) {
+            print(onError);
+          });
       globalSnackbar(context, "Request Completed Successfully".tr(context),
           backgroundColor: Colors.green);
       sendNotification(
         contents: "Request Completed Successfully",
         headings: "Blood Donation",
-        recivedIds: [userId],
-        contentAr: "تم تكميل الطلب بنجاح",
+        recivedIds: [userprofileModel.oneSignalId],
+        contentAr: "تم اكمال الطلب بنجاح",
         headingAr: "التبرع بالدم",
       );
       Navigator.pop(context);

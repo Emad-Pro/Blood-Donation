@@ -12,9 +12,11 @@ class HospitalDonerBuildDonerRequestItem extends StatelessWidget {
   const HospitalDonerBuildDonerRequestItem(
       {super.key,
       required this.userprofileModel,
-      required this.hospitalprofileModel});
+      required this.hospitalprofileModel,
+      required this.orderId});
   final UserSignupModel? userprofileModel;
   final HospitalProfileModel? hospitalprofileModel;
+  final int? orderId;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -168,7 +170,7 @@ class HospitalDonerBuildDonerRequestItem extends StatelessWidget {
                                               .validate()) {
                                             getIt<HospitalDonorReceivedRequestsCubit>()
                                                 .proccessOrder(
-                                              userprofileModel!.id!.toString(),
+                                              orderId!,
                                               "Rejected",
                                               reason: getIt<
                                                       HospitalDonorReceivedRequestsCubit>()
@@ -194,7 +196,7 @@ class HospitalDonerBuildDonerRequestItem extends StatelessWidget {
                   TextButton.icon(
                     onPressed: () {
                       getIt<HospitalDonorReceivedRequestsCubit>().proccessOrder(
-                        hospitalprofileModel!.id!.toString(),
+                        orderId!,
                         "accepted",
                         hospitalModel: hospitalprofileModel!,
                         userprofileModel: userprofileModel!,

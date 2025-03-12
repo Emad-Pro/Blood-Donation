@@ -77,7 +77,7 @@ class HospitalDonorReceivedRequestsCubit
     }
   }
 
-  proccessOrder(String id, String proccess,
+  proccessOrder(int id, String proccess,
       {String? reason,
       UserSignupModel? userprofileModel,
       HospitalProfileModel? hospitalModel}) async {

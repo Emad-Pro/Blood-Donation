@@ -1,4 +1,5 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
+import 'package:blood_donation/core/widget/global_button.dart';
 import 'package:blood_donation/core/widget/global_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -67,58 +68,91 @@ class UserViewReviewHospitalScreen extends StatelessWidget {
                         calculateRatingsDistribution(state.hospitalReviewModel!)
                             .values
                             .toList();
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "${"Ratings & Reviews".tr(context)} (${state.hospitalReviewModel!.length})",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(height: 16),
-                                RatingSummary(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  counter: state.hospitalReviewModel!.length,
-                                  average: calculateAverageRating(
-                                      state.hospitalReviewModel!),
-                                  showAverage: true,
-                                  counterFiveStars: values[4],
-                                  counterFourStars: values[3],
-                                  counterThreeStars: values[2],
-                                  counterTwoStars: values[1],
-                                  counterOneStars: values[0],
-                                ),
-                                SizedBox(height: 16),
-                                Text(
-                                  "Reviews".tr(context),
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(height: 16),
-                              ],
+                    return state.hospitalReviewModel!.isEmpty
+                        ? Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                spacing: 7,
+                                children: [
+                                  Text("No Reviews".tr(context)),
+                                  GlobalButton(
+                                      text: "Write Review".tr(context),
+                                      onTap: () {
+                                        showModalBottomSheet(
+                                            context: context,
+                                            isScrollControlled: false,
+                                            builder: (context) =>
+                                                UserAddReviewInHospitalScreen(
+                                                    cubit: cubit,
+                                                    hospitalUid:
+                                                        hospitalProfileModel
+                                                            .uId!));
+                                      })
+                                ],
+                              ),
                             ),
-                            SizedBox(
-                              child: ListView.builder(
-                                  itemCount: state.hospitalReviewModel!.length,
-                                  shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemBuilder: (context, index) {
-                                    return HospitalProfileReviewBuildCard(
-                                      review: state.hospitalReviewModel![index],
-                                    );
-                                  }),
-                            )
-                          ],
-                        ),
-                      ),
-                    );
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "${"Ratings & Reviews".tr(context)} (${state.hospitalReviewModel!.length})",
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(height: 16),
+                                      RatingSummary(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        counter:
+                                            state.hospitalReviewModel!.length,
+                                        average: calculateAverageRating(
+                                            state.hospitalReviewModel!),
+                                        showAverage: true,
+                                        counterFiveStars: values[4],
+                                        counterFourStars: values[3],
+                                        counterThreeStars: values[2],
+                                        counterTwoStars: values[1],
+                                        counterOneStars: values[0],
+                                      ),
+                                      SizedBox(height: 16),
+                                      Text(
+                                        "Reviews".tr(context),
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(height: 16),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    child: ListView.builder(
+                                        itemCount:
+                                            state.hospitalReviewModel!.length,
+                                        shrinkWrap: true,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemBuilder: (context, index) {
+                                          return HospitalProfileReviewBuildCard(
+                                            review: state
+                                                .hospitalReviewModel![index],
+                                          );
+                                        }),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
                   case RequestState.error:
                     return Center(
                       child: Text(state.errorMessage),

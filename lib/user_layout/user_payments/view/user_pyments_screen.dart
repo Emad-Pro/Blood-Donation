@@ -26,33 +26,36 @@ class UserPymentsScreen extends StatelessWidget {
               case RequestState.loading:
                 return Center(child: CircularProgressIndicator());
               case RequestState.success:
-                return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: state.paymentsModel!.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: Theme.of(context)
-                                .colorScheme
-                                .primary
-                                .withValues(alpha: 0.4)),
-                        child: ListTile(
-                          leading: CircleAvatar(child: Icon(Icons.payment)),
-                          title: Text(
-                              "${state.paymentsModel![index].item!} ,${"count".tr(context)} (${"${state.paymentsModel![index].count!}"})"),
-                          trailing: Text(
-                            "${state.paymentsModel![index].status!.tr(context)} (${state.paymentsModel![index].points!})",
-                            style: TextStyle(
-                                color: Theme.of(context).colorScheme.surface,
-                                fontSize: 12),
-                          ),
-                          subtitle: Text(
-                              "${DateFormat.yMMMEd(getIt<LocalizationsCubit>().state.languageCode).format(state.paymentsModel![index].createdAt!)} ,${DateFormat.Hm(getIt<LocalizationsCubit>().state.languageCode).format(state.paymentsModel![index].createdAt!)}"),
-                        ),
-                      );
-                    });
+                return state.paymentsModel!.isEmpty
+                    ? Center(child: Text("No Payments".tr(context)))
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: state.paymentsModel!.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withValues(alpha: 0.4)),
+                            child: ListTile(
+                              leading: CircleAvatar(child: Icon(Icons.payment)),
+                              title: Text(
+                                  "${state.paymentsModel![index].item!} ,${"count".tr(context)} (${"${state.paymentsModel![index].count!}"})"),
+                              trailing: Text(
+                                "${state.paymentsModel![index].status!.tr(context)} (${state.paymentsModel![index].points!})",
+                                style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
+                                    fontSize: 12),
+                              ),
+                              subtitle: Text(
+                                  "${DateFormat.yMMMEd(getIt<LocalizationsCubit>().state.languageCode).format(state.paymentsModel![index].createdAt!)} ,${DateFormat.Hm(getIt<LocalizationsCubit>().state.languageCode).format(state.paymentsModel![index].createdAt!)}"),
+                            ),
+                          );
+                        });
               case RequestState.error:
                 return Center(
                     child: Text("Check Internet Connection".tr(context)));
