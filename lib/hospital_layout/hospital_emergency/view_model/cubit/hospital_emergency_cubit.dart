@@ -22,12 +22,14 @@ class HospitalEmergencyCubit extends Cubit<HospitalEmergencyState> {
   getUsersData() async {
     emit(state.copyWith(usersState: RequestState.loading));
     try {
-      final result = await Supabase.instance.client.from("UserAuth").select();
-      emit(state.copyWith(
-          userSignupModel:
-              result.map((e) => UserSignupModel.fromJson(e)).toList(),
-          usersState: RequestState.success));
-      print(result);
+      Supabase.instance.client
+          .from("UserAuth")
+          .stream(primaryKey: ["id"]).listen((data) {
+        emit(state.copyWith(
+            userSignupModel:
+                data.map((e) => UserSignupModel.fromJson(e)).toList(),
+            usersState: RequestState.success));
+      });
     } on PostgrestException catch (e) {
       emit(state.copyWith(usersState: RequestState.error));
     }

@@ -433,11 +433,11 @@
     "Type AB Positive (AB+)": "فصيلة الدم AB الإيجابي (AB+)",
     "notes_blood": "ملاحظات",
     "Give Rewards": "إعطاء المكافآت",
-    "List of donation awards": "قائمة جوائز التبرع",
-    "Give Emergency Rewards": " منح جوائز التبرع في الطوارئ",
+    "List of donation awards": "قائمة نقاط التبرع",
+    "Give Emergency Rewards": " منح نقاط التبرع في الطوارئ",
     "Donor Email": "البريد الالكتروني الخاص بالمتبرع",
     "Blood Bags Count": "عدد اكياس الدم",
-    "Give Rewards For Emergency Donation": "منح جوائز التبرع في الطوارئ",
+    "Give Rewards For Emergency Donation": "منح نقاط التبرع في الطوارئ",
     "Give Rewards For Request Donation": "منح مكافآت لطلب التبرع",
     "please_enter_donor_email": "يرجى إدخال بريد المتبرع الإلكتروني",
     "please_enter_blood_bags_count": "يرجى إدخال عدد أكياس الدم",
@@ -490,5 +490,8 @@
     "An error occurred in the process of exchanging points": "حدث خطأ في عملية تبادل النقاط",
     "status": "الحالة",
     "info doner": "معلومات المتبرع",
+    "No Payments": "لا يوجد مشتريات",
+    "No Reviews": "لا يوجد تقييمات",
+    "Write Review": "كتابة تقييم",
     "The points exchange process was completed successfully": "تم تنفيذ عملية تبادل النقاط بنجاح.\n توجه للمستشفي لصرف الدواء"
 }

@@ -33,13 +33,13 @@ class HospitalExchengedCubit extends Cubit<HospitalExchengedState> {
     }
   }
 
-  void changeStatus(int index) async {
+  void changeStatus(int id) async {
     emit(state.copyWith(updateExchengedState: RequestState.loading));
     try {
       final supabase = Supabase.instance.client;
       await supabase
           .from("payments")
-          .update({"status": "complete"}).match({"id": index});
+          .update({"status": "complete"}).match({"id": id});
       emit(state.copyWith(updateExchengedState: RequestState.success));
       getExchenged();
     } on PostgrestException catch (e) {
