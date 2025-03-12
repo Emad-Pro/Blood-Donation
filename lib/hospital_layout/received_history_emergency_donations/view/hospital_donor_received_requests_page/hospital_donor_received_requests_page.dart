@@ -50,6 +50,8 @@ class HospitalDonerReceivedRequestsPage extends StatelessWidget {
                         .length, // Adjust based on the number of requests
                     itemBuilder: (context, index) {
                       return HospitalDonerBuildDonerRequestItem(
+                        orderId:
+                            state.hospitalDonorReceviedRequestsModel![index].id,
                         hospitalprofileModel: state
                             .hospitalDonorReceviedRequestsModel![index]
                             .hospitalprofileModel!,
