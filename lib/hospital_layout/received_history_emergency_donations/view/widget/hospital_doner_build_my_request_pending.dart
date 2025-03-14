@@ -116,11 +116,15 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                             ),
                           ),
                         if (model.status == "completed")
-                          Text(
-                            "${"Complete By Donor".tr(context)} (${model.unit})",
-                            style: TextStyle(
-                              color: Colors.purple,
-                              fontWeight: FontWeight.bold,
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              "${"Complete By Donor".tr(context)} (${model.unit})",
+                              style: TextStyle(
+                                color: Colors.purple,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         if (model.status == "canceled")

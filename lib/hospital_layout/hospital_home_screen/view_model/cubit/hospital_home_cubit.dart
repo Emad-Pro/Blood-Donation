@@ -37,23 +37,36 @@ class HospitalHomeCubit extends Cubit<HospitalHomeState> {
   }
 
   getRecentDonations() async {
-    try {
-      final supabase = await Supabase.instance.client
-          .from('Dontions_Hospital')
-          .select()
-          .select(
-              'id, created_at,blood_type,donaer_id,hospital_id,points,request,HospitalAuth(name),UserAuth(user_full_name,user_blood_type)')
-          .order('created_at', ascending: false);
+    emit(state.copyWith(hospitalDonationsState: RequestState.loading));
+    final supabase = Supabase.instance.client;
 
+    try {
+      final result = await supabase
+          .from("hospital_appointment")
+          .select("UserAuth(*),HospitalAuth(*),*")
+          .eq("hospital_id", supabase.auth.currentUser!.id)
+          .eq("status", "completed")
+          .order("created_at", ascending: false);
       emit(state.copyWith(
           hospitalDonationsState: RequestState.success,
-          hospitalDonationsModel: supabase
-              .map((toElement) => HospitalDonationsModel.fromJson(toElement))
-              .toList()));
+          hospitalDonationsModel:
+              result.map((e) => HospitalDonationsModel.fromJson(e)).toList()));
+    } on PostgrestException catch (e) {
+      emit(state.copyWith(
+          hospitalDonationsState: RequestState.error,
+          recentDontionsMessage: e.message));
     } on SocketException catch (e) {
       emit(state.copyWith(
-          reviewsSliderState: RequestState.error,
-          errorReviewsSliderMessage: e.message));
+          hospitalDonationsState: RequestState.error,
+          recentDontionsMessage: e.message));
+    } on AuthApiException catch (e) {
+      emit(state.copyWith(
+          hospitalDonationsState: RequestState.error,
+          recentDontionsMessage: e.message));
+    } on AuthException catch (e) {
+      emit(state.copyWith(
+          hospitalDonationsState: RequestState.error,
+          recentDontionsMessage: e.message));
     }
   }
 }

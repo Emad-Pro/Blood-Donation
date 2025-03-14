@@ -61,7 +61,7 @@ class UserProfileOptionsWidgets extends StatelessWidget {
         ),
         UserProfileOptionTile(
           icon: Icons.bloodtype_outlined,
-          title: "My Appointments".tr(context),
+          title: "My donations".tr(context),
           onTap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => MyAppointmentScreen()));

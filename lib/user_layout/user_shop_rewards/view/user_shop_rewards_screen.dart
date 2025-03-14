@@ -41,8 +41,9 @@ class UserShopRewardsScreen extends StatelessWidget {
                       Expanded(
                         child: GridView.builder(
                             gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2, childAspectRatio: 1.2),
+                                const SliverGridDelegateWithMaxCrossAxisExtent(
+                              maxCrossAxisExtent: 350,
+                            ),
                             itemCount: state.medicineRewardsModel!.length,
                             shrinkWrap: true,
                             itemBuilder: (context, index) =>

@@ -58,22 +58,28 @@ class HospitalSignupScreen extends StatelessWidget {
               child: GlobalButton(
                 text: "Sign Up".tr(context),
                 onTap: () async {
-                  if (hospitalSignupCubit.formKey.currentState!.validate()) {
-                    if (state.selectedDays.isEmpty) {
-                      globalSnackbar(
-                          context, "Please Select Work Days".tr(context),
-                          backgroundColor: Colors.red);
-                    } else if (state.openingTime == null ||
-                        state.closingTime == null) {
-                      globalSnackbar(
-                          context, "Please Select Work Hours".tr(context),
-                          backgroundColor: Colors.red);
-                    } else if (state.selectedDocsFiles.isEmpty) {
-                      globalSnackbar(context, "Please upload docs".tr(context),
-                          backgroundColor: Colors.red);
-                    } else {
-                      await hospitalSignupCubit
-                          .signupHospitalWithEmailAndPassword();
+                  if (state.acceptTerms == false) {
+                    globalSnackbar(context, "Please Accept Terms".tr(context),
+                        backgroundColor: Colors.red);
+                  } else {
+                    if (hospitalSignupCubit.formKey.currentState!.validate()) {
+                      if (state.selectedDays.isEmpty) {
+                        globalSnackbar(
+                            context, "Please Select Work Days".tr(context),
+                            backgroundColor: Colors.red);
+                      } else if (state.openingTime == null ||
+                          state.closingTime == null) {
+                        globalSnackbar(
+                            context, "Please Select Work Hours".tr(context),
+                            backgroundColor: Colors.red);
+                      } else if (state.selectedDocsFiles.isEmpty) {
+                        globalSnackbar(
+                            context, "Please upload docs".tr(context),
+                            backgroundColor: Colors.red);
+                      } else {
+                        await hospitalSignupCubit
+                            .signupHospitalWithEmailAndPassword();
+                      }
                     }
                   }
                 },
