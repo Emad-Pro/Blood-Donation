@@ -137,7 +137,7 @@ class HospitalLoginScreen extends StatelessWidget {
                                     child: CircularProgressIndicator(),
                                   )
                                 : GlobalButton(
-                                    text: "Login",
+                                    text: "Login".tr(context),
                                     onTap: () {
                                       if (hospitalLoginCuibt
                                           .formKey.currentState!

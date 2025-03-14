@@ -69,6 +69,10 @@ class HospitalGiveRewardForRequestDonationCubit
         "unit": int.parse(bagsController.text)
       }).eq("id", id);
       await Supabase.instance.client
+          .from("UserAuth")
+          .update({"user_last_dontaion": DateTime.now().toIso8601String()}).eq(
+              "user_email", userprofileModel.email!);
+      await Supabase.instance.client
           .rpc('increment_points', params: {
             'uid': userprofileModel.uId,
             'value': int.parse(bagsController.text) * 100

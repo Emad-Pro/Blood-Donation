@@ -96,7 +96,7 @@ class HospitalEmergencyCubit extends Cubit<HospitalEmergencyState> {
     return totalMonths;
   }
 
-  sendEmergencyRequest(BuildContext context, List<String> ids) async {
+  sendEmergencyRequest(BuildContext context, List<String?> ids) async {
     emit(state.copyWith(
         sendEmergencyRequestNotificationState: RequestState.loading));
     try {

@@ -1,3 +1,4 @@
+import 'package:blood_donation/core/auto_direction.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:blood_donation/hospital_layout/hospital_profile_screen/data/model/hospital_profile_model/hospital_profile_model.dart';
 import 'package:flutter/material.dart';
@@ -16,70 +17,89 @@ class UserShopRewardsBuildGridViewItem extends StatelessWidget {
       : super(key: key);
   final HospitalMedicineRewardsModel model;
   final HospitalProfileModel hospitalProfileModel;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.all(5),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color:
-                Theme.of(context).colorScheme.primary.withValues(alpha: 0.2)),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            //mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.medical_information_rounded,
-                size: 35,
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              Text(
-                model.name!,
-                style: TextStyle(
+      margin: EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.medical_information_rounded,
+              size: 35,
+            ),
+            SizedBox(height: 8),
+            AutoDirection(
+              text: model.name!,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  model.name!,
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
-                    color: Theme.of(context).colorScheme.primary),
-                maxLines: 2,
-              ),
-              GestureDetector(
-                onTap: () {
-                  userShopRewardsViewDetailsDailog(context, model);
-                },
-                child: Text(
-                  "View Details ...".tr(context),
-                  style: TextStyle(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurface
-                          .withValues(alpha: 0.4)),
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
-              Spacer(),
-              Row(
-                children: [
-                  Text(
-                    "${model.points} ".toString(),
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Theme.of(context).colorScheme.primary),
-                  ),
-                  Icon(Icons.card_giftcard),
-                  Spacer(),
-                  BlocBuilder<UserHomeCubit, UserHomeState>(
-                    bloc: getIt<UserHomeCubit>(),
-                    builder: (context, state) {
-                      return ElevatedButton(
+            ),
+            GestureDetector(
+              onTap: () {
+                userShopRewardsViewDetailsDailog(context, model);
+              },
+              child: Text(
+                "View Details ...".tr(context),
+                style: TextStyle(
+                  color: Theme.of(context)
+                      .colorScheme
+                      .onSurface
+                      .withValues(alpha: .4),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Text(
+                            "${model.points} ",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                          Icon(Icons.card_giftcard),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: 18,
+                    ),
+                    BlocBuilder<UserHomeCubit, UserHomeState>(
+                      bloc: getIt<UserHomeCubit>(),
+                      builder: (context, state) {
+                        return ElevatedButton(
                           style: ButtonStyle(
-                              backgroundColor: WidgetStatePropertyAll(
-                                  Theme.of(context).colorScheme.primary),
-                              foregroundColor: WidgetStatePropertyAll(
-                                  Theme.of(context).colorScheme.surface)),
+                            backgroundColor: WidgetStatePropertyAll(
+                                Theme.of(context).colorScheme.primary),
+                            foregroundColor: WidgetStatePropertyAll(
+                                Theme.of(context).colorScheme.surface),
+                          ),
                           onPressed: !(getIt<UserHomeCubit>()
                                       .state
                                       .userPointModel!
@@ -87,10 +107,10 @@ class UserShopRewardsBuildGridViewItem extends StatelessWidget {
                                   model.points)
                               ? () {
                                   globalSnackbar(
-                                      context,
-                                      "You do not have enough points"
-                                          .tr(context),
-                                      backgroundColor: Colors.red);
+                                    context,
+                                    "You do not have enough points".tr(context),
+                                    backgroundColor: Colors.red,
+                                  );
                                 }
                               : () {
                                   userShopAskConfirmDailog(
@@ -99,13 +119,17 @@ class UserShopRewardsBuildGridViewItem extends StatelessWidget {
                                     model,
                                   );
                                 },
-                          child: Text("Buy".tr(context)));
-                    },
-                  )
-                ],
+                          child: Text("Buy".tr(context)),
+                        );
+                      },
+                    )
+                  ],
+                ),
               ),
-            ],
-          ),
-        ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

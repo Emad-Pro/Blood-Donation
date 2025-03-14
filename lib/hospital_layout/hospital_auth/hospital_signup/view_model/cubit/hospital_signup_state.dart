@@ -10,6 +10,7 @@ class HospitalSignupState {
   final String? selectedPhoneServicePrimaryContactPerson;
   final RequestState signUpHospitalState;
   final String errorMessage;
+  final bool acceptTerms;
 
   final List<String> daysOfWeek = [
     'Sun',
@@ -34,7 +35,8 @@ class HospitalSignupState {
       this.errorMessage = '',
       this.signUpHospitalState = RequestState.init,
       this.selectedPhoneService,
-      this.selectedPhoneServicePrimaryContactPerson});
+      this.selectedPhoneServicePrimaryContactPerson,
+      this.acceptTerms = false});
 
   bool get allSelected => selectedDays.length == daysOfWeek.length - 1;
 
@@ -49,7 +51,8 @@ class HospitalSignupState {
       String? selectedPhoneService,
       RequestState? signUpHospitalState,
       String? errorMessage,
-      String? selectedPhoneServicePrimaryContactPerson}) {
+      String? selectedPhoneServicePrimaryContactPerson,
+      bool? acceptTerms}) {
     return HospitalSignupState(
         selectedDays: selectedDays ?? this.selectedDays,
         openingTime: openingTime ?? this.openingTime,
@@ -64,6 +67,7 @@ class HospitalSignupState {
         errorMessage: errorMessage ?? this.errorMessage,
         selectedPhoneServicePrimaryContactPerson:
             selectedPhoneServicePrimaryContactPerson ??
-                this.selectedPhoneServicePrimaryContactPerson);
+                this.selectedPhoneServicePrimaryContactPerson,
+        acceptTerms: acceptTerms ?? this.acceptTerms);
   }
 }

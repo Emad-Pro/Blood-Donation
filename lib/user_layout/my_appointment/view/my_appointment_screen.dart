@@ -47,6 +47,7 @@ class MyAppointmentScreen extends StatelessWidget {
                     : ListView.builder(
                         itemCount: state.appointments?.length,
                         itemBuilder: (context, index) {
+                          print(state.appointments![index].status!);
                           return ListTile(
                               leading: CircleAvatar(
                                   child: Icon(Icons.local_hospital)),

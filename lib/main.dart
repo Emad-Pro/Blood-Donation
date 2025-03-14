@@ -23,11 +23,8 @@ void main() async {
   ServiceLocator().init();
   await Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
 
-  // تسجيل المهمة الدورية
-  await Workmanager().registerPeriodicTask(
-      "1", // معرف المهمة (يجب أن يكون فريدًا)
-      taskName,
-      frequency: Duration(minutes: 15));
+  await Workmanager()
+      .registerPeriodicTask("1", taskName, frequency: Duration(minutes: 15));
   await Supabase.initialize(
       url: 'https://rcmumkmvatjdvwmxprjc.supabase.co',
       anonKey:
@@ -49,29 +46,30 @@ class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LocalizationsCubit, Locale>(
-        bloc: getIt<LocalizationsCubit>(),
-        builder: (context, locale) {
-          return BlocBuilder<ThemeCubit, ThemeMode>(
-            bloc: getIt<ThemeCubit>(),
-            builder: (context, themeMode) {
-              return MaterialApp(
-                locale: locale,
-                supportedLocales: const [Locale('en'), Locale('ar')],
-                localizationsDelegates: const [
-                  AppLocaliztions.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate
-                ],
-                debugShowCheckedModeBanner: false,
-                theme: lighTheme,
-                darkTheme: darkTheme,
-                themeMode: themeMode,
-                home: OnBoardingSkip.WidgetIntApp(),
-              );
-            },
-          );
-        });
+      bloc: getIt<LocalizationsCubit>(),
+      builder: (context, locale) {
+        return BlocBuilder<ThemeCubit, ThemeMode>(
+          bloc: getIt<ThemeCubit>(),
+          builder: (context, themeMode) {
+            return MaterialApp(
+              locale: locale,
+              supportedLocales: const [Locale('en'), Locale('ar')],
+              localizationsDelegates: const [
+                AppLocaliztions.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate
+              ],
+              debugShowCheckedModeBanner: false,
+              theme: lighTheme,
+              darkTheme: darkTheme,
+              themeMode: themeMode,
+              home: OnBoardingSkip.WidgetIntApp(),
+            );
+          },
+        );
+      },
+    );
   }
 }
 
