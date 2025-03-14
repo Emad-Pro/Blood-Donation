@@ -53,6 +53,10 @@ class HospitalSignupCubit extends Cubit<HospitalSignupState> {
     }
   }
 
+  toggleTermsAndConditions() {
+    emit(state.copyWith(acceptTerms: !state.acceptTerms));
+  }
+
   //
   Future addHospitalToDatabase() async {
     try {

@@ -1,3 +1,4 @@
+import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,7 +19,7 @@ class HospitalSignupShowDayesWidget extends StatelessWidget {
             //  mainAxisSize: MainAxisSize.min,
             children: state.daysOfWeek.map((day) {
               return CheckboxListTile(
-                title: Text(day),
+                title: Text(day.tr(context)),
                 value: state.selectedDays.contains(day) ||
                     (day == 'Select all' && state.allSelected),
                 onChanged: (_) => hospitalSignupCubit.toggleDay(day),

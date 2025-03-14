@@ -61,7 +61,7 @@ class UserSignupCubit extends Cubit<UserSignupState> {
       ;
 
       await _addUserToDatabase(userAuth);
-
+      await Supabase.instance.client.auth.signOut();
       emit(state.copyWith(signUpState: RequestState.success));
     } on AuthException catch (e) {
       emit(state.copyWith(

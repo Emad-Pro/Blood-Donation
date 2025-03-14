@@ -68,49 +68,60 @@ class HospitalSignupSelectFileWidget extends StatelessWidget {
         SizedBox(
           height: 8,
         ),
-        Center(
-          child: Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            alignment: WrapAlignment.center,
-            children: [
-              Text(
-                "By logging, you agree to our".tr(context),
-                style:
-                    TextStyle(color: Theme.of(context).colorScheme.onSurface),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Checkbox(
+                value: state.acceptTerms,
+                onChanged: (value) {
+                  hospitalSignupCubit.toggleTermsAndConditions();
+                }),
+            Expanded(
+              child: Wrap(
+                crossAxisAlignment: WrapCrossAlignment.start,
+                alignment: WrapAlignment.start,
+                children: [
+                  Text(
+                    "By logging, you agree to our".tr(context),
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface),
+                  ),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TermsAndConditionsScreen(),
+                            ));
+                      },
+                      child: Text(
+                        "Terms & Conditions".tr(context),
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary),
+                      )),
+                  Text(
+                    "and".tr(context),
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface),
+                  ),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PrivacyPolicyScreen(),
+                            ));
+                      },
+                      child: Text(
+                        "PrivacyPolicy.".tr(context),
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary),
+                      )),
+                ],
               ),
-              GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TermsAndConditionsScreen(),
-                        ));
-                  },
-                  child: Text(
-                    "Terms & Conditions".tr(context),
-                    style:
-                        TextStyle(color: Theme.of(context).colorScheme.primary),
-                  )),
-              Text(
-                "and".tr(context),
-                style:
-                    TextStyle(color: Theme.of(context).colorScheme.onSurface),
-              ),
-              GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PrivacyPolicyScreen(),
-                        ));
-                  },
-                  child: Text(
-                    "PrivacyPolicy.".tr(context),
-                    style:
-                        TextStyle(color: Theme.of(context).colorScheme.primary),
-                  )),
-            ],
-          ),
+            ),
+          ],
         ),
         const SizedBox(
           height: 35,

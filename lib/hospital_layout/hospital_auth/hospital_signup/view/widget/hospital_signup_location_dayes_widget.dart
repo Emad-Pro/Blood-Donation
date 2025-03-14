@@ -55,7 +55,9 @@ class HospitalSignupLocationDayesWidget extends StatelessWidget {
                   ? "Select Operating Days".tr(context)
                   : hospitalSignupCubit.state.selectedDays.length == 7
                       ? "All Days".tr(context)
-                      : hospitalSignupCubit.state.selectedDays.join(', '),
+                      : hospitalSignupCubit.state.selectedDays
+                          .map((day) => day.tr(context))
+                          .join(', '),
               style: TextStyle(fontSize: 14),
             ),
           ),

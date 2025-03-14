@@ -178,7 +178,7 @@ class HospitalEmergency extends StatelessWidget {
                                 .sendEmergencyRequest(
                                     context,
                                     state.searchUserResult!.map((toElement) {
-                                      return toElement.oneSignalId!;
+                                      return toElement.oneSignalId;
                                     }).toList());
                           },
                           label: Text("Send".tr(context)),

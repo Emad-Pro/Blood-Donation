@@ -1,6 +1,7 @@
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/auto_direction.dart';
 import '../../../hospital_layout/hospital_medicine_rewards/model/hospital_medicine_rewards_model.dart';
 
 Future<dynamic> userShopRewardsViewDetailsDailog(
@@ -15,7 +16,8 @@ Future<dynamic> userShopRewardsViewDetailsDailog(
                   },
                   child: Text("Cancel".tr(context)))
             ],
-            title: Text(model.name!),
-            content: Text(model.description!),
+            title: AutoDirection(text: model.name!, child: Text(model.name!)),
+            content: AutoDirection(
+                text: model.description!, child: Text(model.description!)),
           ));
 }
