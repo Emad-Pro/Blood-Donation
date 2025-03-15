@@ -1,20 +1,14 @@
 import 'dart:io';
-
 import 'package:bloc/bloc.dart';
-import 'package:blood_donation/app/public/choose_screen/view/choose_screen.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
 import 'package:blood_donation/core/methods/send_notification.dart';
 import 'package:blood_donation/hospital_layout/hospital_profile_screen/view_model/cubit/hospital_profile_cubit.dart';
 import 'package:blood_donation/user_layout/user_auth/user_signup/model/user_signup_model.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
 import '../../../../core/di/service_lacator.dart';
 import '../../../../core/enum/request_state.dart';
 import '../../../../core/methods/calculate_distance.dart';
-
 part 'hospital_emergency_state.dart';
 
 class HospitalEmergencyCubit extends Cubit<HospitalEmergencyState> {
@@ -97,6 +91,10 @@ class HospitalEmergencyCubit extends Cubit<HospitalEmergencyState> {
   }
 
   sendEmergencyRequest(BuildContext context, List<String?> ids) async {
+    List<String?> recivedIds = ids
+        .where((item) => item != null && item.toString().trim().isNotEmpty)
+        .toList();
+    print(recivedIds);
     emit(state.copyWith(
         sendEmergencyRequestNotificationState: RequestState.loading));
     try {
@@ -111,7 +109,7 @@ class HospitalEmergencyCubit extends Cubit<HospitalEmergencyState> {
         contents:
             "${getIt<HospitalProfileCubit>().state.hospitalProfileModel!.name} We Need Emergency Blood Type ${bloodNames.join(', ')} ${state.timeNeeded!.trEn(context)} Units Count :${state.unitsRequired}",
         headings: "Emergency Blood Request",
-        recivedIds: ids,
+        recivedIds: recivedIds,
         contentAr:
             "${getIt<HospitalProfileCubit>().state.hospitalProfileModel!.name}نحتاج لطلب تبرع بالدم نوع ${bloodNames.join(', ')} ${state.timeNeeded!.trAr(context)} وحدات :${state.unitsRequired}",
         headingAr: "طلب تبرع عاجل بالدم",

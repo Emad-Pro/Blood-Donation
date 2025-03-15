@@ -14,6 +14,7 @@ class UserHospitalViewDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(hospitalProfileModel.oneSignalId);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: UserHospitalAppBarWidget(

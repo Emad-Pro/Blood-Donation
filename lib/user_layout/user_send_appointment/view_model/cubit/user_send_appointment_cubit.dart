@@ -57,6 +57,7 @@ class UserSendAppointmentCubit extends Cubit<UserSendAppointmentState> {
                 "time": state.selectedTimeBloodDonationAppointment,
                 "day": state.selectedDayBloodDonationAppointment,
               }).then((onValue) {
+                print("Hospital One Signel =${model.oneSignalId}");
                 sendNotification(
                   contentAr:
                       "لقد تم حجز موعد التبرع بالدم يوم ${state.selectedDayBloodDonationAppointment!.trAr(context)} في تمام الساعة ${state.selectedTimeBloodDonationAppointment!.replaceAll("AM", "صباحا").replaceAll("PM", "ٌمساءاً")}",

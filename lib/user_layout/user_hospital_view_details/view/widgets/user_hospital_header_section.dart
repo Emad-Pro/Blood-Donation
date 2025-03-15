@@ -17,6 +17,7 @@ class UserHospitalHeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(hospitalProfileModel.oneSignalId);
     return Container(
       height: 210,
       width: double.infinity,

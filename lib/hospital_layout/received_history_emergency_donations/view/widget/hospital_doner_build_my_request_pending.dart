@@ -96,48 +96,52 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                   model.status == "completed")
                 Row(
                   children: [
-                    Row(
-                      children: [
-                        (model.status == "accepted")
-                            ? Icon(Icons.check_circle, color: Colors.green)
-                            : (model.status == "completed")
-                                ? Icon(
-                                    Icons.checklist_rounded,
-                                    color: Colors.purple,
-                                  )
-                                : Icon(Icons.close, color: Colors.orange),
-                        const SizedBox(width: 5),
-                        if (model.status == "accepted")
-                          Text(
-                            "Request accepted".tr(context),
-                            style: TextStyle(
-                              color: Colors.green,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        if (model.status == "completed")
-                          FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Text(
-                              "${"Complete By Donor".tr(context)} (${model.unit})",
-                              style: TextStyle(
-                                color: Colors.purple,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: Row(
+                        children: [
+                          (model.status == "accepted")
+                              ? Icon(Icons.check_circle, color: Colors.green)
+                              : (model.status == "completed")
+                                  ? Icon(
+                                      Icons.checklist_rounded,
+                                      color: Colors.purple,
+                                    )
+                                  : Icon(Icons.close, color: Colors.orange),
+                          const SizedBox(width: 5),
+                          if (model.status == "accepted")
+                            Expanded(
+                              child: Text(
+                                "Request accepted".tr(context),
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                          ),
-                        if (model.status == "canceled")
-                          Text(
-                            "Canceled By Donor".tr(context),
-                            style: TextStyle(
-                              color: Colors.orange,
-                              fontWeight: FontWeight.bold,
+                          if (model.status == "completed")
+                            Expanded(
+                              child: Text(
+                                "${"Complete By Donor".tr(context)} (${model.unit})",
+                                style: TextStyle(
+                                  color: Colors.purple,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
-                          ),
-                      ],
+                          if (model.status == "canceled")
+                            Expanded(
+                              child: Text(
+                                "Canceled By Donor".tr(context),
+                                style: TextStyle(
+                                  color: Colors.orange,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
                     ),
-                    Spacer(),
                     Row(
                       children: [
                         // Donor Info Button
