@@ -37,6 +37,7 @@ class UserHospitalActionButtons extends StatelessWidget {
             label: 'blood now'.tr(context),
             primaryColor: primaryColor,
             onPressed: () {
+              print(hospitalProfileModel.oneSignalId);
               showScheduleDialog(
                 hospitalProfileModel: hospitalProfileModel,
                 context,
