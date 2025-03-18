@@ -1,0 +1,2 @@
+M:/Blood-Donation/android/app/.cxx/Debug/24f4a155/x86/CMakeFiles/edit_cache.dir
+M:/Blood-Donation/android/app/.cxx/Debug/24f4a155/x86/CMakeFiles/rebuild_cache.dir
