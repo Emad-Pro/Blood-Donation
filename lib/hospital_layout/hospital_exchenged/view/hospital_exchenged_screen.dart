@@ -21,14 +21,16 @@ class HospitalExchengedScreen extends StatelessWidget {
         child: BlocBuilder<HospitalExchengedCubit, HospitalExchengedState>(
             builder: (context, state) {
           var cubit = context.read<HospitalExchengedCubit>();
-          ;
+
           switch (state.getExchengedState) {
             case RequestState.init:
             case RequestState.loading:
               return Center(child: CircularProgressIndicator());
             case RequestState.success:
+              var reversedList =
+                  state.hospitalExchangedModel!.reversed.toList();
               return ListView.builder(
-                itemCount: state.hospitalExchangedModel!.length,
+                itemCount: reversedList.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return Card(
@@ -38,12 +40,10 @@ class HospitalExchengedScreen extends StatelessWidget {
                           leading: CircleAvatar(child: Icon(Icons.payment)),
                           trailing: Column(
                             children: [
-                              if (state.hospitalExchangedModel![index].status ==
-                                  'purchased')
+                              if (reversedList[index].status == 'purchased')
                                 ElevatedButton(
                                   onPressed: () {
-                                    cubit.changeStatus(state
-                                        .hospitalExchangedModel![index].id!);
+                                    cubit.changeStatus(reversedList[index].id!);
                                   },
                                   child: Text(
                                     "confirm".tr(context),
@@ -56,51 +56,44 @@ class HospitalExchengedScreen extends StatelessWidget {
                             ],
                           ),
                           title: Text(
-                              "${state.hospitalExchangedModel![index].name!} , ${"count".tr(context)} (${state.hospitalExchangedModel![index].count!})"),
+                              "${reversedList[index].name!} , ${"count".tr(context)} (${reversedList[index].count!})"),
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(DateFormat.yMMMEd(getIt<LocalizationsCubit>()
                                       .state
                                       .languageCode)
-                                  .format(state.hospitalExchangedModel![index]
-                                      .createdAt!)),
+                                  .format(reversedList[index].createdAt!)),
                               Text(
-                                  "${"status".tr(context)} : ${"${state.hospitalExchangedModel![index].status!}".tr(context)}"),
+                                  "${"status".tr(context)} : ${"${reversedList[index].status!}".tr(context)}"),
                             ],
                           ),
                         ),
                         ExpansionTile(
-                            title: Text("donor info".tr(context)),
-                            childrenPadding: EdgeInsets.all(10),
-                            children: [
-                              Row(children: [
-                                Icon(Icons.person),
-                                SizedBox(
-                                  width: 12,
-                                ),
-                                Text(state.hospitalExchangedModel![index]
-                                    .userSignupModel!.fullName!)
-                              ]),
-                              Divider(),
-                              Row(children: [
-                                Icon(Icons.email),
-                                SizedBox(
-                                  width: 12,
-                                ),
-                                Text(state.hospitalExchangedModel![index]
-                                    .userSignupModel!.email!)
-                              ]),
-                              Divider(),
-                              Row(children: [
-                                Icon(Icons.phone),
-                                SizedBox(
-                                  width: 12,
-                                ),
-                                Text(state.hospitalExchangedModel![index]
-                                    .userSignupModel!.phone!)
-                              ]),
-                            ])
+                          title: Text("donor info".tr(context)),
+                          childrenPadding: EdgeInsets.all(10),
+                          children: [
+                            Row(children: [
+                              Icon(Icons.person),
+                              SizedBox(width: 12),
+                              Text(reversedList[index]
+                                  .userSignupModel!
+                                  .fullName!)
+                            ]),
+                            Divider(),
+                            Row(children: [
+                              Icon(Icons.email),
+                              SizedBox(width: 12),
+                              Text(reversedList[index].userSignupModel!.email!)
+                            ]),
+                            Divider(),
+                            Row(children: [
+                              Icon(Icons.phone),
+                              SizedBox(width: 12),
+                              Text(reversedList[index].userSignupModel!.phone!)
+                            ]),
+                          ],
+                        )
                       ],
                     ),
                   );
