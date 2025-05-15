@@ -96,8 +96,7 @@ class UserEditProfileCubit extends Cubit<UserEditProfileState> {
       id: userSignupModel.id,
       email: emailController.text,
       fullName: nameController.text,
-      dateLastBloodDonation: DateTime.fromMillisecondsSinceEpoch(
-          int.parse(lastDonationController.text)),
+      dateLastBloodDonation: DateTime.parse(lastDonationController.text),
       phoneCode: _getPhoneServiceWithName(state.selectedPhoneService!),
       phone: "${phoneController.text}",
       age: ageController.text,
