@@ -86,7 +86,7 @@ class UserEditProfileCubit extends Cubit<UserEditProfileState> {
     }
   }
 
-  updateProfile() async {
+  void updateProfile() async {
     String? path;
     if (state.selectedProfileImage != null) {
       path = await uploadImage();
