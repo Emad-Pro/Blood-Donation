@@ -178,9 +178,8 @@ class HospitalEmergency extends StatelessWidget {
                                     context,
                                     state.searchUserResult!.map((toElement) {
                                       if (toElement.oneSignalId != null ||
-                                          toElement.oneSignalId!.isNotEmpty ||
                                           toElement.oneSignalId != '') {
-                                        return toElement.oneSignalId!;
+                                        return toElement.oneSignalId ?? "";
                                       }
                                     }).toList());
                           },

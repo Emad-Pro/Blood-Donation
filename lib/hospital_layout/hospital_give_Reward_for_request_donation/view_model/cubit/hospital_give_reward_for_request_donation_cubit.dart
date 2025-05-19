@@ -84,11 +84,11 @@ class HospitalGiveRewardForRequestDonationCubit
       globalSnackbar(context, "Request Completed Successfully".tr(context),
           backgroundColor: Colors.green);
       sendNotification(
-        contents: "Request Completed Successfully",
-        headings: "Blood Donation",
+        contents: "Regular Blood Donation Points Added Successfully",
+        headings: "Regular Blood Donation Points",
         recivedIds: [userprofileModel.oneSignalId],
-        contentAr: "تم اكمال الطلب بنجاح",
-        headingAr: "التبرع بالدم",
+        contentAr: "تم اضافة نقاط التبرع المنتظم بنجاح",
+        headingAr: "نقاط التبرع المنتظم",
       );
       Navigator.pop(context);
       emit(state.copyWith(confirmRequestState: RequestState.success));
@@ -103,6 +103,33 @@ class HospitalGiveRewardForRequestDonationCubit
       ));
     } on Exception catch (_) {
       emit(state.copyWith());
+    }
+  }
+
+  Future<void> cancelDonation({
+    required int id,
+    required BuildContext context,
+  }) async {
+    emit(state.copyWith(confirmRequestState: RequestState.loading));
+    try {
+      await Supabase.instance.client
+          .from("hospital_appointment")
+          .update({"status": "canceled_by_hospital"}).eq("id", id);
+
+      globalSnackbar(
+        context,
+        "Request cancelled. Donor did not attend the appointment.",
+        backgroundColor: Colors.green,
+      );
+
+      emit(state.copyWith(confirmRequestState: RequestState.success));
+      await getAcceptedRequestState();
+    } on SocketException catch (_) {
+      emit(state.copyWith(confirmRequestState: RequestState.error));
+    } on PostgrestException catch (_) {
+      emit(state.copyWith(confirmRequestState: RequestState.error));
+    } on Exception catch (_) {
+      emit(state.copyWith(confirmRequestState: RequestState.error));
     }
   }
 }
