@@ -28,11 +28,11 @@ class HospitalGiveRewardsEmergencyCubit
             "user_email", emailController.text);
     await Supabase.instance.client.rpc('increment_point', params: {
       'uid': state.userModel!.uId!,
-      'value': int.parse(bloodBagsCountController.text) * 100
+      'value': int.parse(bloodBagsCountController.text) * 200
     });
     await Supabase.instance.client.from("emergency_donation").insert({
       "user_uid": state.userModel!.uId,
-      "point": int.parse(bloodBagsCountController.text) * 100,
+      "point": int.parse(bloodBagsCountController.text) * 200,
       "hospital_uid": hospitalId,
       "blood_bags_count": int.parse(bloodBagsCountController.text)
     }).then((onValue) {

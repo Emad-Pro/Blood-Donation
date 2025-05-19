@@ -27,111 +27,114 @@ class HospitalGiveRewardForRequestDonation extends StatelessWidget {
           switch (state.getAcceptedRequestsState) {
             case RequestState.init:
             case RequestState.loading:
-              return Center(
-                child: CircularProgressIndicator(),
-              );
+              return const Center(child: CircularProgressIndicator());
+
             case RequestState.success:
               if (state.getAcceptedRequestsModel!.isEmpty) {
                 return Center(child: Text("No Accepted Requests".tr(context)));
-              } else
+              } else {
                 return ListView.builder(
-                    itemCount: state.getAcceptedRequestsModel?.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        leading: CircleAvatar(
-                          radius: 35,
-                          backgroundImage: NetworkImage(state
-                              .getAcceptedRequestsModel![index]
-                              .userprofileModel!
-                              .profileImage!),
+                  itemCount: state.getAcceptedRequestsModel?.length,
+                  itemBuilder: (context, index) {
+                    final request = state.getAcceptedRequestsModel![index];
+                    return ListTile(
+                      leading: CircleAvatar(
+                        radius: 35,
+                        backgroundImage: NetworkImage(
+                          request.userprofileModel!.profileImage!,
                         ),
-                        trailing: ElevatedButton(
-                            onPressed: () {
-                              showDialog(
+                      ),
+                      title: Text(
+                        "${"Request a donation for".tr(context)} ${request.userprofileModel!.fullName!}",
+                      ),
+                      subtitle: Text(
+                        DateFormat.yMMMMEEEEd(
+                          getIt<LocalizationsCubit>().state.languageCode,
+                        ).format(DateTime.parse(request.createdAt!)),
+                      ),
+                      trailing: SizedBox(
+                        width: 100,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            IconButton(
+                              tooltip: "Confirm",
+                              onPressed: () {
+                                showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
-                                        title: Text("Confirm Donation"),
-                                        content: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            GlobalTextFormFiled(
-                                              keyboardType:
-                                                  TextInputType.number,
-                                              lableText: "Blood Bags Count"
-                                                  .tr(context),
-                                              textEditingController: getIt<
-                                                      HospitalGiveRewardForRequestDonationCubit>()
-                                                  .bagsController,
-                                            ),
-                                            SizedBox(
-                                              height: 12,
-                                            ),
-                                            state.confirmRequestState ==
-                                                    RequestState.loading
-                                                ? Center(
-                                                    child:
-                                                        CircularProgressIndicator())
-                                                : Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: GlobalButton(
-                                                            text: "Confirm"
-                                                                .tr(context),
-                                                            onTap: () {
-                                                              getIt<HospitalGiveRewardForRequestDonationCubit>().confirmDonation(
-                                                                  id: state
-                                                                      .getAcceptedRequestsModel![
-                                                                          index]
-                                                                      .id!,
-                                                                  context:
-                                                                      context,
-                                                                  userprofileModel: state
-                                                                      .getAcceptedRequestsModel![
-                                                                          index]
-                                                                      .userprofileModel!);
-                                                            }),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 8,
-                                                      ),
-                                                      Expanded(
-                                                        child: GlobalButton(
-                                                            text: "Cancel"
-                                                                .tr(context),
-                                                            onTap: () {
-                                                              Navigator.pop(
-                                                                  context);
-                                                            }),
-                                                      ),
-                                                    ],
-                                                  )
-                                          ],
+                                    title: Text("Confirm Donation"),
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        GlobalTextFormFiled(
+                                          keyboardType: TextInputType.number,
+                                          lableText:
+                                              "Blood Bags Count".tr(context),
+                                          textEditingController: getIt<
+                                                  HospitalGiveRewardForRequestDonationCubit>()
+                                              .bagsController,
                                         ),
-                                      ));
-                            },
-                            child: Text("Confirm".tr(context))),
-                        subtitle: Text(DateFormat.yMMMMEEEEd(
-                                getIt<LocalizationsCubit>().state.languageCode)
-                            .format(DateTime.parse(state
-                                .getAcceptedRequestsModel![index].createdAt!))),
-                        title: Text(
-                            "${"Request a donation for".tr(context)} ${state.getAcceptedRequestsModel![index].userprofileModel!.fullName!}"),
-                      );
-                    });
+                                        const SizedBox(height: 12),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: GlobalButton(
+                                                text: "Confirm".tr(context),
+                                                onTap: () {
+                                                  getIt<HospitalGiveRewardForRequestDonationCubit>()
+                                                      .confirmDonation(
+                                                    id: request.id!,
+                                                    context: context,
+                                                    userprofileModel: request
+                                                        .userprofileModel!,
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Expanded(
+                                              child: GlobalButton(
+                                                text: "Cancel".tr(context),
+                                                onTap: () {
+                                                  Navigator.pop(context);
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                              icon:
+                                  const Icon(Icons.check, color: Colors.green),
+                            ),
+                            IconButton(
+                              tooltip: "Cancelled",
+                              onPressed: () {
+                                getIt<HospitalGiveRewardForRequestDonationCubit>()
+                                    .cancelDonation(
+                                  id: request.id!,
+                                  context: context,
+                                );
+                              },
+                              icon: const Icon(Icons.close, color: Colors.red),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
 
             case RequestState.error:
-              return Text(state.getAcceptedRequestsMessage);
+              return Center(child: Text(state.getAcceptedRequestsMessage));
           }
         },
       ),
     );
   }
 }
-
-
-
-
-
-
-//accepted
