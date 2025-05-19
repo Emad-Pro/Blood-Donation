@@ -93,7 +93,8 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
               ),
               if (model.status == "accepted" ||
                   model.status == "canceled" ||
-                  model.status == "completed")
+                  model.status == "completed" ||
+                  model.status == "canceled_by_hospital")
                 Row(
                   children: [
                     Expanded(
@@ -133,6 +134,16 @@ class HospitalDonerBuildMyRequestPending extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 "Canceled By Donor".tr(context),
+                                style: TextStyle(
+                                  color: Colors.orange,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          if (model.status == "canceled_by_hospital")
+                            Expanded(
+                              child: Text(
+                                "canceled_by_hospital".tr(context),
                                 style: TextStyle(
                                   color: Colors.orange,
                                   fontWeight: FontWeight.bold,

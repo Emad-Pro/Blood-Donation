@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:blood_donation/core/locale/app_localiztions.dart';
+import 'package:blood_donation/user_layout/user_auth/user_signup/view_model/cubit/user_signup_cubit.dart';
 import 'package:equatable/equatable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -13,13 +14,29 @@ part 'user_send_appointment_state.dart';
 
 class UserSendAppointmentCubit extends Cubit<UserSendAppointmentState> {
   UserSendAppointmentCubit() : super(UserSendAppointmentState());
+
   sendRequestAppointment(
-      HospitalProfileModel model, String content, String title, context) async {
+    HospitalProfileModel model,
+    String content,
+    String title,
+    context,
+  ) async {
     emit(state.copyWith(sendRequestAppointmentState: RequestState.loading));
 
     await getIt<UserProfileCubit>().getUserProfile();
 
     final uid = getIt<UserProfileCubit>().state.userSignupModel!.uId;
+
+    final diseases = getIt<UserProfileCubit>().state.userSignupModel!.diseases;
+    final hasAnyDisease = diseases!.values.any((selected) => selected == true);
+
+    if (hasAnyDisease) {
+      emit(state.copyWith(
+        sendRequestAppointmentState: RequestState.error,
+        errorMessage: "You cannot donate because of a medical condition.",
+      ));
+    }
+
     await Supabase.instance.client
         .from("hospital_appointment")
         .select("user_id")
@@ -28,11 +45,12 @@ class UserSendAppointmentCubit extends Cubit<UserSendAppointmentState> {
         .then((onValue) async {
       if (onValue.isEmpty) {
         int monthsDifference = calculateMonthsDifference(
-            getIt<UserProfileCubit>()
-                .state
-                .userSignupModel!
-                .dateLastBloodDonation!);
-        print(monthsDifference);
+          getIt<UserProfileCubit>()
+              .state
+              .userSignupModel!
+              .dateLastBloodDonation!,
+        );
+
         if (monthsDifference < 3) {
           emit(state.copyWith(
               sendRequestAppointmentState: RequestState.error,
@@ -42,7 +60,7 @@ class UserSendAppointmentCubit extends Cubit<UserSendAppointmentState> {
           await Supabase.instance.client
               .from("hospital_appointment")
               .select("user_id")
-              .eq("user_id", uid!)
+              .eq("user_id", uid)
               .eq("status", "accepted")
               .then((onValue) async {
             if (onValue.isEmpty) {
@@ -57,7 +75,6 @@ class UserSendAppointmentCubit extends Cubit<UserSendAppointmentState> {
                 "time": state.selectedTimeBloodDonationAppointment,
                 "day": state.selectedDayBloodDonationAppointment,
               }).then((onValue) {
-                print("Hospital One Signel =${model.oneSignalId}");
                 sendNotification(
                   contentAr:
                       "لقد تم حجز موعد التبرع بالدم يوم ${state.selectedDayBloodDonationAppointment!.trAr(context)} في تمام الساعة ${state.selectedTimeBloodDonationAppointment!.replaceAll("AM", "صباحا").replaceAll("PM", "ٌمساءاً")}",
@@ -75,7 +92,7 @@ class UserSendAppointmentCubit extends Cubit<UserSendAppointmentState> {
             } else {
               emit(state.copyWith(
                   sendRequestAppointmentState: RequestState.error,
-                  errorMessage: "You have a Accepted request"));
+                  errorMessage: "You have an accepted request"));
             }
           }).catchError((onError) {
             emit(state.copyWith(
@@ -90,9 +107,10 @@ class UserSendAppointmentCubit extends Cubit<UserSendAppointmentState> {
     });
   }
 
-  toggleSelectedDayBloodDonationAppointment(String day) =>
+  void toggleSelectedDayBloodDonationAppointment(String day) =>
       emit(state.copyWith(selectedDayBloodDonationAppointment: day));
-  toggleSelectedTimeBloodDonationAppoinment(String time) =>
+
+  void toggleSelectedTimeBloodDonationAppoinment(String time) =>
       emit(state.copyWith(selectedTimeBloodDonationAppointment: time));
 
   int calculateMonthsDifference(DateTime startDate) {
@@ -100,7 +118,6 @@ class UserSendAppointmentCubit extends Cubit<UserSendAppointmentState> {
     int yearsDiff = today.year - startDate.year;
     int monthsDiff = today.month - startDate.month;
 
-    // حساب العدد الكلي للأشهر
     int totalMonths = (yearsDiff * 12) + monthsDiff;
 
     if (today.day < startDate.day) {

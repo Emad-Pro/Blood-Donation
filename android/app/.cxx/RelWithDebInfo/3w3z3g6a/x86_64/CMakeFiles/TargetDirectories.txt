@@ -1,0 +1,2 @@
+M:/Blood-Donation/android/app/.cxx/RelWithDebInfo/3w3z3g6a/x86_64/CMakeFiles/edit_cache.dir
+M:/Blood-Donation/android/app/.cxx/RelWithDebInfo/3w3z3g6a/x86_64/CMakeFiles/rebuild_cache.dir
